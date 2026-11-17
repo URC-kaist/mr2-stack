@@ -1,0 +1,1 @@
+{"pid": 52863, "started": 1793286736.9896562, "cmd": ["bash", "/home/mr2/mr2-stack/scripts/start_chrony_base.sh", "--rover-host", "192.168.0.57", "--antenna-enable", "false"]}

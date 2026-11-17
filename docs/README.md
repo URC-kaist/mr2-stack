@@ -1,5 +1,8 @@
 # Docs
 
+- [Orin NX dependency inventory (URC 2027 migration)](./migration/orin-nx-dependency-inventory-2026-11-17.md):
+  installed dependency versions, ownership, functions, and evidence captured on
+  2026-11-17 before the Ubuntu 24.04 migration.
 - [Flat rover latency handoff](./flat-latency-handoff.md): matching base/rover
   deployment, read-only preflight reports, synthetic video check, and acceptance.
 - [Rover profiles](./rover-profiles.md): original/flat hardware and video defaults.

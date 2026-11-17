@@ -1,0 +1,375 @@
+-- run_test.py: invoking following command in '/home/mr2/mr2-stack/rover/ros2_ws/src/mr2_rover_control':
+ - /opt/ros/humble/bin/ament_uncrustify --xunit-file /tmp/mr2-rs-validation/build/mr2_rover_control/test_results/mr2_rover_control/uncrustify.xunit.xml
+
+Code style divergence in file 'include/mr2_rover_control/twist_to_commands_controller.hpp':
+
+--- include/mr2_rover_control/twist_to_commands_controller.hpp
++++ include/mr2_rover_control/twist_to_commands_controller.hpp.uncrustify
+@@ -16 +16,2 @@
+-namespace mr2_rover_control {
++namespace mr2_rover_control
++{
+@@ -19 +20,2 @@
+-    : public controller_interface::ControllerInterface {
++  : public controller_interface::ControllerInterface
++{
+@@ -29 +31 @@
+-  on_configure(const rclcpp_lifecycle::State &previous_state) override;
++  on_configure(const rclcpp_lifecycle::State & previous_state) override;
+@@ -31 +33 @@
+-  on_activate(const rclcpp_lifecycle::State &previous_state) override;
++  on_activate(const rclcpp_lifecycle::State & previous_state) override;
+@@ -33 +35 @@
+-  on_deactivate(const rclcpp_lifecycle::State &previous_state) override;
++  on_deactivate(const rclcpp_lifecycle::State & previous_state) override;
+@@ -36 +38 @@
+-  update(const rclcpp::Time &time, const rclcpp::Duration &period) override;
++  update(const rclcpp::Time & time, const rclcpp::Duration & period) override;
+@@ -44 +46 @@
+-      const mr2_action_interface::msg::MissionStatus::SharedPtr msg);
++    const mr2_action_interface::msg::MissionStatus::SharedPtr msg);
+@@ -46,5 +48,7 @@
+-  bool fillWheelStates(std::array<double, 4> &wheel_ang_vel,
+-                       std::array<double, 4> &steer_angle) const;
+-  void publishOdom(const std::array<double, 4> &wheel_ang_vel,
+-                   const std::array<double, 4> &steer_angle,
+-                   const rclcpp::Time &stamp);
++  bool fillWheelStates(
++    std::array<double, 4> & wheel_ang_vel,
++    std::array<double, 4> & steer_angle) const;
++  void publishOdom(
++    const std::array<double, 4> & wheel_ang_vel,
++    const std::array<double, 4> & steer_angle,
++    const rclcpp::Time & stamp);
+@@ -52,2 +56,3 @@
+-  double applyRateLimit(double target, double prev, double rate_limit,
+-                        double dt) const;
++  double applyRateLimit(
++    double target, double prev, double rate_limit,
++    double dt) const;
+@@ -77 +82 @@
+-      sub_mission_status_;
++    sub_mission_status_;
+
+Code style divergence in file 'src/twist_to_commands_controller.cpp':
+
+--- src/twist_to_commands_controller.cpp
++++ src/twist_to_commands_controller.cpp.uncrustify
+@@ -8,3 +8,5 @@
+-namespace mr2_rover_control {
+-
+-controller_interface::CallbackReturn TwistToCommandsController::on_init() {
++namespace mr2_rover_control
++{
++
++controller_interface::CallbackReturn TwistToCommandsController::on_init()
++{
+@@ -22,4 +24,6 @@
+-  auto_declare<double>("rate_limit_angular_z",
+-                       1.0); // rad/s^2 (tighter yaw slew)
+-  auto_declare<double>("steering_error_ratio_deg",
+-                       40.0); // drive scale->0 around 30 deg
++  auto_declare<double>(
++    "rate_limit_angular_z",
++    1.0);                    // rad/s^2 (tighter yaw slew)
++  auto_declare<double>(
++    "steering_error_ratio_deg",
++    40.0);                    // drive scale->0 around 30 deg
+@@ -38 +42,2 @@
+-TwistToCommandsController::command_interface_configuration() const {
++TwistToCommandsController::command_interface_configuration() const
++{
+@@ -44,2 +49,2 @@
+-                    ->get_parameter("wheel_joints")
+-                    .as_string_array(); // size may be 0 pre-configure
++    ->get_parameter("wheel_joints")
++    .as_string_array();                 // size may be 0 pre-configure
+@@ -47 +52 @@
+-  for (const auto &joint : wheels) {
++  for (const auto & joint : wheels) {
+@@ -50 +55 @@
+-  for (const auto &joint : steer) {
++  for (const auto & joint : steer) {
+@@ -57 +62,2 @@
+-TwistToCommandsController::state_interface_configuration() const {
++TwistToCommandsController::state_interface_configuration() const
++{
+@@ -62 +68 @@
+-  for (const auto &joint : wheels) {
++  for (const auto & joint : wheels) {
+@@ -65 +71 @@
+-  for (const auto &joint : steer) {
++  for (const auto & joint : steer) {
+@@ -72 +78,2 @@
+-TwistToCommandsController::on_configure(const rclcpp_lifecycle::State &) {
++TwistToCommandsController::on_configure(const rclcpp_lifecycle::State &)
++{
+@@ -75 +82 @@
+-      get_node()->get_parameter("steering_joints").as_string_array();
++    get_node()->get_parameter("steering_joints").as_string_array();
+@@ -77,2 +84,3 @@
+-    RCLCPP_ERROR(get_node()->get_logger(),
+-                 "Expected 4 wheel joints and 4 steering joints");
++    RCLCPP_ERROR(
++      get_node()->get_logger(),
++      "Expected 4 wheel joints and 4 steering joints");
+@@ -85 +93 @@
+-      get_node()->get_parameter("max_wheel_linear_speed").as_double();
++    get_node()->get_parameter("max_wheel_linear_speed").as_double();
+@@ -90 +98 @@
+-      get_node()->get_parameter("odom_publish_rate_hz").as_double();
++    get_node()->get_parameter("odom_publish_rate_hz").as_double();
+@@ -94 +102 @@
+-      get_node()->get_parameter("rate_limit_angular_z").as_double();
++    get_node()->get_parameter("rate_limit_angular_z").as_double();
+@@ -96,4 +104,4 @@
+-      get_node()->get_parameter("steering_error_ratio_deg").as_double();
+-  steering_error_ratio_rad_ = (steer_err_ratio_deg > 0.0)
+-                                  ? steer_err_ratio_deg * M_PI / 180.0
+-                                  : max_steer_;
++    get_node()->get_parameter("steering_error_ratio_deg").as_double();
++  steering_error_ratio_rad_ = (steer_err_ratio_deg > 0.0) ?
++    steer_err_ratio_deg * M_PI / 180.0 :
++    max_steer_;
+@@ -102 +110 @@
+-      get_node()->get_parameter("odom_wheel_drive_enabled").as_bool_array();
++    get_node()->get_parameter("odom_wheel_drive_enabled").as_bool_array();
+@@ -107,3 +115,4 @@
+-    RCLCPP_WARN(get_node()->get_logger(),
+-                "odom_wheel_drive_enabled must have 4 entries (FL, FR, RL, RR); "
+-                "falling back to all true");
++    RCLCPP_WARN(
++      get_node()->get_logger(),
++      "odom_wheel_drive_enabled must have 4 entries (FL, FR, RL, RR); "
++      "falling back to all true");
+@@ -117 +126 @@
+-      get_node()->get_parameter("odom_wheel_steer_enabled").as_bool_array();
++    get_node()->get_parameter("odom_wheel_steer_enabled").as_bool_array();
+@@ -122,3 +131,4 @@
+-    RCLCPP_WARN(get_node()->get_logger(),
+-                "odom_wheel_steer_enabled must have 4 entries (FL, FR, RL, RR); "
+-                "falling back to all true");
++    RCLCPP_WARN(
++      get_node()->get_logger(),
++      "odom_wheel_steer_enabled must have 4 entries (FL, FR, RL, RR); "
++      "falling back to all true");
+@@ -134 +144 @@
+-      get_node()->get_parameter("cmd_vel_topic_nominal").as_string();
++    get_node()->get_parameter("cmd_vel_topic_nominal").as_string();
+@@ -136 +146 @@
+-      get_node()->get_parameter("cmd_vel_topic_running").as_string();
++    get_node()->get_parameter("cmd_vel_topic_running").as_string();
+@@ -138 +148 @@
+-      get_node()->get_parameter("mission_status_topic").as_string();
++    get_node()->get_parameter("mission_status_topic").as_string();
+@@ -140 +150 @@
+-      get_node()->get_parameter("wheel_odom_topic").as_string();
++    get_node()->get_parameter("wheel_odom_topic").as_string();
+@@ -143,3 +153,4 @@
+-      cmd_topic_nominal, rclcpp::SystemDefaultsQoS(),
+-      std::bind(&TwistToCommandsController::twistNominalCb, this,
+-                std::placeholders::_1));
++    cmd_topic_nominal, rclcpp::SystemDefaultsQoS(),
++    std::bind(
++      &TwistToCommandsController::twistNominalCb, this,
++      std::placeholders::_1));
+@@ -148,3 +159,4 @@
+-      cmd_topic_running, rclcpp::SystemDefaultsQoS(),
+-      std::bind(&TwistToCommandsController::twistRunningCb, this,
+-                std::placeholders::_1));
++    cmd_topic_running, rclcpp::SystemDefaultsQoS(),
++    std::bind(
++      &TwistToCommandsController::twistRunningCb, this,
++      std::placeholders::_1));
+@@ -153,4 +165,5 @@
+-      get_node()->create_subscription<mr2_action_interface::msg::MissionStatus>(
+-          mission_status_topic, 10,
+-          std::bind(&TwistToCommandsController::missionStatusCb, this,
+-                    std::placeholders::_1));
++    get_node()->create_subscription<mr2_action_interface::msg::MissionStatus>(
++    mission_status_topic, 10,
++    std::bind(
++      &TwistToCommandsController::missionStatusCb, this,
++      std::placeholders::_1));
+@@ -159 +172 @@
+-      get_node()->create_publisher<nav_msgs::msg::Odometry>(odom_topic, 10);
++    get_node()->create_publisher<nav_msgs::msg::Odometry>(odom_topic, 10);
+@@ -168 +181 @@
+-      rclcpp::Time(0, 0, get_node()->get_clock()->get_clock_type());
++    rclcpp::Time(0, 0, get_node()->get_clock()->get_clock_type());
+@@ -174 +187,2 @@
+-TwistToCommandsController::on_activate(const rclcpp_lifecycle::State &) {
++TwistToCommandsController::on_activate(const rclcpp_lifecycle::State &)
++{
+@@ -183 +197,2 @@
+-TwistToCommandsController::on_deactivate(const rclcpp_lifecycle::State &) {
++TwistToCommandsController::on_deactivate(const rclcpp_lifecycle::State &)
++{
+@@ -192 +207,2 @@
+-    const geometry_msgs::msg::Twist::SharedPtr msg) {
++  const geometry_msgs::msg::Twist::SharedPtr msg)
++{
+@@ -194 +210 @@
+-      (mission_state_.has_value() && mission_state_.value() == kMissionStateRunning);
++    (mission_state_.has_value() && mission_state_.value() == kMissionStateRunning);
+@@ -203 +219,2 @@
+-    const geometry_msgs::msg::Twist::SharedPtr msg) {
++  const geometry_msgs::msg::Twist::SharedPtr msg)
++{
+@@ -205 +222 @@
+-      (mission_state_.has_value() && mission_state_.value() == kMissionStateRunning);
++    (mission_state_.has_value() && mission_state_.value() == kMissionStateRunning);
+@@ -214 +231,2 @@
+-    const mr2_action_interface::msg::MissionStatus::SharedPtr msg) {
++  const mr2_action_interface::msg::MissionStatus::SharedPtr msg)
++{
+@@ -218 +236,2 @@
+-void TwistToCommandsController::publishZeros() {
++void TwistToCommandsController::publishZeros()
++{
+@@ -226,2 +245,3 @@
+-    std::array<double, 4> &wheel_ang_vel,
+-    std::array<double, 4> &steer_angle) const {
++  std::array<double, 4> & wheel_ang_vel,
++  std::array<double, 4> & steer_angle) const
++{
+@@ -229,2 +249,3 @@
+-    RCLCPP_WARN_THROTTLE(get_node()->get_logger(), *get_node()->get_clock(),
+-                         2000, "State interfaces not available yet");
++    RCLCPP_WARN_THROTTLE(
++      get_node()->get_logger(), *get_node()->get_clock(),
++      2000, "State interfaces not available yet");
+@@ -242,4 +263,5 @@
+-      RCLCPP_WARN_THROTTLE(get_node()->get_logger(), *get_node()->get_clock(),
+-                           2000,
+-                           "Wheel joint %s velocity is NaN/inf; treating as 0",
+-                           wheel_joints_[i].c_str());
++      RCLCPP_WARN_THROTTLE(
++        get_node()->get_logger(), *get_node()->get_clock(),
++        2000,
++        "Wheel joint %s velocity is NaN/inf; treating as 0",
++        wheel_joints_[i].c_str());
+@@ -249,3 +271,3 @@
+-          get_node()->get_logger(), *get_node()->get_clock(), 2000,
+-          "Steering joint %s position is NaN/inf; treating as 0",
+-          steering_joints_[i].c_str());
++        get_node()->get_logger(), *get_node()->get_clock(), 2000,
++        "Steering joint %s position is NaN/inf; treating as 0",
++        steering_joints_[i].c_str());
+@@ -258 +280,2 @@
+-TwistToCommandsController::wheelPositions() const {
++TwistToCommandsController::wheelPositions() const
++{
+@@ -266,2 +289,3 @@
+-    const std::array<double, 4> &wheel_ang_vel,
+-    const std::array<double, 4> &steer_angle, const rclcpp::Time &stamp) {
++  const std::array<double, 4> & wheel_ang_vel,
++  const std::array<double, 4> & steer_angle, const rclcpp::Time & stamp)
++{
+@@ -323,2 +347,2 @@
+-                          big_cov, 0, 0, 0, 0, 0, 0, big_cov, 0, 0, 0, 0, 0, 0,
+-                          big_cov, 0, 0, 0, 0, 0, 0, big_cov};
++    big_cov, 0, 0, 0, 0, 0, 0, big_cov, 0, 0, 0, 0, 0, 0,
++    big_cov, 0, 0, 0, 0, 0, 0, big_cov};
+@@ -331,3 +355,3 @@
+-      twist_cov, 0, 0, 0, 0, 0, 0, twist_cov, 0, 0, 0, 0, 0, 0,
+-      twist_cov, 0, 0, 0, 0, 0, 0, twist_cov, 0, 0, 0, 0, 0, 0,
+-      twist_cov, 0, 0, 0, 0, 0, 0, twist_cov};
++    twist_cov, 0, 0, 0, 0, 0, 0, twist_cov, 0, 0, 0, 0, 0, 0,
++    twist_cov, 0, 0, 0, 0, 0, 0, twist_cov, 0, 0, 0, 0, 0, 0,
++    twist_cov, 0, 0, 0, 0, 0, 0, twist_cov};
+@@ -338,3 +362,5 @@
+-double TwistToCommandsController::applyRateLimit(double target, double prev,
+-                                                 double rate_limit,
+-                                                 double dt) const {
++double TwistToCommandsController::applyRateLimit(
++  double target, double prev,
++  double rate_limit,
++  double dt) const
++{
+@@ -350,2 +376,4 @@
+-TwistToCommandsController::update(const rclcpp::Time &,
+-                                  const rclcpp::Duration &period) {
++TwistToCommandsController::update(
++  const rclcpp::Time &,
++  const rclcpp::Duration & period)
++{
+@@ -360 +388 @@
+-      applyRateLimit(target_vx, limited_twist_.linear.x, rate_limit_vx_, dt);
++    applyRateLimit(target_vx, limited_twist_.linear.x, rate_limit_vx_, dt);
+@@ -362 +390 @@
+-      applyRateLimit(target_vy, limited_twist_.linear.y, rate_limit_vy_, dt);
++    applyRateLimit(target_vy, limited_twist_.linear.y, rate_limit_vy_, dt);
+@@ -364 +392 @@
+-      applyRateLimit(target_wz, limited_twist_.angular.z, rate_limit_wz_, dt);
++    applyRateLimit(target_wz, limited_twist_.angular.z, rate_limit_wz_, dt);
+@@ -372,2 +400,2 @@
+-        get_node()->get_logger(), *get_node()->get_clock(), 2000,
+-        "wheel_radius must be > 0 (got %.3f); zeroing commands", wheel_radius_);
++      get_node()->get_logger(), *get_node()->get_clock(), 2000,
++      "wheel_radius must be > 0 (got %.3f); zeroing commands", wheel_radius_);
+@@ -376,3 +404,4 @@
+-    RCLCPP_WARN_THROTTLE(get_node()->get_logger(), *get_node()->get_clock(),
+-                         2000,
+-                         "State interfaces not available yet; zeroing outputs");
++    RCLCPP_WARN_THROTTLE(
++      get_node()->get_logger(), *get_node()->get_clock(),
++      2000,
++      "State interfaces not available yet; zeroing outputs");
+@@ -390,3 +419,3 @@
+-            get_node()->get_logger(), *get_node()->get_clock(), 2000,
+-            "Steering joint %s position missing/invalid; zeroing wheel commands",
+-            steering_joints_[i].c_str());
++          get_node()->get_logger(), *get_node()->get_clock(), 2000,
++          "Steering joint %s position missing/invalid; zeroing wheel commands",
++          steering_joints_[i].c_str());
+@@ -404,4 +433,4 @@
+-        // Smallest absolute difference between two angles (wrap at 2*pi)
+-        const double diff = std::remainder(a - b, 2.0 * M_PI);
+-        return std::abs(diff);
+-      };
++          // Smallest absolute difference between two angles (wrap at 2*pi)
++          const double diff = std::remainder(a - b, 2.0 * M_PI);
++          return std::abs(diff);
++        };
+@@ -410 +439 @@
+-        const auto &w = wheels[i];
++        const auto & w = wheels[i];
+@@ -421,3 +450,3 @@
+-        const double v_lin_limited = (max_wheel_linear_speed_ > 0.0)
+-                                         ? std::min(v_lin, max_wheel_linear_speed_)
+-                                         : v_lin;
++        const double v_lin_limited = (max_wheel_linear_speed_ > 0.0) ?
++          std::min(v_lin, max_wheel_linear_speed_) :
++          v_lin;
+@@ -452,4 +481,4 @@
+-              get_node()->get_logger(), *get_node()->get_clock(), 2000,
+-              "Steering solution %.2f rad exceeds limit (±%.2f); "
+-              "zeroing wheel speed for wheel %zu",
+-              unclamped, max_steer_, i);
++            get_node()->get_logger(), *get_node()->get_clock(), 2000,
++            "Steering solution %.2f rad exceeds limit (±%.2f); "
++            "zeroing wheel speed for wheel %zu",
++            unclamped, max_steer_, i);
+@@ -460 +489,2 @@
+-              ang_distance(cand1, current_steer[i])) {
++            ang_distance(cand1, current_steer[i]))
++          {
+@@ -482 +512 @@
+-            steering_error_ratio_rad_ > 0.0 ? steering_error_ratio_rad_ : max_steer_;
++          steering_error_ratio_rad_ > 0.0 ? steering_error_ratio_rad_ : max_steer_;
+@@ -487 +517 @@
+-        for (double &v : speed) {
++        for (double & v : speed) {
+@@ -522,2 +552,3 @@
+-PLUGINLIB_EXPORT_CLASS(mr2_rover_control::TwistToCommandsController,
+-                       controller_interface::ControllerInterface)
++PLUGINLIB_EXPORT_CLASS(
++  mr2_rover_control::TwistToCommandsController,
++  controller_interface::ControllerInterface)
+
+2 files with code style divergence
+
+
+-- run_test.py: return code 1
+-- run_test.py: verify result file '/tmp/mr2-rs-validation/build/mr2_rover_control/test_results/mr2_rover_control/uncrustify.xunit.xml'

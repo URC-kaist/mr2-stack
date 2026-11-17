@@ -1,0 +1,115 @@
+Oct 30 03:52:07 rover kernel: usb 1-2.4.2: USB disconnect, device number 42
+Oct 30 03:52:08 rover kernel: usb 1-2.4.2: new high-speed USB device number 43 using tegra-xusb
+Oct 30 03:52:08 rover kernel: usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+Oct 30 03:52:08 rover kernel: input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input36
+Oct 30 03:52:09 rover kernel: usb 1-2.4.2: USB disconnect, device number 43
+Oct 30 03:52:09 rover kernel: usb 1-2.4.2: new high-speed USB device number 44 using tegra-xusb
+Oct 30 03:52:09 rover kernel: usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+Oct 30 03:52:09 rover kernel: input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input37
+Oct 30 03:52:10 rover kernel: usb 1-2.4.2: USB disconnect, device number 44
+Oct 30 03:52:11 rover kernel: usb 1-2.4.2: new high-speed USB device number 45 using tegra-xusb
+Oct 30 03:52:11 rover kernel: usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+Oct 30 03:52:11 rover kernel: input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input38
+Oct 30 03:52:12 rover kernel: usb 1-2.4.2: USB disconnect, device number 45
+Oct 30 03:52:12 rover kernel: usb 1-2.4.2: new high-speed USB device number 46 using tegra-xusb
+Oct 30 03:52:13 rover kernel: usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+Oct 30 03:52:13 rover kernel: input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input39
+Oct 30 03:52:14 rover kernel: usb 1-2.4.2: USB disconnect, device number 46
+Oct 30 03:52:14 rover kernel: usb 1-2.4.2: new high-speed USB device number 47 using tegra-xusb
+Oct 30 03:52:14 rover kernel: usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+Oct 30 03:52:14 rover kernel: input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input40
+Oct 30 03:52:15 rover kernel: usb 1-2.4.2: USB disconnect, device number 47
+Oct 30 03:52:15 rover kernel: usb 1-2.4.2: new high-speed USB device number 48 using tegra-xusb
+Oct 30 03:52:15 rover kernel: usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+Oct 30 03:52:15 rover kernel: input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input41
+Oct 30 03:52:16 rover kernel: usb 1-2.4.2: USB disconnect, device number 48
+Oct 30 03:52:16 rover kernel: usb 1-2.4.2: new high-speed USB device number 49 using tegra-xusb
+Oct 30 03:52:16 rover kernel: usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+Oct 30 03:52:16 rover kernel: input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input42
+Oct 30 03:52:17 rover kernel: usb 1-2.4.2: USB disconnect, device number 49
+Oct 30 03:52:17 rover kernel: uvcvideo 1-2.4.2:1.1: Failed to resubmit video URB (-19).
+Oct 30 03:52:17 rover kernel: uvcvideo 1-2.4.2:1.1: Failed to resubmit video URB (-19).
+Oct 30 03:52:17 rover kernel: usb 1-2.4.2: new high-speed USB device number 50 using tegra-xusb
+Oct 30 03:52:17 rover kernel: usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+Oct 30 03:52:17 rover kernel: input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input43
+Oct 30 03:52:18 rover kernel: usb 1-2.4.2: USB disconnect, device number 50
+Oct 30 03:52:18 rover kernel: uvcvideo 1-2.4.2:1.1: Failed to resubmit video URB (-19).
+Oct 30 03:52:19 rover kernel: usb 1-2.4.2: new high-speed USB device number 51 using tegra-xusb
+Oct 30 03:52:19 rover kernel: usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+Oct 30 03:52:19 rover kernel: input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input44
+Oct 30 03:52:20 rover kernel: usb 1-2.4.2: USB disconnect, device number 51
+Oct 30 03:52:20 rover kernel: usb 1-2.4.2: new high-speed USB device number 52 using tegra-xusb
+Oct 30 03:52:20 rover kernel: usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+Oct 30 03:52:20 rover kernel: input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input45
+Oct 30 03:52:21 rover kernel: usb 1-2.4.2: USB disconnect, device number 52
+Oct 30 03:52:22 rover kernel: uvcvideo 1-2.4.2:1.1: Failed to resubmit video URB (-19).
+Oct 30 03:52:22 rover kernel: usb 1-2.4.2: new high-speed USB device number 53 using tegra-xusb
+Oct 30 03:52:22 rover kernel: usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+Oct 30 03:52:22 rover kernel: input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input46
+Oct 30 03:52:23 rover kernel: usb 1-2.4.2: USB disconnect, device number 53
+Oct 30 03:52:23 rover kernel: usb 1-2.4.2: new high-speed USB device number 54 using tegra-xusb
+Oct 30 03:52:24 rover kernel: usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+Oct 30 03:52:24 rover kernel: input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input47
+Oct 30 03:52:24 rover kernel: usb 1-2.4.2: USB disconnect, device number 54
+Oct 30 03:52:24 rover kernel: uvcvideo 1-2.4.2:1.1: Failed to resubmit video URB (-19).
+Oct 30 03:52:25 rover kernel: usb 1-2.4.2: new high-speed USB device number 55 using tegra-xusb
+Oct 30 03:52:25 rover kernel: usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+Oct 30 03:52:25 rover kernel: input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input48
+Oct 30 03:52:25 rover kernel: usb 1-2.4.2: USB disconnect, device number 55
+Oct 30 03:52:26 rover kernel: usb 1-2.4.2: new high-speed USB device number 56 using tegra-xusb
+Oct 30 03:52:26 rover kernel: usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+Oct 30 03:52:26 rover kernel: input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input49
+Oct 30 03:52:26 rover kernel: usb 1-2.4.2: USB disconnect, device number 56
+Oct 30 03:52:26 rover kernel: uvcvideo 1-2.4.2:1.1: Failed to resubmit video URB (-19).
+Oct 30 03:52:27 rover kernel: usb 1-2.4.2: new high-speed USB device number 57 using tegra-xusb
+Oct 30 03:52:27 rover kernel: usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+Oct 30 03:52:27 rover kernel: input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input50
+Oct 30 03:52:27 rover kernel: usb 1-2.4.2: USB disconnect, device number 57
+Oct 30 03:52:27 rover kernel: uvcvideo 1-2.4.2:1.1: Failed to resubmit video URB (-19).
+Oct 30 03:52:28 rover kernel: usb 1-2.4.2: new high-speed USB device number 58 using tegra-xusb
+Oct 30 03:52:28 rover kernel: usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+Oct 30 03:52:28 rover kernel: input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input51
+Oct 30 03:52:29 rover kernel: usb 1-2.4.2: USB disconnect, device number 58
+Oct 30 03:52:29 rover kernel: usb 1-2.4.2: new high-speed USB device number 59 using tegra-xusb
+Oct 30 03:52:29 rover kernel: usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+Oct 30 03:52:29 rover kernel: input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input52
+Oct 30 03:52:33 rover kernel: usb 1-2.4.2: USB disconnect, device number 59
+Oct 30 03:52:34 rover kernel: usb 1-2.4.2: new high-speed USB device number 60 using tegra-xusb
+Oct 30 03:52:34 rover kernel: usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+Oct 30 03:52:34 rover kernel: input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input53
+Oct 30 03:52:34 rover kernel: usb 1-2.4.2: USB disconnect, device number 60
+Oct 30 03:52:35 rover kernel: usb 1-2.4.2: new high-speed USB device number 61 using tegra-xusb
+Oct 30 03:52:35 rover kernel: usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+Oct 30 03:52:35 rover kernel: input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input54
+Oct 30 03:52:35 rover kernel: usb 1-2.4.2: USB disconnect, device number 61
+Oct 30 03:52:36 rover kernel: usb 1-2.4.2: new high-speed USB device number 62 using tegra-xusb
+Oct 30 03:52:36 rover kernel: usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+Oct 30 03:52:36 rover kernel: input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input55
+Oct 30 03:52:36 rover kernel: usb 1-2.4.2: USB disconnect, device number 62
+Oct 30 03:52:37 rover kernel: usb 1-2.4.2: new high-speed USB device number 63 using tegra-xusb
+Oct 30 03:52:37 rover kernel: usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+Oct 30 03:52:37 rover kernel: input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input56
+Oct 30 03:52:37 rover kernel: usb 1-2.4.2: USB disconnect, device number 63
+Oct 30 03:52:37 rover kernel: uvcvideo 1-2.4.2:1.1: Failed to resubmit video URB (-19).
+Oct 30 03:52:37 rover kernel: uvcvideo 1-2.4.2:1.1: Failed to resubmit video URB (-19).
+Oct 30 03:52:38 rover kernel: usb 1-2.4.2: new high-speed USB device number 64 using tegra-xusb
+Oct 30 03:52:38 rover kernel: usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+Oct 30 03:52:38 rover kernel: input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input57
+Oct 30 03:52:38 rover kernel: usb 1-2.4.2: USB disconnect, device number 64
+Oct 30 03:52:38 rover kernel: uvcvideo 1-2.4.2:1.1: Failed to resubmit video URB (-19).
+Oct 30 03:52:38 rover kernel: uvcvideo 1-2.4.2:1.1: Failed to resubmit video URB (-19).
+Oct 30 03:52:39 rover kernel: usb 1-2.4.2: new high-speed USB device number 65 using tegra-xusb
+Oct 30 03:52:39 rover kernel: usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+Oct 30 03:52:39 rover kernel: input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input58
+Oct 30 03:52:40 rover kernel: usb 1-2.4.2: USB disconnect, device number 65
+Oct 30 03:52:40 rover kernel: usb 1-2.4.2: new high-speed USB device number 66 using tegra-xusb
+Oct 30 03:52:40 rover kernel: usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+Oct 30 03:52:40 rover kernel: input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input59
+Oct 30 03:52:41 rover kernel: usb 1-2.4.2: USB disconnect, device number 66
+Oct 30 03:52:42 rover kernel: usb 1-2.4.2: new high-speed USB device number 67 using tegra-xusb
+Oct 30 03:52:42 rover kernel: usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+Oct 30 03:52:42 rover kernel: input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input60
+Oct 30 03:52:43 rover kernel: usb 1-2.4.2: USB disconnect, device number 67
+Oct 30 03:52:43 rover kernel: usb 1-2.4.2: new high-speed USB device number 68 using tegra-xusb
+Oct 30 03:52:43 rover kernel: usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+Oct 30 03:52:43 rover kernel: input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input61

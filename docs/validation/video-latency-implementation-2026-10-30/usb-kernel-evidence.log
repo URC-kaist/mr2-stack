@@ -1,0 +1,180 @@
+[ 6703.157638] uvcvideo 2-1.3:1.4: Non-zero status (-71) in video completion handler.
+[ 6713.949992] uvcvideo 2-1.3:1.4: Non-zero status (-71) in video completion handler.
+[ 6725.034410] uvcvideo 2-1.3:1.4: Non-zero status (-71) in video completion handler.
+[ 6744.812526] uvcvideo 2-1.3:1.4: Non-zero status (-71) in video completion handler.
+[ 7575.703885] uvcvideo 2-1.3:1.4: Non-zero status (-71) in video completion handler.
+[ 7577.275661] uvcvideo 2-1.3:1.4: Non-zero status (-71) in video completion handler.
+[ 7579.892146] uvcvideo 2-1.3:1.4: Non-zero status (-71) in video completion handler.
+[ 7581.048851] uvcvideo 2-1.3:1.4: Non-zero status (-71) in video completion handler.
+[ 7591.451011] uvcvideo 2-1.3:1.4: Non-zero status (-71) in video completion handler.
+[ 7605.233171] uvcvideo 2-1.3:1.4: Non-zero status (-71) in video completion handler.
+[ 7620.700788] uvcvideo 2-1.3:1.4: Non-zero status (-71) in video completion handler.
+[ 8218.317530] uvcvideo 2-1.3:1.4: Non-zero status (-71) in video completion handler.
+[ 8234.900870] uvcvideo 2-1.3:1.4: Non-zero status (-71) in video completion handler.
+[11852.574692] can: controller area network core
+[11852.574794] NET: Registered PF_CAN protocol family
+[11852.582438] can: raw protocol
+[11854.062491] uvcvideo 2-1.3:1.4: Non-zero status (-71) in video completion handler.
+[11855.563490] uvcvideo 2-1.3:1.4: Non-zero status (-71) in video completion handler.
+[11871.471896] uvcvideo 2-1.3:1.4: Non-zero status (-71) in video completion handler.
+[11881.145524] uvcvideo 2-1.3:1.4: Non-zero status (-71) in video completion handler.
+[11885.242418] uvcvideo 2-1.3:1.4: Non-zero status (-71) in video completion handler.
+[11903.445659] uvcvideo 2-1.3:1.4: Non-zero status (-71) in video completion handler.
+[13695.475035] uvcvideo 2-1.3:1.4: Non-zero status (-71) in video completion handler.
+[13697.112481] uvcvideo 2-1.3:1.4: Non-zero status (-71) in video completion handler.
+[14132.443267] pwm-tegra-tachometer 39c0000.tachometer: Tachometer Overflow is detected
+[14176.442535] pwm-tegra-tachometer 39c0000.tachometer: Tachometer Overflow is detected
+[14299.857871] usb usb1-port2: disabled by hub (EMI?), re-enabling...
+[14299.857946] usb 1-2: USB disconnect, device number 2
+[14299.857981] usb 1-2.1: USB disconnect, device number 4
+[14299.858228] usb 1-2: clear tt 1 (9041) error -71
+[14299.858281] ftdi_sio ttyUSB0: error from flowcontrol urb
+[14299.858378] uvcvideo 1-2.4.1:1.1: Failed to resubmit video URB (-19).
+[14299.859417] ftdi_sio ttyUSB0: FTDI USB Serial Device converter now disconnected from ttyUSB0
+[14299.859496] ftdi_sio 1-2.1:1.0: device disconnected
+[14299.859985] uvcvideo 1-2.4.3:1.1: Failed to resubmit video URB (-19).
+[14299.860250] uvcvideo 1-2.4.2:1.1: Failed to resubmit video URB (-19).
+[14299.860506] usb 1-2.2: USB disconnect, device number 5
+[14299.860515] usb 1-2.2.4: USB disconnect, device number 7
+[14299.861360] uvcvideo 1-2.4.4:1.1: Failed to resubmit video URB (-19).
+[14299.862358] uvcvideo 1-2.4.1:1.1: Failed to resubmit video URB (-19).
+[14299.863981] uvcvideo 1-2.4.3:1.1: Failed to resubmit video URB (-19).
+[14299.864232] uvcvideo 1-2.4.2:1.1: Failed to resubmit video URB (-19).
+[14299.864602] usb 1-2.4: USB disconnect, device number 6
+[14299.864610] usb 1-2.4.1: USB disconnect, device number 8
+[14299.865360] uvcvideo 1-2.4.4:1.1: Failed to resubmit video URB (-19).
+[14299.867979] uvcvideo 1-2.4.3:1.1: Failed to resubmit video URB (-19).
+[14299.868238] uvcvideo 1-2.4.2:1.1: Failed to resubmit video URB (-19).
+[14299.869364] uvcvideo 1-2.4.4:1.1: Failed to resubmit video URB (-19).
+[14299.871984] uvcvideo 1-2.4.3:1.1: Failed to resubmit video URB (-19).
+[14299.872229] uvcvideo 1-2.4.2:1.1: Failed to resubmit video URB (-19).
+[14299.873357] uvcvideo 1-2.4.4:1.1: Failed to resubmit video URB (-19).
+[14299.875988] uvcvideo 1-2.4.3:1.1: Failed to resubmit video URB (-19).
+[14299.876238] uvcvideo 1-2.4.2:1.1: Failed to resubmit video URB (-19).
+[14299.877361] uvcvideo 1-2.4.4:1.1: Failed to resubmit video URB (-19).
+[14299.954906] usb 1-2.4.2: USB disconnect, device number 9
+[14300.063682] usb 1-2.4.3: USB disconnect, device number 10
+[14300.139814] usb 1-2.4.4: USB disconnect, device number 11
+[14300.570526] usb 1-2: new high-speed USB device number 12 using tegra-xusb
+[14300.744008] hub 1-2:1.0: USB hub found
+[14300.745558] hub 1-2:1.0: 4 ports detected
+[14301.454521] usb 1-2.1: new full-speed USB device number 13 using tegra-xusb
+[14301.573893] ftdi_sio 1-2.1:1.0: FTDI USB Serial Device converter detected
+[14301.573993] usb 1-2.1: Detected FT-X
+[14301.579922] usb 1-2.1: FTDI USB Serial Device converter now attached to ttyUSB0
+[14301.662489] usb 1-2.2: new high-speed USB device number 14 using tegra-xusb
+[14301.770221] hub 1-2.2:1.0: USB hub found
+[14301.771000] hub 1-2.2:1.0: 4 ports detected
+[14301.854486] usb 1-2.4: new high-speed USB device number 15 using tegra-xusb
+[14301.962089] hub 1-2.4:1.0: USB hub found
+[14301.962874] hub 1-2.4:1.0: 4 ports detected
+[14302.102470] usb 1-2.2.4: new high-speed USB device number 16 using tegra-xusb
+[14302.234344] hub 1-2.2.4:1.0: USB hub found
+[14302.235103] hub 1-2.2.4:1.0: 4 ports detected
+[14302.334470] usb 1-2.4.1: new high-speed USB device number 17 using tegra-xusb
+[14302.522562] usb 1-2.4.1: Found UVC 1.00 device HD Camera (1e45:8022)
+[14302.542918] input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.1/1-2.4.1:1.0/input/input10
+[14302.646467] usb 1-2.4.2: new high-speed USB device number 18 using tegra-xusb
+[14302.838473] usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+[14302.858569] input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input11
+[14302.966500] usb 1-2.4.3: new high-speed USB device number 19 using tegra-xusb
+[14303.158126] usb 1-2.4.3: Found UVC 1.00 device HD Camera (1e45:8022)
+[14303.179258] input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.3/1-2.4.3:1.0/input/input12
+[14303.286464] usb 1-2.4.4: new high-speed USB device number 20 using tegra-xusb
+[14303.474678] usb 1-2.4.4: Found UVC 1.00 device HD Camera (1e45:8022)
+[14303.494868] input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.4/1-2.4.4:1.0/input/input13
+[14307.943273] usb 1-2.4.2: USB disconnect, device number 18
+[14308.294323] usb 1-2.4.2: new high-speed USB device number 21 using tegra-xusb
+[14308.486166] usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+[14308.506400] input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input14
+[14325.607267] usb 1-2.4.2: USB disconnect, device number 21
+[14325.965967] usb 1-2.4.2: new high-speed USB device number 22 using tegra-xusb
+[14326.154437] usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+[14326.175263] input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input15
+[14329.191250] usb 1-2.4.2: USB disconnect, device number 22
+[14329.521842] usb 1-2.4.2: new high-speed USB device number 23 using tegra-xusb
+[14329.710077] usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+[14329.731735] input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input16
+[14330.215236] usb 1-2.4.2: USB disconnect, device number 23
+[14330.545865] usb 1-2.4.2: new high-speed USB device number 24 using tegra-xusb
+[14330.739063] usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+[14330.759774] input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input17
+[14334.311249] usb 1-2.4.2: USB disconnect, device number 24
+[14334.653766] usb 1-2.4.2: new high-speed USB device number 25 using tegra-xusb
+[14334.846562] usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+[14334.867791] input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input18
+[14335.847884] usb 1-2.4.2: USB disconnect, device number 25
+[14336.169694] usb 1-2.4.2: new high-speed USB device number 26 using tegra-xusb
+[14336.358054] usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+[14336.378255] input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input19
+[14337.383253] usb 1-2.4.2: USB disconnect, device number 26
+[14337.741787] usb 1-2.4.2: new high-speed USB device number 27 using tegra-xusb
+[14337.934060] usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+[14337.955650] input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input20
+[14339.943408] usb 1-2.4.2: USB disconnect, device number 27
+[14339.944860] uvcvideo 1-2.4.2:1.1: Failed to resubmit video URB (-19).
+[14340.285601] usb 1-2.4.2: new high-speed USB device number 28 using tegra-xusb
+[14340.478052] usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+[14340.498766] input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input21
+[14341.223251] usb 1-2.4.2: USB disconnect, device number 28
+[14341.545864] usb 1-2.4.2: new high-speed USB device number 29 using tegra-xusb
+[14341.738193] usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+[14341.759177] input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input22
+[14342.247386] usb 1-2.4.2: USB disconnect, device number 29
+[14342.248613] uvcvideo 1-2.4.2:1.1: Failed to resubmit video URB (-19).
+[14342.565563] usb 1-2.4.2: new high-speed USB device number 30 using tegra-xusb
+[14342.749468] usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+[14342.770236] input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input23
+[14343.211210] ftdi_sio ttyUSB0: usb_serial_generic_read_bulk_callback - urb stopped: -32
+[14343.271372] usb 1-2.4.2: USB disconnect, device number 30
+[14343.272487] uvcvideo 1-2.4.2:1.1: Failed to resubmit video URB (-19).
+[14343.585530] usb 1-2.4.2: new high-speed USB device number 31 using tegra-xusb
+[14343.778686] usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+[14343.800301] input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input24
+[14344.295388] usb 1-2.4.2: USB disconnect, device number 31
+[14344.605672] usb 1-2.4.2: new high-speed USB device number 32 using tegra-xusb
+[14344.801817] usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+[14344.823130] input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input25
+[14345.319258] usb 1-2.4.2: USB disconnect, device number 32
+[14345.633505] usb 1-2.4.2: new high-speed USB device number 33 using tegra-xusb
+[14345.829579] usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+[14345.850382] input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input26
+[14346.855242] usb 1-2.4.2: USB disconnect, device number 33
+[14347.185481] usb 1-2.4.2: new high-speed USB device number 34 using tegra-xusb
+[14347.374186] usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+[14347.395452] input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input27
+[14348.391239] usb 1-2.4.2: USB disconnect, device number 34
+[14348.717476] usb 1-2.4.2: new high-speed USB device number 35 using tegra-xusb
+[14348.905943] usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+[14348.926850] input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input28
+[14349.927270] usb 1-2.4.2: USB disconnect, device number 35
+[14350.261387] usb 1-2.4.2: new high-speed USB device number 36 using tegra-xusb
+[14350.446211] usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+[14350.467135] input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input29
+[14351.463248] usb 1-2.4.2: USB disconnect, device number 36
+[14351.789365] usb 1-2.4.2: new high-speed USB device number 37 using tegra-xusb
+[14351.974059] usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+[14351.995122] input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input30
+[14352.745116] usb 1-2.4.2: USB disconnect, device number 37
+[14352.746492] uvcvideo 1-2.4.2:1.1: Failed to resubmit video URB (-19).
+[14353.081341] usb 1-2.4.2: new high-speed USB device number 38 using tegra-xusb
+[14353.273628] usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+[14353.293983] input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input31
+[14353.767235] usb 1-2.4.2: USB disconnect, device number 38
+[14354.097289] usb 1-2.4.2: new high-speed USB device number 39 using tegra-xusb
+[14354.290101] usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+[14354.311837] input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input32
+[14354.791391] usb 1-2.4.2: USB disconnect, device number 39
+[14354.792013] uvcvideo 1-2.4.2:1.1: Failed to resubmit video URB (-19).
+[14355.101303] usb 1-2.4.2: new high-speed USB device number 40 using tegra-xusb
+[14355.293418] usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+[14355.313831] input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input33
+[14355.815507] usb 1-2.4.2: USB disconnect, device number 40
+[14355.816239] uvcvideo 1-2.4.2:1.1: Failed to resubmit video URB (-19).
+[14356.145235] usb 1-2.4.2: new high-speed USB device number 41 using tegra-xusb
+[14356.338908] usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+[14356.360175] input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input34
+[14389.607255] usb 1-2.4.2: USB disconnect, device number 41
+[14389.932483] usb 1-2.4.2: new high-speed USB device number 42 using tegra-xusb
+[14390.126198] usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+[14390.149585] input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input35

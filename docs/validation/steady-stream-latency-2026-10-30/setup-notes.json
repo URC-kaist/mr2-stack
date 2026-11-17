@@ -1,0 +1,32 @@
+{
+  "initial_low_fps_fixture_attempt": {
+    "fps": 5,
+    "encoder_target_bps": 1800000,
+    "vbv_size": 180000,
+    "result": "encoder resource error; excluded"
+  },
+  "corrected_low_fps_fixture": {
+    "fps": 5,
+    "vbv_size": 361800,
+    "method": "same frame-period formula as production vbv_bits",
+    "result": "30 frames generated and both browser cases passed"
+  },
+  "initial_missing_fixture_browser_attempt": "No measurements; temporary browser stopped; harness now returns 404 for missing fixtures",
+  "fixtures": [
+    {
+      "file": "fps5.json",
+      "bytes": 1597614,
+      "sha256": "2989415a9c3e4cf7a8a82f6ff73f1ce3ddda84f2534e7f65dd39cf0ed59667d8"
+    },
+    {
+      "file": "poc0.json",
+      "bytes": 929034,
+      "sha256": "1d3014fed1640237b8ba29676d90886d4812faced8ae0629366b589d706deb48"
+    },
+    {
+      "file": "poc2.json",
+      "bytes": 943111,
+      "sha256": "effdf9eef0b3a6662711fa843c799138abbdbc9ebad125f828978f3fc1cebafd"
+    }
+  ]
+}

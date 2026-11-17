@@ -1,0 +1,11 @@
+{
+  "source_fps": 6,
+  "source_frames": 72,
+  "decoded_frames": 66,
+  "width": 640,
+  "height": 480,
+  "wire_budget_kbps": 1800,
+  "encoder_target_kbps": 1530,
+  "sender_exit": 0,
+  "elapsed_s": 13.047282350999922
+}

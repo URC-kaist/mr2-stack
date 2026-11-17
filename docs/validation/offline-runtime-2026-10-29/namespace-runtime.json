@@ -1,0 +1,62 @@
+{
+  "namespace": "net:[4026534139]",
+  "host_namespace": "net:[4026531840]",
+  "interfaces": [
+    {
+      "ifindex": 1,
+      "ifname": "lo",
+      "flags": [
+        "LOOPBACK",
+        "UP",
+        "LOWER_UP"
+      ],
+      "mtu": 65536,
+      "qdisc": "noqueue",
+      "operstate": "UNKNOWN",
+      "group": "default",
+      "txqlen": 1000,
+      "addr_info": [
+        {
+          "family": "inet",
+          "local": "127.0.0.1",
+          "prefixlen": 8,
+          "scope": "host",
+          "label": "lo",
+          "valid_life_time": 4294967295,
+          "preferred_life_time": 4294967295
+        }
+      ]
+    }
+  ],
+  "routes": [],
+  "external_reachable": false,
+  "ntp": {
+    "server_config": "local stratum 8\nbindaddress 127.0.0.1\nallow 127.0.0.1\nport 51594\ncmdport 0\npidfile /tmp/mr2-isolated-ntp-6g8i0_ez/server.pid\n",
+    "returncode": 0,
+    "output": "2026-10-29T10:13:59Z chronyd version 4.2 starting (+CMDMON +NTP +REFCLOCK +RTC +PRIVDROP +SCFILTER +SIGND +ASYNCDNS +NTS +SECHASH +IPV6 -DEBUG)\n2026-10-29T10:13:59Z Disabled control of system clock\n2026-10-29T10:13:59Z Running with root privileges\n2026-10-29T10:14:00Z System clock wrong by -0.000010 seconds (ignored)\n2026-10-29T10:14:00Z chronyd exiting\n"
+  },
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "scripts/latency/test_adaptive_video.py",
+        "--bin",
+        "rover/ros2_ws/install/mr2_video_streaming/lib/mr2_video_streaming"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "node",
+        "--test",
+        "base/gateway/test/video_control.test.js",
+        "base/gateway/test/video_network_scenarios.test.js",
+        "base/gateway/test/chrony_status.test.js",
+        "base/gateway/test/uplink_trial_manager.test.js",
+        "base/gateway/test/gateway_startup.test.js"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "passed": true
+}

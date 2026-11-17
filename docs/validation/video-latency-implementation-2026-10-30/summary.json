@@ -1,0 +1,33 @@
+{
+  "elapsed_observed_s": 760.001675362,
+  "user_requested_stop": true,
+  "clock": {
+    "reports": 384,
+    "unsynchronized_reports": 0,
+    "not_ready_reports": 0,
+    "max_abs_offset_ms": 0.079164,
+    "max_bound_ms": 1.6709004954099937
+  },
+  "acceptance": {
+    "initial_five_physical_feeds": true,
+    "priority_change_and_disable_enable": true,
+    "full_duration_uninterrupted_five_feeds": false,
+    "reason": "USB hub disconnect followed by repeated Left-camera disconnect/re-enumeration; user stopped long testing."
+  },
+  "tests": {
+    "gateway_passed": 131,
+    "native_checks_passed": 8,
+    "budget_scenarios": 17,
+    "failed_prefix_scenarios": 1,
+    "capture_reconfiguration_scenarios": 6,
+    "dashboard_typecheck_lint_build": "passed",
+    "dashboard_functional_tests": "passed",
+    "xbee_pty_keyframe_control": "passed"
+  },
+  "final_deployment": {
+    "rover_build": "passed",
+    "base_native_receiver_build": "passed",
+    "source_hashes_match": true,
+    "final_gateway_backlog_and_late_subscriber_fix": "unit tested and deployed; fresh full-stack rerun omitted at user request"
+  }
+}

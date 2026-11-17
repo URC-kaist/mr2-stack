@@ -1,0 +1,32 @@
+[
+  {
+    "stream_id": "rgbd_camera",
+    "device": "/dev/videoRGBD",
+    "exit": 0,
+    "stderr": ""
+  },
+  {
+    "stream_id": "front_left_cam",
+    "device": "/dev/videoFL",
+    "exit": 0,
+    "stderr": ""
+  },
+  {
+    "stream_id": "front_right_cam",
+    "device": "/dev/videoFR",
+    "exit": 0,
+    "stderr": ""
+  },
+  {
+    "stream_id": "left_cam",
+    "device": "/dev/videoLEFT",
+    "exit": 0,
+    "stderr": ""
+  },
+  {
+    "stream_id": "right_cam",
+    "device": "/dev/videoRIGHT",
+    "exit": 0,
+    "stderr": ""
+  }
+]

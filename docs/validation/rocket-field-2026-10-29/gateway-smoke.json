@@ -1,0 +1,99 @@
+{
+  "command": [
+    "npm",
+    "start",
+    "--",
+    "--gateway-port",
+    "44017",
+    "--base-xbee-device",
+    "/dev/pts/4",
+    "--antenna-enable",
+    "false",
+    "--ros-topic-relay-enable",
+    "false",
+    "--video-config",
+    "/tmp/mr2-rocket-field-smoke/video.json"
+  ],
+  "isolated_serial": true,
+  "temporary_udp_port": 45771,
+  "fleet": {
+    "type": "rocket_m2_statuses",
+    "statuses": [
+      {
+        "connected": true,
+        "updated_at_ms": 1793272878943,
+        "last_success_ms": 1793272878943,
+        "signal": -24,
+        "rssi": 72,
+        "noisef": -92,
+        "chwidth": 20,
+        "rx_chainmask": 3,
+        "chainrssi": [
+          73,
+          65,
+          0
+        ],
+        "chainrssimgmt": [
+          73,
+          65,
+          0
+        ],
+        "chainrssiext": [
+          73,
+          65,
+          0
+        ],
+        "error": null,
+        "target": "base",
+        "label": "Base"
+      },
+      {
+        "connected": false,
+        "updated_at_ms": 1793272878946,
+        "last_success_ms": null,
+        "signal": null,
+        "rssi": null,
+        "noisef": null,
+        "chwidth": null,
+        "rx_chainmask": null,
+        "chainrssi": [],
+        "chainrssimgmt": [],
+        "chainrssiext": [],
+        "error": "Rocket M2 management interface unreachable",
+        "target": "drone",
+        "label": "Drone"
+      },
+      {
+        "connected": true,
+        "updated_at_ms": 1793272878949,
+        "last_success_ms": 1793272878949,
+        "signal": -24,
+        "rssi": 72,
+        "noisef": -93,
+        "chwidth": 20,
+        "rx_chainmask": 3,
+        "chainrssi": [
+          70,
+          70,
+          0
+        ],
+        "chainrssimgmt": [
+          70,
+          70,
+          0
+        ],
+        "chainrssiext": [
+          70,
+          70,
+          0
+        ],
+        "error": null,
+        "target": "rover",
+        "label": "Rover"
+      }
+    ]
+  },
+  "mavproxy_not_started": true,
+  "passed": true,
+  "test_process_stopped": true
+}

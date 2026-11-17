@@ -1,0 +1,143 @@
+{
+  "initial": [
+    {
+      "at": 1.1390760399999635,
+      "phase": "initial",
+      "width": 640,
+      "height": 480,
+      "fps": 6
+    },
+    {
+      "at": 2.1392514930003017,
+      "phase": "initial",
+      "width": 640,
+      "height": 480,
+      "fps": 6
+    },
+    {
+      "at": 3.139172133000102,
+      "phase": "initial",
+      "width": 640,
+      "height": 480,
+      "fps": 6
+    },
+    {
+      "at": 4.138570871999946,
+      "phase": "initial",
+      "width": 640,
+      "height": 480,
+      "fps": 6
+    },
+    {
+      "at": 5.139203146,
+      "phase": "initial",
+      "width": 640,
+      "height": 480,
+      "fps": 6
+    },
+    {
+      "at": 6.1392531649999,
+      "phase": "initial",
+      "width": 640,
+      "height": 480,
+      "fps": 6
+    },
+    {
+      "at": 7.143791454000166,
+      "phase": "initial",
+      "width": 640,
+      "height": 480,
+      "fps": 6
+    },
+    {
+      "at": 8.139132750000044,
+      "phase": "initial",
+      "width": 640,
+      "height": 480,
+      "fps": 6
+    }
+  ],
+  "last": [
+    {
+      "at": 24.14561000699996,
+      "phase": "recovered",
+      "width": 640,
+      "height": 480,
+      "fps": 6
+    },
+    {
+      "at": 25.139506498000173,
+      "phase": "recovered",
+      "width": 640,
+      "height": 480,
+      "fps": 6
+    },
+    {
+      "at": 26.139347066000028,
+      "phase": "recovered",
+      "width": 640,
+      "height": 480,
+      "fps": 6
+    },
+    {
+      "at": 27.13970697400009,
+      "phase": "recovered",
+      "width": 640,
+      "height": 480,
+      "fps": 6
+    },
+    {
+      "at": 28.139578391000214,
+      "phase": "recovered",
+      "width": 640,
+      "height": 480,
+      "fps": 6
+    },
+    {
+      "at": 29.13951521700028,
+      "phase": "recovered",
+      "width": 640,
+      "height": 480,
+      "fps": 6
+    },
+    {
+      "at": 30.139611310999953,
+      "phase": "recovered",
+      "width": 640,
+      "height": 480,
+      "fps": 6
+    },
+    {
+      "at": 31.13955600899999,
+      "phase": "recovered",
+      "width": 640,
+      "height": 480,
+      "fps": 6
+    },
+    {
+      "at": 32.14031630999989,
+      "phase": "recovered",
+      "width": 640,
+      "height": 480,
+      "fps": 6
+    },
+    {
+      "at": 33.140532214999894,
+      "phase": "recovered",
+      "width": 640,
+      "height": 480,
+      "fps": 6
+    }
+  ],
+  "low_profile_observed": true,
+  "full_profile_recovered": true,
+  "rtp_frames": 143,
+  "frames_by_phase": {
+    "initial": 48,
+    "low": 18,
+    "recovered": 77
+  },
+  "fps_limits": [
+    6
+  ]
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="1" failures="0" disabled="0" errors="0" time="0.014" timestamp="2026-11-12T23:25:19" name="AllTests">
+  <testsuite name="PluginLoading" tests="1" failures="0" disabled="0" errors="0" time="0.014" timestamp="2026-11-12T23:25:19">
+    <testcase name="MixedDeviceClassesAndIndependentCommandMemory" status="run" result="completed" time="0.013" timestamp="2026-11-12T23:25:19" classname="mr2_devices_robstride.PluginLoading" />
+  </testsuite>
+</testsuites>

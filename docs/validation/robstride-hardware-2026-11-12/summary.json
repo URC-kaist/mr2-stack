@@ -1,0 +1,74 @@
+{
+  "test": "single RS-06 via installed RobstrideDevice plugin",
+  "result": "PASS",
+  "iface": "can0",
+  "bitrate": 1000000,
+  "motor_id": 127,
+  "host_id": 253,
+  "current_limit_a": 1.0,
+  "acceleration_rad_s2": 0.5,
+  "phase_results": {
+    "initial_zero": {
+      "samples": 60,
+      "target_rad_s": 0.0,
+      "tail_mean_velocity_rad_s": -0.012970168612179804,
+      "first_position_rad": 2.80132524605,
+      "last_position_rad": 2.80017441062
+    },
+    "forward": {
+      "samples": 100,
+      "target_rad_s": 0.2,
+      "tail_mean_velocity_rad_s": 0.20159515467368072,
+      "first_position_rad": 2.80017441062,
+      "last_position_rad": 2.94863218128
+    },
+    "zero_between": {
+      "samples": 60,
+      "target_rad_s": 0.0,
+      "tail_mean_velocity_rad_s": -0.0027583616505573076,
+      "first_position_rad": 2.95055024033,
+      "last_position_rad": 2.99274753948
+    },
+    "reverse": {
+      "samples": 100,
+      "target_rad_s": -0.2,
+      "tail_mean_velocity_rad_s": -0.21491745456040773,
+      "first_position_rad": 2.99236392767,
+      "last_position_rad": 2.86116868849
+    },
+    "final_zero": {
+      "samples": 60,
+      "target_rad_s": 0.0,
+      "tail_mean_velocity_rad_s": -0.037689784084852,
+      "first_position_rad": 2.85925062943,
+      "last_position_rad": 2.82242389563
+    }
+  },
+  "feedback_frames": 392,
+  "feedback_modes": {
+    "0": 9,
+    "2": 383
+  },
+  "nonzero_feedback_faults": 0,
+  "max_temperature_c": 22.0,
+  "final_parameters": {
+    "run_mode": 2,
+    "spd_ref": 0.0,
+    "limit_cur": 1.0,
+    "mechPos": 2.822950601577759,
+    "iqf": 0.0,
+    "mechVel": 0.0,
+    "VBUS": 24.149999618530273,
+    "acc_rad": 0.5,
+    "canTimeout": 4000
+  },
+  "can_error_counters": {
+    "restarts": 0,
+    "bus_error": 0,
+    "arbitration_lost": 0,
+    "error_warning": 0,
+    "error_passive": 0,
+    "bus_off": 0
+  },
+  "profile": "flat"
+}

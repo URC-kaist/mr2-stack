@@ -1,0 +1,3 @@
+{"exposure_dynamic_framerate": 1, "cameras": {"FR": {"fps": 7.676397098620209, "frames": 61, "median_interval_ms": 131.9619440000679, "errors": []}, "RIGHT": {"fps": 7.674504180083637, "frames": 62, "median_interval_ms": 131.9414960003087, "errors": []}}}
+{"exposure_dynamic_framerate": 0, "cameras": {"FR": {"fps": 29.999390708624077, "frames": 241, "median_interval_ms": 32.01831649971609, "errors": []}, "RIGHT": {"fps": 30.014501179838472, "frames": 241, "median_interval_ms": 32.00765999986288, "errors": []}}}
+{"exposure_dynamic_framerate": 1, "cameras": {"FR": {"fps": 7.676458949956082, "frames": 61, "median_interval_ms": 131.85319000012896, "errors": []}, "RIGHT": {"fps": 7.67473632349101, "frames": 62, "median_interval_ms": 131.95698400022593, "errors": []}}}

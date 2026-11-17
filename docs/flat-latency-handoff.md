@@ -138,6 +138,27 @@ source rover/ros2_ws/install/setup.bash
 ./scripts/rover.bash start flat
 ```
 
+For a camera-only experiment, persist the optional local defaults once:
+
+```bash
+./scripts/rover.bash start flat --cameras-only
+```
+
+This keeps the flat video/XBee configuration and disables the flat motor and
+GNSS in the next ordinary `ros2 launch mr2_launch rover_real.launch.py`.
+`start_chrony.sh` also skips CAN initialization when its selected hardware
+modules are all disabled. Explicit launch arguments still override these
+defaults. Selecting `start flat` or `start original` again clears the local
+camera-only options. The field wrapper preserves an already selected flat
+camera experiment. This selector does not change addresses or start processes;
+development-network destinations still belong in the usual IP arguments.
+
+The base gateway independently reads its ignored `base/gateway/.env.local`;
+set `VIDEO_CONFIG_PATH` to the same flat JSON as described above. The camera
+paths in that JSON must match the actual USB ports. Current camera experiment
+mapping: `flat_cam_1` uses `2.3.1`, `flat_cam_3` uses `2.4.1`, and `flat_cam_4`
+uses `2.4.2`. The unused `2.2.2` slot remains `NO DEVICE` until connected.
+
 On a machine without the previously built flat profile, build `mr2_flat_motor`
 as well. These feature packages do not require selecting `mr2_control` or enabling
 the original rover hardware. Reuse the existing CAN setup for actual driving.

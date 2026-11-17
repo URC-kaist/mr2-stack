@@ -1,0 +1,139 @@
+{
+  "phases": [
+    {
+      "name": "warm5400",
+      "budget": 5400,
+      "states": {
+        "53930": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 1530,
+          "width": 640,
+          "height": 480,
+          "fps": 30
+        },
+        "53932": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 1530,
+          "width": 640,
+          "height": 360,
+          "fps": 30
+        },
+        "53934": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 1530,
+          "width": 640,
+          "height": 360,
+          "fps": 30
+        }
+      },
+      "decoded_total": [
+        217,
+        201,
+        203
+      ],
+      "decoded_stable": [
+        117,
+        117,
+        117
+      ]
+    },
+    {
+      "name": "smallDrop4320",
+      "budget": 4320,
+      "states": {
+        "53930": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 1224,
+          "width": 640,
+          "height": 480,
+          "fps": 30
+        },
+        "53932": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 1224,
+          "width": 640,
+          "height": 360,
+          "fps": 30
+        },
+        "53934": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 1224,
+          "width": 640,
+          "height": 360,
+          "fps": 30
+        }
+      },
+      "decoded_total": [
+        12,
+        12,
+        13
+      ],
+      "decoded_stable": [
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "name": "cumulativeDrop3456",
+      "budget": 3456,
+      "states": {
+        "53930": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 979,
+          "width": 480,
+          "height": 360,
+          "fps": 30
+        },
+        "53932": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 979,
+          "width": 480,
+          "height": 270,
+          "fps": 30
+        },
+        "53934": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 979,
+          "width": 480,
+          "height": 270,
+          "fps": 30
+        }
+      },
+      "decoded_total": [
+        33,
+        32,
+        3
+      ],
+      "decoded_stable": [
+        17,
+        18,
+        0
+      ]
+    }
+  ],
+  "cumulative_downgrade_first_decoded_s": [
+    0.24901446999865584,
+    0.31884301899845013,
+    0.3359018839983037
+  ],
+  "passed": true
+}

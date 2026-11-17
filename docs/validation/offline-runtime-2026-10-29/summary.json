@@ -1,0 +1,16 @@
+{
+  "offline_local_runtime_passed": true,
+  "browser_assets_and_local_tiles_passed": true,
+  "continuous_2ms_readiness_passed": false,
+  "measurement_ready_samples": 9,
+  "clock_observations": 28,
+  "host_network_unchanged": true,
+  "clock_locks_released": true,
+  "production_change": "Base MR2_LATENCY_PUBLIC_BASE_URL: old development .62 -> field 192.168.1.101",
+  "untested": [
+    "offline physical cold boot",
+    "RTC backup battery health",
+    "loaded Rocket RF 2ms precision",
+    "new real-camera offline browser end-to-end run"
+  ]
+}

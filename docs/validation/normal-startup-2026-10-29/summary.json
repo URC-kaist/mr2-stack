@@ -1,0 +1,162 @@
+{
+  "passed": true,
+  "deployment": {
+    "rover": "192.168.0.57",
+    "base": "192.168.0.54",
+    "field_base_default": "192.168.1.101",
+    "field_rover_default": "192.168.1.102",
+    "field_radio_defaults": {
+      "base": "192.168.1.100",
+      "rover": "192.168.1.106",
+      "drone": "192.168.1.103"
+    },
+    "defaults_persisted": true
+  },
+  "commands": {
+    "base_field": "npm start",
+    "rover_field": "ros2 launch mr2_launch rover_real.launch.py enable_manipulator_module:=false enable_xbee_sim:=false",
+    "base_tested": "npm start -- --rover-host 192.168.0.57 --base-rocket-m2-ip 192.168.0.244 --rover-rocket-m2-ip 192.168.0.245 --drone-rocket-m2-ip \"\"",
+    "rover_tested": "ros2 launch mr2_launch rover_real.launch.py enable_manipulator_module:=false enable_xbee_sim:=false video_base_host:=192.168.0.54"
+  },
+  "tests": {
+    "gateway_local": 95,
+    "gateway_base": 95,
+    "launch": 29,
+    "clock_policy": 15,
+    "field_config": 5,
+    "cpp_allocator": "passed",
+    "native_x264_jetson": "passed in isolation",
+    "low_fps_dynamic_bitrate": {
+      "fps": 6,
+      "frames": 36,
+      "rates_bps": [
+        150000,
+        1800000,
+        200000,
+        1000000,
+        300000
+      ]
+    }
+  },
+  "browser": {
+    "before": {
+      "Front Left": {
+        "count": 440,
+        "sizes": [
+          "640x360"
+        ]
+      },
+      "RGB-D Cam": {
+        "count": 60,
+        "sizes": [
+          "240x180",
+          "160x120"
+        ]
+      }
+    },
+    "after": {
+      "Front Left": {
+        "count": 708,
+        "sizes": [
+          "640x360",
+          "320x180",
+          "480x270"
+        ]
+      },
+      "RGB-D Cam": {
+        "count": 98,
+        "sizes": [
+          "240x180",
+          "160x120",
+          "640x480"
+        ]
+      }
+    },
+    "rosbridge": {
+      "topic": "/video/state",
+      "received": true
+    },
+    "radios": {
+      "type": "rocket_m2_statuses",
+      "statuses": [
+        {
+          "connected": true,
+          "updated_at_ms": 1793205364475,
+          "last_success_ms": 1793205364475,
+          "signal": -18,
+          "rssi": 78,
+          "noisef": -91,
+          "chwidth": 20,
+          "rx_chainmask": 3,
+          "chainrssi": [
+            74,
+            76,
+            0
+          ],
+          "chainrssimgmt": [
+            74,
+            76,
+            0
+          ],
+          "chainrssiext": [
+            74,
+            76,
+            0
+          ],
+          "error": null,
+          "target": "base",
+          "label": "Base"
+        },
+        {
+          "connected": true,
+          "updated_at_ms": 1793205364485,
+          "last_success_ms": 1793205364485,
+          "signal": -22,
+          "rssi": 74,
+          "noisef": -91,
+          "chwidth": 20,
+          "rx_chainmask": 3,
+          "chainrssi": [
+            72,
+            74,
+            0
+          ],
+          "chainrssimgmt": [
+            65,
+            70,
+            0
+          ],
+          "chainrssiext": [
+            72,
+            74,
+            0
+          ],
+          "error": null,
+          "target": "rover",
+          "label": "Rover"
+        }
+      ]
+    }
+  },
+  "final_full_launch_log": {
+    "launch_exceptions": 0,
+    "gstreamer_errors": 0,
+    "child_exits": 0,
+    "direct_children": 39
+  },
+  "feedback": {
+    "samples": 60,
+    "budget_min_kbps": 3407,
+    "budget_max_kbps": 3407,
+    "loss_max": 0.038
+  },
+  "limitations": [
+    "The development LAN is not a verified Rocket-only transport path.",
+    "No induced RF congestion, interference, or driving test.",
+    "Clock relative precision not ready; no absolute one-way delay claimed.",
+    "The repository-wide lint invocation also scanned inherited files and reported formatting violations; functional tests above passed.",
+    "A simultaneous native encoder probe under full-stack load had insufficient pacing samples; the isolated final run passed.",
+    "The receiver logged two transient GStreamer criticals during an earlier sender startup; the final rover/browser run had no sender GStreamer errors."
+  ],
+  "verification_processes": "stopped after acceptance; no test services enabled"
+}

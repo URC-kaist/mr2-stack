@@ -151,12 +151,58 @@ the gateway so `rclnodejs` can initialize correctly.
 
 ## Running
 
+From a fresh base terminal, the wrapper loads ROS, the workspace, and the
+repository's Node version before forwarding gateway arguments:
+
+```bash
+bash ~/mr2-stack/scripts/start_chrony_base.sh \
+  --latency-diagnostics-enable true \
+  --latency-public-base-url http://192.168.0.62
+```
+
+Use the base's current address (field default: `192.168.1.101`). If SiK is
+disconnected, add `--mavproxy-enable false` for that run.
+
+If startup reports a missing `ublox_ubx_msgs/msg/UBXNavSvin` or
+`rtcm_msgs/msg/Message` despite those ROS packages being installed, regenerate
+the JavaScript bindings with the workspace sourced and the gateway stopped:
+
+```bash
+source /opt/ros/humble/setup.bash
+source ~/mr2-stack/rover/ros2_ws/install/setup.bash
+cd ~/mr2-stack/base/gateway
+node -e 'require("rclnodejs").regenerateAll().catch(error => { console.error(error); process.exitCode = 1 })'
+```
+
+This is needed when bindings were generated before the workspace was sourced;
+the on-demand loader may miss message files in symlink installations.
+
 Minimal example:
 
 ```bash
 cd base/gateway
 npm start -- --base-xbee-device /dev/ttyXBEE --gateway-port 8081
 ```
+
+These values are already defaults, so `npm start` is sufficient on base. The
+legacy `/dev/XBEE` spelling also works when only `/dev/ttyXBEE` exists.
+Field addresses remain in `.env`: base `192.168.1.101`, rover `192.168.1.102`,
+base Rocket `192.168.1.100`, rover Rocket `192.168.1.106`, drone `192.168.1.103`.
+For another network, override addresses only for that run, for example:
+
+```bash
+npm start -- \
+  --rover-host 192.168.0.57 \
+  --base-rocket 192.168.0.244 \
+  --rover-rocket 192.168.0.245 \
+  --drone-rocket ''
+```
+
+`--rover-host` selects the ROS WebSocket upstream through the gateway and nginx;
+no nginx IP edit or dashboard rebuild is needed when changing networks. An
+explicit empty Rocket IP omits that radio for this run. The matching rover
+launch needs `video_base_host:=192.168.0.55` on this example network; the clock
+lease uses the same explicit base for that launch only.
 
 Rover-local direct operation:
 
@@ -199,7 +245,10 @@ npm start -- \
 The base station needs a GStreamer runtime with `gst-launch-1.0`, `rtph264depay`,
 `h264parse`, and `fdsink` available.
 
-MAVProxy starts with the gateway by default:
+XBee is the default 900 MHz control link (`/dev/ttyXBEE`). MAVProxy is disabled
+by default. Enable the separate SiK/MAVLink path only when that device is used,
+with `--mavproxy-enable true`. Do not point MAVProxy at the XBee control device.
+When enabled, its default command is:
 
 ```bash
 mavproxy.py --master=/dev/ttySIK,57600 --out=udp:192.168.1.108:14550 --default-modules= --non-interactive
@@ -242,7 +291,7 @@ For `rover-direct`, the profile defaults change the XBEE device to
 
 | CLI flag | Environment variable | Default |
 | --- | --- | --- |
-| `--mavproxy-enable` | `MAVPROXY_ENABLE` | `true` |
+| `--mavproxy-enable` | `MAVPROXY_ENABLE` | `false` |
 | `--mavproxy-binary` | `MAVPROXY_BINARY` | `mavproxy.py` |
 | `--mavproxy-master-device` | `MAVPROXY_MASTER_DEVICE` | `/dev/ttySIK` |
 | `--mavproxy-master-baud` | `MAVPROXY_MASTER_BAUD` | `57600` |
@@ -258,7 +307,9 @@ such as `adsb` being absent from the local Python environment.
 | CLI flag | Environment variable | Default |
 | --- | --- | --- |
 | `--video-config` | `VIDEO_CONFIG_PATH` | `rover/ros2_ws/src/mr2_launch/config/video_streams.json` |
-| `--video-gst-binary` | `VIDEO_GST_BINARY` | `gst-launch-1.0` |
+| `--video-gst-binary` | `VIDEO_GST_BINARY` | workspace `mr2_video_streaming/lib/mr2_video_streaming/video_receiver` |
+| `--video-initial-kbps` | `VIDEO_INITIAL_KBPS` | `3000` |
+| `--video-max-kbps` | `VIDEO_MAX_KBPS` | `0` (sum of configured maxima) |
 | `--video-jitter-ms` | `VIDEO_JITTER_LATENCY_MS` | `40` |
 | `--video-restart-ms` | `VIDEO_RECEIVER_RESTART_MS` | `1000` |
 | `--video-client-max-buffered-bytes` | `VIDEO_CLIENT_MAX_BUFFERED_BYTES` | `1048576` |
@@ -283,12 +334,16 @@ such as `adsb` being absent from the local Python environment.
 
 ### Rocket M2 Polling
 
+The following IPs are supplied by the checked-in field environment; the parser
+itself leaves an unset radio IP empty. `/rosbridge-ws` uses `--rover-host` /
+`MR2_ROVER_IP` (fallback `192.168.1.102`).
+
 | CLI flag | Environment variable | Default |
 | --- | --- | --- |
 | `--rocket-m2-enable` | `ROCKET_M2_ENABLE` | `false` |
-| `--base-rocket-m2-ip` | `MR2_BASE_ROCKET_IP` | empty |
-| `--drone-rocket-m2-ip` | `MR2_DRONE_ROCKET_IP` | empty |
-| `--rover-rocket-m2-ip` | `MR2_ROVER_ROCKET_IP` | empty |
+| `--base-rocket` | `MR2_BASE_ROCKET_IP` | empty |
+| `--drone-rocket` | `MR2_DRONE_ROCKET_IP` | empty |
+| `--rover-rocket` | `MR2_ROVER_ROCKET_IP` | empty |
 | `--rocket-m2-user` | `ROCKET_M2_USER` | empty |
 | `--rocket-m2-pass` | `ROCKET_M2_PASS` | empty |
 | `--rocket-m2-poll-ms` | `ROCKET_M2_POLL_MS` | `5000` |

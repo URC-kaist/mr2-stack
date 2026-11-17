@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="10" failures="0" disabled="0" errors="0" time="0" timestamp="2026-11-12T23:58:28" name="AllTests">
+  <testsuite name="FlatGate" tests="10" failures="0" disabled="0" errors="0" time="0" timestamp="2026-11-12T23:58:28">
+    <testcase name="StableFeedbackAndNeutralAreBothRequired" status="run" result="completed" time="0" timestamp="2026-11-12T23:58:28" classname="mr2_devices_robstride.FlatGate" />
+    <testcase name="ClampDirectionAndImmediateNeutral" status="run" result="completed" time="0" timestamp="2026-11-12T23:58:28" classname="mr2_devices_robstride.FlatGate" />
+    <testcase name="LateHeldCommandCannotBypassWatchdog" status="run" result="completed" time="0" timestamp="2026-11-12T23:58:28" classname="mr2_devices_robstride.FlatGate" />
+    <testcase name="TimerWatchdogDisarmsWithFreshMotorFeedback" status="run" result="completed" time="0" timestamp="2026-11-12T23:58:28" classname="mr2_devices_robstride.FlatGate" />
+    <testcase name="FeedbackTimeoutLatchesAndCannotResumeOldTarget" status="run" result="completed" time="0" timestamp="2026-11-12T23:58:28" classname="mr2_devices_robstride.FlatGate" />
+    <testcase name="EmergencyStopNeverClearsFromNeutral" status="run" result="completed" time="0" timestamp="2026-11-12T23:58:28" classname="mr2_devices_robstride.FlatGate" />
+    <testcase name="InvalidCommandAndInvalidFeedbackLatch" status="run" result="completed" time="0" timestamp="2026-11-12T23:58:28" classname="mr2_devices_robstride.FlatGate" />
+    <testcase name="MovingStartupAndDuplicateSamplesDoNotInitialize" status="run" result="completed" time="0" timestamp="2026-11-12T23:58:28" classname="mr2_devices_robstride.FlatGate" />
+    <testcase name="InvalidTestLimitsAreRejected" status="run" result="completed" time="0" timestamp="2026-11-12T23:58:28" classname="mr2_devices_robstride.FlatGate" />
+    <testcase name="OverspeedFeedbackLatchesStop" status="run" result="completed" time="0" timestamp="2026-11-12T23:58:28" classname="mr2_devices_robstride.FlatGate" />
+  </testsuite>
+</testsuites>

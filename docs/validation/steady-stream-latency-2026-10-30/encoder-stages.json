@@ -1,0 +1,83 @@
+[
+  {
+    "poc_type": 0,
+    "videorate": true,
+    "frames": 94,
+    "source_to_encoder_ms": {
+      "n": 86,
+      "p50_ms": 1.829606,
+      "p95_ms": 1.997354,
+      "max_ms": 2.269968
+    },
+    "encoder_ms": {
+      "n": 86,
+      "p50_ms": 3.14637,
+      "p95_ms": 3.405127,
+      "max_ms": 3.867761
+    },
+    "source_to_encoded_ms": {
+      "n": 86,
+      "p50_ms": 5.00545,
+      "p95_ms": 5.399826,
+      "max_ms": 5.710712
+    },
+    "source_to_rate_ms": {
+      "n": 86,
+      "p50_ms": 0.140675,
+      "p95_ms": 0.244389,
+      "max_ms": 0.281734
+    }
+  },
+  {
+    "poc_type": 0,
+    "videorate": false,
+    "frames": 96,
+    "source_to_encoder_ms": {
+      "n": 86,
+      "p50_ms": 1.607713,
+      "p95_ms": 1.784422,
+      "max_ms": 1.865704
+    },
+    "encoder_ms": {
+      "n": 86,
+      "p50_ms": 3.164386,
+      "p95_ms": 3.408295,
+      "max_ms": 3.475369
+    },
+    "source_to_encoded_ms": {
+      "n": 86,
+      "p50_ms": 4.797924,
+      "p95_ms": 5.057322,
+      "max_ms": 5.192717
+    }
+  },
+  {
+    "poc_type": 2,
+    "videorate": true,
+    "frames": 96,
+    "source_to_encoder_ms": {
+      "n": 86,
+      "p50_ms": 1.864359,
+      "p95_ms": 2.089772,
+      "max_ms": 2.143181
+    },
+    "encoder_ms": {
+      "n": 86,
+      "p50_ms": 3.14461,
+      "p95_ms": 3.48641,
+      "max_ms": 3.733679
+    },
+    "source_to_encoded_ms": {
+      "n": 86,
+      "p50_ms": 5.03921,
+      "p95_ms": 5.386097,
+      "max_ms": 5.749177
+    },
+    "source_to_rate_ms": {
+      "n": 86,
+      "p50_ms": 0.165955,
+      "p95_ms": 0.231493,
+      "max_ms": 0.276645
+    }
+  }
+]

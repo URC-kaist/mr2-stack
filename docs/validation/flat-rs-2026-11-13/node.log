@@ -1,0 +1,3 @@
+[INFO] [1794495546.091810219] [flat_motor]: RS-06 ID 127 on can0, /base/cmd_vel.linear.x, limit 0.200 rad/s / 1.00 A; waiting for stable feedback and neutral triggers
+[ERROR] [1794495553.032109135] [flat_motor]: Dashboard E-Stop latched; restart flat RS controller
+[INFO] [1794495554.959672905] [rclcpp]: signal_handler(SIGINT/SIGTERM)

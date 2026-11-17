@@ -1,0 +1,31 @@
+{
+  "network": {
+    "base": "192.168.0.55",
+    "base_rocket": "192.168.0.244",
+    "rover_rocket": "192.168.0.245",
+    "rover": "192.168.0.57"
+  },
+  "verification": {
+    "base_identity": "hostname base, ED25519 host key matches the previously verified base",
+    "radios": "UDP discovery hostnames base-rocket / rover-rocket and matching MAC addresses",
+    "ui": "deployed production bundle, real Chromium WebCodecs decoding synthetic H.264 in an isolated localhost fixture",
+    "assertions": [
+      "decoded geometry instead of static stream configuration",
+      "measured FPS instead of the configured 30 FPS",
+      "same 12px font size as toggle button",
+      "OFF produces zero FPS and Enable button",
+      "Enable resumes rendering",
+      "live resolution and rate change",
+      "NO DEVICE header replaced by zero-FPS placeholder"
+    ],
+    "dashboard_check": "typecheck, lint and build passed",
+    "dashboard_latency_tests": "passed",
+    "physical_camera_test_this_change": false
+  },
+  "deployment": {
+    "base_static": "/var/www/mr2-dashboard",
+    "field_ip_defaults_changed": false,
+    "gateway_or_rover_restart_required": false,
+    "test_listener": "localhost port 18087, stopped after verification"
+  }
+}

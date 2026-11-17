@@ -1,0 +1,12 @@
+{
+  "status": "host_500kbps_motor_unresponsive",
+  "motor_id": 127,
+  "host_bitrate": 500000,
+  "can_state": "ERROR-PASSIVE",
+  "error_counters": {
+    "tx": 128,
+    "rx": 0
+  },
+  "motor_motion_test_run": false,
+  "awaiting": "physical power-cycle and motor power confirmation"
+}

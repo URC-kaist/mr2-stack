@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="12" failures="0" disabled="0" errors="0" time="0.036" timestamp="2026-11-12T23:25:18" name="AllTests">
+  <testsuite name="Robstride" tests="12" failures="0" disabled="0" errors="0" time="0.035" timestamp="2026-11-12T23:25:18">
+    <testcase name="LiteralVelocityAndParameterWireBytes" status="run" result="completed" time="0" timestamp="2026-11-12T23:25:18" classname="mr2_devices_robstride.Robstride" />
+    <testcase name="FeedbackEndpointsAndTemperature" status="run" result="completed" time="0" timestamp="2026-11-12T23:25:18" classname="mr2_devices_robstride.Robstride" />
+    <testcase name="ActivationOrderSettingsAndZeroUntilFreshFeedback" status="run" result="completed" time="0" timestamp="2026-11-12T23:25:18" classname="mr2_devices_robstride.Robstride" />
+    <testcase name="VelocityClampingInvalidCommandAndDeactivation" status="run" result="completed" time="0" timestamp="2026-11-12T23:25:18" classname="mr2_devices_robstride.Robstride" />
+    <testcase name="ActivationRejectsMissingWrongModeFaultAndMissingSettingAck" status="run" result="completed" time="0.021" timestamp="2026-11-12T23:25:18" classname="mr2_devices_robstride.Robstride" />
+    <testcase name="TimeoutLatchesStopAndNeverAutoRecovers" status="run" result="completed" time="0" timestamp="2026-11-12T23:25:18" classname="mr2_devices_robstride.Robstride" />
+    <testcase name="StartupPrimingRequiresFreshRunningFeedback" status="run" result="completed" time="0.001" timestamp="2026-11-12T23:25:18" classname="mr2_devices_robstride.Robstride" />
+    <testcase name="StatusFaultResetAndFaultFrameStop" status="run" result="completed" time="0" timestamp="2026-11-12T23:25:18" classname="mr2_devices_robstride.Robstride" />
+    <testcase name="FiltersRejectOtherMotorHostStandardRtrErrorAndShortFrames" status="run" result="completed" time="0" timestamp="2026-11-12T23:25:18" classname="mr2_devices_robstride.Robstride" />
+    <testcase name="ContinuousPositionUnwrapsBothDirectionsAndDetectsAmbiguousGap" status="run" result="completed" time="0" timestamp="2026-11-12T23:25:18" classname="mr2_devices_robstride.Robstride" />
+    <testcase name="RejectsInvalidConfigurationBeforeOpeningAnyBus" status="run" result="completed" time="0.001" timestamp="2026-11-12T23:25:18" classname="mr2_devices_robstride.Robstride" />
+    <testcase name="FeedbackSnapshotsRemainCoherentWithConcurrentReceive" status="run" result="completed" time="0.012" timestamp="2026-11-12T23:25:18" classname="mr2_devices_robstride.Robstride" />
+  </testsuite>
+</testsuites>

@@ -1,0 +1,64 @@
+[INFO] [1793274076.938660654] [video_streaming]: Configured video stream rgbd_camera source=v4l2 port=5022 service=/video_streaming/streams/rgbd_camera/set_enabled device=/dev/videoRGBD pixel_format=YUY2 capture=640x480 output=320x240
+[INFO] [1793274076.949458086] [video_streaming]: Configured video stream top_cam source=v4l2 port=5008 service=/video_streaming/streams/top_cam/set_enabled device=/dev/videoTOP pixel_format=MJPG capture=640x360 output=320x180
+[INFO] [1793274076.980690621] [video_streaming]: Configured video stream front_left_cam source=v4l2 port=5010 service=/video_streaming/streams/front_left_cam/set_enabled device=/dev/videoFL pixel_format=MJPG capture=640x360 output=320x180
+[INFO] [1793274077.004770576] [video_streaming]: Configured video stream front_right_cam source=v4l2 port=5012 service=/video_streaming/streams/front_right_cam/set_enabled device=/dev/videoFR pixel_format=MJPG capture=640x360 output=320x180
+[INFO] [1793274077.025491348] [video_streaming]: Configured video stream left_cam source=v4l2 port=5014 service=/video_streaming/streams/left_cam/set_enabled device=/dev/videoLEFT pixel_format=MJPG capture=640x360 output=320x180
+[INFO] [1793274077.045439533] [video_streaming]: Configured video stream right_cam source=v4l2 port=5016 service=/video_streaming/streams/right_cam/set_enabled device=/dev/videoRIGHT pixel_format=MJPG capture=640x360 output=320x180
+[INFO] [1793274077.047189093] [video_streaming]: Configured video stream arm_cam source=v4l2 port=5018 service=/video_streaming/streams/arm_cam/set_enabled device=/dev/videoARM pixel_format=MJPG capture=640x360 output=320x180
+[INFO] [1793274077.048559865] [video_streaming]: Configured video stream gripper_cam source=v4l2 port=5020 service=/video_streaming/streams/gripper_cam/set_enabled device=/dev/videoGRIPPER pixel_format=MJPG capture=640x360 output=320x180
+[INFO] [1793274077.055678749] [video_streaming]: Configured video stream science_left_cam source=v4l2 port=5026 service=/video_streaming/streams/science_left_cam/set_enabled device=/dev/videoSCIENCELEFT pixel_format=MJPG capture=640x360 output=320x180
+[INFO] [1793274077.062861666] [video_streaming]: Configured video stream left_beaker_cam source=v4l2 port=5030 service=/video_streaming/streams/left_beaker_cam/set_enabled device=/dev/videoLEFTBEAKER pixel_format=MJPG capture=640x360 output=320x180
+[INFO] [1793274077.067130878] [video_streaming]: Configured video stream microscope_cam source=v4l2 port=5032 service=/video_streaming/streams/microscope_cam/set_enabled device=/dev/videoMICROSCOPE pixel_format=YUY2 capture=640x480 output=320x240
+[INFO] [1793274077.074426629] [video_streaming]: Configured video stream science_right_cam source=v4l2 port=5034 service=/video_streaming/streams/science_right_cam/set_enabled device=/dev/videoSCIENCERIGHT pixel_format=MJPG capture=640x360 output=320x180
+[INFO] [1793274077.085167388] [video_streaming]: Configured video stream right_beaker_cam source=v4l2 port=5036 service=/video_streaming/streams/right_beaker_cam/set_enabled device=/dev/videoRIGHTBEAKER pixel_format=MJPG capture=640x360 output=320x180
+[INFO] [1793274079.124926592] [video_streaming]: Started V4L2 video stream rgbd_camera device=/dev/videoRGBD port=5022 capture=640x480 output=640x480 fps=30 pixel_format=YUY2
+[INFO] [1793274079.625150050] [video_streaming]: Started V4L2 video stream rgbd_camera device=/dev/videoRGBD port=5022 capture=640x480 output=320x240 fps=30 pixel_format=YUY2
+[INFO] [1793274079.628150232] [video_streaming]: Started V4L2 video stream front_left_cam device=/dev/videoFL port=5010 capture=640x360 output=640x360 fps=30 pixel_format=MJPG
+[INFO] [1793274079.630386423] [video_streaming]: Started V4L2 video stream front_right_cam device=/dev/videoFR port=5012 capture=640x360 output=640x360 fps=30 pixel_format=MJPG
+[INFO] [1793274079.633154611] [video_streaming]: Started V4L2 video stream left_cam device=/dev/videoLEFT port=5014 capture=640x360 output=320x180 fps=30 pixel_format=MJPG
+[INFO] [1793274083.125757074] [video_streaming]: Started V4L2 video stream right_cam device=/dev/videoRIGHT port=5016 capture=640x360 output=320x180 fps=30 pixel_format=MJPG
+[INFO] [1793274087.125203720] [video_streaming]: Started V4L2 video stream rgbd_camera device=/dev/videoRGBD port=5022 capture=640x480 output=640x480 fps=30 pixel_format=YUY2
+[INFO] [1793274087.127802456] [video_streaming]: Started V4L2 video stream left_cam device=/dev/videoLEFT port=5014 capture=640x360 output=640x360 fps=30 pixel_format=MJPG
+[INFO] [1793274092.237097732] [video_streaming]: Started V4L2 video stream right_cam device=/dev/videoRIGHT port=5016 capture=640x360 output=640x360 fps=30 pixel_format=MJPG
+[WARN] [1793274181.624294273] [video_streaming]: Capture check failed for left_cam; retrying in 2 s
+[WARN] [1793274184.624365377] [video_streaming]: Capture check failed for left_cam; retrying in 4 s
+[WARN] [1793274186.624303188] [video_streaming]: Capture check failed for left_cam; retrying in 2 s
+[INFO] [1793274190.799667805] [video_streaming]: Started V4L2 video stream rgbd_camera device=/dev/videoRGBD port=5022 capture=640x480 output=480x360 fps=30 pixel_format=YUY2
+[INFO] [1793274190.804647754] [video_streaming]: Started V4L2 video stream right_cam device=/dev/videoRIGHT port=5016 capture=640x360 output=480x270 fps=30 pixel_format=MJPG
+[INFO] [1793274192.127256588] [video_streaming]: Started V4L2 video stream rgbd_camera device=/dev/videoRGBD port=5022 capture=640x480 output=480x360 fps=30 pixel_format=YUY2
+[INFO] [1793274192.130591829] [video_streaming]: Started V4L2 video stream left_cam device=/dev/videoLEFT port=5014 capture=640x360 output=480x270 fps=30 pixel_format=MJPG
+[INFO] [1793274192.133692441] [video_streaming]: Started V4L2 video stream right_cam device=/dev/videoRIGHT port=5016 capture=640x360 output=480x270 fps=30 pixel_format=MJPG
+[INFO] [1793274201.555540240] [video_streaming]: Started V4L2 video stream rgbd_camera device=/dev/videoRGBD port=5022 capture=640x480 output=640x480 fps=30 pixel_format=YUY2
+[INFO] [1793274201.558397915] [video_streaming]: Started V4L2 video stream left_cam device=/dev/videoLEFT port=5014 capture=640x360 output=640x360 fps=30 pixel_format=MJPG
+[INFO] [1793274201.561315878] [video_streaming]: Started V4L2 video stream right_cam device=/dev/videoRIGHT port=5016 capture=640x360 output=640x360 fps=30 pixel_format=MJPG
+[INFO] [1793274205.627549448] [video_streaming]: Started V4L2 video stream left_cam device=/dev/videoLEFT port=5014 capture=640x360 output=640x360 fps=30 pixel_format=MJPG
+[WARN] [1793274207.624791204] [video_streaming]: Capture check failed for left_cam; retrying in 2 s
+[WARN] [1793274210.624837452] [video_streaming]: Capture check failed for left_cam; retrying in 4 s
+[WARN] [1793274215.124720991] [video_streaming]: Capture check failed for left_cam; retrying in 8 s
+[WARN] [1793274223.625095356] [video_streaming]: Capture check failed for left_cam; retrying in 16 s
+[WARN] [1793274240.125547248] [video_streaming]: Capture check failed for left_cam; retrying in 30 s
+[WARN] [1793274242.125533387] [video_streaming]: Capture check failed for left_cam; retrying in 2 s
+[WARN] [1793274243.125382789] [video_streaming]: Capture check failed for left_cam; retrying in 2 s
+[WARN] [1793274244.625630520] [video_streaming]: Capture check failed for left_cam; retrying in 2 s
+[WARN] [1793274288.794924120] [video_streaming]: Stream right_cam stopped producing encoded frames; retrying in 1 s
+[WARN] [1793274290.626720925] [video_streaming]: Capture check failed for right_cam; retrying in 2 s
+[WARN] [1793274292.779226691] [video_streaming]: Stream front_right_cam stopped producing encoded frames; retrying in 1 s
+[WARN] [1793274293.126784095] [video_streaming]: Capture check failed for right_cam; retrying in 4 s
+[WARN] [1793274294.626752494] [video_streaming]: Capture check failed for front_right_cam; retrying in 2 s
+[WARN] [1793274297.126890433] [video_streaming]: Capture check failed for front_right_cam; retrying in 4 s
+[WARN] [1793274297.626882353] [video_streaming]: Capture check failed for right_cam; retrying in 8 s
+[WARN] [1793274302.127186633] [video_streaming]: Capture check failed for front_right_cam; retrying in 8 s
+[INFO] [1793274304.715946964] [video_streaming]: Started V4L2 video stream rgbd_camera device=/dev/videoRGBD port=5022 capture=640x480 output=320x240 fps=30 pixel_format=YUY2
+[WARN] [1793274307.626996243] [video_streaming]: Capture check failed for front_left_cam; retrying in 2 s
+[WARN] [1793274307.627184312] [video_streaming]: Capture check failed for left_cam; retrying in 2 s
+[INFO] [1793274308.716019766] [video_streaming]: Started V4L2 video stream rgbd_camera device=/dev/videoRGBD port=5022 capture=640x480 output=160x120 fps=5 pixel_format=YUY2
+[INFO] [1793274308.719492849] [video_streaming]: Started V4L2 video stream front_right_cam device=/dev/videoFR port=5012 capture=640x360 output=320x180 fps=30 pixel_format=MJPG
+[WARN] [1793274309.127290802] [video_streaming]: V4L2 sender child for stream front_right_cam exited with code 1; retrying in 1 s
+[WARN] [1793274309.127548216] [video_streaming]: Capture check failed for left_cam; retrying in 2 s
+[INFO] [1793274309.726977408] [video_streaming]: Started V4L2 video stream rgbd_camera device=/dev/videoRGBD port=5022 capture=640x480 output=320x240 fps=30 pixel_format=YUY2
+[INFO] [1793274311.216710962] [video_streaming]: Started V4L2 video stream rgbd_camera device=/dev/videoRGBD port=5022 capture=640x480 output=160x120 fps=5 pixel_format=YUY2
+[INFO] [1793274311.220139383] [video_streaming]: Started V4L2 video stream front_left_cam device=/dev/videoFL port=5010 capture=640x360 output=320x180 fps=30 pixel_format=MJPG
+[WARN] [1793274314.127351637] [video_streaming]: Capture check failed for left_cam; retrying in 2 s
+[WARN] [1793274316.627206067] [video_streaming]: Capture check failed for left_cam; retrying in 2 s
+[WARN] [1793274318.127450648] [video_streaming]: Capture check failed for left_cam; retrying in 2 s
+[INFO] [1793274554.413830157] [rclcpp]: signal_handler(SIGINT/SIGTERM)

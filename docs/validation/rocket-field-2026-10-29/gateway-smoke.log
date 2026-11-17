@@ -1,0 +1,13 @@
+
+> gateway@0.1.0 start
+> node index.js --gateway-port 44017 --base-xbee-device /dev/pts/4 --antenna-enable false --ros-topic-relay-enable false --video-config /tmp/mr2-rocket-field-smoke/video.json
+
+[gateway] HTTP/WebSocket listening on 127.0.0.1:44017
+[gateway] Base ROS GNSS/RTCM topic relay disabled
+[gateway] [video:rgbd_camera] spawning /home/mr2/mr2-stack/rover/ros2_ws/install/mr2_video_streaming/lib/mr2_video_streaming/video_receiver udpsrc name=video_source port=45771 caps=application/x-rtp,media=video,encoding-name=H264,payload=96,clock-rate=90000 ! rtpjitterbuffer latency=40 drop-on-latency=true ! tee name=rtp rtp. ! queue ! rtph264depay ! h264parse disable-passthrough=true ! video/x-h264,stream-format=byte-stream,alignment=au ! appsink name=video_output sync=false async=false rtp. ! queue ! rtpstreampay ! fdsink fd=3 sync=false async=false
+[gateway] Rocket M2 Base polling 192.168.1.100 every 5000 ms
+[gateway] Rocket M2 Drone polling 192.168.1.103 every 5000 ms
+[gateway] Rocket M2 Rover polling 192.168.1.106 every 5000 ms
+[gateway] Serial open /dev/pts/4 @ 115200
+[gateway] Rocket M2 Drone poll failed (192.168.1.103): Rocket M2 management interface unreachable
+[gateway] SIGINT received, shutting down

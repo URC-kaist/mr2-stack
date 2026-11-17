@@ -1,0 +1,37 @@
+{
+  "worker_constructor_forced_to_fail": true,
+  "started_at_ms": 1793294420843,
+  "finished_at_ms": 1793294456790,
+  "feeds": [
+    {
+      "label": "RGB-D Cam",
+      "quality": "320\u00d7240 \u00b7 30.2 FPS"
+    },
+    {
+      "label": "Front Left",
+      "quality": "\u2014 \u00b7 0 FPS"
+    },
+    {
+      "label": "Front Right",
+      "quality": "\u2014 \u00b7 0 FPS"
+    },
+    {
+      "label": "Left",
+      "quality": "\u2014 \u00b7 0 FPS"
+    },
+    {
+      "label": "Right",
+      "quality": "\u2014 \u00b7 0 FPS"
+    }
+  ],
+  "frames": {
+    "front_left_cam": 853,
+    "left_cam": 715,
+    "rgbd_camera": 1050,
+    "right_cam": 706,
+    "front_right_cam": 712
+  },
+  "original_probe_passed": true,
+  "acceptance": "inconclusive",
+  "reason": "Historical frame counters were insufficient for continuous-feed acceptance. USB disconnect/re-enumeration overlapped this check; Left did not recover."
+}

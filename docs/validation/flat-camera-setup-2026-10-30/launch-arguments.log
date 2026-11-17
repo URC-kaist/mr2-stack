@@ -1,0 +1,460 @@
+[mr2_launch] rover profile: flat (real)
+Arguments (pass arguments as '<name>:=<value>'):
+[mr2_launch] rover profile: flat (rover)
+[mr2_launch] rover profile: flat (video)
+
+    'enable_autonomous_module':
+        Enable autonomous module: launch RealSense RGB-D, the UVC front_camera, and autonomous perception/navigation
+        (default: 'false')
+
+    'enable_realsense':
+        Start RealSense ROS hardware; defaults to the autonomous module setting
+        (default: 'false')
+
+    'set_manual_datum':
+        When true, call navsat_transform set_datum with provided lat/lon/alt
+        (default: 'false')
+
+    'datum_lat':
+        WGS84 latitude for manual datum
+        (default: '0.0')
+
+    'datum_lon':
+        WGS84 longitude for manual datum
+        (default: '0.0')
+
+    'datum_alt':
+        WGS84 altitude (meters) for manual datum
+        (default: '0.0')
+
+    'rviz_config':
+        Full path to RViz2 config file
+        (default: PathJoinSubstitution('FindPackageShare(pkg='mr2_launch'), 'rviz', 'sim.rviz''))
+
+    'headless':
+        Run without GUI components (disables RViz)
+        (default: 'true')
+
+    'control_backend':
+        Real actuator runtime (simulation uses ros2_control). Valid choices are: ['ros2_control', 'mr2_control']
+        (default: 'ros2_control')
+
+    'controller_config':
+        Controller manager YAML shared by sim and hardware
+        (default: PathJoinSubstitution('FindPackageShare(pkg='mr2_rover_description'), 'config', 'controllers', 'rover_controllers.yaml''))
+
+    'controller_spawn_delay':
+        Delay (seconds) before spawning ros2_control controllers
+        (default: '10.0')
+
+    'can_iface':
+        CAN interface connected to the rover hardware
+        (default: 'can0')
+
+    'use_mock_servos':
+        Start mock AK servo nodes that emulate the manipulator CAN motors
+        (default: 'false')
+
+    'enable_manipulator_module':
+        Enable manipulator URDF, ros2_control, and MoveIt2 components
+        (default: 'false')
+
+    'enable_xbee_sim':
+        Start socat to emulate a XBEE serial port pair in real mode
+        (default: 'false')
+
+    'enable_latency_diagnostics':
+        Publish experimental command and motion latency traces
+        (default: 'false')
+
+    'xbee_sim_device':
+        PTy path the XBEE bridge will open when socat emulation is enabled
+        (default: '/tmp/xbee_sim0')
+
+    'xbee_sim_peer':
+        Peer PTY path for external attachment when socat emulation is enabled
+        (default: '/tmp/xbee_sim1')
+
+    'xbee_device':
+        Serial device for the XBEE bridge (defaults to emulated PTY when enabled)
+        (default: PythonExpr(''' + LaunchConfig('xbee_sim_device') + '' if '' + LaunchConfig('enable_xbee_sim') + '' == 'true' else '/dev/ttyXBEE''))
+
+    'enable_science_module':
+        Enable science module: start science CAN controls and the direct V4L2 panorama capture action server for /dev/videoSCIENCEFRONT
+        (default: 'false')
+
+    'panorama_stale_goal_timeout_sec':
+        Seconds before a new panorama goal may replace a stale active goal after client disconnect
+        (default: '60.0')
+
+    'enable_video_streaming':
+        Start the rover H.264 RTP/UDP video streaming node
+        (default: 'true')
+
+    'video_base_host':
+        Base-station host/IP for rover RTP/UDP video streams
+        (default: LaunchConfig('mr2_clock_base_peer'))
+
+    'video_config':
+        Central JSON video stream configuration file
+        (default: '/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_launch/share/mr2_launch/config/video_streams_flat.json')
+
+    'yolo_cam_topic':
+        RealSense camera base topic for YOLO (e.g., /rgbd_camera)
+        (default: '/rgbd_camera')
+
+    'yolo_device':
+        Ultralytics device for YOLO inference on the real rover
+        (default: 'cuda:0')
+
+    'yolo_publish_annotated':
+        Publish annotated YOLO debug images on the real rover
+        (default: 'true')
+
+    'yolo_annotated_fps':
+        Maximum annotated YOLO debug image publish rate in Hz on the real rover
+        (default: '0.5')
+
+    'left_gnss_serial':
+        USB serial string for the left F9P (empty selects first match)
+        (default: 'TowerRx_')
+
+    'enable_gnss':
+        Start the wrapper's two GNSS receivers and NavSat relays
+        (default: 'false')
+
+    'right_gnss_serial':
+        USB serial string for the right F9P (empty selects first match)
+        (default: 'NorthRx_')
+
+    'left_gnss_frame_id':
+        Frame ID for left GNSS NavSatFix
+        (default: 'left_gnss')
+
+    'right_gnss_frame_id':
+        Frame ID for right GNSS NavSatFix
+        (default: 'right_gnss')
+
+    'rtcm_input_topic':
+        Topic providing RTCM corrections for rover F9Ps (set to /ntrip_client/rtcm to use NTRIP)
+        (default: '/base/rtcm')
+
+    'enable_ntrip':
+        Start NTRIP client for RTCM corrections
+        (default: 'false')
+
+    'ntrip_use_https':
+        Use HTTPS to reach NTRIP caster
+        (default: 'false')
+
+    'ntrip_host':
+        NTRIP caster host
+        (default: 'www.gnssdata.or.kr')
+
+    'ntrip_port':
+        NTRIP caster port
+        (default: '2101')
+
+    'ntrip_mountpoint':
+        NTRIP mountpoint
+        (default: 'SEJN-RTCM32')
+
+    'ntrip_username':
+        NTRIP username (can also set NTRIP_USERNAME env var)
+        (default: EnvVar('NTRIP_USERNAME'))
+
+    'ntrip_password':
+        NTRIP password (can also set NTRIP_PASSWORD env var)
+        (default: EnvVar('NTRIP_PASSWORD'))
+
+    'ntrip_log_level':
+        Log level for NTRIP client
+        (default: 'INFO')
+
+    'ntrip_maxage_conn':
+        Max age for reconnection attempts (seconds)
+        (default: '30')
+
+    'enable_led':
+        Start mr2_led CAN node for status LEDs
+        (default: 'false')
+
+    'led_can_id':
+        Standard CAN ID for the LED controller
+        (default: '0x123')
+
+    'enable_camera_turret':
+        Start mr2_camera_turret classic CAN command node
+        (default: 'false')
+
+    'camera_turret_can_id':
+        Standard CAN ID for the camera turret controller
+        (default: '0x124')
+
+    'camera_turret_invert_x':
+        Invert camera turret X command direction
+        (default: 'false')
+
+    'camera_turret_invert_y':
+        Invert camera turret Y command direction
+        (default: 'false')
+
+    'camera_name':
+        no description given
+        (default: '')
+
+    'camera_namespace':
+        no description given
+        (default: '')
+
+    'base_frame_id':
+        no description given
+        (default: '')
+
+    'urdf_mount_frame':
+        no description given
+        (default: '')
+
+    'log_level':
+        no description given
+        (default: 'info')
+
+    'imu_only':
+        Disable RealSense image/depth streams and keep gyro/accel IMU streams only
+        (default: 'false')
+
+    'video_device':
+        Video4Linux device for the front camera
+        (default: '/dev/videoFRONT')
+
+    'camera_info_url':
+        URL for the camera calibration file (ost.yaml)
+        (default: 'file:///home/mr2/mr2-stack/rover/ros2_ws/src/mr2_launch/config/ost.yaml')
+
+    'frame_id':
+        Frame ID stamped on published images (should exist in URDF TF tree)
+        (default: 'front_camera_optical_frame')
+
+    'mode':
+        Operating mode: 'sim' or 'real'
+        (default: 'sim')
+
+    'use_sim_time':
+        Use simulation time; defaults to true in sim mode and false in real
+        (default: PythonExpr(''true' if '' + LaunchConfig('mode') + '' == 'sim' else 'false''))
+
+    'launch_actions':
+        Launch mission/action servers
+        (default: 'true')
+
+    'map':
+        Occupancy grid YAML passed to Nav2 map_server
+        (default: '/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_rover_auto/share/mr2_rover_auto/maps/map0p4.yaml')
+
+    'params_file':
+        Nav2 parameters file
+        (default: '/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_rover_auto/share/mr2_rover_auto/config/nav2_params.yaml')
+
+    'trav_params_file':
+        Traversability pipeline parameters file
+        (default: '/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_rover_auto/share/mr2_rover_auto/config/trav_pipeline.yaml')
+
+    'namespace':
+        Top-level namespace
+        (default: '')
+
+    'use_namespace':
+        Whether to apply a namespace to the navigation stack
+        (default: 'false')
+
+    'autostart':
+        Automatically startup the nav2 stack
+        (default: 'true')
+
+    'use_composition':
+        Whether to use composed bringup
+        (default: 'True')
+
+    'use_respawn':
+        Whether to respawn if a node crashes. Applied when composition is disabled.
+        (default: 'False')
+
+    'container_name':
+        the name of conatiner that nodes will load in if use composition
+        (default: 'nav2_container')
+
+    'cover_vision_params':
+        no description given
+        (default: '/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_rover_auto/share/mr2_rover_auto/config/cover_vision_params.yaml')
+
+    'centrifuge_module_rx_id':
+        no description given
+        (default: '0x450')
+
+    'carriage_module_rx_id':
+        no description given
+        (default: '0x500')
+
+    'carriage_motor_rx_id':
+        no description given
+        (default: '0x650')
+
+    'carriage_motor_velocity_tx_id':
+        no description given
+        (default: '0x651')
+
+    'carriage_motor_position_tx_id':
+        no description given
+        (default: '0x652')
+
+    'centrifuge_motor_rx_id':
+        no description given
+        (default: '0x600')
+
+    'drill_motor_rx_id':
+        no description given
+        (default: '0x700')
+
+    'use_https':
+        no description given
+        (default: 'true')
+
+    'host':
+        no description given
+        (default: 'ntrip.data.gnss.ga.gov.au')
+
+    'port':
+        no description given
+        (default: '443')
+
+    'mountpoint':
+        no description given
+        (default: 'MBCH00AUS0')
+
+    'username':
+        no description given
+        (default: EnvVar('NTRIP_USERNAME'))
+
+    'password':
+        no description given
+        (default: EnvVar('NTRIP_PASSWORD'))
+
+    'maxage_conn':
+        no description given
+        (default: '30')
+
+    'enable_rover_hardware':
+        Start the original rover model, drive/arm controllers and battery CAN monitors
+        (default: 'false')
+
+    'enable_xbee_bridge':
+        Start the real-mode command bridge (physical XBee or direct-mode PTY)
+        (default: 'true')
+
+    'smooth_drive_commands':
+        Apply command-bridge drive slew limiting (flat motor handles its own limits)
+        (default: 'false')
+
+    'enable_manipulator_module_sim':
+        Enable manipulator URDF and ros2_control in simulation
+        (default: 'false')
+
+    'enable_autonomous_module_sim':
+        Enable autonomous camera module (front_camera) in simulation
+        (default: 'true')
+
+    'enable_localization':
+        Start the delayed robot_localization stack
+        (default: 'false')
+
+    'start_manipulator_controllers_active':
+        Start real manipulator and gripper controllers active instead of configured/inactive
+        (default: 'false')
+
+    'latency_capture_interface':
+        Rover network interface facing the Rocket M2 link
+        (default: EnvVar('MR2_ROVER_ROCKET_INTERFACE'))
+
+    'latency_artifact_directory':
+        Rover directory for temporary latency capture artifacts
+        (default: EnvVar('MR2_LATENCY_ARTIFACT_DIR'))
+
+    'enable_aruco':
+        Start ArUco tracker node
+        (default: 'false')
+
+    'aruco_cam_topic':
+        Base image topic for aruco_opencv (must have matching /camera_info; default is Gazebo RGBD camera)
+        (default: '/front_camera/image_raw')
+
+    'gnss_managed_externally':
+        The real wrapper already owns the GNSS receivers
+        (default: 'false')
+
+    'device_family':
+        no description given
+        (default: 'F9P')
+
+    'device_serial_string':
+        Serial string of the device to use
+        (default: '')
+
+    'enable_flat_motor':
+        Start the isolated single-motor trigger controller
+        (default: 'false')
+
+    'flat_motor_clockwise_sign':
+        CAN angle sign for clockwise rotation, viewed facing the output shaft. Valid choices are: ['-1', '1']
+        (default: '-1')
+
+    'flat_motor_command_topic':
+        Existing rover-side Twist command topic
+        (default: '/base/cmd_vel')
+
+    'flat_motor_command_component':
+        Twist component mapped to flat motor speed. Valid choices are: ['linear.x', 'linear.y', 'angular.z']
+        (default: 'linear.x')
+
+    'flat_motor_max_speed_deg_s':
+        Output shaft speed at full drive sensitivity/input (degrees/s)
+        (default: '180.0')
+
+    'flat_motor_max_accel_deg_s2':
+        Acceleration/reversal slew limit; stop commands bypass this ramp
+        (default: '720.0')
+
+    'disabled_stream_ids':
+        Comma-separated stream IDs to skip from the central video config
+        (default: '')
+
+    'stream_lease_timeout_s':
+        Maximum automatic latency trial stream lease duration
+        (default: '60.0')
+
+    'can_id':
+        no description given
+        (default: '0x124')
+
+    'command_topic':
+        no description given
+        (default: '/camera_turret/command')
+
+    'publish_rate_hz':
+        no description given
+        (default: '50.0')
+
+    'invert_x':
+        no description given
+        (default: 'false')
+
+    'invert_y':
+        no description given
+        (default: 'false')
+
+    'tilt_min_rad':
+        no description given
+        (default: '-0.3')
+
+    'tilt_max_rad':
+        no description given
+        (default: '0.8')

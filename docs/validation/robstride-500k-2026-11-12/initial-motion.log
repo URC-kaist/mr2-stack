@@ -1,0 +1,7 @@
+initial_zero mean_velocity=0.00997705 rad/s position=2.82511 rad
+forward mean_velocity=0.191383 rad/s position=2.97127 rad
+zero_between mean_velocity=0.01074 rad/s position=3.01845 rad
+reverse mean_velocity=-0.168847 rad/s position=2.88342 rad
+final_zero mean_velocity=-0.0640879 rad/s position=2.83432 rad
+FAIL: Zero-speed target did not settle
+[ros2run]: Process exited with failure 1

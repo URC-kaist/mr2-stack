@@ -1,0 +1,7 @@
+initial_zero mean_velocity=-0.00980099 rad/s position=2.7833 rad
+forward mean_velocity=0.213568 rad/s position=2.92868 rad
+zero_between mean_velocity=0.047479 rad/s position=2.98086 rad
+reverse mean_velocity=-0.177944 rad/s position=2.84276 rad
+final_zero mean_velocity=0.00334525 rad/s position=2.79864 rad
+FAIL: Stop/reset status was not confirmed
+[ros2run]: Process exited with failure 1

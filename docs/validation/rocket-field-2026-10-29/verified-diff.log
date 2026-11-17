@@ -1,0 +1,2 @@
+{"target": "base", "verified_changes": {"netconf.3.alias.1.ip": "192.168.1.100", "dhcpc.1.fallback": "192.168.1.100", "netconf.3.alias.1.status": "enabled", "netconf.3.alias.1.comment": "MR2-field-management", "netconf.3.alias.1.netmask": "255.255.255.0"}}
+{"target": "rover", "verified_changes": {"netconf.3.alias.1.ip": "192.168.1.106", "dhcpc.1.fallback": "192.168.1.106", "netconf.3.alias.1.status": "enabled", "netconf.3.alias.1.comment": "MR2-field-management", "netconf.3.alias.1.netmask": "255.255.255.0"}}

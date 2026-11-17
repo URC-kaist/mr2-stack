@@ -1,0 +1,21 @@
+{
+  "checked_at_utc": "2026-10-29T15:46:44.791466+00:00",
+  "source_sha256": {
+    "scripts/clock_policy/policy.py": "e7110d862bbbc7fdadb338a752588551aecc9d3a1107dbd4ca9cb7d951f51f9f",
+    "scripts/clock_policy/service.py": "0f4edc90c7c1200a1ea6ecfcd8ede6701707301295dbdcb58decca050ac4963e",
+    "scripts/clock_policy/test_policy.py": "7297fa3ce8b28bdaaae1ba9ac68a37d3e4fb34f5b5da097c23051cc26a02b4bd",
+    "scripts/clock_policy/test_quality.py": "202983f6c5b8bc552f00a0080a3392caf78eb8b0b3aba24cdba840ea134041eb",
+    "rover/ros2_ws/src/mr2_launch/mr2_launch/clock_guard.py": "d15b1832ff2a2adc3a2db8ab9c63a381598f534c0dc6d5e3d522364a6ff0ea62",
+    "rover/ros2_ws/src/mr2_launch/test/test_clock_guard.py": "9127edd23c6a4f40fa8948dab9e0ab25c0328a35e5c7dc5b02f870cb08665e19",
+    "rover/ros2_ws/src/mr2_system_status/mr2_system_status/chrony_status.py": "8c2f05cdad93677412b4e1cc7007cf8b4134f015aea1fddebcae87d149d60488",
+    "base/gateway/src/runtime/chrony_status.js": "dda44db2cf4c6e84605317cf8b5c4f8a2bce7e1964462dd61394cfbd7ea8ff75",
+    "dashboard/src/lib/chronyStatus.ts": "5a61066d93da6e178bab0d3fb1f8057a87ae2c75f1696408aaf9f31e0ae45406",
+    "dashboard/src/lib/videoLinkLatency.ts": "7cb0b1923e70eb846836e19cf969ac628a6ee0a74c49e1246e5ea2f17c3da233",
+    "scripts/field_setup.py": "18e0b4c95aa4dbde1f334bff00bfbe6c9e1083e64186da02ddc85ea42e701299",
+    "scripts/latency/preflight.py": "d990c1dd21e81a881e4f1c882455f7bf5f3602e42bed4246df2585a8f4a79f92"
+  },
+  "same_as_five_minute_run": true,
+  "base_matches_rover": true,
+  "rover_runtime_matches": true,
+  "base_runtime_matches": true
+}

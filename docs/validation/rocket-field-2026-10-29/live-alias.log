@@ -1,0 +1,14 @@
+[
+  {
+    "ip": "192.168.0.244",
+    "target": "base",
+    "exit_code": 0,
+    "output": " \r\n6: br0: <BROADCAST,MULTICAST,ALLMULTI,UP,LOWER_UP> mtu 1500 qdisc noqueue state UNKNOWN \r\n    link/ether ac:8b:a9:c0:77:e7 brd ff:ff:ff:ff:ff:ff\r\n    inet 192.168.0.244/24 brd 192.168.0.255 scope global br0\r\n    inet 169.254.119.231/16 brd 169.254.255.255 scope global br0\r\n    inet 192.168.1.100/24 scope global br0\r\n    inet6 fe80::ae8b:a9ff:fec0:77e7/64 scope link \r\n       valid_lft forever preferred_lft forever\r\nLive alias added; candidate prepared; flash not changed yet\r\n"
+  },
+  {
+    "ip": "192.168.0.245",
+    "target": "rover",
+    "exit_code": 0,
+    "output": " \r\n6: br0: <BROADCAST,MULTICAST,ALLMULTI,UP,LOWER_UP> mtu 1500 qdisc noqueue state UNKNOWN \r\n    link/ether ac:8b:a9:c0:78:18 brd ff:ff:ff:ff:ff:ff\r\n    inet 192.168.0.245/24 brd 192.168.0.255 scope global br0\r\n    inet 169.254.120.24/16 brd 169.254.255.255 scope global br0\r\n    inet 192.168.1.106/24 scope global br0\r\n    inet6 fe80::ae8b:a9ff:fec0:7818/64 scope link \r\n       valid_lft forever preferred_lft forever\r\nLive alias added; candidate prepared; flash not changed yet\r\n"
+  }
+]

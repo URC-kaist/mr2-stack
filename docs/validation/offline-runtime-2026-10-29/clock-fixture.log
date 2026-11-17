@@ -1,0 +1,8 @@
+[INFO] [launch]: All log files can be found below /home/mr2/.ros/log/2026-10-29-19-11-43-444286-rover-127475
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [launch.user]: Clock locked for ROS launch; base=192.168.0.55
+[INFO] [sleep-1]: process started with pid [127527]
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[ERROR] [sleep-1]: process[sleep-1] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[INFO] [sleep-1]: sending signal 'SIGTERM' to process[sleep-1]
+[ERROR] [sleep-1]: process has died [pid 127527, exit code -15, cmd 'sleep 180'].

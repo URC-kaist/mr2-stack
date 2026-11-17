@@ -54,7 +54,7 @@ There is not necessarily only one CAN thread for the entire system: retain exist
 | CanBusManager I/O thread | Drain the existing TX queue; write to SocketCAN; receive frames; invoke the registered driver callbacks, including frame decoding and driver feedback updates |
 | ROS executor | Receive upper-level commands; update input buffers; publish prepared joint states, odometry, and diagnostics; accept supported management requests |
 
-`AkServoDevice` and `OutputActuatorDevice` are C++ objects, not independent processes or threads. A normal call to `device.process()` executes on its caller's control thread. A receive callback invoked by CanBusManager executes on the CAN I/O thread.
+`AkServoDevice` and `CustomActuatorDevice` are C++ objects, not independent processes or threads. A normal call to `device.process()` executes on its caller's control thread. A receive callback invoked by CanBusManager executes on the CAN I/O thread.
 
 The existing architecture already executes controller update, CanHW write, and driver transmit processing sequentially on the control thread. Preserve that placement.
 
@@ -271,7 +271,7 @@ All paths below are relative to `rover/ros2_ws/src/` and must be verified agains
 | Hardware conversion | `mr2_can_hardware_interface/src/can_hw.cpp` and its transmission implementations/configuration |
 | Device abstraction and bus | `mr2_can_bus_core/include/mr2_can_bus_core/can_device.hpp`, `can_bus_manager.hpp`, `can_bus_registry.hpp` |
 | AK driver | `mr2_devices_ak_servo/src/ak_servo_device.cpp` |
-| OutputActuator driver | `mr2_devices_output_actuator/src/output_actuator_device.cpp` |
+| CustomActuator driver | `mr2_devices_output_actuator/src/custom_actuator_device.cpp` |
 | Upper-level arm contract | `mr2_moveit/config/servo.yaml`, Servo launch, controller configuration |
 | Manual command path | `mr2_xbee_bridge/src/xbee_bridge_node.cpp` |
 

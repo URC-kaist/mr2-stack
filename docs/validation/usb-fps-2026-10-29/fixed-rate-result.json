@@ -1,0 +1,48 @@
+{
+  "capture_checks": {
+    "FR": {
+      "returncode": 0,
+      "controls": "auto_exposure: 3 (Aperture Priority Mode)\nexposure_dynamic_framerate: 0",
+      "stderr": "FR/capture-check: exposure_dynamic_framerate=0 (exposure mode unchanged)\n"
+    },
+    "RIGHT": {
+      "returncode": 0,
+      "controls": "auto_exposure: 3 (Aperture Priority Mode)\nexposure_dynamic_framerate: 0",
+      "stderr": "RIGHT/capture-check: exposure_dynamic_framerate=0 (exposure mode unchanged)\n"
+    }
+  },
+  "rounds": [
+    {
+      "FR": {
+        "returncode": 0,
+        "elapsed_s": 10.503328260999751,
+        "controls": "auto_exposure: 3 (Aperture Priority Mode)\nexposure_dynamic_framerate: 0",
+        "matched_frames": 300,
+        "actual_input_fps_after_2s": 30.009645778195317
+      },
+      "RIGHT": {
+        "returncode": 0,
+        "elapsed_s": 10.6344498440003,
+        "controls": "auto_exposure: 3 (Aperture Priority Mode)\nexposure_dynamic_framerate: 0",
+        "matched_frames": 300,
+        "actual_input_fps_after_2s": 30.00918984353409
+      }
+    },
+    {
+      "FR": {
+        "returncode": 0,
+        "elapsed_s": 10.840284293999957,
+        "controls": "auto_exposure: 3 (Aperture Priority Mode)\nexposure_dynamic_framerate: 0",
+        "matched_frames": 300,
+        "actual_input_fps_after_2s": 30.00942346121659
+      },
+      "RIGHT": {
+        "returncode": 0,
+        "elapsed_s": 10.710404270999788,
+        "controls": "auto_exposure: 3 (Aperture Priority Mode)\nexposure_dynamic_framerate: 0",
+        "matched_frames": 300,
+        "actual_input_fps_after_2s": 29.99436633010645
+      }
+    }
+  ]
+}

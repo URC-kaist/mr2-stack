@@ -1,0 +1,256 @@
+{
+  "initialPage": {
+    "title": "dashboard",
+    "buttons": [
+      "",
+      "Manual",
+      "Orbit",
+      "E-Stop",
+      "Status",
+      "Live Feed",
+      "Latency",
+      "Science",
+      "Delivery / Servicing",
+      "Autonomous",
+      "Downlink",
+      "Uplink",
+      "Chrony sync",
+      "",
+      "",
+      "Run pump",
+      "Apply LED",
+      "Startup",
+      "Move",
+      "Home",
+      "FOC calibrate",
+      "Send",
+      "Stop",
+      "Set velocity",
+      "Set position",
+      "Pump 1",
+      "Pump 2",
+      "Pump 3",
+      "Pump 4",
+      "Set",
+      "Off",
+      "Position",
+      "Ramp",
+      "Send",
+      "Send",
+      "Velocity",
+      "Stop",
+      "Position",
+      "Velocity",
+      "Stop",
+      "Position",
+      "Start capture",
+      "Cancel",
+      "Download JPEG",
+      "Capture spectrum",
+      "Export CSV"
+    ]
+  },
+  "before": {
+    "Front Left": {
+      "count": 52,
+      "sizes": [
+        "640x360"
+      ]
+    },
+    "RGB-D Cam": {
+      "count": 45,
+      "sizes": [
+        "320x240"
+      ]
+    }
+  },
+  "body": "XBEE\nROS\nAUTO\nUp\nDown\n—\nLeft GNSS\nFix --\nFix OK --\nRight GNSS\nFix --\nFix OK --\n---\n--°C · --V · --Ah\n---\n--°C · --V · --Ah\nManual\nOrbit\nGamepad\nNo control\nNo gamepad detected\nSensitivity\nLOW 0.2\nMED 0.4\nHIGH 0.8\n+0.4\n-0.4\n+0.4\n-0.4\nno gamepad connected\nE-STOP\nStatus\nLive Feed\nLatency\nScience\nDelivery / Servicing\nAutonomous\nLive Feed\nReconnect\nRGB-D Cam\nON\nHigh\nLow\nDisable\nLive\nTop Cam\nNO DEVICE\nHigh\nLow\nDisable\nWaiting for video ingest...\nFront Left\nON\nHigh\nLow\nDisable\nLive\nFront Right\nNO DEVICE\nHigh\nLow\nDisable\nWaiting for video ingest...\nLeft\nOFF\nHigh\nLow\nEnable\nWaiting for video ingest...\nRight\nNO DEVICE\nHigh\nLow\nDisable\nWaiting for video ingest...\nArm\nNO DEVICE\nHigh\nLow\nDisable\nWaiting for video ingest...\nGripper\nNO DEVICE\nHigh\nLow\nDisable\nWaiting for video ingest...\nScience Left\nNO DEVICE\nHigh\nLow\nDisable\nWaiting for video ingest...\nLeft Beaker\nNO DEVICE\nHigh\nLow\nDisable\nWaiting for video ingest...\nMicroscope\nNO DEVICE\nHigh\nLow\nDisable\nWaiting for video ingest...\nScience Right\nNO DEVICE\nHigh\nLow\nDisable\nWaiting for video ingest...\nRight Beaker\nNO DEVICE\nHigh\nLow\nDisable\nWaiting for video ingest...",
+  "allocationBefore": {
+    "front": {
+      "priority": "high",
+      "stream_id": "front_left_cam",
+      "source_type": "v4l2",
+      "ros_topic": null,
+      "ros_encoding": null,
+      "v4l2_device": "/dev/videoFL",
+      "v4l2_pixel_format": "MJPG",
+      "udp_port": 5010,
+      "width": 640,
+      "height": 360,
+      "framerate": 30,
+      "display": {
+        "label": "Front Left",
+        "panel": "delivery",
+        "order": 4
+      },
+      "encoded_width": 640,
+      "encoded_height": 360,
+      "available": true,
+      "boot": 1542016186,
+      "session": 2199378852,
+      "request": 11,
+      "port": 5010,
+      "state": "ON",
+      "enabled": true,
+      "bitrate_kbps": 1360,
+      "fps": 30,
+      "result": 0
+    },
+    "rgbd": {
+      "priority": "low",
+      "stream_id": "rgbd_camera",
+      "source_type": "v4l2",
+      "ros_topic": null,
+      "ros_encoding": null,
+      "v4l2_device": "/dev/videoRGBD",
+      "v4l2_pixel_format": "YUY2",
+      "udp_port": 5022,
+      "width": 320,
+      "height": 240,
+      "framerate": 30,
+      "display": {
+        "label": "RGB-D Cam",
+        "panel": "autonomy",
+        "order": 1
+      },
+      "encoded_width": 320,
+      "encoded_height": 240,
+      "available": true,
+      "boot": 1542016186,
+      "session": 2199378852,
+      "request": 12,
+      "port": 5022,
+      "state": "ON",
+      "enabled": true,
+      "bitrate_kbps": 340,
+      "fps": 30,
+      "result": 0
+    }
+  },
+  "off": {
+    "priority": "high",
+    "stream_id": "front_left_cam",
+    "source_type": "v4l2",
+    "ros_topic": null,
+    "ros_encoding": null,
+    "v4l2_device": "/dev/videoFL",
+    "v4l2_pixel_format": "MJPG",
+    "udp_port": 5010,
+    "width": 640,
+    "height": 360,
+    "framerate": 30,
+    "display": {
+      "label": "Front Left",
+      "panel": "delivery",
+      "order": 4
+    },
+    "encoded_width": 640,
+    "encoded_height": 360,
+    "available": true,
+    "boot": 1542016186,
+    "session": 2199731755,
+    "request": 1,
+    "port": 5010,
+    "state": "OFF",
+    "enabled": false,
+    "bitrate_kbps": 0,
+    "fps": 30,
+    "result": 0
+  },
+  "priorityCommands": [
+    {
+      "type": "video_command_result",
+      "stream_id": "rgbd_camera",
+      "success": true,
+      "message": "",
+      "elapsed_ms": 593
+    },
+    {
+      "type": "video_command_result",
+      "stream_id": "front_left_cam",
+      "success": true,
+      "message": "",
+      "elapsed_ms": 1163
+    }
+  ],
+  "allocationSwapped": {
+    "front": {
+      "priority": "low",
+      "stream_id": "front_left_cam",
+      "source_type": "v4l2",
+      "ros_topic": null,
+      "ros_encoding": null,
+      "v4l2_device": "/dev/videoFL",
+      "v4l2_pixel_format": "MJPG",
+      "udp_port": 5010,
+      "width": 320,
+      "height": 180,
+      "framerate": 30,
+      "display": {
+        "label": "Front Left",
+        "panel": "delivery",
+        "order": 4
+      },
+      "encoded_width": 320,
+      "encoded_height": 180,
+      "available": true,
+      "boot": 1542016186,
+      "session": 2199731755,
+      "request": 4,
+      "port": 5010,
+      "state": "ON",
+      "enabled": true,
+      "bitrate_kbps": 340,
+      "fps": 30,
+      "result": 0
+    },
+    "rgbd": {
+      "priority": "high",
+      "stream_id": "rgbd_camera",
+      "source_type": "v4l2",
+      "ros_topic": null,
+      "ros_encoding": null,
+      "v4l2_device": "/dev/videoRGBD",
+      "v4l2_pixel_format": "YUY2",
+      "udp_port": 5022,
+      "width": 640,
+      "height": 480,
+      "framerate": 30,
+      "display": {
+        "label": "RGB-D Cam",
+        "panel": "autonomy",
+        "order": 1
+      },
+      "encoded_width": 640,
+      "encoded_height": 480,
+      "available": true,
+      "boot": 1542016186,
+      "session": 2199731755,
+      "request": 3,
+      "port": 5022,
+      "state": "ON",
+      "enabled": true,
+      "bitrate_kbps": 1360,
+      "fps": 30,
+      "result": 0
+    }
+  },
+  "after": {
+    "Front Left": {
+      "count": 391,
+      "sizes": [
+        "640x360",
+        "480x270",
+        "320x180"
+      ]
+    },
+    "RGB-D Cam": {
+      "count": 418,
+      "sizes": [
+        "320x240",
+        "640x480"
+      ]
+    }
+  },
+  "passed": true
+}

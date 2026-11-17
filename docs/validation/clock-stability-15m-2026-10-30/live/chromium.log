@@ -1,0 +1,3 @@
+
+DevTools listening on ws://127.0.0.1:18501/devtools/browser/527c0471-c83e-460d-bc6f-861fcf875982
+[1030/002843.399243:ERROR:media/gpu/vaapi/vaapi_wrapper.cc:1662] Installed VAAPI version is too old. min supported version: 1.17 installed version: 1.14

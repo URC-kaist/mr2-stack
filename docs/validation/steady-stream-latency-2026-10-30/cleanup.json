@@ -1,0 +1,11 @@
+{
+  "checked_at_utc": "2026-10-29T16:29:27.800747+00:00",
+  "product_hashes_unchanged": true,
+  "rover_clock_locked": false,
+  "rover_udp_ports": "State Recv-Q Send-Q Local Address:Port Peer Address:PortProcess\n",
+  "base": {
+    "clock_locked": false,
+    "ports": "State Recv-Q Send-Q Local Address:Port Peer Address:PortProcess\n",
+    "processes": ""
+  }
+}

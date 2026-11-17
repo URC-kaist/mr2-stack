@@ -1,0 +1,17 @@
+{
+  "warm_frames": 41,
+  "pause_s": 6.5,
+  "pause_worker": [
+    194529
+  ],
+  "before_worker": [
+    194529
+  ],
+  "after_worker": [
+    194529
+  ],
+  "resumed_frames": 64,
+  "first_resumed_frame_ms": 967.9526719992282,
+  "capture_retained": true,
+  "resume_scheduling_stall_ms": 700
+}

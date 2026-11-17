@@ -1,0 +1,53 @@
+Oct 29 20:44:50 rover kernel: uvcvideo 1-2.4.3:1.1: Failed to query (129) UVC probe control : -71 (exp. 26).
+Oct 29 20:44:52 rover kernel: uvcvideo 1-2.4.3:1.1: Failed to set UVC probe control : -71 (exp. 26).
+Oct 29 20:44:54 rover kernel: uvcvideo 1-2.4.4:1.1: Failed to set UVC probe control : -71 (exp. 26).
+Oct 29 20:44:56 rover kernel: uvcvideo 1-2.4.4:1.1: Failed to query (130) UVC probe control : -71 (exp. 26).
+Oct 29 20:44:56 rover kernel: ftdi_sio ttyUSB0: usb_serial_generic_read_bulk_callback - urb stopped: -32
+Oct 29 20:44:57 rover kernel: uvcvideo 1-2.4.3:1.1: Failed to set UVC probe control : -71 (exp. 26).
+Oct 29 20:45:01 rover kernel: uvcvideo 1-2.4.4:1.1: Failed to set UVC probe control : -71 (exp. 26).
+Oct 29 20:45:02 rover kernel: usb usb1-port2: disabled by hub (EMI?), re-enabling...
+Oct 29 20:45:02 rover kernel: usb 1-2: USB disconnect, device number 2
+Oct 29 20:45:02 rover kernel: usb 1-2.1: USB disconnect, device number 4
+Oct 29 20:45:02 rover kernel: usb 1-2: clear tt 1 (9041) error -71
+Oct 29 20:45:02 rover kernel: ftdi_sio ttyUSB0: error from flowcontrol urb
+Oct 29 20:45:02 rover kernel: uvcvideo 1-2.4.1:1.1: Failed to resubmit video URB (-19).
+Oct 29 20:45:02 rover kernel: ftdi_sio ttyUSB0: FTDI USB Serial Device converter now disconnected from ttyUSB0
+Oct 29 20:45:02 rover kernel: ftdi_sio 1-2.1:1.0: device disconnected
+Oct 29 20:45:02 rover kernel: uvcvideo 1-2.4.1:1.1: Failed to resubmit video URB (-19).
+Oct 29 20:45:02 rover kernel: usb 1-2.2: USB disconnect, device number 5
+Oct 29 20:45:02 rover kernel: usb 1-2.2.4: USB disconnect, device number 7
+Oct 29 20:45:02 rover kernel: uvcvideo 1-2.4.1:1.1: Failed to resubmit video URB (-19).
+Oct 29 20:45:02 rover kernel: usb 1-2.4: USB disconnect, device number 6
+Oct 29 20:45:02 rover kernel: usb 1-2.4.1: USB disconnect, device number 8
+Oct 29 20:45:02 rover kernel: usb 1-2.4.3: USB disconnect, device number 10
+Oct 29 20:45:02 rover kernel: usb 1-2.4.4: USB disconnect, device number 11
+Oct 29 20:45:03 rover kernel: usb 1-2: new high-speed USB device number 24 using tegra-xusb
+Oct 29 20:45:03 rover kernel: hub 1-2:1.0: USB hub found
+Oct 29 20:45:03 rover kernel: hub 1-2:1.0: 4 ports detected
+Oct 29 20:45:03 rover kernel: usb 1-2.1: new full-speed USB device number 25 using tegra-xusb
+Oct 29 20:45:04 rover kernel: ftdi_sio 1-2.1:1.0: FTDI USB Serial Device converter detected
+Oct 29 20:45:04 rover kernel: usb 1-2.1: Detected FT-X
+Oct 29 20:45:04 rover kernel: usb 1-2.1: FTDI USB Serial Device converter now attached to ttyUSB1
+Oct 29 20:45:04 rover kernel: usb 1-2.2: new high-speed USB device number 26 using tegra-xusb
+Oct 29 20:45:04 rover kernel: hub 1-2.2:1.0: USB hub found
+Oct 29 20:45:04 rover kernel: hub 1-2.2:1.0: 4 ports detected
+Oct 29 20:45:04 rover kernel: usb 1-2.4: new high-speed USB device number 27 using tegra-xusb
+Oct 29 20:45:04 rover kernel: hub 1-2.4:1.0: USB hub found
+Oct 29 20:45:04 rover kernel: hub 1-2.4:1.0: 4 ports detected
+Oct 29 20:45:04 rover kernel: usb 1-2.2.4: new high-speed USB device number 28 using tegra-xusb
+Oct 29 20:45:04 rover kernel: hub 1-2.2.4:1.0: USB hub found
+Oct 29 20:45:04 rover kernel: hub 1-2.2.4:1.0: 4 ports detected
+Oct 29 20:45:04 rover kernel: usb 1-2.4.1: new high-speed USB device number 29 using tegra-xusb
+Oct 29 20:45:04 rover kernel: uvcvideo 2-1.3:1.4: Non-zero status (-71) in video completion handler.
+Oct 29 20:45:05 rover kernel: usb 1-2.4.1: Found UVC 1.00 device HD Camera (1e45:8022)
+Oct 29 20:45:05 rover kernel: input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.1/1-2.4.1:1.0/input/input18
+Oct 29 20:45:05 rover kernel: hub 1-2.4:1.0: hub_ext_port_status failed (err = -71)
+Oct 29 20:45:05 rover kernel: usb 1-2.4-port2: cannot reset (err = -71)
+Oct 29 20:45:05 rover kernel: usb 1-2.4-port2: cannot reset (err = -71)
+Oct 29 20:45:05 rover kernel: usb 1-2.4-port2: cannot reset (err = -71)
+Oct 29 20:45:05 rover kernel: usb 1-2.4-port2: cannot reset (err = -71)
+Oct 29 20:45:05 rover kernel: usb 1-2.4-port2: Cannot enable. Maybe the USB cable is bad?
+Oct 29 20:45:05 rover kernel: usb 1-2.4-port2: cannot disable (err = -71)
+Oct 29 20:45:05 rover kernel: usb 1-2.4.2: new high-speed USB device number 31 using tegra-xusb
+Oct 29 20:45:05 rover kernel: usb 1-2.4.2: Found UVC 1.00 device HD Camera (1e45:8022)
+Oct 29 20:45:05 rover kernel: input: HD Camera: HD Camera as /devices/platform/bus@0/3610000.usb/usb1/1-2/1-2.4/1-2.4.2/1-2.4.2:1.0/input/input19

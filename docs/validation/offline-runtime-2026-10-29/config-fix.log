@@ -1,0 +1,2 @@
+Updated only MR2_LATENCY_PUBLIC_BASE_URL to http://192.168.1.101; private backup preserved
+{"field_upload_url":"http://192.168.1.101","development_cli_override":"http://192.168.0.55"}

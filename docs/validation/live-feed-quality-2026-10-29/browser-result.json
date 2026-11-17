@@ -1,0 +1,48 @@
+{
+  "small": {
+    "text": "320×180 · 4.0 FPS",
+    "qualityFont": "12px",
+    "buttonFont": "12px",
+    "button": "Disable",
+    "canvas": [
+      320,
+      180
+    ],
+    "header": "Quality Check\n320×180 · 4.0 FPS\nHigh\nLow\nDisable"
+  },
+  "off": {
+    "text": "— · 0 FPS",
+    "qualityFont": "12px",
+    "buttonFont": "12px",
+    "button": "Enable",
+    "canvas": [
+      300,
+      150
+    ],
+    "header": "Quality Check\n— · 0 FPS\nHigh\nLow\nEnable"
+  },
+  "resumed": {
+    "text": "320×180 · 4.0 FPS",
+    "qualityFont": "12px",
+    "buttonFont": "12px",
+    "button": "Disable",
+    "canvas": [
+      320,
+      180
+    ],
+    "header": "Quality Check\n320×180 · 4.0 FPS\nHigh\nLow\nDisable"
+  },
+  "large": {
+    "text": "640×360 · 10.0 FPS",
+    "qualityFont": "12px",
+    "buttonFont": "12px",
+    "button": "Disable",
+    "canvas": [
+      640,
+      360
+    ],
+    "header": "Quality Check\n640×360 · 10.0 FPS\nHigh\nLow\nDisable"
+  },
+  "absent": "Absent Camera\n— · 0 FPS\nHigh\nLow\nDisable",
+  "passed": true
+}

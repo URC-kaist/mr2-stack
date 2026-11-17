@@ -1,0 +1,1578 @@
+{
+  "sampling_interval_s": {
+    "min": 0.9707797020000157,
+    "median": 0.9999521039999877,
+    "max": 1.0284992969999962
+  },
+  "frame_no_progress_events": [
+    {
+      "feed": "Left",
+      "at_s": 22.002139867999997,
+      "sample_interval_s": 0.9990954609999996,
+      "context": [
+        {
+          "at_s": 20.002824877,
+          "delay": [
+            "4.2 ms",
+            "13.8 ms",
+            "0.4 ms",
+            "3.1 ms"
+          ],
+          "labels": [
+            "Rover \u2192 Base",
+            "Link P95",
+            "Min since start",
+            "Extra queue"
+          ],
+          "reason": "Packet send on rover \u2192 receive on base, before jitter buffering; median/P95 over the last 1 s. Excludes camera capture, encoding, sender pacing and browser display. Rover/base clock synchronization verified.",
+          "feeds": [
+            {
+              "label": "RGB-D Cam",
+              "quality": "320\u00d7240 \u00b7 30.0 FPS"
+            },
+            {
+              "label": "Top Cam",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Front Left",
+              "quality": "640\u00d7360 \u00b7 30.0 FPS"
+            },
+            {
+              "label": "Front Right",
+              "quality": "640\u00d7360 \u00b7 30.0 FPS"
+            },
+            {
+              "label": "Left",
+              "quality": "320\u00d7180 \u00b7 30.0 FPS"
+            },
+            {
+              "label": "Right",
+              "quality": "320\u00d7180 \u00b7 29.0 FPS"
+            },
+            {
+              "label": "Arm",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Gripper",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Left",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Left Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Microscope",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Right",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Right Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            }
+          ],
+          "frames": {
+            "Front Left": 722,
+            "Front Right": 730,
+            "Left": 639,
+            "RGB-D Cam": 604,
+            "Right": 636
+          }
+        },
+        {
+          "at_s": 21.003044406999997,
+          "delay": [
+            "5.2 ms",
+            "25.5 ms",
+            "0.4 ms",
+            "4.1 ms"
+          ],
+          "labels": [
+            "Rover \u2192 Base",
+            "Link P95",
+            "Min since start",
+            "Extra queue"
+          ],
+          "reason": "Packet send on rover \u2192 receive on base, before jitter buffering; median/P95 over the last 1 s. Excludes camera capture, encoding, sender pacing and browser display. Rover/base clock synchronization verified.",
+          "feeds": [
+            {
+              "label": "RGB-D Cam",
+              "quality": "320\u00d7240 \u00b7 30.0 FPS"
+            },
+            {
+              "label": "Top Cam",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Front Left",
+              "quality": "640\u00d7360 \u00b7 30.0 FPS"
+            },
+            {
+              "label": "Front Right",
+              "quality": "640\u00d7360 \u00b7 30.0 FPS"
+            },
+            {
+              "label": "Left",
+              "quality": "320\u00d7180 \u00b7 29.0 FPS"
+            },
+            {
+              "label": "Right",
+              "quality": "320\u00d7180 \u00b7 30.0 FPS"
+            },
+            {
+              "label": "Arm",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Gripper",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Left",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Left Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Microscope",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Right",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Right Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            }
+          ],
+          "frames": {
+            "Front Left": 752,
+            "Front Right": 760,
+            "Left": 668,
+            "RGB-D Cam": 629,
+            "Right": 666
+          }
+        },
+        {
+          "at_s": 22.002139867999997,
+          "delay": [
+            "3.5 ms",
+            "12.0 ms",
+            "0.4 ms",
+            "2.1 ms"
+          ],
+          "labels": [
+            "Rover \u2192 Base",
+            "Link P95",
+            "Min since start",
+            "Extra queue"
+          ],
+          "reason": "Packet send on rover \u2192 receive on base, before jitter buffering; median/P95 over the last 1 s. Excludes camera capture, encoding, sender pacing and browser display. Rover/base clock synchronization verified.",
+          "feeds": [
+            {
+              "label": "RGB-D Cam",
+              "quality": "320\u00d7240 \u00b7 25.0 FPS"
+            },
+            {
+              "label": "Top Cam",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Front Left",
+              "quality": "640\u00d7360 \u00b7 30.0 FPS"
+            },
+            {
+              "label": "Front Right",
+              "quality": "640\u00d7360 \u00b7 30.0 FPS"
+            },
+            {
+              "label": "Left",
+              "quality": "320\u00d7180 \u00b7 29.0 FPS"
+            },
+            {
+              "label": "Right",
+              "quality": "320\u00d7180 \u00b7 30.0 FPS"
+            },
+            {
+              "label": "Arm",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Gripper",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Left",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Left Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Microscope",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Right",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Right Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            }
+          ],
+          "frames": {
+            "Front Left": 782,
+            "Front Right": 790,
+            "Left": 668,
+            "RGB-D Cam": 629,
+            "Right": 670
+          }
+        },
+        {
+          "at_s": 23.002508083000002,
+          "delay": [
+            "4.9 ms",
+            "15.0 ms",
+            "0.4 ms",
+            "2.9 ms"
+          ],
+          "labels": [
+            "Rover \u2192 Base",
+            "Link P95",
+            "Min since start",
+            "Extra queue"
+          ],
+          "reason": "Packet send on rover \u2192 receive on base, before jitter buffering; median/P95 over the last 1 s. Excludes camera capture, encoding, sender pacing and browser display. Rover/base clock synchronization verified.",
+          "feeds": [
+            {
+              "label": "RGB-D Cam",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Top Cam",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Front Left",
+              "quality": "640\u00d7360 \u00b7 30.0 FPS"
+            },
+            {
+              "label": "Front Right",
+              "quality": "640\u00d7360 \u00b7 30.0 FPS"
+            },
+            {
+              "label": "Left",
+              "quality": "480\u00d7270 \u00b7 2.0 FPS"
+            },
+            {
+              "label": "Right",
+              "quality": "320\u00d7180 \u00b7 4.0 FPS"
+            },
+            {
+              "label": "Arm",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Gripper",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Left",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Left Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Microscope",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Right",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Right Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            }
+          ],
+          "frames": {
+            "Front Left": 812,
+            "Front Right": 820,
+            "Left": 703,
+            "RGB-D Cam": 657,
+            "Right": 703
+          }
+        },
+        {
+          "at_s": 24.005633191999998,
+          "delay": [
+            "4.9 ms",
+            "24.5 ms",
+            "0.4 ms",
+            "3.8 ms"
+          ],
+          "labels": [
+            "Rover \u2192 Base",
+            "Link P95",
+            "Min since start",
+            "Extra queue"
+          ],
+          "reason": "Packet send on rover \u2192 receive on base, before jitter buffering; median/P95 over the last 1 s. Excludes camera capture, encoding, sender pacing and browser display. Rover/base clock synchronization verified.",
+          "feeds": [
+            {
+              "label": "RGB-D Cam",
+              "quality": "480\u00d7360 \u00b7 29.0 FPS"
+            },
+            {
+              "label": "Top Cam",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Front Left",
+              "quality": "640\u00d7360 \u00b7 30.1 FPS"
+            },
+            {
+              "label": "Front Right",
+              "quality": "640\u00d7360 \u00b7 30.0 FPS"
+            },
+            {
+              "label": "Left",
+              "quality": "480\u00d7270 \u00b7 34.1 FPS"
+            },
+            {
+              "label": "Right",
+              "quality": "480\u00d7270 \u00b7 33.1 FPS"
+            },
+            {
+              "label": "Arm",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Gripper",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Left",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Left Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Microscope",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Right",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Right Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            }
+          ],
+          "frames": {
+            "Front Left": 840,
+            "Front Right": 848,
+            "Left": 731,
+            "RGB-D Cam": 685,
+            "Right": 729
+          }
+        }
+      ]
+    },
+    {
+      "feed": "Left",
+      "at_s": 636.009290941,
+      "sample_interval_s": 1.0093711490000032,
+      "context": [
+        {
+          "at_s": 634.0000445459999,
+          "delay": [
+            "11.4 ms",
+            "83.7 ms",
+            "0.3 ms",
+            "10.2 ms"
+          ],
+          "labels": [
+            "Rover \u2192 Base",
+            "Link P95",
+            "Min since start",
+            "Extra queue"
+          ],
+          "reason": "Packet send on rover \u2192 receive on base, before jitter buffering; median/P95 over the last 1 s. Excludes camera capture, encoding, sender pacing and browser display. Rover/base clock synchronization verified.",
+          "feeds": [
+            {
+              "label": "RGB-D Cam",
+              "quality": "640\u00d7480 \u00b7 25.7 FPS"
+            },
+            {
+              "label": "Top Cam",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Front Left",
+              "quality": "640\u00d7360 \u00b7 26.6 FPS"
+            },
+            {
+              "label": "Front Right",
+              "quality": "640\u00d7360 \u00b7 26.6 FPS"
+            },
+            {
+              "label": "Left",
+              "quality": "640\u00d7360 \u00b7 26.6 FPS"
+            },
+            {
+              "label": "Right",
+              "quality": "640\u00d7360 \u00b7 27.6 FPS"
+            },
+            {
+              "label": "Arm",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Gripper",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Left",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Left Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Microscope",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Right",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Right Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            }
+          ],
+          "frames": {
+            "Front Left": 19143,
+            "Front Right": 19150,
+            "Left": 18952,
+            "RGB-D Cam": 18903,
+            "Right": 19015
+          }
+        },
+        {
+          "at_s": 634.999919792,
+          "delay": [
+            "28.0 ms",
+            "97.5 ms",
+            "0.3 ms",
+            "16.9 ms"
+          ],
+          "labels": [
+            "Rover \u2192 Base",
+            "Link P95",
+            "Min since start",
+            "Extra queue"
+          ],
+          "reason": "Packet send on rover \u2192 receive on base, before jitter buffering; median/P95 over the last 1 s. Excludes camera capture, encoding, sender pacing and browser display. Rover/base clock synchronization verified.",
+          "feeds": [
+            {
+              "label": "RGB-D Cam",
+              "quality": "640\u00d7480 \u00b7 32.3 FPS"
+            },
+            {
+              "label": "Top Cam",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Front Left",
+              "quality": "640\u00d7360 \u00b7 34.5 FPS"
+            },
+            {
+              "label": "Front Right",
+              "quality": "640\u00d7360 \u00b7 33.5 FPS"
+            },
+            {
+              "label": "Left",
+              "quality": "640\u00d7360 \u00b7 33.5 FPS"
+            },
+            {
+              "label": "Right",
+              "quality": "640\u00d7360 \u00b7 33.5 FPS"
+            },
+            {
+              "label": "Arm",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Gripper",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Left",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Left Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Microscope",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Right",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Right Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            }
+          ],
+          "frames": {
+            "Front Left": 19172,
+            "Front Right": 19179,
+            "Left": 18954,
+            "RGB-D Cam": 18903,
+            "Right": 19022
+          }
+        },
+        {
+          "at_s": 636.009290941,
+          "delay": [
+            "6.5 ms",
+            "87.4 ms",
+            "0.3 ms",
+            "3.8 ms"
+          ],
+          "labels": [
+            "Rover \u2192 Base",
+            "Link P95",
+            "Min since start",
+            "Extra queue"
+          ],
+          "reason": "Packet send on rover \u2192 receive on base, before jitter buffering; median/P95 over the last 1 s. Excludes camera capture, encoding, sender pacing and browser display. Rover/base clock synchronization verified.",
+          "feeds": [
+            {
+              "label": "RGB-D Cam",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Top Cam",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Front Left",
+              "quality": "640\u00d7360 \u00b7 29.0 FPS"
+            },
+            {
+              "label": "Front Right",
+              "quality": "640\u00d7360 \u00b7 29.0 FPS"
+            },
+            {
+              "label": "Left",
+              "quality": "640\u00d7360 \u00b7 2.0 FPS"
+            },
+            {
+              "label": "Right",
+              "quality": "640\u00d7360 \u00b7 7.0 FPS"
+            },
+            {
+              "label": "Arm",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Gripper",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Left",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Left Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Microscope",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Right",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Right Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            }
+          ],
+          "frames": {
+            "Front Left": 19197,
+            "Front Right": 19204,
+            "Left": 18954,
+            "RGB-D Cam": 18924,
+            "Right": 19051
+          }
+        },
+        {
+          "at_s": 636.999955453,
+          "delay": [
+            "42.7 ms",
+            "139.3 ms",
+            "0.3 ms",
+            "39.3 ms"
+          ],
+          "labels": [
+            "Rover \u2192 Base",
+            "Link P95",
+            "Min since start",
+            "Extra queue"
+          ],
+          "reason": "Packet send on rover \u2192 receive on base, before jitter buffering; median/P95 over the last 1 s. Excludes camera capture, encoding, sender pacing and browser display. Rover/base clock synchronization verified.",
+          "feeds": [
+            {
+              "label": "RGB-D Cam",
+              "quality": "480\u00d7360 \u00b7 22.1 FPS"
+            },
+            {
+              "label": "Top Cam",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Front Left",
+              "quality": "640\u00d7360 \u00b7 25.1 FPS"
+            },
+            {
+              "label": "Front Right",
+              "quality": "640\u00d7360 \u00b7 26.1 FPS"
+            },
+            {
+              "label": "Left",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Right",
+              "quality": "480\u00d7270 \u00b7 30.1 FPS"
+            },
+            {
+              "label": "Arm",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Gripper",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Left",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Left Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Microscope",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Right",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Right Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            }
+          ],
+          "frames": {
+            "Front Left": 19229,
+            "Front Right": 19236,
+            "Left": 18983,
+            "RGB-D Cam": 18956,
+            "Right": 19081
+          }
+        },
+        {
+          "at_s": 638.001924124,
+          "delay": [
+            "13.9 ms",
+            "56.9 ms",
+            "0.3 ms",
+            "12.4 ms"
+          ],
+          "labels": [
+            "Rover \u2192 Base",
+            "Link P95",
+            "Min since start",
+            "Extra queue"
+          ],
+          "reason": "Packet send on rover \u2192 receive on base, before jitter buffering; median/P95 over the last 1 s. Excludes camera capture, encoding, sender pacing and browser display. Rover/base clock synchronization verified.",
+          "feeds": [
+            {
+              "label": "RGB-D Cam",
+              "quality": "480\u00d7360 \u00b7 31.0 FPS"
+            },
+            {
+              "label": "Top Cam",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Front Left",
+              "quality": "640\u00d7360 \u00b7 31.0 FPS"
+            },
+            {
+              "label": "Front Right",
+              "quality": "640\u00d7360 \u00b7 31.0 FPS"
+            },
+            {
+              "label": "Left",
+              "quality": "480\u00d7270 \u00b7 29.0 FPS"
+            },
+            {
+              "label": "Right",
+              "quality": "480\u00d7270 \u00b7 29.0 FPS"
+            },
+            {
+              "label": "Arm",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Gripper",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Left",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Left Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Microscope",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Right",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Right Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            }
+          ],
+          "frames": {
+            "Front Left": 19259,
+            "Front Right": 19266,
+            "Left": 19013,
+            "RGB-D Cam": 18986,
+            "Right": 19111
+          }
+        }
+      ]
+    },
+    {
+      "feed": "RGB-D Cam",
+      "at_s": 22.002139867999997,
+      "sample_interval_s": 0.9990954609999996,
+      "context": [
+        {
+          "at_s": 20.002824877,
+          "delay": [
+            "4.2 ms",
+            "13.8 ms",
+            "0.4 ms",
+            "3.1 ms"
+          ],
+          "labels": [
+            "Rover \u2192 Base",
+            "Link P95",
+            "Min since start",
+            "Extra queue"
+          ],
+          "reason": "Packet send on rover \u2192 receive on base, before jitter buffering; median/P95 over the last 1 s. Excludes camera capture, encoding, sender pacing and browser display. Rover/base clock synchronization verified.",
+          "feeds": [
+            {
+              "label": "RGB-D Cam",
+              "quality": "320\u00d7240 \u00b7 30.0 FPS"
+            },
+            {
+              "label": "Top Cam",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Front Left",
+              "quality": "640\u00d7360 \u00b7 30.0 FPS"
+            },
+            {
+              "label": "Front Right",
+              "quality": "640\u00d7360 \u00b7 30.0 FPS"
+            },
+            {
+              "label": "Left",
+              "quality": "320\u00d7180 \u00b7 30.0 FPS"
+            },
+            {
+              "label": "Right",
+              "quality": "320\u00d7180 \u00b7 29.0 FPS"
+            },
+            {
+              "label": "Arm",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Gripper",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Left",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Left Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Microscope",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Right",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Right Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            }
+          ],
+          "frames": {
+            "Front Left": 722,
+            "Front Right": 730,
+            "Left": 639,
+            "RGB-D Cam": 604,
+            "Right": 636
+          }
+        },
+        {
+          "at_s": 21.003044406999997,
+          "delay": [
+            "5.2 ms",
+            "25.5 ms",
+            "0.4 ms",
+            "4.1 ms"
+          ],
+          "labels": [
+            "Rover \u2192 Base",
+            "Link P95",
+            "Min since start",
+            "Extra queue"
+          ],
+          "reason": "Packet send on rover \u2192 receive on base, before jitter buffering; median/P95 over the last 1 s. Excludes camera capture, encoding, sender pacing and browser display. Rover/base clock synchronization verified.",
+          "feeds": [
+            {
+              "label": "RGB-D Cam",
+              "quality": "320\u00d7240 \u00b7 30.0 FPS"
+            },
+            {
+              "label": "Top Cam",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Front Left",
+              "quality": "640\u00d7360 \u00b7 30.0 FPS"
+            },
+            {
+              "label": "Front Right",
+              "quality": "640\u00d7360 \u00b7 30.0 FPS"
+            },
+            {
+              "label": "Left",
+              "quality": "320\u00d7180 \u00b7 29.0 FPS"
+            },
+            {
+              "label": "Right",
+              "quality": "320\u00d7180 \u00b7 30.0 FPS"
+            },
+            {
+              "label": "Arm",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Gripper",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Left",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Left Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Microscope",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Right",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Right Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            }
+          ],
+          "frames": {
+            "Front Left": 752,
+            "Front Right": 760,
+            "Left": 668,
+            "RGB-D Cam": 629,
+            "Right": 666
+          }
+        },
+        {
+          "at_s": 22.002139867999997,
+          "delay": [
+            "3.5 ms",
+            "12.0 ms",
+            "0.4 ms",
+            "2.1 ms"
+          ],
+          "labels": [
+            "Rover \u2192 Base",
+            "Link P95",
+            "Min since start",
+            "Extra queue"
+          ],
+          "reason": "Packet send on rover \u2192 receive on base, before jitter buffering; median/P95 over the last 1 s. Excludes camera capture, encoding, sender pacing and browser display. Rover/base clock synchronization verified.",
+          "feeds": [
+            {
+              "label": "RGB-D Cam",
+              "quality": "320\u00d7240 \u00b7 25.0 FPS"
+            },
+            {
+              "label": "Top Cam",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Front Left",
+              "quality": "640\u00d7360 \u00b7 30.0 FPS"
+            },
+            {
+              "label": "Front Right",
+              "quality": "640\u00d7360 \u00b7 30.0 FPS"
+            },
+            {
+              "label": "Left",
+              "quality": "320\u00d7180 \u00b7 29.0 FPS"
+            },
+            {
+              "label": "Right",
+              "quality": "320\u00d7180 \u00b7 30.0 FPS"
+            },
+            {
+              "label": "Arm",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Gripper",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Left",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Left Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Microscope",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Right",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Right Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            }
+          ],
+          "frames": {
+            "Front Left": 782,
+            "Front Right": 790,
+            "Left": 668,
+            "RGB-D Cam": 629,
+            "Right": 670
+          }
+        },
+        {
+          "at_s": 23.002508083000002,
+          "delay": [
+            "4.9 ms",
+            "15.0 ms",
+            "0.4 ms",
+            "2.9 ms"
+          ],
+          "labels": [
+            "Rover \u2192 Base",
+            "Link P95",
+            "Min since start",
+            "Extra queue"
+          ],
+          "reason": "Packet send on rover \u2192 receive on base, before jitter buffering; median/P95 over the last 1 s. Excludes camera capture, encoding, sender pacing and browser display. Rover/base clock synchronization verified.",
+          "feeds": [
+            {
+              "label": "RGB-D Cam",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Top Cam",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Front Left",
+              "quality": "640\u00d7360 \u00b7 30.0 FPS"
+            },
+            {
+              "label": "Front Right",
+              "quality": "640\u00d7360 \u00b7 30.0 FPS"
+            },
+            {
+              "label": "Left",
+              "quality": "480\u00d7270 \u00b7 2.0 FPS"
+            },
+            {
+              "label": "Right",
+              "quality": "320\u00d7180 \u00b7 4.0 FPS"
+            },
+            {
+              "label": "Arm",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Gripper",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Left",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Left Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Microscope",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Right",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Right Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            }
+          ],
+          "frames": {
+            "Front Left": 812,
+            "Front Right": 820,
+            "Left": 703,
+            "RGB-D Cam": 657,
+            "Right": 703
+          }
+        },
+        {
+          "at_s": 24.005633191999998,
+          "delay": [
+            "4.9 ms",
+            "24.5 ms",
+            "0.4 ms",
+            "3.8 ms"
+          ],
+          "labels": [
+            "Rover \u2192 Base",
+            "Link P95",
+            "Min since start",
+            "Extra queue"
+          ],
+          "reason": "Packet send on rover \u2192 receive on base, before jitter buffering; median/P95 over the last 1 s. Excludes camera capture, encoding, sender pacing and browser display. Rover/base clock synchronization verified.",
+          "feeds": [
+            {
+              "label": "RGB-D Cam",
+              "quality": "480\u00d7360 \u00b7 29.0 FPS"
+            },
+            {
+              "label": "Top Cam",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Front Left",
+              "quality": "640\u00d7360 \u00b7 30.1 FPS"
+            },
+            {
+              "label": "Front Right",
+              "quality": "640\u00d7360 \u00b7 30.0 FPS"
+            },
+            {
+              "label": "Left",
+              "quality": "480\u00d7270 \u00b7 34.1 FPS"
+            },
+            {
+              "label": "Right",
+              "quality": "480\u00d7270 \u00b7 33.1 FPS"
+            },
+            {
+              "label": "Arm",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Gripper",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Left",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Left Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Microscope",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Right",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Right Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            }
+          ],
+          "frames": {
+            "Front Left": 840,
+            "Front Right": 848,
+            "Left": 731,
+            "RGB-D Cam": 685,
+            "Right": 729
+          }
+        }
+      ]
+    },
+    {
+      "feed": "RGB-D Cam",
+      "at_s": 634.999919792,
+      "sample_interval_s": 0.9998752460001015,
+      "context": [
+        {
+          "at_s": 633.026412286,
+          "delay": [
+            "13.2 ms",
+            "45.4 ms",
+            "0.3 ms",
+            "11.8 ms"
+          ],
+          "labels": [
+            "Rover \u2192 Base",
+            "Link P95",
+            "Min since start",
+            "Extra queue"
+          ],
+          "reason": "Packet send on rover \u2192 receive on base, before jitter buffering; median/P95 over the last 1 s. Excludes camera capture, encoding, sender pacing and browser display. Rover/base clock synchronization verified.",
+          "feeds": [
+            {
+              "label": "RGB-D Cam",
+              "quality": "640\u00d7480 \u00b7 30.1 FPS"
+            },
+            {
+              "label": "Top Cam",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Front Left",
+              "quality": "640\u00d7360 \u00b7 30.0 FPS"
+            },
+            {
+              "label": "Front Right",
+              "quality": "640\u00d7360 \u00b7 30.0 FPS"
+            },
+            {
+              "label": "Left",
+              "quality": "640\u00d7360 \u00b7 30.0 FPS"
+            },
+            {
+              "label": "Right",
+              "quality": "640\u00d7360 \u00b7 29.0 FPS"
+            },
+            {
+              "label": "Arm",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Gripper",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Left",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Left Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Microscope",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Right",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Right Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            }
+          ],
+          "frames": {
+            "Front Left": 19110,
+            "Front Right": 19117,
+            "Left": 18918,
+            "RGB-D Cam": 18871,
+            "Right": 18981
+          }
+        },
+        {
+          "at_s": 634.0000445459999,
+          "delay": [
+            "11.4 ms",
+            "83.7 ms",
+            "0.3 ms",
+            "10.2 ms"
+          ],
+          "labels": [
+            "Rover \u2192 Base",
+            "Link P95",
+            "Min since start",
+            "Extra queue"
+          ],
+          "reason": "Packet send on rover \u2192 receive on base, before jitter buffering; median/P95 over the last 1 s. Excludes camera capture, encoding, sender pacing and browser display. Rover/base clock synchronization verified.",
+          "feeds": [
+            {
+              "label": "RGB-D Cam",
+              "quality": "640\u00d7480 \u00b7 25.7 FPS"
+            },
+            {
+              "label": "Top Cam",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Front Left",
+              "quality": "640\u00d7360 \u00b7 26.6 FPS"
+            },
+            {
+              "label": "Front Right",
+              "quality": "640\u00d7360 \u00b7 26.6 FPS"
+            },
+            {
+              "label": "Left",
+              "quality": "640\u00d7360 \u00b7 26.6 FPS"
+            },
+            {
+              "label": "Right",
+              "quality": "640\u00d7360 \u00b7 27.6 FPS"
+            },
+            {
+              "label": "Arm",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Gripper",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Left",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Left Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Microscope",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Right",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Right Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            }
+          ],
+          "frames": {
+            "Front Left": 19143,
+            "Front Right": 19150,
+            "Left": 18952,
+            "RGB-D Cam": 18903,
+            "Right": 19015
+          }
+        },
+        {
+          "at_s": 634.999919792,
+          "delay": [
+            "28.0 ms",
+            "97.5 ms",
+            "0.3 ms",
+            "16.9 ms"
+          ],
+          "labels": [
+            "Rover \u2192 Base",
+            "Link P95",
+            "Min since start",
+            "Extra queue"
+          ],
+          "reason": "Packet send on rover \u2192 receive on base, before jitter buffering; median/P95 over the last 1 s. Excludes camera capture, encoding, sender pacing and browser display. Rover/base clock synchronization verified.",
+          "feeds": [
+            {
+              "label": "RGB-D Cam",
+              "quality": "640\u00d7480 \u00b7 32.3 FPS"
+            },
+            {
+              "label": "Top Cam",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Front Left",
+              "quality": "640\u00d7360 \u00b7 34.5 FPS"
+            },
+            {
+              "label": "Front Right",
+              "quality": "640\u00d7360 \u00b7 33.5 FPS"
+            },
+            {
+              "label": "Left",
+              "quality": "640\u00d7360 \u00b7 33.5 FPS"
+            },
+            {
+              "label": "Right",
+              "quality": "640\u00d7360 \u00b7 33.5 FPS"
+            },
+            {
+              "label": "Arm",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Gripper",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Left",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Left Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Microscope",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Right",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Right Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            }
+          ],
+          "frames": {
+            "Front Left": 19172,
+            "Front Right": 19179,
+            "Left": 18954,
+            "RGB-D Cam": 18903,
+            "Right": 19022
+          }
+        },
+        {
+          "at_s": 636.009290941,
+          "delay": [
+            "6.5 ms",
+            "87.4 ms",
+            "0.3 ms",
+            "3.8 ms"
+          ],
+          "labels": [
+            "Rover \u2192 Base",
+            "Link P95",
+            "Min since start",
+            "Extra queue"
+          ],
+          "reason": "Packet send on rover \u2192 receive on base, before jitter buffering; median/P95 over the last 1 s. Excludes camera capture, encoding, sender pacing and browser display. Rover/base clock synchronization verified.",
+          "feeds": [
+            {
+              "label": "RGB-D Cam",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Top Cam",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Front Left",
+              "quality": "640\u00d7360 \u00b7 29.0 FPS"
+            },
+            {
+              "label": "Front Right",
+              "quality": "640\u00d7360 \u00b7 29.0 FPS"
+            },
+            {
+              "label": "Left",
+              "quality": "640\u00d7360 \u00b7 2.0 FPS"
+            },
+            {
+              "label": "Right",
+              "quality": "640\u00d7360 \u00b7 7.0 FPS"
+            },
+            {
+              "label": "Arm",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Gripper",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Left",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Left Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Microscope",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Right",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Right Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            }
+          ],
+          "frames": {
+            "Front Left": 19197,
+            "Front Right": 19204,
+            "Left": 18954,
+            "RGB-D Cam": 18924,
+            "Right": 19051
+          }
+        },
+        {
+          "at_s": 636.999955453,
+          "delay": [
+            "42.7 ms",
+            "139.3 ms",
+            "0.3 ms",
+            "39.3 ms"
+          ],
+          "labels": [
+            "Rover \u2192 Base",
+            "Link P95",
+            "Min since start",
+            "Extra queue"
+          ],
+          "reason": "Packet send on rover \u2192 receive on base, before jitter buffering; median/P95 over the last 1 s. Excludes camera capture, encoding, sender pacing and browser display. Rover/base clock synchronization verified.",
+          "feeds": [
+            {
+              "label": "RGB-D Cam",
+              "quality": "480\u00d7360 \u00b7 22.1 FPS"
+            },
+            {
+              "label": "Top Cam",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Front Left",
+              "quality": "640\u00d7360 \u00b7 25.1 FPS"
+            },
+            {
+              "label": "Front Right",
+              "quality": "640\u00d7360 \u00b7 26.1 FPS"
+            },
+            {
+              "label": "Left",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Right",
+              "quality": "480\u00d7270 \u00b7 30.1 FPS"
+            },
+            {
+              "label": "Arm",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Gripper",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Left",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Left Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Microscope",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Science Right",
+              "quality": "\u2014 \u00b7 0 FPS"
+            },
+            {
+              "label": "Right Beaker",
+              "quality": "\u2014 \u00b7 0 FPS"
+            }
+          ],
+          "frames": {
+            "Front Left": 19229,
+            "Front Right": 19236,
+            "Left": 18983,
+            "RGB-D Cam": 18956,
+            "Right": 19081
+          }
+        }
+      ]
+    }
+  ],
+  "max_reported_chrony_update_interval_s": 45.0
+}

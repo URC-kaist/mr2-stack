@@ -1,0 +1,57 @@
+{
+  "iface": "can0",
+  "motor_id": 127,
+  "host_id": 253,
+  "from_bitrate": 1000000,
+  "requested_bitrate": 500000,
+  "power_cycle_required": true,
+  "trace": [
+    {
+      "direction": "tx",
+      "time": 2280.212750546,
+      "can_id": "9200FD7F",
+      "dlc": 8,
+      "data": "0a70000000000000"
+    },
+    {
+      "direction": "rx",
+      "time": 2280.213110365,
+      "can_id": "82007FFD",
+      "dlc": 8,
+      "data": "9cbe7fdc7fff00dc"
+    },
+    {
+      "direction": "tx",
+      "time": 2280.213142654,
+      "can_id": "8400FD7F",
+      "dlc": 8,
+      "data": "0000000000000000"
+    },
+    {
+      "direction": "rx",
+      "time": 2280.213465672,
+      "can_id": "82007FFD",
+      "dlc": 8,
+      "data": "9cbe7ffc7fff00dc"
+    },
+    {
+      "direction": "tx",
+      "time": 2280.213491401,
+      "can_id": "9700FD7F",
+      "dlc": 8,
+      "data": "0102030405060200"
+    },
+    {
+      "direction": "rx",
+      "time": 2280.215709869,
+      "can_id": "80007FFE",
+      "dlc": 8,
+      "data": "893e38009023b710"
+    }
+  ],
+  "command_acknowledged": true,
+  "ack_can_id": "80007FFE",
+  "ack_uid": "893e38009023b710",
+  "status": "verified_500kbps_after_power_cycle",
+  "verification": "../robstride-500k-2026-11-12/summary.json"
+}

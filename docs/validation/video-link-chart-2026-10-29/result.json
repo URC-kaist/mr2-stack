@@ -1,0 +1,229 @@
+{
+  "page": {
+    "url": "https://127.0.0.1/",
+    "title": "dashboard",
+    "hasMetrics": true
+  },
+  "metrics": [
+    {
+      "type": "video_link_metrics",
+      "updated_at_ms": 1793253031243,
+      "budget_kbps": 1462.725318081586,
+      "receive_kbps": 899.3534992306066,
+      "loss_pct": 0,
+      "trend_ms_s": 0.2459015237967151,
+      "classes": {
+        "high": {
+          "budget_kbps": 1169.4117647058824,
+          "receive_kbps": 899.353499230607,
+          "utilization_pct": 76.90648635271789,
+          "streams": 2
+        },
+        "low": {
+          "budget_kbps": 291.7647058823529,
+          "receive_kbps": 0,
+          "utilization_pct": 0,
+          "streams": 3
+        }
+      }
+    },
+    {
+      "type": "video_link_metrics",
+      "updated_at_ms": 1793253032243,
+      "budget_kbps": 1462.725318081586,
+      "receive_kbps": 767.9318062672107,
+      "loss_pct": 0,
+      "trend_ms_s": 2.4084268279851737,
+      "classes": {
+        "high": {
+          "budget_kbps": 1169.4117647058824,
+          "receive_kbps": 767.9318062672107,
+          "utilization_pct": 65.66821280957033,
+          "streams": 2
+        },
+        "low": {
+          "budget_kbps": 291.7647058823529,
+          "receive_kbps": 0,
+          "utilization_pct": 0,
+          "streams": 3
+        }
+      }
+    },
+    {
+      "type": "video_link_metrics",
+      "updated_at_ms": 1793253033443,
+      "budget_kbps": 1462.725318081586,
+      "receive_kbps": 883.0237276755051,
+      "loss_pct": 0,
+      "trend_ms_s": -0.1358454741218294,
+      "classes": {
+        "high": {
+          "budget_kbps": 1169.4117647058824,
+          "receive_kbps": 883.0237276755056,
+          "utilization_pct": 75.51007731631587,
+          "streams": 2
+        },
+        "low": {
+          "budget_kbps": 291.7647058823529,
+          "receive_kbps": 0,
+          "utilization_pct": 0,
+          "streams": 3
+        }
+      }
+    }
+  ],
+  "radios": [
+    {
+      "type": "rocket_m2_status",
+      "connected": true,
+      "updated_at_ms": 1793253023205,
+      "last_success_ms": 1793253023205,
+      "signal": -15,
+      "rssi": 81,
+      "noisef": -89,
+      "chwidth": 20,
+      "rx_chainmask": 3,
+      "chainrssi": [
+        76,
+        79,
+        0
+      ],
+      "chainrssimgmt": [
+        75,
+        77,
+        0
+      ],
+      "chainrssiext": [
+        76,
+        79,
+        0
+      ],
+      "error": null,
+      "target": "base",
+      "label": "Base"
+    },
+    {
+      "type": "rocket_m2_status",
+      "connected": true,
+      "updated_at_ms": 1793253023213,
+      "last_success_ms": 1793253023213,
+      "signal": -17,
+      "rssi": 79,
+      "noisef": -91,
+      "chwidth": 20,
+      "rx_chainmask": 3,
+      "chainrssi": [
+        77,
+        74,
+        0
+      ],
+      "chainrssimgmt": [
+        72,
+        73,
+        0
+      ],
+      "chainrssiext": [
+        77,
+        74,
+        0
+      ],
+      "error": null,
+      "target": "rover",
+      "label": "Rover"
+    },
+    {
+      "type": "rocket_m2_status",
+      "connected": true,
+      "updated_at_ms": 1793253028204,
+      "last_success_ms": 1793253028204,
+      "signal": -15,
+      "rssi": 81,
+      "noisef": -89,
+      "chwidth": 20,
+      "rx_chainmask": 3,
+      "chainrssi": [
+        78,
+        78,
+        0
+      ],
+      "chainrssimgmt": [
+        77,
+        80,
+        0
+      ],
+      "chainrssiext": [
+        78,
+        78,
+        0
+      ],
+      "error": null,
+      "target": "base",
+      "label": "Base"
+    },
+    {
+      "type": "rocket_m2_status",
+      "connected": true,
+      "updated_at_ms": 1793253028213,
+      "last_success_ms": 1793253028213,
+      "signal": -18,
+      "rssi": 78,
+      "noisef": -91,
+      "chwidth": 20,
+      "rx_chainmask": 3,
+      "chainrssi": [
+        75,
+        75,
+        0
+      ],
+      "chainrssimgmt": [
+        74,
+        74,
+        0
+      ],
+      "chainrssiext": [
+        75,
+        75,
+        0
+      ],
+      "error": null,
+      "target": "rover",
+      "label": "Rover"
+    }
+  ],
+  "firstTile": "video-feed-item video-link-card",
+  "traffic": {
+    "text": "Network · Rocket M2\nTraffic\nSignal\n0.88 Mbps\nvideo received · last 1 s\n━ Received\n┄ GCC budget\nMbps · 60 s\n0.0\n1.0\n2.0\n−60 s\n−30 s\nNow\nClass\tReceived\tBudget ≈\tUtil.\nHIGH\t0.88 Mbps\t1.17 Mbps\t75.5%\nLOW\t0.00 Mbps\t0.29 Mbps\t0.0%",
+    "paths": [
+      "M368.8,68.8 L375.9,69.8 L383.0,69.9 L390.1,75.3 L397.2,79.9 L404.3,79.9 L411.3,113.9 L418.4,112.8 L425.5,95.2 L432.6,94.6 L439.7,94.1 L446.8,69.7 L453.8,73.6 L460.9,81.0 L468.0,74.6",
+      "M368.8,43.4 L375.9,42.1 L383.0,42.1 L390.1,42.1 L397.2,42.1 L404.3,42.1 L411.3,42.1 L418.4,42.1 L425.5,42.1 L432.6,42.1 L439.7,42.1 L446.8,42.1 L453.8,42.1 L460.9,42.1 L468.0,42.1"
+    ],
+    "rows": [
+      "HIGH\t0.88 Mbps\t1.17 Mbps\t75.5%",
+      "LOW\t0.00 Mbps\t0.29 Mbps\t0.0%"
+    ],
+    "overflow": false
+  },
+  "signal": {
+    "text": "Network · Rocket M2\nTraffic\nSignal\n-15 dBm\nbase radio receive signal\n━ Base RX\n━ Rover RX\ndBm · 60 s\n-100\n-55\n-10\n−60 s\n−30 s\nNow\nClass\tReceived\tBudget ≈\tUtil.\nHIGH\t0.88 Mbps\t1.17 Mbps\t75.5%\nLOW\t0.00 Mbps\t0.29 Mbps\t0.0%",
+    "paths": [
+      "M368.8,17.0 L375.9,17.0 L383.0,17.0 L390.1,17.0 L397.2,17.0 L404.3,18.2 L411.3,18.2 L418.4,18.2 L425.5,18.2 L432.6,18.2 L439.7,18.2 L446.8,18.2 L453.8,18.2 L460.9,18.2 L468.0,18.2",
+      "M368.8,20.7 L375.9,20.7 L383.0,20.7 L390.1,20.7 L397.2,20.7 L404.3,20.7 L411.3,20.7 L418.4,20.7 L425.5,20.7 L432.6,20.7 L439.7,22.0 L446.8,22.0 L453.8,22.0 L460.9,22.0 L468.0,22.0"
+    ],
+    "labels": [
+      "-100",
+      "-55",
+      "-10",
+      "−60 s",
+      "−30 s",
+      "Now"
+    ]
+  },
+  "tooltip": "2:50:31 PM · Base RX: -15 dBm · Rover RX: -18 dBm",
+  "compact": {
+    "width": 829,
+    "scrollWidth": 829,
+    "height": 466,
+    "scrollHeight": 466
+  },
+  "passed": true
+}

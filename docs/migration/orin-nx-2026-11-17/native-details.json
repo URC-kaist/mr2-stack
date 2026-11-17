@@ -1,0 +1,245 @@
+{
+  "imports": {
+    "cv2": "4.13.0",
+    "numpy": "1.26.4",
+    "psutil": "5.9.0",
+    "yaml": "5.4.1",
+    "torch": "2.8.0",
+    "torch_compiled_cuda": "12.6"
+  },
+  "plugins": {
+    "nvv4l2h264enc": {
+      "found": true,
+      "plugin_details": "Plugin Details:\n  Name                     nvvideo4linux2\n  Description              Nvidia elements for Video 4 Linux\n  Filename                 /usr/lib/aarch64-linux-gnu/gstreamer-1.0/libgstnvvideo4linux2.so\n  Version                  1.14.0\n  License                  LGPL\n  Source module            nvvideo4linux2\n  Binary package           nvvideo4linux2\n  Origin URL               http://nvidia.com/",
+      "error": ""
+    },
+    "nvvidconv": {
+      "found": true,
+      "plugin_details": "Plugin Details:\n  Name                     nvvidconv\n  Description              video Colorspace conversion & scaler\n  Filename                 /usr/lib/aarch64-linux-gnu/gstreamer-1.0/libgstnvvidconv.so\n  Version                  1.2.3\n  License                  Proprietary\n  Source module            gstreamer-nvvconv-plugin\n  Binary package           GStreamer nvvconv Plugin\n  Origin URL               http://nvidia.com/",
+      "error": ""
+    },
+    "x264enc": {
+      "found": true,
+      "plugin_details": "Plugin Details:\n  Name                     x264\n  Description              libx264-based H.264 encoder plugin\n  Filename                 /usr/lib/aarch64-linux-gnu/gstreamer-1.0/libgstx264.so\n  Version                  1.20.1\n  License                  GPL\n  Source module            gst-plugins-ugly\n  Source release date      2022-03-14\n  Binary package           GStreamer Ugly Plugins (Ubuntu)\n  Origin URL               https://launchpad.net/distros/ubuntu/+source/gst-plugins-ugly1.0",
+      "error": ""
+    },
+    "openh264enc": {
+      "found": true,
+      "plugin_details": "Plugin Details:\n  Name                     openh264\n  Description              OpenH264 encoder/decoder plugin\n  Filename                 /usr/lib/aarch64-linux-gnu/gstreamer-1.0/libgstopenh264.so\n  Version                  1.20.3\n  License                  BSD\n  Source module            gst-plugins-bad\n  Source release date      2022-06-15\n  Binary package           GStreamer Bad Plugins (Ubuntu)\n  Origin URL               https://launchpad.net/distros/ubuntu/+source/gst-plugins-bad1.0",
+      "error": ""
+    },
+    "rtph264pay": {
+      "found": true,
+      "plugin_details": "Plugin Details:\n  Name                     rtp\n  Description              Real-time protocol plugins\n  Filename                 /usr/lib/aarch64-linux-gnu/gstreamer-1.0/libgstrtp.so\n  Version                  1.20.3\n  License                  LGPL\n  Source module            gst-plugins-good\n  Source release date      2022-06-15\n  Binary package           GStreamer Good Plugins (Ubuntu)\n  Origin URL               https://launchpad.net/distros/ubuntu/+source/gst-plugins-good1.0",
+      "error": ""
+    },
+    "rtph264depay": {
+      "found": true,
+      "plugin_details": "Plugin Details:\n  Name                     rtp\n  Description              Real-time protocol plugins\n  Filename                 /usr/lib/aarch64-linux-gnu/gstreamer-1.0/libgstrtp.so\n  Version                  1.20.3\n  License                  LGPL\n  Source module            gst-plugins-good\n  Source release date      2022-06-15\n  Binary package           GStreamer Good Plugins (Ubuntu)\n  Origin URL               https://launchpad.net/distros/ubuntu/+source/gst-plugins-good1.0",
+      "error": ""
+    },
+    "h264parse": {
+      "found": true,
+      "plugin_details": "Plugin Details:\n  Name                     videoparsersbad\n  Description              videoparsers\n  Filename                 /usr/lib/aarch64-linux-gnu/gstreamer-1.0/libgstvideoparsersbad.so\n  Version                  1.20.3\n  License                  LGPL\n  Source module            gst-plugins-bad\n  Source release date      2022-06-15\n  Binary package           GStreamer Bad Plugins (Ubuntu)\n  Origin URL               https://launchpad.net/distros/ubuntu/+source/gst-plugins-bad1.0",
+      "error": ""
+    },
+    "v4l2src": {
+      "found": true,
+      "plugin_details": "Plugin Details:\n  Name                     video4linux2\n  Description              elements for Video 4 Linux\n  Filename                 /usr/lib/aarch64-linux-gnu/gstreamer-1.0/libgstvideo4linux2.so\n  Version                  1.20.3\n  License                  LGPL\n  Source module            gst-plugins-good\n  Source release date      2022-06-15\n  Binary package           GStreamer Good Plugins (Ubuntu)\n  Origin URL               https://launchpad.net/distros/ubuntu/+source/gst-plugins-good1.0",
+      "error": ""
+    },
+    "appsink": {
+      "found": true,
+      "plugin_details": "Plugin Details:\n  Name                     app\n  Description              Elements used to communicate with applications\n  Filename                 /usr/lib/aarch64-linux-gnu/gstreamer-1.0/libgstapp.so\n  Version                  1.20.1\n  License                  LGPL\n  Source module            gst-plugins-base\n  Source release date      2022-03-14\n  Binary package           GStreamer Base Plugins (Ubuntu)\n  Origin URL               https://launchpad.net/distros/ubuntu/+source/gst-plugins-base1.0",
+      "error": ""
+    },
+    "appsrc": {
+      "found": true,
+      "plugin_details": "Plugin Details:\n  Name                     app\n  Description              Elements used to communicate with applications\n  Filename                 /usr/lib/aarch64-linux-gnu/gstreamer-1.0/libgstapp.so\n  Version                  1.20.1\n  License                  LGPL\n  Source module            gst-plugins-base\n  Source release date      2022-03-14\n  Binary package           GStreamer Base Plugins (Ubuntu)\n  Origin URL               https://launchpad.net/distros/ubuntu/+source/gst-plugins-base1.0",
+      "error": ""
+    },
+    "avdec_h264": {
+      "found": false,
+      "plugin_details": "",
+      "error": "No such element or plugin 'avdec_h264'"
+    }
+  },
+  "native_repositories": {
+    "/home/mr2/librealsense": {
+      "head": "9a0dd70db1a2c180b69c6c257cd2ee6120505499",
+      "describe": "9a0dd70",
+      "status": "",
+      "remotes": "origin\thttps://github.com/realsenseai/librealsense.git (fetch)\norigin\thttps://github.com/realsenseai/librealsense.git (push)"
+    },
+    "/home/mr2/ros2_ws/src/realsense-ros": {
+      "head": "5c2244ca5cd9867c9ee63769668891430f460dfd",
+      "describe": "4.57.7",
+      "status": "",
+      "remotes": "origin\thttps://github.com/IntelRealSense/realsense-ros.git (fetch)\norigin\thttps://github.com/IntelRealSense/realsense-ros.git (push)"
+    },
+    "/home/mr2/jetson-orin-librealsense": {
+      "head": "dcdd8ce11f26a6263c3a2b3d6498426ff7d4ea64",
+      "describe": "dcdd8ce",
+      "status": "",
+      "remotes": "origin\thttps://github.com/jetsonhacks/jetson-orin-librealsense.git (fetch)\norigin\thttps://github.com/jetsonhacks/jetson-orin-librealsense.git (push)"
+    }
+  },
+  "tools": {
+    "mavproxy.py": null,
+    "dumpcap": null,
+    "tshark": null,
+    "tcpdump": "/usr/bin/tcpdump",
+    "canbusload": "/usr/bin/canbusload",
+    "candump": "/usr/bin/candump",
+    "cansend": "/usr/bin/cansend",
+    "nginx": "/usr/sbin/nginx",
+    "nmcli": "/usr/bin/nmcli",
+    "iw": "/usr/sbin/iw",
+    "chronyd": "/usr/sbin/chronyd",
+    "chronyc": "/usr/bin/chronyc",
+    "ssh": "/usr/bin/ssh",
+    "sshpass": null,
+    "rsync": "/usr/bin/rsync",
+    "ffmpeg": null,
+    "ffprobe": null,
+    "nvcc": "/usr/local/cuda/bin/nvcc"
+  },
+  "pkg_config": {
+    "realsense2": {
+      "exit_code": 0,
+      "stdout": "2.57.7",
+      "stderr": ""
+    },
+    "opencv4": {
+      "exit_code": 0,
+      "stdout": "4.5.4",
+      "stderr": ""
+    },
+    "gstreamer-1.0": {
+      "exit_code": 0,
+      "stdout": "1.20.3",
+      "stderr": ""
+    },
+    "gstreamer-app-1.0": {
+      "exit_code": 0,
+      "stdout": "1.20.1",
+      "stderr": ""
+    },
+    "gstreamer-video-1.0": {
+      "exit_code": 0,
+      "stdout": "1.20.1",
+      "stderr": ""
+    },
+    "gstreamer-rtp-1.0": {
+      "exit_code": 0,
+      "stdout": "1.20.1",
+      "stderr": ""
+    },
+    "eigen3": {
+      "exit_code": 0,
+      "stdout": "3.4.0",
+      "stderr": ""
+    },
+    "yaml-cpp": {
+      "exit_code": 0,
+      "stdout": "0.7.0",
+      "stderr": ""
+    },
+    "libcurl": {
+      "exit_code": 0,
+      "stdout": "7.81.0",
+      "stderr": ""
+    },
+    "libusb-1.0": {
+      "exit_code": 0,
+      "stdout": "1.0.25",
+      "stderr": ""
+    },
+    "pcl_common": {
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Package pcl_common was not found in the pkg-config search path.\nPerhaps you should add the directory containing `pcl_common.pc'\nto the PKG_CONFIG_PATH environment variable\nNo package 'pcl_common' found"
+    }
+  },
+  "compiler": "g++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0",
+  "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2024 NVIDIA Corporation\nBuilt on Wed_Aug_14_10:14:07_PDT_2024\nCuda compilation tools, release 12.6, V12.6.68\nBuild cuda_12.6.r12.6/compiler.34714021_0",
+  "ldconfig_realsense_tensor_rt": "\tlibrealsense2.so.2.57 (libc6,AArch64) => /usr/local/lib/librealsense2.so.2.57\n\tlibrealsense2.so (libc6,AArch64) => /usr/local/lib/librealsense2.so\n\tlibrealsense2-gl.so.2.57 (libc6,AArch64) => /usr/local/lib/librealsense2-gl.so.2.57\n\tlibrealsense2-gl.so (libc6,AArch64) => /usr/local/lib/librealsense2-gl.so",
+  "librealsense_pc": "prefix=/usr/local\nexec_prefix=${prefix}\nincludedir=${prefix}/include\n#TODO: libdir=${exec_prefix}/lib\nlibdir= ${prefix}/lib/x86_64-linux-gnu\n\nName:\nDescription: Intel(R) RealSense(tm) Cross Platform API\nVersion: 2.57.7\nURL: https://github.com/realsenseai/librealsense\nRequires.private: \nLibs: -L${libdir} -lrealsense2\nLibs.private: \nCflags: -I${includedir}\n\n#TODO check -Wl -Bdynamic\n#Libs: -L${libdir} -Wl,-Bdynamic -lrealsense\n",
+  "python_requirement_metadata": {
+    "ultralytics": [
+      "numpy>=1.23.0",
+      "matplotlib>=3.3.0",
+      "opencv-python>=4.6.0",
+      "pillow>=7.1.2",
+      "pyyaml>=5.3.1",
+      "requests>=2.23.0",
+      "scipy>=1.4.1",
+      "torch>=1.8.0",
+      "torch!=2.4.0,>=1.8.0; sys_platform == \"win32\"",
+      "torchvision>=0.9.0",
+      "psutil>=5.8.0",
+      "polars>=0.20.0",
+      "ultralytics-thop>=2.0.18",
+      "ipython; extra == \"dev\"",
+      "pytest; extra == \"dev\"",
+      "pytest-cov; extra == \"dev\"",
+      "coverage[toml]; extra == \"dev\"",
+      "zensical>=0.0.15; python_version >= \"3.10\" and extra == \"dev\"",
+      "mkdocs-ultralytics-plugin>=0.2.4; extra == \"dev\"",
+      "minijinja>=2.0.0; extra == \"dev\"",
+      "numpy<2.0.0; extra == \"export\"",
+      "onnx>=1.12.0; platform_system != \"Darwin\" and extra == \"export\"",
+      "onnx<1.18.0,>=1.12.0; platform_system == \"Darwin\" and extra == \"export\"",
+      "onnxslim>=0.1.82; extra == \"export\"",
+      "coremltools>=9.0; (platform_system != \"Windows\" and python_version <= \"3.13\") and extra == \"export\"",
+      "scikit-learn>=1.3.2; (platform_system != \"Windows\" and python_version <= \"3.13\") and extra == \"export\"",
+      "openvino>=2024.0.0; extra == \"export\"",
+      "tensorflow<=2.19.0,>=2.0.0; extra == \"export\"",
+      "tensorflowjs>=2.0.0; extra == \"export\"",
+      "ydf<0.13.0; platform_machine != \"aarch64\" and extra == \"export\"",
+      "tensorstore>=0.1.63; (platform_machine == \"aarch64\" and python_version >= \"3.9\") and extra == \"export\"",
+      "h5py!=3.11.0; platform_machine == \"aarch64\" and extra == \"export\"",
+      "setuptools<=81.0.0; extra == \"export\"",
+      "packaging>=26.0; (platform_machine == \"aarch64\" and platform_system == \"Linux\" and python_version >= \"3.9\") and extra == \"export\"",
+      "shapely>=2.0.0; extra == \"solutions\"",
+      "streamlit>=1.51.0; python_version >= \"3.10\" and extra == \"solutions\"",
+      "streamlit<1.51.0,>=1.29.0; (python_version < \"3.10\" and (python_version < \"3.9\" or platform_machine != \"aarch64\" or platform_system != \"Linux\")) and extra == \"solutions\"",
+      "flask>=3.0.1; extra == \"solutions\"",
+      "wandb; extra == \"logging\"",
+      "tensorboard; extra == \"logging\"",
+      "mlflow; extra == \"logging\"",
+      "ipython; extra == \"extra\"",
+      "albumentations>=1.4.6; extra == \"extra\"",
+      "faster-coco-eval>=1.6.7; extra == \"extra\"",
+      "scipy-stubs>=1.14.1.4; python_version >= \"3.10\" and extra == \"typing\"",
+      "types-pillow; extra == \"typing\"",
+      "types-psutil; extra == \"typing\"",
+      "types-pyyaml; extra == \"typing\"",
+      "types-requests; extra == \"typing\"",
+      "types-shapely; extra == \"typing\""
+    ],
+    "torch": [
+      "filelock",
+      "typing-extensions>=4.10.0",
+      "setuptools; python_version >= \"3.12\"",
+      "sympy>=1.13.3",
+      "networkx>=2.5.1",
+      "jinja2",
+      "fsspec>=0.8.5",
+      "optree>=0.13.0; extra == \"optree\"",
+      "opt-einsum>=3.3; extra == \"opt-einsum\"",
+      "pyyaml; extra == \"pyyaml\""
+    ],
+    "torchvision": [
+      "numpy",
+      "torch",
+      "pillow!=8.3.*,>=5.3.0",
+      "gdown>=4.7.3; extra == \"gdown\"",
+      "scipy; extra == \"scipy\""
+    ],
+    "opencv-python": [
+      "numpy<2.0; python_version < \"3.9\"",
+      "numpy>=2; python_version >= \"3.9\""
+    ]
+  }
+}

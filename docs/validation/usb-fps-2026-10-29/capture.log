@@ -1,0 +1,34 @@
+{
+  "FL": {
+    "capture_fps": 30.011523095358122,
+    "frames": 301,
+    "median_interval_ms": 32.029422000050545,
+    "p95_interval_ms": 36.063433999970584,
+    "errors": []
+  },
+  "FR": {
+    "capture_fps": 7.673569929654123,
+    "frames": 77,
+    "median_interval_ms": 131.9476640001085,
+    "p95_interval_ms": 132.08163500030423,
+    "errors": []
+  },
+  "LEFT": {
+    "capture_fps": 0,
+    "frames": 0,
+    "median_interval_ms": null,
+    "p95_interval_ms": null,
+    "errors": [
+      "gst-resource-error-quark: Could not read from resource. (9)",
+      "gst-resource-error-quark: Failed to allocate a buffer (14)",
+      "gst-stream-error-quark: Internal data stream error. (1)"
+    ]
+  },
+  "RIGHT": {
+    "capture_fps": 7.676572467732888,
+    "frames": 77,
+    "median_interval_ms": 131.96252900002037,
+    "p95_interval_ms": 132.0896349998293,
+    "errors": []
+  }
+}

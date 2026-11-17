@@ -1,0 +1,3 @@
+[OK] rover: installed prerequisites; clock locked=False
+[FIELD] enP8p1s0: 192.168.1.102/24; profile mr2-field-rover
+enP8p1s0         UP             192.168.0.57/24

@@ -1,0 +1,10 @@
+{
+  "internet_available": false,
+  "server_config": "local stratum 8\npool ntp.ubuntu.com iburst maxsources 4\npool pool.ntp.org iburst maxsources 4\nmakestep 0.1 -1\nallow 127.0.0.1\nbindaddress 127.0.0.1\nport 49617\ncmdport 0\npidfile /tmp/mr2-offline-cold-i2py9ydr/server.pid\n",
+  "server_clock_control_disabled": true,
+  "client_measure_only": true,
+  "elapsed_s": 0.7855984230009199,
+  "exit_code": 0,
+  "output": "2026-10-29T10:18:15Z chronyd version 4.2 starting (+CMDMON +NTP +REFCLOCK +RTC +PRIVDROP +SCFILTER +SIGND +ASYNCDNS +NTS +SECHASH +IPV6 -DEBUG)\n2026-10-29T10:18:15Z Disabled control of system clock\n2026-10-29T10:18:15Z Running with root privileges\n2026-10-29T10:18:15Z System clock wrong by -0.000012 seconds (ignored)\n2026-10-29T10:18:15Z chronyd exiting\n",
+  "passed": true
+}

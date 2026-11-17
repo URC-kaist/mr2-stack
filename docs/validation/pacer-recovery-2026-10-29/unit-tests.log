@@ -1,0 +1,10 @@
+Internal ctest changing into directory: /tmp/mr2-pacer-build/mr2_video_streaming
+Test project /tmp/mr2-pacer-build/mr2_video_streaming
+    Start 1: video_control
+1/2 Test #1: video_control ....................   Passed    0.01 sec
+    Start 2: video_pacer
+2/2 Test #2: video_pacer ......................   Passed    0.01 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Total Test time (real) =   0.02 sec

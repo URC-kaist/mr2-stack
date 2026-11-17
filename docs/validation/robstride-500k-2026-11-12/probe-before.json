@@ -1,0 +1,20 @@
+{
+  "iface": "can0",
+  "host_id": 253,
+  "motor_ids": [],
+  "frames": [],
+  "parameters": {
+    "run_mode": null,
+    "spd_ref": null,
+    "limit_cur": null,
+    "mechPos": null,
+    "iqf": null,
+    "mechVel": null,
+    "VBUS": null,
+    "acc_rad": null,
+    "canTimeout": null
+  },
+  "passive_extended_ids": [],
+  "mcu_identifiers": {},
+  "probed_motor_id": 127
+}

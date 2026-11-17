@@ -1,0 +1,437 @@
+{
+  "baseline": {
+    "window_ms": [
+      1793292072441.0,
+      1793292172441.0
+    ],
+    "duration_s": 100,
+    "matched": {
+      "front_right_cam": {
+        "source_to_canvas": {
+          "count": 2968,
+          "p50_ms": 76.182,
+          "p95_ms": 105.053
+        },
+        "decoder": {
+          "count": 2968,
+          "p50_ms": 34.3,
+          "p95_ms": 55.5
+        },
+        "output_to_canvas": {
+          "count": 2968,
+          "p50_ms": 3.1,
+          "p95_ms": 5.1
+        },
+        "source_to_pay": {
+          "count": 2968,
+          "p50_ms": 5.922,
+          "p95_ms": 17.628
+        },
+        "encode": {
+          "count": 2968,
+          "p50_ms": 2.989,
+          "p95_ms": 14.675
+        }
+      },
+      "all": {
+        "source_to_canvas": {
+          "count": 14962,
+          "p50_ms": 76.058,
+          "p95_ms": 102.069
+        },
+        "decoder": {
+          "count": 14962,
+          "p50_ms": 34.8,
+          "p95_ms": 55.0
+        },
+        "output_to_canvas": {
+          "count": 14962,
+          "p50_ms": 3.2,
+          "p95_ms": 5.5
+        },
+        "source_to_pay": {
+          "count": 14962,
+          "p50_ms": 6.22,
+          "p95_ms": 13.621
+        },
+        "encode": {
+          "count": 14962,
+          "p50_ms": 3.495,
+          "p95_ms": 10.745
+        }
+      },
+      "front_left_cam": {
+        "source_to_canvas": {
+          "count": 2999,
+          "p50_ms": 73.262,
+          "p95_ms": 100.123
+        },
+        "decoder": {
+          "count": 2999,
+          "p50_ms": 35.1,
+          "p95_ms": 54.1
+        },
+        "output_to_canvas": {
+          "count": 2999,
+          "p50_ms": 3.0,
+          "p95_ms": 4.9
+        },
+        "source_to_pay": {
+          "count": 2999,
+          "p50_ms": 6.055,
+          "p95_ms": 10.227
+        },
+        "encode": {
+          "count": 2999,
+          "p50_ms": 3.091,
+          "p95_ms": 6.478
+        }
+      },
+      "left_cam": {
+        "source_to_canvas": {
+          "count": 2999,
+          "p50_ms": 74.369,
+          "p95_ms": 106.069
+        },
+        "decoder": {
+          "count": 2999,
+          "p50_ms": 34.9,
+          "p95_ms": 55.6
+        },
+        "output_to_canvas": {
+          "count": 2999,
+          "p50_ms": 2.9,
+          "p95_ms": 4.8
+        },
+        "source_to_pay": {
+          "count": 2999,
+          "p50_ms": 6.714,
+          "p95_ms": 21.693
+        },
+        "encode": {
+          "count": 2999,
+          "p50_ms": 3.364,
+          "p95_ms": 18.648
+        }
+      },
+      "rgbd_camera": {
+        "source_to_canvas": {
+          "count": 2997,
+          "p50_ms": 78.122,
+          "p95_ms": 104.343
+        },
+        "decoder": {
+          "count": 2997,
+          "p50_ms": 34.7,
+          "p95_ms": 56.9
+        },
+        "output_to_canvas": {
+          "count": 2997,
+          "p50_ms": 4.2,
+          "p95_ms": 6.5
+        },
+        "source_to_pay": {
+          "count": 2997,
+          "p50_ms": 6.281,
+          "p95_ms": 12.763
+        },
+        "encode": {
+          "count": 2997,
+          "p50_ms": 3.56,
+          "p95_ms": 10.098
+        }
+      },
+      "right_cam": {
+        "source_to_canvas": {
+          "count": 2999,
+          "p50_ms": 78.164,
+          "p95_ms": 99.84
+        },
+        "decoder": {
+          "count": 2999,
+          "p50_ms": 35.1,
+          "p95_ms": 52.5
+        },
+        "output_to_canvas": {
+          "count": 2999,
+          "p50_ms": 3.0,
+          "p95_ms": 4.9
+        },
+        "source_to_pay": {
+          "count": 2999,
+          "p50_ms": 6.574,
+          "p95_ms": 13.909
+        },
+        "encode": {
+          "count": 2999,
+          "p50_ms": 3.785,
+          "p95_ms": 11.03
+        }
+      }
+    },
+    "unmatched": {},
+    "rendered_in_window": {
+      "front_right_cam": 2968,
+      "front_left_cam": 2999,
+      "left_cam": 2999,
+      "rgbd_camera": 2997,
+      "right_cam": 2999
+    },
+    "frame_gap_ms": {
+      "front_right_cam": {
+        "count": 2967,
+        "p50_ms": 32.7,
+        "p95_ms": 55.6
+      },
+      "front_left_cam": {
+        "count": 2998,
+        "p50_ms": 33.2,
+        "p95_ms": 52.9
+      },
+      "left_cam": {
+        "count": 2998,
+        "p50_ms": 32.8,
+        "p95_ms": 55.5
+      },
+      "rgbd_camera": {
+        "count": 2996,
+        "p50_ms": 33.3,
+        "p95_ms": 55.9
+      },
+      "right_cam": {
+        "count": 2998,
+        "p50_ms": 33.2,
+        "p95_ms": 51.7
+      }
+    }
+  },
+  "improved": {
+    "window_ms": [
+      1793293915140.5,
+      1793294015140.5
+    ],
+    "duration_s": 100,
+    "matched": {
+      "right_cam": {
+        "source_to_canvas": {
+          "count": 3000,
+          "p50_ms": 28.766,
+          "p95_ms": 42.828
+        },
+        "decoder": {
+          "count": 3000,
+          "p50_ms": 1.6,
+          "p95_ms": 3.5
+        },
+        "output_to_canvas": {
+          "count": 3000,
+          "p50_ms": 2.8,
+          "p95_ms": 6.4
+        },
+        "source_to_pay": {
+          "count": 3000,
+          "p50_ms": 6.611,
+          "p95_ms": 9.682
+        },
+        "encode": {
+          "count": 3000,
+          "p50_ms": 3.713,
+          "p95_ms": 5.789
+        }
+      },
+      "all": {
+        "source_to_canvas": {
+          "count": 14993,
+          "p50_ms": 27.024,
+          "p95_ms": 44.078
+        },
+        "decoder": {
+          "count": 14993,
+          "p50_ms": 1.4,
+          "p95_ms": 3.2
+        },
+        "output_to_canvas": {
+          "count": 14993,
+          "p50_ms": 2.7,
+          "p95_ms": 6.5
+        },
+        "source_to_pay": {
+          "count": 14993,
+          "p50_ms": 6.348,
+          "p95_ms": 9.197
+        },
+        "encode": {
+          "count": 14993,
+          "p50_ms": 3.462,
+          "p95_ms": 5.174
+        }
+      },
+      "rgbd_camera": {
+        "source_to_canvas": {
+          "count": 2997,
+          "p50_ms": 25.982,
+          "p95_ms": 43.73
+        },
+        "decoder": {
+          "count": 2997,
+          "p50_ms": 1.5,
+          "p95_ms": 3.4
+        },
+        "output_to_canvas": {
+          "count": 2997,
+          "p50_ms": 2.8,
+          "p95_ms": 7.0
+        },
+        "source_to_pay": {
+          "count": 2997,
+          "p50_ms": 6.462,
+          "p95_ms": 8.184
+        },
+        "encode": {
+          "count": 2997,
+          "p50_ms": 3.575,
+          "p95_ms": 4.911
+        }
+      },
+      "left_cam": {
+        "source_to_canvas": {
+          "count": 2998,
+          "p50_ms": 25.793,
+          "p95_ms": 43.217
+        },
+        "decoder": {
+          "count": 2998,
+          "p50_ms": 1.2,
+          "p95_ms": 2.7
+        },
+        "output_to_canvas": {
+          "count": 2998,
+          "p50_ms": 2.5,
+          "p95_ms": 6.3
+        },
+        "source_to_pay": {
+          "count": 2998,
+          "p50_ms": 6.088,
+          "p95_ms": 8.977
+        },
+        "encode": {
+          "count": 2998,
+          "p50_ms": 3.001,
+          "p95_ms": 5.036
+        }
+      },
+      "front_left_cam": {
+        "source_to_canvas": {
+          "count": 3000,
+          "p50_ms": 30.225,
+          "p95_ms": 45.524
+        },
+        "decoder": {
+          "count": 3000,
+          "p50_ms": 1.4,
+          "p95_ms": 3.0
+        },
+        "output_to_canvas": {
+          "count": 3000,
+          "p50_ms": 2.9,
+          "p95_ms": 6.5
+        },
+        "source_to_pay": {
+          "count": 3000,
+          "p50_ms": 6.432,
+          "p95_ms": 10.378
+        },
+        "encode": {
+          "count": 3000,
+          "p50_ms": 3.237,
+          "p95_ms": 5.639
+        }
+      },
+      "front_right_cam": {
+        "source_to_canvas": {
+          "count": 2998,
+          "p50_ms": 22.649,
+          "p95_ms": 45.123
+        },
+        "decoder": {
+          "count": 2998,
+          "p50_ms": 1.4,
+          "p95_ms": 3.3
+        },
+        "output_to_canvas": {
+          "count": 2998,
+          "p50_ms": 2.3,
+          "p95_ms": 6.2
+        },
+        "source_to_pay": {
+          "count": 2998,
+          "p50_ms": 6.099,
+          "p95_ms": 8.508
+        },
+        "encode": {
+          "count": 2998,
+          "p50_ms": 3.009,
+          "p95_ms": 5.009
+        }
+      }
+    },
+    "unmatched": {},
+    "rendered_in_window": {
+      "right_cam": 3000,
+      "rgbd_camera": 2997,
+      "left_cam": 2998,
+      "front_left_cam": 3000,
+      "front_right_cam": 2998
+    },
+    "frame_gap_ms": {
+      "right_cam": {
+        "count": 2999,
+        "p50_ms": 33.4,
+        "p95_ms": 48.1
+      },
+      "rgbd_camera": {
+        "count": 2996,
+        "p50_ms": 33.4,
+        "p95_ms": 51.1
+      },
+      "left_cam": {
+        "count": 2997,
+        "p50_ms": 33.2,
+        "p95_ms": 51.7
+      },
+      "front_left_cam": {
+        "count": 2999,
+        "p50_ms": 33.4,
+        "p95_ms": 49.3
+      },
+      "front_right_cam": {
+        "count": 2997,
+        "p50_ms": 32.9,
+        "p95_ms": 54.6
+      }
+    }
+  },
+  "improvement_pct": {
+    "source_to_canvas": 64.46922085776646,
+    "decoder": 95.97701149425288,
+    "output_to_canvas": 15.625,
+    "source_to_pay": -2.057877813504816,
+    "encode": 0.9442060085836923
+  },
+  "observation": {
+    "samples": 761,
+    "duration_s": 760.001675362,
+    "numeric_delay_samples": 759,
+    "clock_sync_samples": 0,
+    "blank_ui_samples": 1,
+    "metrics": 722,
+    "clock_messages": 384,
+    "final_qualities": {
+      "RGB-D Cam": "640\u00d7480 \u00b7 30.1 FPS",
+      "Front Left": "640\u00d7360 \u00b7 31.0 FPS",
+      "Front Right": "640\u00d7360 \u00b7 30.0 FPS",
+      "Left": "\u2014 \u00b7 0 FPS",
+      "Right": "640\u00d7360 \u00b7 31.0 FPS"
+    }
+  }
+}

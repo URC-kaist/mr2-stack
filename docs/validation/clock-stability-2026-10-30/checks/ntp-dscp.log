@@ -1,0 +1,136 @@
+tcpdump: listening on enP8p1s0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+23:40:00.257054 IP (tos 0xb8, ttl 64, id 1598, offset 0, flags [DF], proto UDP (17), length 104)
+    192.168.0.57.57617 > 192.168.0.55.123: [bad udp cksum 0x8226 -> 0x4f1c!] NTPv4, Client, length 76
+	Leap indicator:  (0), Stratum 0 (unspecified), poll -1 (1/2s), precision 32
+	Root Delay: 0.000000, Root dispersion: 0.000000, Reference-ID: (unspec)
+	  Reference Timestamp:  0.000000000
+	  Originator Timestamp: 4002273599.752868398 (2026-10-29T14:39:59Z)
+	  Receive Timestamp:    3004775621.653373813 (1995-03-21T11:53:41Z)
+	  Transmit Timestamp:   70918579.291676910 (1902-04-01T19:36:19Z)
+	    Originator - Receive Timestamp:  -997497978.099494585
+	    Originator - Transmit Timestamp: -3931355020.461191488
+	(28 more bytes after the header)
+23:40:00.262374 IP (tos 0xb8, ttl 64, id 2984, offset 0, flags [DF], proto UDP (17), length 104)
+    192.168.0.55.123 > 192.168.0.57.57617: [udp sum ok] NTPv4, Server, length 76
+	Leap indicator:  (0), Stratum 8 (secondary reference), poll -1 (1/2s), precision -25
+	Root Delay: 0.000000, Root dispersion: 0.000000, Reference-ID: 0x7f7f0101
+	  Reference Timestamp:  4002273543.395452569 (2026-10-29T14:39:03Z)
+	  Originator Timestamp: 3004775621.653373813 (1995-03-21T11:53:41Z)
+	  Receive Timestamp:    4002273600.257983497 (2026-10-29T14:40:00Z)
+	  Transmit Timestamp:   4002273599.752962781 (2026-10-29T14:39:59Z)
+	    Originator - Receive Timestamp:  +997497978.604609684
+	    Originator - Transmit Timestamp: +997497978.099588967
+	(28 more bytes after the header)
+23:40:00.770718 IP (tos 0xb8, ttl 64, id 61510, offset 0, flags [DF], proto UDP (17), length 104)
+    192.168.0.57.35523 > 192.168.0.55.123: [bad udp cksum 0x8226 -> 0xc3d8!] NTPv4, Client, length 76
+	Leap indicator:  (0), Stratum 0 (unspecified), poll -1 (1/2s), precision 32
+	Root Delay: 0.000000, Root dispersion: 0.000000, Reference-ID: (unspec)
+	  Reference Timestamp:  0.000000000
+	  Originator Timestamp: 4002273600.257983497 (2026-10-29T14:40:00Z)
+	  Receive Timestamp:    1525001123.087625364 (1948-04-29T11:25:23Z)
+	  Transmit Timestamp:   3746037124.364853986 (2018-09-15T21:52:04Z)
+	    Originator - Receive Timestamp:  -2477272477.170358132
+	    Originator - Transmit Timestamp: -256236475.893129511
+	(28 more bytes after the header)
+23:40:00.775424 IP (tos 0xb8, ttl 64, id 3107, offset 0, flags [DF], proto UDP (17), length 104)
+    192.168.0.55.123 > 192.168.0.57.35523: [udp sum ok] NTPv4, Server, length 76
+	Leap indicator:  (0), Stratum 8 (secondary reference), poll -1 (1/2s), precision -25
+	Root Delay: 0.000000, Root dispersion: 0.000000, Reference-ID: 0x7f7f0101
+	  Reference Timestamp:  4002273543.395452569 (2026-10-29T14:39:03Z)
+	  Originator Timestamp: 1525001123.087625364 (1948-04-29T11:25:23Z)
+	  Receive Timestamp:    4002273600.773513752 (2026-10-29T14:40:00Z)
+	  Transmit Timestamp:   4002273600.258065590 (2026-10-29T14:40:00Z)
+	    Originator - Receive Timestamp:  +2477272477.685888387
+	    Originator - Transmit Timestamp: +2477272477.170440225
+	(28 more bytes after the header)
+23:40:01.279332 IP (tos 0xb8, ttl 64, id 42496, offset 0, flags [DF], proto UDP (17), length 104)
+    192.168.0.57.60506 > 192.168.0.55.123: [bad udp cksum 0x8226 -> 0x1259!] NTPv4, Client, length 76
+	Leap indicator:  (0), Stratum 0 (unspecified), poll -1 (1/2s), precision 32
+	Root Delay: 0.000000, Root dispersion: 0.000000, Reference-ID: (unspec)
+	  Reference Timestamp:  0.000000000
+	  Originator Timestamp: 4002273600.773513752 (2026-10-29T14:40:00Z)
+	  Receive Timestamp:    394133848.201856690 (1912-06-28T17:37:28Z)
+	  Transmit Timestamp:   402493863.133835718 (1912-10-03T11:51:03Z)
+	    Originator - Receive Timestamp:  -3608139752.571657062
+	    Originator - Transmit Timestamp: -3599779737.639678034
+	(28 more bytes after the header)
+23:40:01.312390 IP (tos 0xb8, ttl 64, id 3390, offset 0, flags [DF], proto UDP (17), length 104)
+    192.168.0.55.123 > 192.168.0.57.60506: [udp sum ok] NTPv4, Server, length 76
+	Leap indicator:  (0), Stratum 8 (secondary reference), poll -1 (1/2s), precision -25
+	Root Delay: 0.000000, Root dispersion: 0.000000, Reference-ID: 0x7f7f0101
+	  Reference Timestamp:  4002273543.395452569 (2026-10-29T14:39:03Z)
+	  Originator Timestamp: 394133848.201856690 (1912-06-28T17:37:28Z)
+	  Receive Timestamp:    4002273601.310443813 (2026-10-29T14:40:01Z)
+	  Transmit Timestamp:   4002273600.773609522 (2026-10-29T14:40:00Z)
+	    Originator - Receive Timestamp:  +3608139753.108587122
+	    Originator - Transmit Timestamp: +3608139752.571752831
+	(28 more bytes after the header)
+23:40:01.814793 IP (tos 0xb8, ttl 64, id 41768, offset 0, flags [DF], proto UDP (17), length 104)
+    192.168.0.57.47380 > 192.168.0.55.123: [bad udp cksum 0x8226 -> 0x89f0!] NTPv4, Client, length 76
+	Leap indicator:  (0), Stratum 0 (unspecified), poll -1 (1/2s), precision 32
+	Root Delay: 0.000000, Root dispersion: 0.000000, Reference-ID: (unspec)
+	  Reference Timestamp:  0.000000000
+	  Originator Timestamp: 4002273601.310443813 (2026-10-29T14:40:01Z)
+	  Receive Timestamp:    2122363668.844547198 (1967-04-04T09:27:48Z)
+	  Transmit Timestamp:   1628819260.130590485 (1951-08-14T01:47:40Z)
+	    Originator - Receive Timestamp:  -1879909932.465896615
+	    Originator - Transmit Timestamp: -2373454341.179853327
+	(28 more bytes after the header)
+23:40:01.822458 IP (tos 0xb8, ttl 64, id 3464, offset 0, flags [DF], proto UDP (17), length 104)
+    192.168.0.55.123 > 192.168.0.57.47380: [udp sum ok] NTPv4, Server, length 76
+	Leap indicator:  (0), Stratum 8 (secondary reference), poll -1 (1/2s), precision -25
+	Root Delay: 0.000000, Root dispersion: 0.000000, Reference-ID: 0x7f7f0101
+	  Reference Timestamp:  4002273543.395452569 (2026-10-29T14:39:03Z)
+	  Originator Timestamp: 2122363668.844547198 (1967-04-04T09:27:48Z)
+	  Receive Timestamp:    4002273601.817004478 (2026-10-29T14:40:01Z)
+	  Transmit Timestamp:   4002273601.310642187 (2026-10-29T14:40:01Z)
+	    Originator - Receive Timestamp:  +1879909932.972457280
+	    Originator - Transmit Timestamp: +1879909932.466094989
+	(28 more bytes after the header)
+23:40:02.330933 IP (tos 0xb8, ttl 64, id 6787, offset 0, flags [DF], proto UDP (17), length 104)
+    192.168.0.57.33236 > 192.168.0.55.123: [bad udp cksum 0x8226 -> 0x5b4d!] NTPv4, Client, length 76
+	Leap indicator:  (0), Stratum 0 (unspecified), poll -1 (1/2s), precision 32
+	Root Delay: 0.000000, Root dispersion: 0.000000, Reference-ID: (unspec)
+	  Reference Timestamp:  0.000000000
+	  Originator Timestamp: 4002273601.817004478 (2026-10-29T14:40:01Z)
+	  Receive Timestamp:    3264660755.791561561 (2003-06-15T10:12:35Z)
+	  Transmit Timestamp:   1237439659.152260457 (1939-03-20T05:14:19Z)
+	    Originator - Receive Timestamp:  -737612846.025442916
+	    Originator - Transmit Timestamp: -2764833942.664744020
+	(28 more bytes after the header)
+23:40:02.333533 IP (tos 0xb8, ttl 64, id 3586, offset 0, flags [DF], proto UDP (17), length 104)
+    192.168.0.55.123 > 192.168.0.57.33236: [udp sum ok] NTPv4, Server, length 76
+	Leap indicator:  (0), Stratum 8 (secondary reference), poll -1 (1/2s), precision -25
+	Root Delay: 0.000000, Root dispersion: 0.000000, Reference-ID: 0x7f7f0101
+	  Reference Timestamp:  4002273543.395452569 (2026-10-29T14:39:03Z)
+	  Originator Timestamp: 3264660755.791561561 (2003-06-15T10:12:35Z)
+	  Receive Timestamp:    4002273602.331776755 (2026-10-29T14:40:02Z)
+	  Transmit Timestamp:   4002273601.817166231 (2026-10-29T14:40:01Z)
+	    Originator - Receive Timestamp:  +737612846.540215193
+	    Originator - Transmit Timestamp: +737612846.025604669
+	(28 more bytes after the header)
+23:40:02.842799 IP (tos 0xb8, ttl 64, id 25418, offset 0, flags [DF], proto UDP (17), length 104)
+    192.168.0.57.48409 > 192.168.0.55.123: [bad udp cksum 0x8226 -> 0x86c4!] NTPv4, Client, length 76
+	Leap indicator:  (0), Stratum 0 (unspecified), poll -1 (1/2s), precision 32
+	Root Delay: 0.000000, Root dispersion: 0.000000, Reference-ID: (unspec)
+	  Reference Timestamp:  0.000000000
+	  Originator Timestamp: 4002273602.331776755 (2026-10-29T14:40:02Z)
+	  Receive Timestamp:    2420066199.057975729 (1976-09-09T00:36:39Z)
+	  Transmit Timestamp:   3974166904.396563500 (2025-12-08T07:15:04Z)
+	    Originator - Receive Timestamp:  -1582207403.273801025
+	    Originator - Transmit Timestamp: -28106697.935213254
+	(28 more bytes after the header)
+23:40:02.848526 IP (tos 0xb8, ttl 64, id 3616, offset 0, flags [DF], proto UDP (17), length 104)
+    192.168.0.55.123 > 192.168.0.57.48409: [udp sum ok] NTPv4, Server, length 76
+	Leap indicator:  (0), Stratum 8 (secondary reference), poll -1 (1/2s), precision -25
+	Root Delay: 0.000000, Root dispersion: 0.000000, Reference-ID: 0x7f7f0101
+	  Reference Timestamp:  4002273543.395452569 (2026-10-29T14:39:03Z)
+	  Originator Timestamp: 2420066199.057975729 (1976-09-09T00:36:39Z)
+	  Receive Timestamp:    4002273602.847631746 (2026-10-29T14:40:02Z)
+	  Transmit Timestamp:   4002273602.331845128 (2026-10-29T14:40:02Z)
+	    Originator - Receive Timestamp:  +1582207403.789656016
+	    Originator - Transmit Timestamp: +1582207403.273869398
+	(28 more bytes after the header)
+12 packets captured
+12 packets received by filter
+0 packets dropped by kernel

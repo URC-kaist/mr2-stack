@@ -1,0 +1,190 @@
+{
+  "cases": [
+    {
+      "font": 16,
+      "width": 1100,
+      "tileWidth": 408,
+      "parts": [
+        {
+          "right": 0,
+          "bottom": 0,
+          "overflow": 0
+        },
+        {
+          "right": -10,
+          "bottom": -86.796875,
+          "overflow": 0
+        },
+        {
+          "right": -10,
+          "bottom": -9,
+          "overflow": 0
+        }
+      ],
+      "overlap": false
+    },
+    {
+      "font": 16,
+      "width": 1280,
+      "tileWidth": 480,
+      "parts": [
+        {
+          "right": 0,
+          "bottom": 0,
+          "overflow": 0
+        },
+        {
+          "right": -10,
+          "bottom": -86.796875,
+          "overflow": 0
+        },
+        {
+          "right": -10,
+          "bottom": -9,
+          "overflow": 0
+        }
+      ],
+      "overlap": false
+    },
+    {
+      "font": 16,
+      "width": 1440,
+      "tileWidth": 544,
+      "parts": [
+        {
+          "right": 0,
+          "bottom": 0,
+          "overflow": 0
+        },
+        {
+          "right": -10,
+          "bottom": -86.796875,
+          "overflow": 0
+        },
+        {
+          "right": -10,
+          "bottom": -9,
+          "overflow": 0
+        }
+      ],
+      "overlap": false
+    },
+    {
+      "font": 16,
+      "width": 1920,
+      "tileWidth": 736,
+      "parts": [
+        {
+          "right": 0,
+          "bottom": 0,
+          "overflow": 0
+        },
+        {
+          "right": -10,
+          "bottom": -86.796875,
+          "overflow": 0
+        },
+        {
+          "right": -10,
+          "bottom": -9,
+          "overflow": 0
+        }
+      ],
+      "overlap": false
+    },
+    {
+      "font": 20,
+      "width": 1100,
+      "tileWidth": 408,
+      "parts": [
+        {
+          "right": 0,
+          "bottom": 0,
+          "overflow": 0
+        },
+        {
+          "right": -10,
+          "bottom": -99.828125,
+          "overflow": 0
+        },
+        {
+          "right": -10,
+          "bottom": -9,
+          "overflow": 0
+        }
+      ],
+      "overlap": false
+    },
+    {
+      "font": 20,
+      "width": 1280,
+      "tileWidth": 480,
+      "parts": [
+        {
+          "right": 0,
+          "bottom": 0,
+          "overflow": 0
+        },
+        {
+          "right": -10,
+          "bottom": -99.828125,
+          "overflow": 0
+        },
+        {
+          "right": -10,
+          "bottom": -9,
+          "overflow": 0
+        }
+      ],
+      "overlap": false
+    },
+    {
+      "font": 20,
+      "width": 1440,
+      "tileWidth": 544,
+      "parts": [
+        {
+          "right": 0,
+          "bottom": 0,
+          "overflow": 0
+        },
+        {
+          "right": -10,
+          "bottom": -99.828125,
+          "overflow": 0
+        },
+        {
+          "right": -10,
+          "bottom": -9,
+          "overflow": 0
+        }
+      ],
+      "overlap": false
+    },
+    {
+      "font": 20,
+      "width": 1920,
+      "tileWidth": 736,
+      "parts": [
+        {
+          "right": 0,
+          "bottom": 0,
+          "overflow": 0
+        },
+        {
+          "right": -10,
+          "bottom": -99.828125,
+          "overflow": 0
+        },
+        {
+          "right": -10,
+          "bottom": -9,
+          "overflow": 0
+        }
+      ],
+      "overlap": false
+    }
+  ],
+  "passed": true,
+  "errors": []
+}

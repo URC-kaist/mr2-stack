@@ -1,0 +1,187 @@
+{
+  "localResponses": [
+    {
+      "url": "https://127.0.0.1/",
+      "status": 200,
+      "type": "Document"
+    },
+    {
+      "url": "https://127.0.0.1/vendor/uplot/uPlot.min.css",
+      "status": 200,
+      "type": "Stylesheet"
+    },
+    {
+      "url": "https://127.0.0.1/assets/index-DctmVRft.css",
+      "status": 200,
+      "type": "Stylesheet"
+    },
+    {
+      "url": "https://127.0.0.1/vendor/uplot/uPlot.iife.min.js",
+      "status": 200,
+      "type": "Script"
+    },
+    {
+      "url": "https://127.0.0.1/roslib.min.js",
+      "status": 200,
+      "type": "Script"
+    },
+    {
+      "url": "https://127.0.0.1/assets/index-Do6KH2-H.js",
+      "status": 200,
+      "type": "Script"
+    },
+    {
+      "url": "data:image/webp;base64,UklGRh4AAABXRUJQVlA4TBEAAAAvAQAAAAfQ//73v/+BiOh/AAA=",
+      "status": 200,
+      "type": "Image"
+    },
+    {
+      "url": "https://127.0.0.1/assets/space-grotesk-latin-400-normal-CJ-V5oYT.woff2",
+      "status": 200,
+      "type": "Font"
+    },
+    {
+      "url": "https://127.0.0.1/assets/space-grotesk-latin-700-normal-RjhwGPKo.woff2",
+      "status": 200,
+      "type": "Font"
+    },
+    {
+      "url": "https://127.0.0.1/assets/space-grotesk-latin-600-normal-DjKNqYRj.woff2",
+      "status": 200,
+      "type": "Font"
+    },
+    {
+      "url": "https://127.0.0.1/latency/clock-status",
+      "status": 502,
+      "type": "Fetch"
+    },
+    {
+      "url": "https://127.0.0.1/video/streams",
+      "status": 502,
+      "type": "Fetch"
+    },
+    {
+      "url": "https://127.0.0.1/favicon.svg?v=mr2-2",
+      "status": 200,
+      "type": "Other"
+    },
+    {
+      "url": "https://127.0.0.1/latency/clock-status",
+      "status": 502,
+      "type": "Fetch"
+    },
+    {
+      "url": "https://127.0.0.1/video/streams",
+      "status": 502,
+      "type": "Fetch"
+    },
+    {
+      "url": "https://127.0.0.1/video/streams",
+      "status": 502,
+      "type": "Fetch"
+    },
+    {
+      "url": "https://127.0.0.1/latency/clock-status",
+      "status": 502,
+      "type": "Fetch"
+    },
+    {
+      "url": "https://127.0.0.1/video/streams",
+      "status": 502,
+      "type": "Fetch"
+    },
+    {
+      "url": "https://127.0.0.1/tiles/kaist/19/447623/205209.png",
+      "status": 200,
+      "type": "Fetch"
+    },
+    {
+      "url": "https://127.0.0.1/tiles/pump_track/19/447623/205349.png",
+      "status": 200,
+      "type": "Fetch"
+    },
+    {
+      "url": "https://127.0.0.1/tiles/naip/19/100822/201527.png",
+      "status": 200,
+      "type": "Fetch"
+    }
+  ],
+  "blocked": [
+    "https://example.com/__mr2_offline_probe__"
+  ],
+  "exceptions": [],
+  "ui": {
+    "title": "dashboard",
+    "buttons": [
+      "",
+      "Manual",
+      "Orbit",
+      "E-Stop",
+      "Status",
+      "Live Feed",
+      "Latency",
+      "Science",
+      "Delivery / Servicing",
+      "Autonomous",
+      "Downlink",
+      "Uplink",
+      "Chrony sync",
+      "",
+      "",
+      "Run pump",
+      "Apply LED",
+      "Startup",
+      "Move",
+      "Home",
+      "FOC calibrate",
+      "Send",
+      "Stop",
+      "Set velocity",
+      "Set position",
+      "Pump 1",
+      "Pump 2",
+      "Pump 3",
+      "Pump 4",
+      "Set",
+      "Off",
+      "Position",
+      "Ramp",
+      "Send",
+      "Send",
+      "Velocity",
+      "Stop",
+      "Position",
+      "Velocity",
+      "Stop",
+      "Position",
+      "Start capture",
+      "Cancel",
+      "Download JPEG",
+      "Capture spectrum",
+      "Export CSV"
+    ],
+    "secure": true,
+    "webcodecs": true
+  },
+  "liveFeed": true,
+  "tiles": [
+    {
+      "name": "kaist",
+      "status": 200,
+      "type": "image/png"
+    },
+    {
+      "name": "pump_track",
+      "status": 200,
+      "type": "image/png"
+    },
+    {
+      "name": "naip",
+      "status": 200,
+      "type": "image/png"
+    }
+  ],
+  "externalBlocked": true,
+  "notes": "Only this browser page external requests were blocked. Gateway/ROS were stopped; live camera playback was not exercised by this UI check.",
+  "passed": true
+}

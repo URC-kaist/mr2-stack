@@ -1,0 +1,103 @@
+[
+  {
+    "bitrate_updates": 19,
+    "deltas_blocked_recovering": 36,
+    "encoder_kbps": 42,
+    "failed": false,
+    "fps": 10,
+    "frames_admitted": 0,
+    "frames_encoded": 40,
+    "height": 90,
+    "key_sizes_bytes": [
+      10133,
+      2120,
+      2453,
+      2127
+    ],
+    "keys_admitted": 0,
+    "keys_encoded": 4,
+    "pacer_frame_window_us": 200000,
+    "pattern": "snow",
+    "rtp_packets": 0,
+    "sent_kbps": 0.0,
+    "update_interval_ms": 200,
+    "vbv_bits": 180000,
+    "width": 160,
+    "wire_kbps": 50
+  },
+  {
+    "bitrate_updates": 19,
+    "deltas_blocked_recovering": 32,
+    "encoder_kbps": 63,
+    "failed": false,
+    "fps": 10,
+    "frames_admitted": 4,
+    "frames_encoded": 40,
+    "height": 90,
+    "key_sizes_bytes": [
+      10078,
+      1344,
+      1321,
+      1698
+    ],
+    "keys_admitted": 2,
+    "keys_encoded": 4,
+    "pacer_frame_window_us": 200000,
+    "pattern": "snow",
+    "rtp_packets": 14,
+    "sent_kbps": 10.966,
+    "update_interval_ms": 200,
+    "vbv_bits": 180000,
+    "width": 160,
+    "wire_kbps": 75
+  },
+  {
+    "bitrate_updates": 19,
+    "deltas_blocked_recovering": 9,
+    "encoder_kbps": 85,
+    "failed": false,
+    "fps": 10,
+    "frames_admitted": 30,
+    "frames_encoded": 40,
+    "height": 90,
+    "key_sizes_bytes": [
+      11282,
+      1451
+    ],
+    "keys_admitted": 1,
+    "keys_encoded": 2,
+    "pacer_frame_window_us": 200000,
+    "pattern": "snow",
+    "rtp_packets": 37,
+    "sent_kbps": 70.196,
+    "update_interval_ms": 200,
+    "vbv_bits": 180000,
+    "width": 160,
+    "wire_kbps": 100
+  },
+  {
+    "bitrate_updates": 19,
+    "deltas_blocked_recovering": 18,
+    "encoder_kbps": 127,
+    "failed": false,
+    "fps": 10,
+    "frames_admitted": 20,
+    "frames_encoded": 40,
+    "height": 90,
+    "key_sizes_bytes": [
+      14356,
+      2845,
+      2112
+    ],
+    "keys_admitted": 2,
+    "keys_encoded": 3,
+    "pacer_frame_window_us": 200000,
+    "pattern": "snow",
+    "rtp_packets": 49,
+    "sent_kbps": 77.354,
+    "update_interval_ms": 200,
+    "vbv_bits": 180000,
+    "width": 160,
+    "wire_kbps": 150
+  }
+]

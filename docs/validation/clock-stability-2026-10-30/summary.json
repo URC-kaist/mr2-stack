@@ -1,0 +1,97 @@
+{
+  "started_at_utc": "2026-10-29T15:14:11.433Z",
+  "ended_at_utc": "2026-10-29T15:19:12.111Z",
+  "started_at_kst": "2026-10-30T00:14:11.433000+09:00",
+  "duration_observed_s": 300.677352059,
+  "samples": 300,
+  "numeric": 300,
+  "clock_sync": 0,
+  "clock_sync_intervals_s": [],
+  "ui_clock_ready_at_start": true,
+  "browser_clock_warmup_s": 5.037006327,
+  "displayed_one_second_median_ms": {
+    "min": 3.0,
+    "median": 5.5,
+    "max": 13.4
+  },
+  "displayed_one_second_p95_ms": {
+    "min": 10.0,
+    "median": 19.3,
+    "max": 79.8
+  },
+  "running_minimum_last": "0.4 ms",
+  "clock_messages_during_observation": 150,
+  "clock_states": {
+    "holdover": 44,
+    "fresh": 106
+  },
+  "estimated_abs_system_offset_ms": {
+    "min": 0.0,
+    "median": 0.021099,
+    "max": 0.10581199999999999
+  },
+  "clock_error_bound_ms": {
+    "min": 1.3612215752000008,
+    "median": 1.6132761168999976,
+    "max": 1.8961731130800001
+  },
+  "root_delay_ms": {
+    "min": 1.529643,
+    "median": 1.529643,
+    "max": 1.84594
+  },
+  "root_dispersion_ms": {
+    "min": 0.46458099999999997,
+    "median": 0.7653380000000001,
+    "max": 1.078641
+  },
+  "rover_clock_epochs": [
+    "6879d021c2a0405a88ea7f8abb0b2376"
+  ],
+  "base_clock_epochs": [
+    "89d18be9b800472ab176247e6a6ada63"
+  ],
+  "frames": {
+    "Front Left": {
+      "frames_during_observation": 8971,
+      "average_decoded_fps": 30.004346399083236,
+      "longest_no_progress_samples": 0
+    },
+    "Left": {
+      "frames_during_observation": 8889,
+      "average_decoded_fps": 29.73008974935357,
+      "longest_no_progress_samples": 0
+    },
+    "Front Right": {
+      "frames_during_observation": 8970,
+      "average_decoded_fps": 30.001001805793848,
+      "longest_no_progress_samples": 0
+    },
+    "RGB-D Cam": {
+      "frames_during_observation": 8855,
+      "average_decoded_fps": 29.61637357751444,
+      "longest_no_progress_samples": 0
+    },
+    "Right": {
+      "frames_during_observation": 8907,
+      "average_decoded_fps": 29.79029242856252,
+      "longest_no_progress_samples": 0
+    }
+  },
+  "layout": [
+    {
+      "width": 1100,
+      "visible": true,
+      "contained": true,
+      "overflow": 0
+    },
+    {
+      "width": 1440,
+      "visible": true,
+      "contained": true,
+      "overflow": 0
+    }
+  ],
+  "browser_errors": [],
+  "run_error": null
+}

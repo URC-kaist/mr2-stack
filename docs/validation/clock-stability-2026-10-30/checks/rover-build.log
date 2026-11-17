@@ -1,0 +1,56 @@
+Starting >>> mr2_system_status
+running develop
+running egg_info
+writing mr2_system_status.egg-info/PKG-INFO
+writing dependency_links to mr2_system_status.egg-info/dependency_links.txt
+writing entry points to mr2_system_status.egg-info/entry_points.txt
+writing requirements to mr2_system_status.egg-info/requires.txt
+writing top-level names to mr2_system_status.egg-info/top_level.txt
+reading manifest file 'mr2_system_status.egg-info/SOURCES.txt'
+writing manifest file 'mr2_system_status.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/mr2/mr2-stack/rover/ros2_ws/install/mr2_system_status/lib/python3.10/site-packages/mr2-system-status.egg-link (link to .)
+Installing system_status script to /home/mr2/mr2-stack/rover/ros2_ws/install/mr2_system_status/lib/mr2_system_status
+
+Installed /home/mr2/mr2-stack/rover/ros2_ws/build/mr2_system_status
+running symlink_data
+Finished <<< mr2_system_status [2.68s]
+Starting >>> mr2_launch
+running develop
+running egg_info
+writing mr2_launch.egg-info/PKG-INFO
+writing dependency_links to mr2_launch.egg-info/dependency_links.txt
+writing entry points to mr2_launch.egg-info/entry_points.txt
+writing requirements to mr2_launch.egg-info/requires.txt
+writing top-level names to mr2_launch.egg-info/top_level.txt
+reading manifest file 'mr2_launch.egg-info/SOURCES.txt'
+writing manifest file 'mr2_launch.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/mr2/mr2-stack/rover/ros2_ws/install/mr2_launch/lib/python3.10/site-packages/mr2-launch.egg-link (link to .)
+
+Installed /home/mr2/mr2-stack/rover/ros2_ws/build/mr2_launch
+running symlink_data
+symbolically linking /home/mr2/mr2-stack/rover/ros2_ws/build/mr2_launch/resource/mr2_launch -> /home/mr2/mr2-stack/rover/ros2_ws/install/mr2_launch/share/ament_index/resource_index/packages
+symbolically linking /home/mr2/mr2-stack/rover/ros2_ws/build/mr2_launch/package.xml -> /home/mr2/mr2-stack/rover/ros2_ws/install/mr2_launch/share/mr2_launch
+symbolically linking /home/mr2/mr2-stack/rover/ros2_ws/build/mr2_launch/config/video_streams_flat.json -> /home/mr2/mr2-stack/rover/ros2_ws/install/mr2_launch/share/mr2_launch/config
+symbolically linking /home/mr2/mr2-stack/rover/ros2_ws/build/mr2_launch/config/profile_flat.json -> /home/mr2/mr2-stack/rover/ros2_ws/install/mr2_launch/share/mr2_launch/config
+symbolically linking /home/mr2/mr2-stack/rover/ros2_ws/build/mr2_launch/config/profile_original.json -> /home/mr2/mr2-stack/rover/ros2_ws/install/mr2_launch/share/mr2_launch/config
+symbolically linking /home/mr2/mr2-stack/rover/ros2_ws/build/mr2_launch/config/video_streams.json -> /home/mr2/mr2-stack/rover/ros2_ws/install/mr2_launch/share/mr2_launch/config
+symbolically linking /home/mr2/mr2-stack/rover/ros2_ws/build/mr2_launch/config/realsense_rgbd.yaml -> /home/mr2/mr2-stack/rover/ros2_ws/install/mr2_launch/share/mr2_launch/config
+symbolically linking /home/mr2/mr2-stack/rover/ros2_ws/build/mr2_launch/config/ost.yaml -> /home/mr2/mr2-stack/rover/ros2_ws/install/mr2_launch/share/mr2_launch/config
+symbolically linking /home/mr2/mr2-stack/rover/ros2_ws/build/mr2_launch/launch/realsense_rgbd.launch.py -> /home/mr2/mr2-stack/rover/ros2_ws/install/mr2_launch/share/mr2_launch/launch
+symbolically linking /home/mr2/mr2-stack/rover/ros2_ws/build/mr2_launch/launch/rover_real.launch.py -> /home/mr2/mr2-stack/rover/ros2_ws/install/mr2_launch/share/mr2_launch/launch
+symbolically linking /home/mr2/mr2-stack/rover/ros2_ws/build/mr2_launch/launch/front_uvc_camera.launch.py -> /home/mr2/mr2-stack/rover/ros2_ws/install/mr2_launch/share/mr2_launch/launch
+symbolically linking /home/mr2/mr2-stack/rover/ros2_ws/build/mr2_launch/launch/ublox_base_custom.launch.py -> /home/mr2/mr2-stack/rover/ros2_ws/install/mr2_launch/share/mr2_launch/launch
+symbolically linking /home/mr2/mr2-stack/rover/ros2_ws/build/mr2_launch/launch/local_test.launch.py -> /home/mr2/mr2-stack/rover/ros2_ws/install/mr2_launch/share/mr2_launch/launch
+symbolically linking /home/mr2/mr2-stack/rover/ros2_ws/build/mr2_launch/launch/rover.launch.py -> /home/mr2/mr2-stack/rover/ros2_ws/install/mr2_launch/share/mr2_launch/launch
+symbolically linking /home/mr2/mr2-stack/rover/ros2_ws/build/mr2_launch/launch/manipulator_moveit.launch.py -> /home/mr2/mr2-stack/rover/ros2_ws/install/mr2_launch/share/mr2_launch/launch
+symbolically linking /home/mr2/mr2-stack/rover/ros2_ws/build/mr2_launch/launch/xbee_sim.launch.py -> /home/mr2/mr2-stack/rover/ros2_ws/install/mr2_launch/share/mr2_launch/launch
+symbolically linking /home/mr2/mr2-stack/rover/ros2_ws/build/mr2_launch/launch/video_streaming.launch.py -> /home/mr2/mr2-stack/rover/ros2_ws/install/mr2_launch/share/mr2_launch/launch
+symbolically linking /home/mr2/mr2-stack/rover/ros2_ws/build/mr2_launch/launch/rover_sim.launch.py -> /home/mr2/mr2-stack/rover/ros2_ws/install/mr2_launch/share/mr2_launch/launch
+symbolically linking /home/mr2/mr2-stack/rover/ros2_ws/build/mr2_launch/launch/ublox_fb_r_rover_named.launch.py -> /home/mr2/mr2-stack/rover/ros2_ws/install/mr2_launch/share/mr2_launch/launch
+symbolically linking /home/mr2/mr2-stack/rover/ros2_ws/build/mr2_launch/launch/rover_direct.launch.py -> /home/mr2/mr2-stack/rover/ros2_ws/install/mr2_launch/share/mr2_launch/launch
+symbolically linking /home/mr2/mr2-stack/rover/ros2_ws/build/mr2_launch/rviz/sim.rviz -> /home/mr2/mr2-stack/rover/ros2_ws/install/mr2_launch/share/mr2_launch/rviz
+Finished <<< mr2_launch [3.34s]
+
+Summary: 2 packages finished [6.94s]

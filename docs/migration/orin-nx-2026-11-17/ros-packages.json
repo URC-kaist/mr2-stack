@@ -1,0 +1,5523 @@
+{
+  "ament_prefix_path": [
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_launch",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/ublox_dgnss",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/ublox_nav_sat_fix_hp_node",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/ublox_dgnss_node",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_xbee_bridge",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_rover_auto",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/ublox_ubx_msgs",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/ublox_ubx_interfaces",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/ntrip_client_node",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/rtcm_msgs",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_yolo_perception",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_video_streaming",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_latency_diagnostics",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_system_status",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_spectrophotometer",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_spectrophotometer_msgs",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_science_module",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_moveit",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_rover_description",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_rover_control",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_panorama",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_nav2_plugins",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_led",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_latency_msgs",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_flat_motor",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_control",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_devices_robstride",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_devices_output_actuator",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_devices_ak_servo",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_can_hardware_interface",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_camera_turret",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_battery_monitor",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_can_bus_core",
+    "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_action_interface",
+    "/home/mr2/ros2_ws/install/realsense2_description",
+    "/home/mr2/ros2_ws/install/realsense2_camera",
+    "/home/mr2/ros2_ws/install/realsense2_camera_msgs",
+    "/opt/ros/humble"
+  ],
+  "installed": {
+    "mr2_launch": {
+      "version": "0.0.0",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_launch",
+      "description": "TODO: Package description"
+    },
+    "ublox_dgnss": {
+      "version": "0.7.4",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/ublox_dgnss",
+      "description": "Provides a ublox_dgnss node for a u-blox GPS DGNSS receiver using Gen 9 UBX Protocol"
+    },
+    "ublox_nav_sat_fix_hp_node": {
+      "version": "0.7.4",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/ublox_nav_sat_fix_hp_node",
+      "description": "Provides a NavSatFix node for a u-blox GPS GNSS receiver using Gen 9 UBX Protocol"
+    },
+    "ublox_dgnss_node": {
+      "version": "0.7.4",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/ublox_dgnss_node",
+      "description": "Provides a ublox_gnss node for a u-blox GPS GNSS receiver using Gen 9 and Gen 20 UBX Protocol"
+    },
+    "mr2_xbee_bridge": {
+      "version": "0.1.0",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_xbee_bridge",
+      "description": "ROS 2 bridge node for MR2 XBEE serial protocol."
+    },
+    "mr2_rover_auto": {
+      "version": "0.0.0",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_rover_auto",
+      "description": "Autonomy components for MR2 Rover (launch and config)"
+    },
+    "ublox_ubx_msgs": {
+      "version": "0.7.4",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/ublox_ubx_msgs",
+      "description": "UBLOX UBX ROS2 Msgs"
+    },
+    "ublox_ubx_interfaces": {
+      "version": "0.7.4",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/ublox_ubx_interfaces",
+      "description": "UBLOX UBX Interfaces"
+    },
+    "ntrip_client_node": {
+      "version": "0.7.4",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/ntrip_client_node",
+      "description": "Publishes RTCM ntrip messages from an external mountpoint"
+    },
+    "rtcm_msgs": {
+      "version": "1.1.6",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/rtcm_msgs",
+      "description": "The rtcm_msgs package contains messages related to data in the RTCM format."
+    },
+    "mr2_yolo_perception": {
+      "version": "0.0.0",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_yolo_perception",
+      "description": "YOLO detection on RGB images with depth-based 3D localization."
+    },
+    "mr2_video_streaming": {
+      "version": "0.1.0",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_video_streaming",
+      "description": "ROS 2 rover video streaming node that bridges image topics into GStreamer RTP/H.264 pipelines."
+    },
+    "mr2_latency_diagnostics": {
+      "version": "0.1.0",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_latency_diagnostics",
+      "description": "Rover agent for automated RTP latency capture and artifact upload."
+    },
+    "mr2_system_status": {
+      "version": "0.0.1",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_system_status",
+      "description": "System and chrony clock status publisher."
+    },
+    "mr2_spectrophotometer": {
+      "version": "0.1.0",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_spectrophotometer",
+      "description": "ROS2 wrapper for the MR2 spectrophotometer toolkit."
+    },
+    "mr2_spectrophotometer_msgs": {
+      "version": "0.1.0",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_spectrophotometer_msgs",
+      "description": "Custom messages and services for MR2 spectrophotometer."
+    },
+    "mr2_science_module": {
+      "version": "0.1.0",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_science_module",
+      "description": "Classic CAN command node for the MR2 science module."
+    },
+    "mr2_moveit": {
+      "version": "0.3.0",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_moveit",
+      "description": "An automatically generated package with all the configuration and launch files for using the rover with the MoveIt Motion Planning Framework"
+    },
+    "mr2_rover_description": {
+      "version": "0.0.0",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_rover_description",
+      "description": "Robot description, launch files, and ros2_control configuration for the MR2 rover platform."
+    },
+    "mr2_rover_control": {
+      "version": "0.0.0",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_rover_control",
+      "description": "Controller that converts cmd_vel to wheel and steering commands."
+    },
+    "mr2_panorama": {
+      "version": "0.0.0",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_panorama",
+      "description": "Direct V4L2 panorama capture action server for MR2 Rover."
+    },
+    "mr2_nav2_plugins": {
+      "version": "0.0.0",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_nav2_plugins",
+      "description": "TODO: Package description"
+    },
+    "mr2_led": {
+      "version": "0.1.0",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_led",
+      "description": "CAN-controlled LED driver for MR2 (SocketCAN + NeoPixel firmware)."
+    },
+    "mr2_latency_msgs": {
+      "version": "0.1.0",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_latency_msgs",
+      "description": "ROS interfaces for automated MR2 latency measurements."
+    },
+    "mr2_flat_motor": {
+      "version": "0.1.0",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_flat_motor",
+      "description": "Single AK motor control, independent of original rover controllers."
+    },
+    "mr2_control": {
+      "version": "0.1.0",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_control",
+      "description": "Explicit MR2 control runtime with existing CAN drivers and transmissions."
+    },
+    "mr2_devices_robstride": {
+      "version": "0.1.0",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_devices_robstride",
+      "description": "RobStride RS-06 private CAN velocity device plugin."
+    },
+    "mr2_devices_output_actuator": {
+      "version": "0.0.0",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_devices_output_actuator",
+      "description": "CAN output actuator device plugin for the unified MR2 motor firmware."
+    },
+    "mr2_devices_ak_servo": {
+      "version": "0.0.0",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_devices_ak_servo",
+      "description": "TODO: Package description"
+    },
+    "mr2_can_hardware_interface": {
+      "version": "0.1.0",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_can_hardware_interface",
+      "description": "ros2_control SystemInterface that wires multiple CanDevice plugins into a single robot arm."
+    },
+    "mr2_camera_turret": {
+      "version": "0.1.0",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_camera_turret",
+      "description": "Classic CAN camera turret command driver for MR2."
+    },
+    "mr2_battery_monitor": {
+      "version": "0.1.0",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_battery_monitor",
+      "description": "Battery monitoring node for Makita XGT packs via MR2 misc firmware CAN frames."
+    },
+    "mr2_can_bus_core": {
+      "version": "0.0.0",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_can_bus_core",
+      "description": "TODO: Package description"
+    },
+    "mr2_action_interface": {
+      "version": "0.0.0",
+      "prefix": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_action_interface",
+      "description": "Package of action interface for mr2_rover_auto"
+    },
+    "realsense2_description": {
+      "version": "4.57.7",
+      "prefix": "/home/mr2/ros2_ws/install/realsense2_description",
+      "description": "RealSense description package for RealSense 3D D400 cameras"
+    },
+    "realsense2_camera": {
+      "version": "4.57.7",
+      "prefix": "/home/mr2/ros2_ws/install/realsense2_camera",
+      "description": "RealSense camera package allowing access to RealSense D400 3D cameras"
+    },
+    "realsense2_camera_msgs": {
+      "version": "4.57.7",
+      "prefix": "/home/mr2/ros2_ws/install/realsense2_camera_msgs",
+      "description": "RealSense camera_msgs package containing realsense camera messages definitions"
+    },
+    "moveit_ros_planning": {
+      "version": "2.5.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Planning components of MoveIt that use ROS"
+    },
+    "launch_testing": {
+      "version": "1.0.14",
+      "prefix": "/opt/ros/humble",
+      "description": "A package to create tests which involve launch files and multiple processes."
+    },
+    "rcl_yaml_param_parser": {
+      "version": "5.3.12",
+      "prefix": "/opt/ros/humble",
+      "description": "Parse a YAML parameter file and populate the C data structure."
+    },
+    "smclib": {
+      "version": "4.1.4",
+      "prefix": "/opt/ros/humble",
+      "description": "The State Machine Compiler (SMC) from http://smc.sourceforge.net/ converts a language-independent description of a state machine into the source code to support that state machine. This package contains the libraries that a compiled state machine depends on, but it does not contain the compiler itself."
+    },
+    "v4l2_camera": {
+      "version": "0.6.2",
+      "prefix": "/opt/ros/humble",
+      "description": "A ROS 2 camera driver using Video4Linux2"
+    },
+    "desktop": {
+      "version": "0.10.0",
+      "prefix": "/opt/ros/humble",
+      "description": "A package which extends 'ros_base' and includes high level packages like vizualization tools and demos."
+    },
+    "ament_cmake_python": {
+      "version": "1.3.14",
+      "prefix": "/opt/ros/humble",
+      "description": "The ability to use Python in the ament buildsystem in CMake."
+    },
+    "examples_rclpy_minimal_action_server": {
+      "version": "0.15.5",
+      "prefix": "/opt/ros/humble",
+      "description": "Examples of minimal action servers using rclpy."
+    },
+    "behaviortree_cpp_v3": {
+      "version": "3.8.7",
+      "prefix": "/opt/ros/humble",
+      "description": "This package provides the Behavior Trees core library."
+    },
+    "shape_msgs": {
+      "version": "4.9.1",
+      "prefix": "/opt/ros/humble",
+      "description": "A package containing some message definitions which describe geometric shapes."
+    },
+    "examples_rclcpp_minimal_service": {
+      "version": "0.15.5",
+      "prefix": "/opt/ros/humble",
+      "description": "A minimal service server which adds two numbers"
+    },
+    "moveit_planners": {
+      "version": "2.5.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Meta package that installs all available planners for MoveIt"
+    },
+    "nav2_collision_monitor": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "Collision Monitor"
+    },
+    "nav2_smoother": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "Smoother action interface"
+    },
+    "grid_map_rviz_plugin": {
+      "version": "2.0.1",
+      "prefix": "/opt/ros/humble",
+      "description": "RViz plugin for displaying grid map messages."
+    },
+    "ament_lint": {
+      "version": "0.12.15",
+      "prefix": "/opt/ros/humble",
+      "description": "Providing common API for ament linter packages."
+    },
+    "lifecycle": {
+      "version": "0.20.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Package containing demos for lifecycle implementation"
+    },
+    "tf2_ros": {
+      "version": "0.25.20",
+      "prefix": "/opt/ros/humble",
+      "description": "This package contains the C++ ROS bindings for the tf2 library"
+    },
+    "rmw_fastrtps_cpp": {
+      "version": "6.2.10",
+      "prefix": "/opt/ros/humble",
+      "description": "Implement the ROS middleware interface using eProsima FastRTPS static code generation in C++."
+    },
+    "rosidl_default_runtime": {
+      "version": "1.2.1",
+      "prefix": "/opt/ros/humble",
+      "description": "A configuration package defining the runtime for the ROS interfaces."
+    },
+    "nav2_controller": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "Controller action interface"
+    },
+    "rosbag2_transport": {
+      "version": "0.15.16",
+      "prefix": "/opt/ros/humble",
+      "description": "Layer encapsulating ROS middleware to allow rosbag2 to be used with or without middleware"
+    },
+    "ament_cmake_export_interfaces": {
+      "version": "1.3.14",
+      "prefix": "/opt/ros/humble",
+      "description": "The ability to export interfaces to downstream packages in the ament buildsystem in CMake."
+    },
+    "aruco_opencv": {
+      "version": "2.4.1",
+      "prefix": "/opt/ros/humble",
+      "description": "ArUco marker detection using aruco module from OpenCV libraries."
+    },
+    "ros2node": {
+      "version": "0.18.18",
+      "prefix": "/opt/ros/humble",
+      "description": "The node command for ROS 2 command line tools."
+    },
+    "nav2_rotation_shim_controller": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "Rotation Shim Controller"
+    },
+    "moveit_ros_warehouse": {
+      "version": "2.5.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Components of MoveIt connecting to MongoDB"
+    },
+    "nav2_voxel_grid": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "voxel_grid provides an implementation of an efficient 3D voxel grid. The occupancy grid can support 3 different representations for the state of a cell: marked, free, or unknown. Due to the underlying implementation relying on bitwise and and or integer operations, the voxel grid only supports 16 different levels per voxel column. However, this limitation yields raytracing and cell marking performance in the grid comparable to standard 2D structures making it quite fast compared to most 3D structures."
+    },
+    "pcl_conversions": {
+      "version": "2.4.5",
+      "prefix": "/opt/ros/humble",
+      "description": "Provides conversions from PCL data types and ROS message types"
+    },
+    "action_msgs": {
+      "version": "1.2.2",
+      "prefix": "/opt/ros/humble",
+      "description": "Messages and service definitions common among all ROS actions."
+    },
+    "stereo_msgs": {
+      "version": "4.9.1",
+      "prefix": "/opt/ros/humble",
+      "description": "A package containing some stereo camera related message definitions."
+    },
+    "geometry_msgs": {
+      "version": "4.9.1",
+      "prefix": "/opt/ros/humble",
+      "description": "A package containing some geometry related message definitions."
+    },
+    "nav_2d_msgs": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "Basic message types for two dimensional navigation, extending from geometry_msgs::Pose2D."
+    },
+    "rcpputils": {
+      "version": "2.4.6",
+      "prefix": "/opt/ros/humble",
+      "description": "Package containing utility code for C++."
+    },
+    "moveit_simple_controller_manager": {
+      "version": "2.5.9",
+      "prefix": "/opt/ros/humble",
+      "description": "A generic, simple controller manager plugin for MoveIt."
+    },
+    "parameter_traits": {
+      "version": "0.7.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Functions and types for rclcpp::Parameter"
+    },
+    "pluginlib": {
+      "version": "5.1.3",
+      "prefix": "/opt/ros/humble",
+      "description": "The pluginlib package provides tools for writing and dynamically loading plugins using the ROS build infrastructure. To work, these tools require plugin providers to register their plugins in the package.xml of their package."
+    },
+    "ament_index_cpp": {
+      "version": "1.4.1",
+      "prefix": "/opt/ros/humble",
+      "description": "C++ API to access the ament resource index."
+    },
+    "console_bridge_vendor": {
+      "version": "1.4.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Wrapper around console_bridge, providing nothing but a dependency on console_bridge, on some systems. On others, it provides an ExternalProject build of console_bridge."
+    },
+    "rosidl_runtime_c": {
+      "version": "3.1.8",
+      "prefix": "/opt/ros/humble",
+      "description": "Provides definitions, initialization and finalization functions, and macros for getting and working with rosidl typesupport types in C."
+    },
+    "moveit_planners_ompl": {
+      "version": "2.5.9",
+      "prefix": "/opt/ros/humble",
+      "description": "MoveIt interface to OMPL"
+    },
+    "nav_2d_utils": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "A handful of useful utility functions for nav_2d packages."
+    },
+    "ament_xmllint": {
+      "version": "0.12.15",
+      "prefix": "/opt/ros/humble",
+      "description": "The ability to check XML files like the package manifest using xmllint and generate xUnit test result files."
+    },
+    "action_tutorials_py": {
+      "version": "0.20.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Python action tutorial code"
+    },
+    "dummy_robot_bringup": {
+      "version": "0.20.9",
+      "prefix": "/opt/ros/humble",
+      "description": "dummy robot bringup"
+    },
+    "joy": {
+      "version": "3.3.0",
+      "prefix": "/opt/ros/humble",
+      "description": "The joy package contains joy_node, a node that interfaces a generic joystick to ROS 2. This node publishes a \"Joy\" message, which contains the current state of each one of the joystick's buttons and axes."
+    },
+    "orocos_kdl_vendor": {
+      "version": "0.2.5",
+      "prefix": "/opt/ros/humble",
+      "description": "Wrapper around orocos_kdl, providing nothing but a dependency on orocos_kdl on some systems. On others, it fetches and builds orocos_kdl locally."
+    },
+    "examples_rclpy_minimal_action_client": {
+      "version": "0.15.5",
+      "prefix": "/opt/ros/humble",
+      "description": "Examples of minimal action clients using rclpy."
+    },
+    "ament_cmake_version": {
+      "version": "1.3.14",
+      "prefix": "/opt/ros/humble",
+      "description": "The ability to override the exported package version in the ament buildsystem."
+    },
+    "ament_cmake_export_targets": {
+      "version": "1.3.14",
+      "prefix": "/opt/ros/humble",
+      "description": "The ability to export targets to downstream packages in the ament buildsystem in CMake."
+    },
+    "rmw_dds_common": {
+      "version": "1.6.0",
+      "prefix": "/opt/ros/humble",
+      "description": "Define a common interface between DDS implementations of ROS middleware."
+    },
+    "rclcpp_lifecycle": {
+      "version": "16.0.19",
+      "prefix": "/opt/ros/humble",
+      "description": "Package containing a prototype for lifecycle implementation"
+    },
+    "rclcpp_components": {
+      "version": "16.0.19",
+      "prefix": "/opt/ros/humble",
+      "description": "Package containing tools for dynamically loadable components"
+    },
+    "dummy_map_server": {
+      "version": "0.20.9",
+      "prefix": "/opt/ros/humble",
+      "description": "dummy map server node"
+    },
+    "octomap_msgs": {
+      "version": "2.0.1",
+      "prefix": "/opt/ros/humble",
+      "description": "This package provides messages and serializations / conversion for the"
+    },
+    "nav2_navfn_planner": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "TODO"
+    },
+    "rosbag2_py": {
+      "version": "0.15.16",
+      "prefix": "/opt/ros/humble",
+      "description": "Python API for rosbag2"
+    },
+    "slam_toolbox": {
+      "version": "2.6.10",
+      "prefix": "/opt/ros/humble",
+      "description": "This package provides a sped up improved slam karto with updated SDK and visualization and modification toolsets"
+    },
+    "std_srvs": {
+      "version": "4.9.1",
+      "prefix": "/opt/ros/humble",
+      "description": "A package containing some standard service definitions."
+    },
+    "rosidl_typesupport_c": {
+      "version": "2.0.2",
+      "prefix": "/opt/ros/humble",
+      "description": "Generate the type support for C messages."
+    },
+    "realtime_tools": {
+      "version": "2.15.0",
+      "prefix": "/opt/ros/humble",
+      "description": "Contains a set of tools that can be used from a hard realtime thread, without breaking the realtime behavior."
+    },
+    "example_interfaces": {
+      "version": "0.9.3",
+      "prefix": "/opt/ros/humble",
+      "description": "Contains message and service definitions used by the examples."
+    },
+    "admittance_controller": {
+      "version": "2.52.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Implementation of admittance controllers for different input and output interface."
+    },
+    "moveit_core": {
+      "version": "2.5.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Core libraries used by MoveIt"
+    },
+    "nav2_mppi_controller": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "nav2_mppi_controller"
+    },
+    "pilz_industrial_motion_planner": {
+      "version": "2.5.9",
+      "prefix": "/opt/ros/humble",
+      "description": "MoveIt plugin to generate industrial trajectories PTP, LIN, CIRC and sequences thereof."
+    },
+    "python_orocos_kdl_vendor": {
+      "version": "0.2.5",
+      "prefix": "/opt/ros/humble",
+      "description": "Wrapper around PyKDL, providing nothing but a dependency on PyKDL on some systems. On others, it fetches and builds python_orocos_kdl locally."
+    },
+    "rqt_graph": {
+      "version": "1.3.2",
+      "prefix": "/opt/ros/humble",
+      "description": "rqt_graph provides a GUI plugin for visualizing the ROS computation graph."
+    },
+    "rqt_py_console": {
+      "version": "1.0.2",
+      "prefix": "/opt/ros/humble",
+      "description": "rqt_py_console is a Python GUI plugin providing an interactive Python console."
+    },
+    "nav2_msgs": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "Messages and service files for the Nav2 stack"
+    },
+    "grid_map_demos": {
+      "version": "2.0.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Demo nodes to demonstrate the usage of the grid map library."
+    },
+    "bond": {
+      "version": "4.1.4",
+      "prefix": "/opt/ros/humble",
+      "description": "A bond allows two processes, A and B, to know when the other has terminated, either cleanly or by crashing. The bond remains connected until it is either broken explicitly or until a heartbeat times out."
+    },
+    "std_msgs": {
+      "version": "4.9.1",
+      "prefix": "/opt/ros/humble",
+      "description": "A package containing some standard message definitions."
+    },
+    "angles": {
+      "version": "1.15.0",
+      "prefix": "/opt/ros/humble",
+      "description": "This package provides a set of simple math utilities to work with angles. The utilities cover simple things like normalizing an angle and conversion between degrees and radians. But even if you're trying to calculate things like the shortest angular distance between two joint space positions of your robot, but the joint motion is constrained by joint limits, this package is what you need. The code in this package is stable and well tested. There are no plans for major changes in the near future."
+    },
+    "rviz_ogre_vendor": {
+      "version": "11.2.26",
+      "prefix": "/opt/ros/humble",
+      "description": "Wrapper around ogre3d, it provides a fixed CMake module and an ExternalProject build of ogre."
+    },
+    "osrf_pycommon": {
+      "version": "2.1.6",
+      "prefix": "/opt/ros/humble",
+      "description": "Commonly needed Python modules, used by Python software developed at OSRF."
+    },
+    "launch_pytest": {
+      "version": "1.0.14",
+      "prefix": "/opt/ros/humble",
+      "description": "A package to create tests which involve launch files and multiple processes."
+    },
+    "ros2pkg": {
+      "version": "0.18.18",
+      "prefix": "/opt/ros/humble",
+      "description": "The pkg command for ROS 2 command line tools."
+    },
+    "diagnostic_updater": {
+      "version": "4.0.6",
+      "prefix": "/opt/ros/humble",
+      "description": "diagnostic_updater contains tools for easily updating diagnostics. it is commonly used in device drivers to keep track of the status of output topics, device status, etc."
+    },
+    "hardware_interface": {
+      "version": "2.53.1",
+      "prefix": "/opt/ros/humble",
+      "description": "ros2_control hardware interface"
+    },
+    "rqt_reconfigure": {
+      "version": "1.1.4",
+      "prefix": "/opt/ros/humble",
+      "description": "This rqt plugin provides a way to view and edit parameters on nodes."
+    },
+    "ament_cmake": {
+      "version": "1.3.14",
+      "prefix": "/opt/ros/humble",
+      "description": "The entry point package for the ament buildsystem in CMake."
+    },
+    "rmw_implementation_cmake": {
+      "version": "6.1.2",
+      "prefix": "/opt/ros/humble",
+      "description": "CMake functions which can discover and enumerate available implementations."
+    },
+    "camera_info_manager": {
+      "version": "3.1.12",
+      "prefix": "/opt/ros/humble",
+      "description": "This package provides a C++ interface for camera calibration information. It provides CameraInfo, and handles SetCameraInfo service requests, saving and restoring the camera calibration data."
+    },
+    "tracetools": {
+      "version": "4.1.2",
+      "prefix": "/opt/ros/humble",
+      "description": "Tracing wrapper for ROS 2."
+    },
+    "rqt_publisher": {
+      "version": "1.5.0",
+      "prefix": "/opt/ros/humble",
+      "description": "rqt_publisher provides a GUI plugin for publishing arbitrary messages with fixed or computed field values."
+    },
+    "rqt_common_plugins": {
+      "version": "1.2.0",
+      "prefix": "/opt/ros/humble",
+      "description": "rqt_common_plugins metapackage provides ROS backend graphical tools suite that can be used on/off of robot runtime."
+    },
+    "launch_testing_ros": {
+      "version": "0.19.13",
+      "prefix": "/opt/ros/humble",
+      "description": "A package providing utilities for writing ROS2 enabled launch tests."
+    },
+    "yaml_cpp_vendor": {
+      "version": "8.0.2",
+      "prefix": "/opt/ros/humble",
+      "description": "Wrapper around yaml-cpp, it provides a fixed CMake module and an ExternalProject build of it."
+    },
+    "ament_cmake_target_dependencies": {
+      "version": "1.3.14",
+      "prefix": "/opt/ros/humble",
+      "description": "The ability to add definitions, include directories and libraries of a package to a target in the ament buildsystem in CMake."
+    },
+    "octomap_server": {
+      "version": "2.3.1",
+      "prefix": "/opt/ros/humble",
+      "description": "octomap_server loads a 3D map (as Octree-based OctoMap) and distributes it to other nodes in a compact binary format. It also allows to incrementally build 3D OctoMaps, and provides map saving in the node octomap_saver."
+    },
+    "class_loader": {
+      "version": "2.2.0",
+      "prefix": "/opt/ros/humble",
+      "description": "The class_loader package is a ROS-independent package for loading plugins during runtime and the foundation of the higher level ROS \"pluginlib\" library. class_loader utilizes the host operating system's runtime loader to open runtime libraries (e.g. .so/.dll files), introspect the library for exported plugin classes, and allows users to instantiate objects of these exported classes without the explicit declaration (i.e. header file) for those classes."
+    },
+    "nav2_behaviors": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "TODO"
+    },
+    "moveit_setup_framework": {
+      "version": "2.5.9",
+      "prefix": "/opt/ros/humble",
+      "description": "C++ Interface for defining setup steps for MoveIt Setup Assistant"
+    },
+    "moveit_common": {
+      "version": "2.5.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Common support functionality used throughout MoveIt"
+    },
+    "controller_manager": {
+      "version": "2.53.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Description of controller_manager"
+    },
+    "pcl_ros": {
+      "version": "2.4.5",
+      "prefix": "/opt/ros/humble",
+      "description": "PCL (Point Cloud Library) ROS interface stack. PCL-ROS is the preferred bridge for 3D applications involving n-D Point Clouds and 3D geometry processing in ROS."
+    },
+    "teleop_twist_joy": {
+      "version": "2.4.8",
+      "prefix": "/opt/ros/humble",
+      "description": "Generic joystick teleop for twist robots."
+    },
+    "demo_nodes_cpp": {
+      "version": "0.20.9",
+      "prefix": "/opt/ros/humble",
+      "description": "C++ nodes which were previously in the ros2/examples repository but are now just used for demo purposes."
+    },
+    "visualization_msgs": {
+      "version": "4.9.1",
+      "prefix": "/opt/ros/humble",
+      "description": "A package containing some visualization and interaction related message definitions."
+    },
+    "diff_drive_controller": {
+      "version": "2.52.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Controller for a differential-drive mobile base."
+    },
+    "navigation2": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "ROS2 Navigation Stack"
+    },
+    "rcl_lifecycle": {
+      "version": "5.3.12",
+      "prefix": "/opt/ros/humble",
+      "description": "Package containing a C-based lifecycle implementation"
+    },
+    "ros2run": {
+      "version": "0.18.18",
+      "prefix": "/opt/ros/humble",
+      "description": "The run command for ROS 2 command line tools."
+    },
+    "ament_cmake_xmllint": {
+      "version": "0.12.15",
+      "prefix": "/opt/ros/humble",
+      "description": "The CMake API for ament_xmllint to check XML file using xmmlint."
+    },
+    "launch_xml": {
+      "version": "1.0.14",
+      "prefix": "/opt/ros/humble",
+      "description": "XML frontend for the launch package."
+    },
+    "ament_cmake_copyright": {
+      "version": "0.12.15",
+      "prefix": "/opt/ros/humble",
+      "description": "The CMake API for ament_copyright to check every source file contains copyright reference."
+    },
+    "rviz_default_plugins": {
+      "version": "11.2.26",
+      "prefix": "/opt/ros/humble",
+      "description": "Several default plugins for rviz to cover the basic functionality."
+    },
+    "rosbag2_storage": {
+      "version": "0.15.16",
+      "prefix": "/opt/ros/humble",
+      "description": "ROS2 independent storage format to store serialized ROS2 messages"
+    },
+    "examples_rclcpp_minimal_publisher": {
+      "version": "0.15.5",
+      "prefix": "/opt/ros/humble",
+      "description": "Examples of minimal publisher nodes"
+    },
+    "lifecycle_msgs": {
+      "version": "1.2.2",
+      "prefix": "/opt/ros/humble",
+      "description": "A package containing some lifecycle related message and service definitions."
+    },
+    "nav2_costmap_2d": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "This package provides an implementation of a 2D costmap that takes in sensor data from the world, builds a 2D or 3D occupancy grid of the data (depending on whether a voxel based implementation is used), and inflates costs in a 2D costmap based on the occupancy grid and a user specified inflation radius. This package also provides support for map_server based initialization of a costmap, rolling window based costmaps, and parameter based subscription to and configuration of sensor topics."
+    },
+    "rpyutils": {
+      "version": "0.2.2",
+      "prefix": "/opt/ros/humble",
+      "description": "Package containing various utility types and functions for Python"
+    },
+    "rviz_assimp_vendor": {
+      "version": "11.2.26",
+      "prefix": "/opt/ros/humble",
+      "description": "Wrapper around assimp, providing nothing but a dependency on assimp, on some systems. On others, it provides a fixed CMake module or even an ExternalProject build of assimp."
+    },
+    "tlsf": {
+      "version": "0.7.0",
+      "prefix": "/opt/ros/humble",
+      "description": "TLSF allocator version 2.4.6"
+    },
+    "grid_map_filters": {
+      "version": "2.0.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Processing grid maps as a sequence of ROS filters."
+    },
+    "rqt_action": {
+      "version": "2.0.1",
+      "prefix": "/opt/ros/humble",
+      "description": "rqt_action provides a feature to introspect all available ROS action types. By utilizing rqt_msg, the output format is unified with it and rqt_srv. Note that the actions shown on this plugin is the ones that are stored on your machine, not on the ROS core your rqt instance connects to."
+    },
+    "rosidl_runtime_cpp": {
+      "version": "3.1.8",
+      "prefix": "/opt/ros/humble",
+      "description": "Provides definitions and templated functions for getting and working with rosidl typesupport types in C++."
+    },
+    "moveit_plugins": {
+      "version": "2.5.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Metapackage for MoveIt plugins."
+    },
+    "ros2_control": {
+      "version": "2.53.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Metapackage for ROS2 control related packages"
+    },
+    "rqt_topic": {
+      "version": "1.5.1",
+      "prefix": "/opt/ros/humble",
+      "description": "rqt_topic provides a GUI plugin for displaying debug information about ROS topics including publishers, subscribers, publishing rate, and ROS Messages."
+    },
+    "eigen_stl_containers": {
+      "version": "1.1.0",
+      "prefix": "/opt/ros/humble",
+      "description": "This package provides a set of typedef's that allow using Eigen datatypes in STL containers"
+    },
+    "ament_lint_cmake": {
+      "version": "0.12.15",
+      "prefix": "/opt/ros/humble",
+      "description": "The ability to lint CMake code using cmakelint and generate xUnit test result files."
+    },
+    "diagnostic_msgs": {
+      "version": "4.9.1",
+      "prefix": "/opt/ros/humble",
+      "description": "A package containing some diagnostics related message and service definitions."
+    },
+    "rttest": {
+      "version": "0.13.0",
+      "prefix": "/opt/ros/humble",
+      "description": "Instrumentation library for real-time performance testing"
+    },
+    "unique_identifier_msgs": {
+      "version": "2.2.1",
+      "prefix": "/opt/ros/humble",
+      "description": "ROS messages for universally unique identifiers."
+    },
+    "ament_pep257": {
+      "version": "0.12.15",
+      "prefix": "/opt/ros/humble",
+      "description": "The ability to check code against the docstring style conventions in PEP 257 and generate xUnit test result files."
+    },
+    "ament_cmake_flake8": {
+      "version": "0.12.15",
+      "prefix": "/opt/ros/humble",
+      "description": "The CMake API for ament_flake8 to check code syntax and style conventions with flake8."
+    },
+    "rosidl_typesupport_introspection_c": {
+      "version": "3.1.8",
+      "prefix": "/opt/ros/humble",
+      "description": "Generate the message type support for dynamic message construction in C."
+    },
+    "rcl": {
+      "version": "5.3.12",
+      "prefix": "/opt/ros/humble",
+      "description": "The ROS client library common implementation. This package contains an API which builds on the ROS middleware API and is optionally built upon by the other ROS client libraries."
+    },
+    "rcl_logging_spdlog": {
+      "version": "2.3.2",
+      "prefix": "/opt/ros/humble",
+      "description": "Implementation of rcl_logging API for an spdlog backend."
+    },
+    "ompl": {
+      "version": "1.7.0",
+      "prefix": "/opt/ros/humble",
+      "description": "OMPL is a free sampling-based motion planning library."
+    },
+    "object_recognition_msgs": {
+      "version": "2.0.0",
+      "prefix": "/opt/ros/humble",
+      "description": "Object_recognition_msgs contains the ROS message and the actionlib definition used in object_recognition_core"
+    },
+    "rosidl_adapter": {
+      "version": "3.1.8",
+      "prefix": "/opt/ros/humble",
+      "description": "API and scripts to parse .msg/.srv/.action files and convert them to .idl."
+    },
+    "nav2_theta_star_planner": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "Theta* Global Planning Plugin"
+    },
+    "map_msgs": {
+      "version": "2.1.0",
+      "prefix": "/opt/ros/humble",
+      "description": "This package defines messages commonly used in mapping packages."
+    },
+    "ros2param": {
+      "version": "0.18.18",
+      "prefix": "/opt/ros/humble",
+      "description": "The param command for ROS 2 command line tools."
+    },
+    "ament_cmake_uncrustify": {
+      "version": "0.12.15",
+      "prefix": "/opt/ros/humble",
+      "description": "The CMake API for ament_uncrustify to check code against styleconventions using uncrustify."
+    },
+    "image_geometry": {
+      "version": "3.2.1",
+      "prefix": "/opt/ros/humble",
+      "description": "`image_geometry` contains C++ and Python libraries for interpreting images geometrically. It interfaces the calibration parameters in sensor_msgs/CameraInfo messages with OpenCV functions such as image rectification, much as cv_bridge interfaces ROS sensor_msgs/Image with OpenCV data types."
+    },
+    "gpio_controllers": {
+      "version": "2.52.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Controllers to interact with gpios."
+    },
+    "costmap_queue": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "The costmap_queue package"
+    },
+    "rosidl_typesupport_cpp": {
+      "version": "2.0.2",
+      "prefix": "/opt/ros/humble",
+      "description": "Generate the type support for C++ messages."
+    },
+    "camera_calibration_parsers": {
+      "version": "3.1.12",
+      "prefix": "/opt/ros/humble",
+      "description": "camera_calibration_parsers contains routines for reading and writing camera calibration parameters."
+    },
+    "rviz2": {
+      "version": "11.2.26",
+      "prefix": "/opt/ros/humble",
+      "description": "3D visualization tool for ROS."
+    },
+    "grid_map_sdf": {
+      "version": "2.0.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Generates signed distance fields from grid maps."
+    },
+    "moveit_setup_controllers": {
+      "version": "2.5.9",
+      "prefix": "/opt/ros/humble",
+      "description": "MoveIt Setup Steps for ROS 2 Control"
+    },
+    "ament_cmake_export_definitions": {
+      "version": "1.3.14",
+      "prefix": "/opt/ros/humble",
+      "description": "The ability to export definitions to downstream packages in the ament buildsystem."
+    },
+    "rosidl_runtime_py": {
+      "version": "0.9.3",
+      "prefix": "/opt/ros/humble",
+      "description": "Runtime utilities for working with generated ROS interfaces in Python."
+    },
+    "ament_cmake_export_dependencies": {
+      "version": "1.3.14",
+      "prefix": "/opt/ros/humble",
+      "description": "The ability to export dependencies to downstream packages in the ament buildsystem in CMake."
+    },
+    "ros_environment": {
+      "version": "3.2.2",
+      "prefix": "/opt/ros/humble",
+      "description": "The package provides the environment variables `ROS_VERSION` and `ROS_DISTRO`."
+    },
+    "ament_cmake_lint_cmake": {
+      "version": "0.12.15",
+      "prefix": "/opt/ros/humble",
+      "description": "The CMake API for ament_lint_cmake to lint CMake code using cmakelint."
+    },
+    "rqt_py_common": {
+      "version": "1.1.9",
+      "prefix": "/opt/ros/humble",
+      "description": "rqt_py_common provides common functionality for rqt plugins written in Python. Despite no plugin is provided, this package is part of the rqt_common_plugins repository to keep refactoring generic functionality from these common plugins into this package as easy as possible. Functionality included in this package should cover generic ROS concepts and should not introduce any special dependencies beside \"ros_base\"."
+    },
+    "octomap": {
+      "version": "1.9.8",
+      "prefix": "/opt/ros/humble",
+      "description": "The OctoMap library implements a 3D occupancy grid mapping approach, providing data structures and mapping algorithms in C++. The map implementation is based on an octree. See http://octomap.github.io for details."
+    },
+    "ros2action": {
+      "version": "0.18.18",
+      "prefix": "/opt/ros/humble",
+      "description": "The action command for ROS 2 command line tools."
+    },
+    "examples_rclcpp_minimal_subscriber": {
+      "version": "0.15.5",
+      "prefix": "/opt/ros/humble",
+      "description": "Examples of minimal subscribers"
+    },
+    "ros_base": {
+      "version": "0.10.0",
+      "prefix": "/opt/ros/humble",
+      "description": "A package which extends 'ros_core' and includes other basic functionalities like tf2 and urdf."
+    },
+    "effort_controllers": {
+      "version": "2.52.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Generic controller for forwarding commands."
+    },
+    "ros2topic": {
+      "version": "0.18.18",
+      "prefix": "/opt/ros/humble",
+      "description": "The topic command for ROS 2 command line tools."
+    },
+    "zstd_vendor": {
+      "version": "0.15.16",
+      "prefix": "/opt/ros/humble",
+      "description": "Zstd compression vendor package, providing a dependency for Zstd."
+    },
+    "examples_rclpy_executors": {
+      "version": "0.15.5",
+      "prefix": "/opt/ros/humble",
+      "description": "Examples of creating and using exectors to run multiple nodes in the same process"
+    },
+    "velocity_controllers": {
+      "version": "2.52.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Generic controller for forwarding commands."
+    },
+    "rosbridge_server": {
+      "version": "2.0.5",
+      "prefix": "/opt/ros/humble",
+      "description": "A WebSocket interface to rosbridge."
+    },
+    "moveit_ros_occupancy_map_monitor": {
+      "version": "2.5.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Components of MoveIt connecting to occupancy map"
+    },
+    "interactive_markers": {
+      "version": "2.3.2",
+      "prefix": "/opt/ros/humble",
+      "description": "3D interactive marker communication library for RViz and similar tools."
+    },
+    "ros2cli": {
+      "version": "0.18.18",
+      "prefix": "/opt/ros/humble",
+      "description": "Framework for ROS 2 command line tools."
+    },
+    "examples_rclpy_minimal_publisher": {
+      "version": "0.15.5",
+      "prefix": "/opt/ros/humble",
+      "description": "Examples of minimal publishers using rclpy."
+    },
+    "rosidl_cmake": {
+      "version": "3.1.8",
+      "prefix": "/opt/ros/humble",
+      "description": "The CMake functionality to invoke code generation for ROS interface files."
+    },
+    "rosbridge_library": {
+      "version": "2.0.5",
+      "prefix": "/opt/ros/humble",
+      "description": "The core rosbridge package, responsible for interpreting JSON and performing the appropriate ROS action, like subscribe, publish, call service, and interact with params."
+    },
+    "ament_lint_common": {
+      "version": "0.12.15",
+      "prefix": "/opt/ros/humble",
+      "description": "The list of commonly used linters in the ament build system in CMake."
+    },
+    "examples_rclpy_minimal_service": {
+      "version": "0.15.5",
+      "prefix": "/opt/ros/humble",
+      "description": "Examples of minimal service servers using rclpy."
+    },
+    "tf2_msgs": {
+      "version": "0.25.20",
+      "prefix": "/opt/ros/humble",
+      "description": "tf2_msgs"
+    },
+    "examples_rclcpp_minimal_client": {
+      "version": "0.15.5",
+      "prefix": "/opt/ros/humble",
+      "description": "Examples of minimal service clients"
+    },
+    "action_tutorials_cpp": {
+      "version": "0.20.9",
+      "prefix": "/opt/ros/humble",
+      "description": "C++ action tutorial cpp code"
+    },
+    "geographic_msgs": {
+      "version": "1.0.6",
+      "prefix": "/opt/ros/humble",
+      "description": "ROS messages for Geographic Information Systems."
+    },
+    "tf2_ros_py": {
+      "version": "0.25.20",
+      "prefix": "/opt/ros/humble",
+      "description": "This package contains the ROS Python bindings for the tf2 library"
+    },
+    "grid_map_loader": {
+      "version": "2.0.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Loading and publishing grid maps from bag files."
+    },
+    "rviz_common": {
+      "version": "11.2.26",
+      "prefix": "/opt/ros/humble",
+      "description": "Common rviz API, used by rviz plugins and applications."
+    },
+    "domain_coordinator": {
+      "version": "0.10.0",
+      "prefix": "/opt/ros/humble",
+      "description": "A tool to coordinate unique ROS_DOMAIN_IDs across multiple processes"
+    },
+    "moveit_ros_robot_interaction": {
+      "version": "2.5.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Components of MoveIt that offer interaction via interactive markers"
+    },
+    "pybind11_vendor": {
+      "version": "2.4.2",
+      "prefix": "/opt/ros/humble",
+      "description": "Wrapper around pybind11."
+    },
+    "rosidl_parser": {
+      "version": "3.1.8",
+      "prefix": "/opt/ros/humble",
+      "description": "The parser for `.idl` ROS interface files."
+    },
+    "libyaml_vendor": {
+      "version": "1.2.2",
+      "prefix": "/opt/ros/humble",
+      "description": "Vendored version of libyaml."
+    },
+    "tricycle_steering_controller": {
+      "version": "2.52.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Steering controller with tricycle kinematics. Rear fixed wheels are powering the vehicle and front wheel is steering."
+    },
+    "joint_trajectory_controller": {
+      "version": "2.52.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Controller for executing joint-space trajectories on a group of joints"
+    },
+    "quality_of_service_demo_py": {
+      "version": "0.20.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Python Demo applications for Quality of Service features"
+    },
+    "laser_geometry": {
+      "version": "2.4.1",
+      "prefix": "/opt/ros/humble",
+      "description": "This package contains a class for converting from a 2D laser scan as defined by sensor_msgs/LaserScan into a point cloud as defined by sensor_msgs/PointCloud or sensor_msgs/PointCloud2. In particular, it contains functionality to account for the skew resulting from moving robots or tilting laser scanners."
+    },
+    "rmw": {
+      "version": "6.1.2",
+      "prefix": "/opt/ros/humble",
+      "description": "Contains the ROS middleware API."
+    },
+    "rosidl_cli": {
+      "version": "3.1.8",
+      "prefix": "/opt/ros/humble",
+      "description": "Command line tools for ROS interface generation."
+    },
+    "launch_yaml": {
+      "version": "1.0.14",
+      "prefix": "/opt/ros/humble",
+      "description": "YAML frontend for the launch package."
+    },
+    "moveit_setup_app_plugins": {
+      "version": "2.5.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Various specialty plugins for MoveIt Setup Assistant"
+    },
+    "rqt_shell": {
+      "version": "1.0.2",
+      "prefix": "/opt/ros/humble",
+      "description": "rqt_shell is a Python GUI plugin providing an interactive shell."
+    },
+    "urdf_parser_plugin": {
+      "version": "2.6.1",
+      "prefix": "/opt/ros/humble",
+      "description": "This package contains a C++ base class for URDF parsers."
+    },
+    "rviz_rendering": {
+      "version": "11.2.26",
+      "prefix": "/opt/ros/humble",
+      "description": "Library which provides the 3D rendering functionality in rviz."
+    },
+    "nav2_behavior_tree": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "TODO"
+    },
+    "ament_cmake_gmock": {
+      "version": "1.3.14",
+      "prefix": "/opt/ros/humble",
+      "description": "The ability to add Google mock-based tests in the ament buildsystem in CMake."
+    },
+    "grid_map_pcl": {
+      "version": "2.0.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Conversions between grid maps and Point Cloud Library (PCL) types."
+    },
+    "ament_cmake_pytest": {
+      "version": "1.3.14",
+      "prefix": "/opt/ros/humble",
+      "description": "The ability to run Python tests using pytest in the ament buildsystem in CMake."
+    },
+    "generate_parameter_library_py": {
+      "version": "0.7.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Python to generate ROS parameter library."
+    },
+    "nav2_route": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "A Route Graph planner to compliment the Planner Server"
+    },
+    "spdlog_vendor": {
+      "version": "1.3.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Wrapper around spdlog, providing nothing but a dependency on spdlog, on some systems. On others, it provides an ExternalProject build of spdlog."
+    },
+    "ros_workspace": {
+      "version": "1.0.2",
+      "prefix": "/opt/ros/humble",
+      "description": "Provides the prefix level environment files for ROS 2 packages."
+    },
+    "eigen3_cmake_module": {
+      "version": "0.1.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Exports a custom CMake module to find Eigen3."
+    },
+    "rosbridge_msgs": {
+      "version": "2.0.5",
+      "prefix": "/opt/ros/humble",
+      "description": "Interface definitions for the rosbridge library."
+    },
+    "grid_map_octomap": {
+      "version": "2.0.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Conversions between grid maps and OctoMap types."
+    },
+    "ament_cmake_include_directories": {
+      "version": "1.3.14",
+      "prefix": "/opt/ros/humble",
+      "description": "The functionality to order include directories according to a chain of prefixes in the ament buildsystem in CMake."
+    },
+    "sros2_cmake": {
+      "version": "0.10.9",
+      "prefix": "/opt/ros/humble",
+      "description": "CMake macros to configure security"
+    },
+    "moveit_setup_assistant": {
+      "version": "2.5.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Generates a configuration package that makes it easy to use MoveIt"
+    },
+    "tricycle_controller": {
+      "version": "2.52.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Controller for a tricycle drive mobile base"
+    },
+    "grid_map_cv": {
+      "version": "2.0.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Conversions between grid maps and OpenCV images."
+    },
+    "actionlib_msgs": {
+      "version": "4.9.1",
+      "prefix": "/opt/ros/humble",
+      "description": "A package containing some message definitions used in the implementation of ROS 1 actions."
+    },
+    "filters": {
+      "version": "2.2.2",
+      "prefix": "/opt/ros/humble",
+      "description": "This library provides a standardized interface for processing data as a sequence of filters. This package contains a base class upon which to build specific implementations as well as an interface which dynamically loads filters based on runtime parameters."
+    },
+    "dwb_core": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "TODO"
+    },
+    "rosidl_default_generators": {
+      "version": "1.2.1",
+      "prefix": "/opt/ros/humble",
+      "description": "A configuration package defining the default ROS interface generators."
+    },
+    "ament_cmake_cppcheck": {
+      "version": "0.12.15",
+      "prefix": "/opt/ros/humble",
+      "description": "The CMake API for ament_cppcheck to perform static code analysis on C/C++ code using Cppcheck."
+    },
+    "mecanum_drive_controller": {
+      "version": "2.52.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Implementation of mecanum drive controller for 4 wheel drive."
+    },
+    "rcutils": {
+      "version": "5.1.8",
+      "prefix": "/opt/ros/humble",
+      "description": "Package containing various utility types and functions for C"
+    },
+    "aruco_opencv_msgs": {
+      "version": "2.4.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Message definitions for aruco_opencv package."
+    },
+    "tf2_eigen": {
+      "version": "0.25.20",
+      "prefix": "/opt/ros/humble",
+      "description": "tf2_eigen"
+    },
+    "control_msgs": {
+      "version": "4.8.0",
+      "prefix": "/opt/ros/humble",
+      "description": "control_msgs contains base messages and actions useful for controlling robots. It provides representations for controller setpoints and joint and cartesian trajectories."
+    },
+    "tango_icons_vendor": {
+      "version": "0.1.1",
+      "prefix": "/opt/ros/humble",
+      "description": "tango_icons_vendor provides the public domain Tango icons for non-linux systems ("
+    },
+    "python_cmake_module": {
+      "version": "0.10.0",
+      "prefix": "/opt/ros/humble",
+      "description": "Provide CMake module with extra functionality for Python."
+    },
+    "nav2_bt_navigator": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "TODO"
+    },
+    "ros2_controllers": {
+      "version": "2.52.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Metapackage for ros2_controllers related packages"
+    },
+    "rmw_fastrtps_shared_cpp": {
+      "version": "6.2.10",
+      "prefix": "/opt/ros/humble",
+      "description": "Code shared on static and dynamic type support of rmw_fastrtps_cpp."
+    },
+    "fastrtps_cmake_module": {
+      "version": "2.2.4",
+      "prefix": "/opt/ros/humble",
+      "description": "Provide CMake module to find eProsima FastRTPS."
+    },
+    "tlsf_cpp": {
+      "version": "0.13.0",
+      "prefix": "/opt/ros/humble",
+      "description": "C++ stdlib-compatible wrapper around tlsf allocator and ROS2 examples"
+    },
+    "teleop_twist_keyboard": {
+      "version": "2.4.1",
+      "prefix": "/opt/ros/humble",
+      "description": "A robot-agnostic teleoperation node to convert keyboard commands to Twist messages."
+    },
+    "ros2doctor": {
+      "version": "0.18.18",
+      "prefix": "/opt/ros/humble",
+      "description": "A command line tool to check potential issues in a ROS 2 system"
+    },
+    "composition_interfaces": {
+      "version": "1.2.2",
+      "prefix": "/opt/ros/humble",
+      "description": "A package containing message and service definitions for managing composable nodes in a container process."
+    },
+    "tf2_py": {
+      "version": "0.25.20",
+      "prefix": "/opt/ros/humble",
+      "description": "The tf2_py package"
+    },
+    "urdf": {
+      "version": "2.6.1",
+      "prefix": "/opt/ros/humble",
+      "description": "This package contains a C++ parser for the Unified Robot Description Format (URDF), which is an XML format for representing a robot model. The code API of the parser has been through our review process and will remain backwards compatible in future releases."
+    },
+    "libstatistics_collector": {
+      "version": "1.3.4",
+      "prefix": "/opt/ros/humble",
+      "description": "Lightweight aggregation utilities to collect statistics and measure message metrics."
+    },
+    "nav2_amcl": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": ""
+    },
+    "qt_gui": {
+      "version": "2.2.4",
+      "prefix": "/opt/ros/humble",
+      "description": "qt_gui provides the infrastructure for an integrated graphical user interface based on Qt. It is extensible with Python- and C++-based plugins (implemented in separate packages) which can contribute arbitrary widgets. It requires either PyQt or PySide bindings."
+    },
+    "moveit_ros_planning_interface": {
+      "version": "2.5.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Components of MoveIt that offer simpler interfaces to planning and execution"
+    },
+    "nav2_util": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "TODO"
+    },
+    "rosbag2_cpp": {
+      "version": "0.15.16",
+      "prefix": "/opt/ros/humble",
+      "description": "C++ ROSBag2 client library"
+    },
+    "rosapi": {
+      "version": "2.0.5",
+      "prefix": "/opt/ros/humble",
+      "description": "Provides services for getting various ROS meta-information, including ROS topic, services, interfaces or action servers and managing ROS parameters."
+    },
+    "geometry2": {
+      "version": "0.25.20",
+      "prefix": "/opt/ros/humble",
+      "description": "A metapackage to bring in the default packages second generation Transform Library in ros, tf2."
+    },
+    "controller_manager_msgs": {
+      "version": "2.53.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Messages and services for the controller manager."
+    },
+    "sdl2_vendor": {
+      "version": "3.3.0",
+      "prefix": "/opt/ros/humble",
+      "description": "Vendor library for SDL2."
+    },
+    "steering_controllers_library": {
+      "version": "2.52.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Package for steering robot configurations including odometry and interfaces."
+    },
+    "rclcpp": {
+      "version": "16.0.19",
+      "prefix": "/opt/ros/humble",
+      "description": "The ROS client library in C++."
+    },
+    "rosbag2_compression_zstd": {
+      "version": "0.15.16",
+      "prefix": "/opt/ros/humble",
+      "description": "Zstandard compression library implementation of rosbag2_compression"
+    },
+    "ros2service": {
+      "version": "0.18.18",
+      "prefix": "/opt/ros/humble",
+      "description": "The service command for ROS 2 command line tools."
+    },
+    "turtlesim": {
+      "version": "1.4.3",
+      "prefix": "/opt/ros/humble",
+      "description": "turtlesim is a tool made for teaching ROS and ROS packages."
+    },
+    "ros2controlcli": {
+      "version": "2.53.1",
+      "prefix": "/opt/ros/humble",
+      "description": "The ROS 2 command line tools for ROS2 Control."
+    },
+    "ament_cmake_core": {
+      "version": "1.3.14",
+      "prefix": "/opt/ros/humble",
+      "description": "The core of the ament buildsystem in CMake. Several subcomponents provide specific funtionalities: * environment: provide prefix-level setup files * environment_hooks: provide package-level setup files and environment hooks * index: store information in an index and retrieve them without crawling * package_templates: templates from the ament_package Python package * symlink_install: use symlinks for CMake install commands"
+    },
+    "intra_process_demo": {
+      "version": "0.20.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Demonstrations of intra process communication."
+    },
+    "grid_map_visualization": {
+      "version": "2.0.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Configurable tool to visualize grid maps in RViz."
+    },
+    "rqt_msg": {
+      "version": "1.2.0",
+      "prefix": "/opt/ros/humble",
+      "description": "A Python GUI plugin for introspecting available ROS message types. Note that the msgs available through this plugin is the ones that are stored on your machine, not on the ROS core your rqt instance connects to."
+    },
+    "rosbag2_compression": {
+      "version": "0.15.16",
+      "prefix": "/opt/ros/humble",
+      "description": "Compression implementations for rosbag2 bags and messages."
+    },
+    "python_qt_binding": {
+      "version": "1.1.3",
+      "prefix": "/opt/ros/humble",
+      "description": "This stack provides Python bindings for Qt. There are two providers: pyside and pyqt. PySide2 is available under the GPL, LGPL and a commercial license. PyQt is released under the GPL. Both the bindings and tools to build bindings are included from each available provider. For PySide, it is called \"Shiboken\". For PyQt, this is called \"SIP\". Also provided is adapter code to make the user's Python code independent of which binding provider was actually used which makes it very easy to switch between these."
+    },
+    "rosidl_generator_py": {
+      "version": "0.14.6",
+      "prefix": "/opt/ros/humble",
+      "description": "Generate the ROS interfaces in Python."
+    },
+    "libcurl_vendor": {
+      "version": "3.1.3",
+      "prefix": "/opt/ros/humble",
+      "description": "Wrapper around libcurl, it provides a fixed CMake module and an ExternalProject build of it."
+    },
+    "nav2_waypoint_follower": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "A waypoint follower navigation server"
+    },
+    "rqt_srv": {
+      "version": "1.0.3",
+      "prefix": "/opt/ros/humble",
+      "description": "A Python GUI plugin for introspecting available ROS message types. Note that the srvs available through this plugin is the ones that are stored on your machine, not on the ROS core your rqt instance connects to."
+    },
+    "position_controllers": {
+      "version": "2.52.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Generic position controller for forwarding position commands."
+    },
+    "examples_rclpy_minimal_subscriber": {
+      "version": "0.15.5",
+      "prefix": "/opt/ros/humble",
+      "description": "Examples of minimal subscribers using rclpy."
+    },
+    "grid_map_msgs": {
+      "version": "2.0.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Definition of the multi-layered grid map message type."
+    },
+    "message_filters": {
+      "version": "4.3.15",
+      "prefix": "/opt/ros/humble",
+      "description": "A set of ROS2 message filters which take in messages and may output those messages at a later time, based on the conditions that filter needs met."
+    },
+    "examples_rclcpp_minimal_action_server": {
+      "version": "0.15.5",
+      "prefix": "/opt/ros/humble",
+      "description": "Minimal action server examples"
+    },
+    "robot_state_publisher": {
+      "version": "3.0.3",
+      "prefix": "/opt/ros/humble",
+      "description": "This package take the joint angles of a robot as input, and publishes the 3D poses of the robot links to tf2, using a kinematic tree model of the robot."
+    },
+    "ament_cmake_export_include_directories": {
+      "version": "1.3.14",
+      "prefix": "/opt/ros/humble",
+      "description": "The ability to export include directories to downstream packages in the ament buildsystem in CMake."
+    },
+    "pendulum_msgs": {
+      "version": "0.20.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Custom messages for real-time pendulum control."
+    },
+    "rosbag2_interfaces": {
+      "version": "0.15.16",
+      "prefix": "/opt/ros/humble",
+      "description": "Interface definitions for controlling rosbag2"
+    },
+    "moveit_setup_core_plugins": {
+      "version": "2.5.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Core (meta) plugins for MoveIt Setup Assistant"
+    },
+    "rmw_implementation": {
+      "version": "2.8.5",
+      "prefix": "/opt/ros/humble",
+      "description": "Proxy implementation of the ROS 2 Middleware Interface."
+    },
+    "examples_rclcpp_minimal_composition": {
+      "version": "0.15.5",
+      "prefix": "/opt/ros/humble",
+      "description": "Minimalist examples of composing nodes in the same process"
+    },
+    "nav2_planner": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "TODO"
+    },
+    "topic_monitor": {
+      "version": "0.20.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Package containing tools for monitoring ROS 2 topics."
+    },
+    "demo_nodes_cpp_native": {
+      "version": "0.20.9",
+      "prefix": "/opt/ros/humble",
+      "description": "C++ nodes which access the native handles of the rmw implementation."
+    },
+    "ament_cmake_auto": {
+      "version": "1.3.14",
+      "prefix": "/opt/ros/humble",
+      "description": "The auto-magic functions for ease to use of the ament buildsystem in CMake."
+    },
+    "sensor_msgs": {
+      "version": "4.9.1",
+      "prefix": "/opt/ros/humble",
+      "description": "A package containing some sensor data related message and service definitions."
+    },
+    "ament_cmake_export_link_flags": {
+      "version": "1.3.14",
+      "prefix": "/opt/ros/humble",
+      "description": "The ability to export link flags to downstream packages in the ament buildsystem."
+    },
+    "transmission_interface": {
+      "version": "2.53.1",
+      "prefix": "/opt/ros/humble",
+      "description": "transmission_interface contains data structures for representing mechanical transmissions, methods for propagating values between actuator and joint spaces and tooling to support this."
+    },
+    "rosbag2_storage_default_plugins": {
+      "version": "0.15.16",
+      "prefix": "/opt/ros/humble",
+      "description": "ROSBag2 SQLite3 storage plugin"
+    },
+    "grid_map_ros": {
+      "version": "2.0.1",
+      "prefix": "/opt/ros/humble",
+      "description": "ROS interface for the grid map library to manage two-dimensional grid maps with multiple data layers."
+    },
+    "srdfdom": {
+      "version": "2.0.7",
+      "prefix": "/opt/ros/humble",
+      "description": "Parser for Semantic Robot Description Format (SRDF)."
+    },
+    "launch_ros": {
+      "version": "0.19.13",
+      "prefix": "/opt/ros/humble",
+      "description": "ROS specific extensions to the launch tool."
+    },
+    "rqt_bag": {
+      "version": "1.1.6",
+      "prefix": "/opt/ros/humble",
+      "description": "rqt_bag provides a GUI plugin for displaying and replaying ROS bag files."
+    },
+    "rosidl_typesupport_fastrtps_cpp": {
+      "version": "2.2.4",
+      "prefix": "/opt/ros/humble",
+      "description": "Generate the C++ interfaces for eProsima FastRTPS."
+    },
+    "rosgraph_msgs": {
+      "version": "1.2.2",
+      "prefix": "/opt/ros/humble",
+      "description": "Messages relating to the ROS Computation Graph. These are generally considered to be low-level messages that end users do not interact with."
+    },
+    "ros2bag": {
+      "version": "0.15.16",
+      "prefix": "/opt/ros/humble",
+      "description": "Entry point for rosbag in ROS 2"
+    },
+    "moveit_ros_move_group": {
+      "version": "2.5.9",
+      "prefix": "/opt/ros/humble",
+      "description": "The move_group node for MoveIt"
+    },
+    "rqt_gui_py": {
+      "version": "1.1.9",
+      "prefix": "/opt/ros/humble",
+      "description": "rqt_gui_py enables GUI plugins to use the Python client library for ROS."
+    },
+    "control_toolbox": {
+      "version": "3.6.3",
+      "prefix": "/opt/ros/humble",
+      "description": "The control toolbox contains modules that are useful across all controllers."
+    },
+    "ament_cmake_gtest": {
+      "version": "1.3.14",
+      "prefix": "/opt/ros/humble",
+      "description": "The ability to add gtest-based tests in the ament buildsystem in CMake."
+    },
+    "ament_cmake_gen_version_h": {
+      "version": "1.3.14",
+      "prefix": "/opt/ros/humble",
+      "description": "Generate a C header containing the version number of the package"
+    },
+    "composition": {
+      "version": "0.20.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Examples for composing multiple nodes in a single process."
+    },
+    "rosidl_generator_c": {
+      "version": "3.1.8",
+      "prefix": "/opt/ros/humble",
+      "description": "Generate the ROS interfaces in C."
+    },
+    "tf2_tools": {
+      "version": "0.25.20",
+      "prefix": "/opt/ros/humble",
+      "description": "tf2_tools"
+    },
+    "ament_cppcheck": {
+      "version": "0.12.15",
+      "prefix": "/opt/ros/humble",
+      "description": "The ability to perform static code analysis on C/C++ code using Cppcheck and generate xUnit test result files."
+    },
+    "moveit_msgs": {
+      "version": "2.2.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Messages, services and actions used by MoveIt"
+    },
+    "ament_lint_auto": {
+      "version": "0.12.15",
+      "prefix": "/opt/ros/humble",
+      "description": "The auto-magic functions for ease to use of the ament linters in CMake."
+    },
+    "trajectory_msgs": {
+      "version": "4.9.1",
+      "prefix": "/opt/ros/humble",
+      "description": "A package containing some robot trajectory message definitions."
+    },
+    "examples_rclcpp_minimal_timer": {
+      "version": "0.15.5",
+      "prefix": "/opt/ros/humble",
+      "description": "Examples of minimal nodes which have timers"
+    },
+    "rqt_image_view": {
+      "version": "1.2.0",
+      "prefix": "/opt/ros/humble",
+      "description": "rqt_image_view provides a GUI plugin for displaying images using image_transport."
+    },
+    "ament_index_python": {
+      "version": "1.4.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Python API to access the ament resource index."
+    },
+    "ament_cmake_pep257": {
+      "version": "0.12.15",
+      "prefix": "/opt/ros/humble",
+      "description": "The CMake API for ament_pep257 to check code against the docstring style conventions in PEP 257."
+    },
+    "bicycle_steering_controller": {
+      "version": "2.52.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Steering controller with bicycle kinematics. Rear fixed wheel is powering the vehicle and front wheel is steering."
+    },
+    "tf2_geometry_msgs": {
+      "version": "0.25.20",
+      "prefix": "/opt/ros/humble",
+      "description": "tf2_geometry_msgs"
+    },
+    "nav_msgs": {
+      "version": "4.9.1",
+      "prefix": "/opt/ros/humble",
+      "description": "A package containing some navigation related message and service definitions."
+    },
+    "rosbag2": {
+      "version": "0.15.16",
+      "prefix": "/opt/ros/humble",
+      "description": "Meta package for rosbag2 related packages"
+    },
+    "rosidl_generator_cpp": {
+      "version": "3.1.8",
+      "prefix": "/opt/ros/humble",
+      "description": "Generate the ROS interfaces in C++."
+    },
+    "tinyxml_vendor": {
+      "version": "0.8.3",
+      "prefix": "/opt/ros/humble",
+      "description": "CMake shim over the tinxml library."
+    },
+    "moveit_ros": {
+      "version": "2.5.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Components of MoveIt that use ROS"
+    },
+    "grid_map_cmake_helpers": {
+      "version": "2.0.1",
+      "prefix": "/opt/ros/humble",
+      "description": "CMake support functionality used throughout grid_map"
+    },
+    "moveit_planners_chomp": {
+      "version": "2.5.9",
+      "prefix": "/opt/ros/humble",
+      "description": "The interface for using CHOMP within MoveIt"
+    },
+    "nav2_map_server": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "Refactored map server for ROS2 Navigation"
+    },
+    "dwb_critics": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "The dwb_critics package"
+    },
+    "sensor_msgs_py": {
+      "version": "4.9.1",
+      "prefix": "/opt/ros/humble",
+      "description": "A package for easy creation and reading of PointCloud2 messages in Python."
+    },
+    "foxglove_bridge": {
+      "version": "3.2.5",
+      "prefix": "/opt/ros/humble",
+      "description": "ROS Foxglove Bridge"
+    },
+    "ros2lifecycle": {
+      "version": "0.18.18",
+      "prefix": "/opt/ros/humble",
+      "description": "The lifecycle command for ROS 2 command line tools."
+    },
+    "image_tools": {
+      "version": "0.20.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Tools to capture and play back images to and from DDS subscriptions and publications."
+    },
+    "geometric_shapes": {
+      "version": "2.3.2",
+      "prefix": "/opt/ros/humble",
+      "description": "This package contains generic definitions of geometric shapes and bodies."
+    },
+    "moveit_kinematics": {
+      "version": "2.5.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Package for all inverse kinematics solvers in MoveIt"
+    },
+    "joint_limits": {
+      "version": "2.53.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Interfaces for handling of joint limits for controllers or hardware."
+    },
+    "launch": {
+      "version": "1.0.14",
+      "prefix": "/opt/ros/humble",
+      "description": "The ROS launch tool."
+    },
+    "dummy_sensors": {
+      "version": "0.20.9",
+      "prefix": "/opt/ros/humble",
+      "description": "dummy sensor nodes"
+    },
+    "sqlite3_vendor": {
+      "version": "0.15.16",
+      "prefix": "/opt/ros/humble",
+      "description": "SQLite 3 vendor package"
+    },
+    "uncrustify_vendor": {
+      "version": "2.0.2",
+      "prefix": "/opt/ros/humble",
+      "description": "Wrapper around uncrustify, providing nothing but a dependency on uncrustify, on some systems. On others, it provides an ExternalProject build of uncrustify."
+    },
+    "qt_dotgraph": {
+      "version": "2.2.4",
+      "prefix": "/opt/ros/humble",
+      "description": "qt_dotgraph provides helpers to work with dot graphs."
+    },
+    "ros2launch": {
+      "version": "0.19.13",
+      "prefix": "/opt/ros/humble",
+      "description": "The launch command for ROS 2 command line tools."
+    },
+    "ros2multicast": {
+      "version": "0.18.18",
+      "prefix": "/opt/ros/humble",
+      "description": "The multicast command for ROS 2 command line tools."
+    },
+    "rqt_console": {
+      "version": "2.0.3",
+      "prefix": "/opt/ros/humble",
+      "description": "rqt_console provides a GUI plugin for displaying and filtering ROS messages."
+    },
+    "rosapi_msgs": {
+      "version": "2.0.5",
+      "prefix": "/opt/ros/humble",
+      "description": "Interface definitions for rosapi package."
+    },
+    "ros2component": {
+      "version": "0.18.18",
+      "prefix": "/opt/ros/humble",
+      "description": "The component command for ROS 2 command line tools."
+    },
+    "rosidl_typesupport_interface": {
+      "version": "3.1.8",
+      "prefix": "/opt/ros/humble",
+      "description": "The interface for rosidl typesupport packages."
+    },
+    "rcl_interfaces": {
+      "version": "1.2.2",
+      "prefix": "/opt/ros/humble",
+      "description": "The ROS client library common interfaces. This package contains the messages and services which ROS client libraries will use under the hood to communicate higher level concepts such as parameters."
+    },
+    "shared_queues_vendor": {
+      "version": "0.15.16",
+      "prefix": "/opt/ros/humble",
+      "description": "Vendor package for concurrent queues from moodycamel"
+    },
+    "moveit": {
+      "version": "2.5.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Meta package that contains all essential packages of MoveIt 2"
+    },
+    "rosidl_generator_rs": {
+      "version": "0.4.11",
+      "prefix": "/opt/ros/humble",
+      "description": "Generate the ROS interfaces in Rust."
+    },
+    "image_transport": {
+      "version": "3.1.12",
+      "prefix": "/opt/ros/humble",
+      "description": "image_transport should always be used to subscribe to and publish images. It provides transparent support for transporting images in low-bandwidth compressed formats. Examples (provided by separate plugin packages) include JPEG/PNG compression and Theora streaming video."
+    },
+    "tf2_kdl": {
+      "version": "0.25.20",
+      "prefix": "/opt/ros/humble",
+      "description": "KDL binding for tf2"
+    },
+    "demo_nodes_py": {
+      "version": "0.20.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Python nodes which were previously in the ros2/examples repository but are now just used for demo purposes."
+    },
+    "nav2_smac_planner": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "Smac global planning plugin: A*, Hybrid-A*, State Lattice"
+    },
+    "tf2": {
+      "version": "0.25.20",
+      "prefix": "/opt/ros/humble",
+      "description": "tf2 is the second generation of the transform library, which lets the user keep track of multiple coordinate frames over time. tf2 maintains the relationship between coordinate frames in a tree structure buffered in time, and lets the user transform points, vectors, etc between any two coordinate frames at any desired point in time."
+    },
+    "rcl_logging_interface": {
+      "version": "2.3.2",
+      "prefix": "/opt/ros/humble",
+      "description": "Interface that rcl_logging backends needs to implement."
+    },
+    "depthimage_to_laserscan": {
+      "version": "2.5.1",
+      "prefix": "/opt/ros/humble",
+      "description": "depthimage_to_laserscan"
+    },
+    "rclpy": {
+      "version": "3.3.21",
+      "prefix": "/opt/ros/humble",
+      "description": "Package containing the Python client."
+    },
+    "warehouse_ros": {
+      "version": "2.0.5",
+      "prefix": "/opt/ros/humble",
+      "description": "Persistent storage of ROS messages"
+    },
+    "topic_tools_interfaces": {
+      "version": "1.1.1",
+      "prefix": "/opt/ros/humble",
+      "description": "topic_tools_interfaces contains messages and services for topic_tools"
+    },
+    "ament_copyright": {
+      "version": "0.12.15",
+      "prefix": "/opt/ros/humble",
+      "description": "The ability to check source files for copyright and license information."
+    },
+    "nav2_simple_commander": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "An importable library for writing mobile robot applications in python3"
+    },
+    "bondcpp": {
+      "version": "4.1.4",
+      "prefix": "/opt/ros/humble",
+      "description": "C++ implementation of bond, a mechanism for checking when another process has terminated."
+    },
+    "rqt_gui_cpp": {
+      "version": "1.1.9",
+      "prefix": "/opt/ros/humble",
+      "description": "rqt_gui_cpp enables GUI plugins to use the C++ client library for ROS."
+    },
+    "pose_broadcaster": {
+      "version": "2.52.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Broadcaster to publish cartesian states."
+    },
+    "examples_rclcpp_multithreaded_executor": {
+      "version": "0.15.5",
+      "prefix": "/opt/ros/humble",
+      "description": "Package containing example of how to implement a multithreaded executor"
+    },
+    "controller_interface": {
+      "version": "2.53.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Description of controller_interface"
+    },
+    "imu_filter_madgwick": {
+      "version": "2.1.5",
+      "prefix": "/opt/ros/humble",
+      "description": "Filter which fuses angular velocities, accelerations, and (optionally) magnetic readings from a generic IMU device into an orientation. Based on code by Sebastian Madgwick, http://www.x-io.co.uk/node/8#open_source_ahrs_and_imu_algorithms."
+    },
+    "examples_rclcpp_minimal_action_client": {
+      "version": "0.15.5",
+      "prefix": "/opt/ros/humble",
+      "description": "Minimal action client examples"
+    },
+    "pcl_msgs": {
+      "version": "1.0.0",
+      "prefix": "/opt/ros/humble",
+      "description": "Package containing PCL (Point Cloud Library)-related ROS messages."
+    },
+    "chomp_motion_planner": {
+      "version": "2.5.9",
+      "prefix": "/opt/ros/humble",
+      "description": "chomp_motion_planner"
+    },
+    "nav2_core": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "A set of headers for plugins core to the Nav2 stack"
+    },
+    "grid_map_costmap_2d": {
+      "version": "2.0.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Interface for grid maps to the costmap_2d format."
+    },
+    "ament_uncrustify": {
+      "version": "0.12.15",
+      "prefix": "/opt/ros/humble",
+      "description": "The ability to check code against style conventions using uncrustify and generate xUnit test result files."
+    },
+    "rosidl_typesupport_fastrtps_c": {
+      "version": "2.2.4",
+      "prefix": "/opt/ros/humble",
+      "description": "Generate the C interfaces for eProsima FastRTPS."
+    },
+    "qt_gui_cpp": {
+      "version": "2.2.4",
+      "prefix": "/opt/ros/humble",
+      "description": "qt_gui_cpp provides the foundation for C++-bindings for qt_gui and creates bindings for every generator available. At least one specific binding must be available in order to use C++-plugins."
+    },
+    "ament_cmake_cpplint": {
+      "version": "0.12.15",
+      "prefix": "/opt/ros/humble",
+      "description": "The CMake API for ament_cpplint to lint C / C++ code using cpplint."
+    },
+    "moveit_ros_benchmarks": {
+      "version": "2.5.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Enhanced tools for benchmarks in MoveIt"
+    },
+    "range_sensor_broadcaster": {
+      "version": "2.52.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Controller to publish readings of range sensors."
+    },
+    "ackermann_steering_controller": {
+      "version": "2.52.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Steering controller for Ackermann kinematics. Rear fixed wheels are powering the vehicle and front wheels are steering it."
+    },
+    "forward_command_controller": {
+      "version": "2.52.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Generic controller for forwarding commands."
+    },
+    "moveit_configs_utils": {
+      "version": "2.5.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Python library for loading moveit config parameters in launch files"
+    },
+    "rqt_plot": {
+      "version": "1.1.5",
+      "prefix": "/opt/ros/humble",
+      "description": "rqt_plot provides a GUI plugin visualizing numeric values in a 2D plot using different plotting backends."
+    },
+    "ros2_control_test_assets": {
+      "version": "2.53.1",
+      "prefix": "/opt/ros/humble",
+      "description": "The package provides shared test resources for ros2_control stack"
+    },
+    "nav2_lifecycle_manager": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "A controller/manager for the lifecycle nodes of the Navigation 2 system"
+    },
+    "statistics_msgs": {
+      "version": "1.2.2",
+      "prefix": "/opt/ros/humble",
+      "description": "Message definitions for reporting statistics for topics and system resources."
+    },
+    "keyboard_handler": {
+      "version": "0.0.5",
+      "prefix": "/opt/ros/humble",
+      "description": "Handler for input from keyboard"
+    },
+    "pid_controller": {
+      "version": "2.52.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Controller based on PID implememenation from control_toolbox package."
+    },
+    "nav2_common": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "Common support functionality used throughout the navigation 2 stack"
+    },
+    "rclcpp_action": {
+      "version": "16.0.19",
+      "prefix": "/opt/ros/humble",
+      "description": "Adds action APIs for C++."
+    },
+    "ament_cpplint": {
+      "version": "0.12.15",
+      "prefix": "/opt/ros/humble",
+      "description": "The ability to check code against the Google style conventions using cpplint and generate xUnit test result files."
+    },
+    "sros2": {
+      "version": "0.10.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Command line tools for managing SROS2 keys"
+    },
+    "ament_cmake_ros": {
+      "version": "0.10.0",
+      "prefix": "/opt/ros/humble",
+      "description": "The ROS specific CMake bits in the ament buildsystem."
+    },
+    "kinematics_interface": {
+      "version": "0.4.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Kinematics interface for ROS 2 control"
+    },
+    "ament_package": {
+      "version": "0.14.2",
+      "prefix": "/opt/ros/humble",
+      "description": "The parser for the manifest files in the ament buildsystem."
+    },
+    "ros2cli_common_extensions": {
+      "version": "0.1.2",
+      "prefix": "/opt/ros/humble",
+      "description": "Meta package for ros2cli common extensions"
+    },
+    "moveit_setup_srdf_plugins": {
+      "version": "2.5.9",
+      "prefix": "/opt/ros/humble",
+      "description": "SRDF-based plugins for MoveIt Setup Assistant"
+    },
+    "common_interfaces": {
+      "version": "4.9.1",
+      "prefix": "/opt/ros/humble",
+      "description": "common_interfaces contains messages and services that are widely used by other ROS packages."
+    },
+    "gripper_controllers": {
+      "version": "2.52.1",
+      "prefix": "/opt/ros/humble",
+      "description": "The gripper_controllers package"
+    },
+    "nav2_rviz_plugins": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "Navigation 2 plugins for rviz"
+    },
+    "ament_cmake_export_libraries": {
+      "version": "1.3.14",
+      "prefix": "/opt/ros/humble",
+      "description": "The ability to export libraries to downstream packages in the ament buildsystem in CMake."
+    },
+    "rqt_gui": {
+      "version": "1.1.9",
+      "prefix": "/opt/ros/humble",
+      "description": "rqt_gui provides the main to start an instance of the ROS integrated graphical user interface provided by qt_gui."
+    },
+    "nav2_dwb_controller": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "ROS2 controller (DWB) metapackage"
+    },
+    "launch_testing_ament_cmake": {
+      "version": "1.0.14",
+      "prefix": "/opt/ros/humble",
+      "description": "A package providing cmake functions for running launch tests from the build."
+    },
+    "imu_sensor_broadcaster": {
+      "version": "2.52.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Controller to publish readings of IMU sensors."
+    },
+    "ament_cmake_test": {
+      "version": "1.3.14",
+      "prefix": "/opt/ros/humble",
+      "description": "The ability to add tests in the ament buildsystem in CMake."
+    },
+    "ros_core": {
+      "version": "0.10.0",
+      "prefix": "/opt/ros/humble",
+      "description": "A package to aggregate the packages required to use publish / subscribe, services, generate messages and other core ROS concepts."
+    },
+    "builtin_interfaces": {
+      "version": "1.2.2",
+      "prefix": "/opt/ros/humble",
+      "description": "A package containing message and service definitions for types defined in the OMG IDL Platform Specific Model."
+    },
+    "nav2_bringup": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "Bringup scripts and configurations for the Nav2 stack"
+    },
+    "tf2_sensor_msgs": {
+      "version": "0.25.20",
+      "prefix": "/opt/ros/humble",
+      "description": "Small lib to transform sensor_msgs with tf. Most notably, PointCloud2"
+    },
+    "urdfdom_py": {
+      "version": "1.2.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Python implementation of the URDF parser."
+    },
+    "nav2_constrained_smoother": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "Ceres constrained smoother"
+    },
+    "rqt_service_caller": {
+      "version": "1.0.5",
+      "prefix": "/opt/ros/humble",
+      "description": "rqt_service_caller provides a GUI plugin for calling arbitrary services."
+    },
+    "quality_of_service_demo_cpp": {
+      "version": "0.20.9",
+      "prefix": "/opt/ros/humble",
+      "description": "C++ Demo applications for Quality of Service features"
+    },
+    "ament_cmake_libraries": {
+      "version": "1.3.14",
+      "prefix": "/opt/ros/humble",
+      "description": "The functionality to deduplicate libraries in the ament buildsystem in CMake."
+    },
+    "moveit_servo": {
+      "version": "2.5.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Provides real-time manipulator Cartesian and joint servoing."
+    },
+    "octomap_ros": {
+      "version": "0.4.4",
+      "prefix": "/opt/ros/humble",
+      "description": "octomap_ros provides conversion functions between ROS and OctoMap's native types. This enables a convenvient use of the octomap package in ROS."
+    },
+    "robot_localization": {
+      "version": "3.5.4",
+      "prefix": "/opt/ros/humble",
+      "description": "Provides nonlinear state estimation through sensor fusion of an abritrary number of sensors."
+    },
+    "ament_flake8": {
+      "version": "0.12.15",
+      "prefix": "/opt/ros/humble",
+      "description": "The ability to check code for style and syntax conventions with flake8."
+    },
+    "kdl_parser": {
+      "version": "2.6.4",
+      "prefix": "/opt/ros/humble",
+      "description": "The Kinematics and Dynamics Library (KDL) defines a tree structure to represent the kinematic and dynamic parameters of a robot mechanism."
+    },
+    "ackermann_msgs": {
+      "version": "2.0.2",
+      "prefix": "/opt/ros/humble",
+      "description": "ROS2 messages for robots using Ackermann steering."
+    },
+    "action_tutorials_interfaces": {
+      "version": "0.20.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Action tutorials action"
+    },
+    "moveit_ros_visualization": {
+      "version": "2.5.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Components of MoveIt that offer visualization"
+    },
+    "tf2_bullet": {
+      "version": "0.25.20",
+      "prefix": "/opt/ros/humble",
+      "description": "tf2_bullet"
+    },
+    "resource_retriever": {
+      "version": "3.1.3",
+      "prefix": "/opt/ros/humble",
+      "description": "This package retrieves data from url-format files such as http://, ftp://, package:// file://, etc., and loads the data into memory. The package:// url for ros packages is translated into a local file:// url. The resourse retriever was initially designed to load mesh files into memory, but it can be used for any type of data. The resource retriever is based on the the libcurl library."
+    },
+    "logging_demo": {
+      "version": "0.20.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Examples for using and configuring loggers."
+    },
+    "cv_bridge": {
+      "version": "3.2.1",
+      "prefix": "/opt/ros/humble",
+      "description": "This contains CvBridge, which converts between ROS2 Image messages and OpenCV images."
+    },
+    "ros2interface": {
+      "version": "0.18.18",
+      "prefix": "/opt/ros/humble",
+      "description": "The interface command for ROS 2 command line tools"
+    },
+    "grid_map": {
+      "version": "2.0.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Meta-package for the universal grid map library."
+    },
+    "tcb_span": {
+      "version": "1.2.0",
+      "prefix": "/opt/ros/humble",
+      "description": "Implementation of C++20's std::span"
+    },
+    "tinyxml2_vendor": {
+      "version": "0.7.7",
+      "prefix": "/opt/ros/humble",
+      "description": "Wrapper around tinyxml2, providing nothing but a dependency on tinyxml2, on some systems. On others, it provides a fixed CMake module or even an ExternalProject build of tinyxml2."
+    },
+    "random_numbers": {
+      "version": "2.0.1",
+      "prefix": "/opt/ros/humble",
+      "description": "This library contains wrappers for generating floating point values, integers, quaternions using boost libraries. The constructor of the wrapper is guaranteed to be thread safe and initialize its random number generator to a random seed. Seeds are obtained using a separate and different random number generator."
+    },
+    "dwb_msgs": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "Message/Service definitions specifically for the dwb_core"
+    },
+    "rosidl_typesupport_introspection_cpp": {
+      "version": "3.1.8",
+      "prefix": "/opt/ros/humble",
+      "description": "Generate the message type support for dynamic message construction in C++."
+    },
+    "rqt_bag_plugins": {
+      "version": "1.1.6",
+      "prefix": "/opt/ros/humble",
+      "description": "rqt_bag provides a GUI plugin for displaying and replaying ROS bag files."
+    },
+    "generate_parameter_library": {
+      "version": "0.7.1",
+      "prefix": "/opt/ros/humble",
+      "description": "CMake to generate ROS parameter library."
+    },
+    "rcl_action": {
+      "version": "5.3.12",
+      "prefix": "/opt/ros/humble",
+      "description": "Package containing a C-based ROS action implementation"
+    },
+    "tf2_eigen_kdl": {
+      "version": "0.25.20",
+      "prefix": "/opt/ros/humble",
+      "description": "Conversion functions between: - Eigen and KDL"
+    },
+    "launch_param_builder": {
+      "version": "0.1.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Python library for loading parameters in launch files"
+    },
+    "joint_state_broadcaster": {
+      "version": "2.52.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Broadcaster to publish joint state"
+    },
+    "examples_rclpy_minimal_client": {
+      "version": "0.15.5",
+      "prefix": "/opt/ros/humble",
+      "description": "Examples of minimal service clients using rclpy."
+    },
+    "nav2_velocity_smoother": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "Nav2's Output velocity smoother"
+    },
+    "nav2_regulated_pure_pursuit_controller": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "Regulated Pure Pursuit Controller"
+    },
+    "pendulum_control": {
+      "version": "0.20.9",
+      "prefix": "/opt/ros/humble",
+      "description": "Demonstrates ROS 2's realtime capabilities with a simulated inverted pendulum."
+    },
+    "rosx_introspection": {
+      "version": "2.2.0",
+      "prefix": "/opt/ros/humble",
+      "description": "Parse any ROS/ROS2 message without compile-time information"
+    },
+    "xacro": {
+      "version": "2.1.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Xacro (XML Macros) Xacro is an XML macro language. With xacro, you can construct shorter and more readable XML files by using macros that expand to larger XML expressions."
+    },
+    "dwb_plugins": {
+      "version": "1.1.20",
+      "prefix": "/opt/ros/humble",
+      "description": "Standard implementations of the GoalChecker and TrajectoryGenerators for dwb_core"
+    },
+    "grid_map_core": {
+      "version": "2.0.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Universal grid map library to manage two-dimensional grid maps with multiple data layers."
+    },
+    "qt_gui_py_common": {
+      "version": "2.2.4",
+      "prefix": "/opt/ros/humble",
+      "description": "qt_gui_py_common provides common functionality for GUI plugins written in Python."
+    },
+    "ros2plugin": {
+      "version": "5.1.3",
+      "prefix": "/opt/ros/humble",
+      "description": "The plugin command for ROS 2 command line tools."
+    },
+    "tl_expected": {
+      "version": "1.2.0",
+      "prefix": "/opt/ros/humble",
+      "description": "C++11/14/17 std::expected with functional-style extensions"
+    },
+    "topic_tools": {
+      "version": "1.1.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Tools for directing, throttling, selecting, and otherwise messing with ROS 2 topics at a meta level."
+    },
+    "octomap_rviz_plugins": {
+      "version": "2.1.1",
+      "prefix": "/opt/ros/humble",
+      "description": "A set of plugins for displaying occupancy information decoded from binary octomap messages."
+    },
+    "force_torque_sensor_broadcaster": {
+      "version": "2.52.1",
+      "prefix": "/opt/ros/humble",
+      "description": "Controller to publish state of force-torque sensors."
+    }
+  },
+  "source_packages": {
+    "mr2_flat_bench": {
+      "version": "0.1.0",
+      "path": "rover/flat_bench_ws/src/mr2_flat_bench/package.xml",
+      "dependencies": [
+        {
+          "name": "ament_cmake",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_cmake_python",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_can_bus_core",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "hardware_interface",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "pluginlib",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "rclcpp",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "ament_index_python",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "launch",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "launch_ros",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "xacro",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "controller_manager",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "joint_state_broadcaster",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "robot_state_publisher",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_launch",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_rover_description",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_rover_control",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_can_hardware_interface",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_devices_robstride",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_cmake_gtest",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_cmake_pytest",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "rclpy",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "controller_manager_msgs",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_action_interface",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "geometry_msgs",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "sensor_msgs",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "nav_msgs",
+          "type": "test_depend",
+          "condition": null
+        }
+      ]
+    },
+    "mr2_action_interface": {
+      "version": "0.0.0",
+      "path": "rover/ros2_ws/src/mr2_action_interface/package.xml",
+      "dependencies": [
+        {
+          "name": "ament_cmake",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "rosidl_default_generators",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_lint_auto",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_lint_common",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "action_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "builtin_interfaces",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "geometry_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "sensor_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "rosidl_default_runtime",
+          "type": "exec_depend",
+          "condition": null
+        }
+      ]
+    },
+    "mr2_battery_monitor": {
+      "version": "0.1.0",
+      "path": "rover/ros2_ws/src/mr2_battery_monitor/package.xml",
+      "dependencies": [
+        {
+          "name": "ament_cmake",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "rosidl_default_generators",
+          "type": "build_depend",
+          "condition": null
+        },
+        {
+          "name": "rclcpp",
+          "type": "build_depend",
+          "condition": null
+        },
+        {
+          "name": "sensor_msgs",
+          "type": "build_depend",
+          "condition": null
+        },
+        {
+          "name": "std_msgs",
+          "type": "build_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_can_bus_core",
+          "type": "build_depend",
+          "condition": null
+        },
+        {
+          "name": "rosidl_default_runtime",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "rclcpp",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "sensor_msgs",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "std_msgs",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_can_bus_core",
+          "type": "exec_depend",
+          "condition": null
+        }
+      ]
+    },
+    "mr2_camera_turret": {
+      "version": "0.1.0",
+      "path": "rover/ros2_ws/src/mr2_camera_turret/package.xml",
+      "dependencies": [
+        {
+          "name": "ament_cmake",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "rclcpp",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "geometry_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_can_bus_core",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "launch",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "launch_ros",
+          "type": "exec_depend",
+          "condition": null
+        }
+      ]
+    },
+    "mr2_can_bus_core": {
+      "version": "0.0.0",
+      "path": "rover/ros2_ws/src/mr2_can_bus_core/package.xml",
+      "dependencies": [
+        {
+          "name": "ament_cmake",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_lint_auto",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_lint_common",
+          "type": "test_depend",
+          "condition": null
+        }
+      ]
+    },
+    "mr2_can_hardware_interface": {
+      "version": "0.1.0",
+      "path": "rover/ros2_ws/src/mr2_can_hardware_interface/package.xml",
+      "dependencies": [
+        {
+          "name": "ament_cmake",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_can_bus_core",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "hardware_interface",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "pluginlib",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "rclcpp",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "transmission_interface",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "ament_cmake_gtest",
+          "type": "test_depend",
+          "condition": null
+        }
+      ]
+    },
+    "mr2_control": {
+      "version": "0.1.0",
+      "path": "rover/ros2_ws/src/mr2_control/package.xml",
+      "dependencies": [
+        {
+          "name": "ament_cmake",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "rclcpp",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "hardware_interface",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "transmission_interface",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "pluginlib",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_can_bus_core",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_action_interface",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "geometry_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "nav_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "sensor_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "std_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "std_srvs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "diagnostic_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "yaml-cpp",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_devices_ak_servo",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_devices_output_actuator",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_devices_robstride",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_cmake_gtest",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_cmake_pytest",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "controller_interface",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "joint_state_broadcaster",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "rclpy",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "xacro",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "python3-yaml",
+          "type": "test_depend",
+          "condition": null
+        }
+      ]
+    },
+    "mr2_devices_ak_servo": {
+      "version": "0.0.0",
+      "path": "rover/ros2_ws/src/mr2_devices_ak_servo/package.xml",
+      "dependencies": [
+        {
+          "name": "mr2_can_bus_core",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "hardware_interface",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "pluginlib",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "rclcpp",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "ament_cmake",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_lint_auto",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_lint_common",
+          "type": "test_depend",
+          "condition": null
+        }
+      ]
+    },
+    "mr2_devices_output_actuator": {
+      "version": "0.0.0",
+      "path": "rover/ros2_ws/src/mr2_devices_output_actuator/package.xml",
+      "dependencies": [
+        {
+          "name": "ament_cmake",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "rosidl_default_generators",
+          "type": "build_depend",
+          "condition": null
+        },
+        {
+          "name": "builtin_interfaces",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_can_bus_core",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "hardware_interface",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "pluginlib",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "rclcpp",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "rosidl_default_runtime",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_lint_auto",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_lint_common",
+          "type": "test_depend",
+          "condition": null
+        }
+      ]
+    },
+    "mr2_devices_robstride": {
+      "version": "0.1.0",
+      "path": "rover/ros2_ws/src/mr2_devices_robstride/package.xml",
+      "dependencies": [
+        {
+          "name": "ament_cmake",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_can_bus_core",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "hardware_interface",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "pluginlib",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "rclcpp",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "ament_cmake_gtest",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_devices_output_actuator",
+          "type": "test_depend",
+          "condition": null
+        }
+      ]
+    },
+    "mr2_flat_motor": {
+      "version": "0.1.0",
+      "path": "rover/ros2_ws/src/mr2_flat_motor/package.xml",
+      "dependencies": [
+        {
+          "name": "rclpy",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "geometry_msgs",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_action_interface",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "std_msgs",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "python3-pytest",
+          "type": "test_depend",
+          "condition": null
+        }
+      ]
+    },
+    "mr2_latency_diagnostics": {
+      "version": "0.1.0",
+      "path": "rover/ros2_ws/src/mr2_latency_diagnostics/package.xml",
+      "dependencies": [
+        {
+          "name": "ament_python",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_latency_msgs",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_system_status",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "python3",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "rclpy",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_copyright",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_flake8",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_pep257",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "python3-pytest",
+          "type": "test_depend",
+          "condition": null
+        }
+      ]
+    },
+    "mr2_latency_msgs": {
+      "version": "0.1.0",
+      "path": "rover/ros2_ws/src/mr2_latency_msgs/package.xml",
+      "dependencies": [
+        {
+          "name": "ament_cmake",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "rosidl_default_generators",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "rosidl_default_runtime",
+          "type": "exec_depend",
+          "condition": null
+        }
+      ]
+    },
+    "mr2_launch": {
+      "version": "0.0.0",
+      "path": "rover/ros2_ws/src/mr2_launch/package.xml",
+      "dependencies": [
+        {
+          "name": "launch",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_index_python",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "launch_ros",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "aruco_opencv",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_latency_diagnostics",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_video_streaming",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_panorama",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_flat_motor",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_science_module",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "rclcpp_components",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "realsense2_camera",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "rosbridge_server",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "rviz2",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "socat",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "tf2_ros",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "topic_tools",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "ublox_dgnss",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "ublox_dgnss_node",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "ublox_nav_sat_fix_hp_node",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "v4l2_camera",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_copyright",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_flake8",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_pep257",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "python3-pytest",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "xacro",
+          "type": "test_depend",
+          "condition": null
+        }
+      ]
+    },
+    "mr2_led": {
+      "version": "0.1.0",
+      "path": "rover/ros2_ws/src/mr2_led/package.xml",
+      "dependencies": [
+        {
+          "name": "ament_cmake",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "rosidl_default_generators",
+          "type": "build_depend",
+          "condition": null
+        },
+        {
+          "name": "rclcpp",
+          "type": "build_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_can_bus_core",
+          "type": "build_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_action_interface",
+          "type": "build_depend",
+          "condition": null
+        },
+        {
+          "name": "rosidl_default_runtime",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "rclcpp",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_can_bus_core",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_action_interface",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "launch",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "launch_ros",
+          "type": "exec_depend",
+          "condition": null
+        }
+      ]
+    },
+    "mr2_moveit": {
+      "version": "0.3.0",
+      "path": "rover/ros2_ws/src/mr2_moveit/package.xml",
+      "dependencies": [
+        {
+          "name": "ament_cmake",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "moveit_kinematics",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "moveit_planners",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "moveit_simple_controller_manager",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "joint_state_publisher",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "joint_state_publisher_gui",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "tf2_ros",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "xacro",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "moveit_servo",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "controller_manager",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "joy",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "rclcpp_components",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "moveit_configs_utils",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "moveit_ros_visualization",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_rover_description",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "rviz2",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "rviz_common",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "rviz_default_plugins",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "xacro",
+          "type": "exec_depend",
+          "condition": null
+        }
+      ]
+    },
+    "mr2_nav2_plugins": {
+      "version": "0.0.0",
+      "path": "rover/ros2_ws/src/mr2_nav2_plugins/package.xml",
+      "dependencies": [
+        {
+          "name": "ament_cmake",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "nav2_costmap_2d",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "pluginlib",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "rclcpp",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "grid_map_core",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "grid_map_ros",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "grid_map_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "tf2",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "tf2_ros",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "tf2_geometry_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "geometry_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "nav2_util",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "ament_lint_auto",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_lint_common",
+          "type": "test_depend",
+          "condition": null
+        }
+      ]
+    },
+    "mr2_panorama": {
+      "version": "0.0.0",
+      "path": "rover/ros2_ws/src/mr2_panorama/package.xml",
+      "dependencies": [
+        {
+          "name": "ament_cmake",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_index_cpp",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "camera_calibration_parsers",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_action_interface",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "rclcpp",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "rclcpp_action",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "sensor_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "tf2",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "tf2_geometry_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "tf2_ros",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "libopencv-dev",
+          "type": "build_depend",
+          "condition": null
+        },
+        {
+          "name": "libopencv-dev",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_lint_auto",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_lint_common",
+          "type": "test_depend",
+          "condition": null
+        }
+      ]
+    },
+    "mr2_rover_auto": {
+      "version": "0.0.0",
+      "path": "rover/ros2_ws/src/mr2_rover_auto/package.xml",
+      "dependencies": [
+        {
+          "name": "ament_cmake",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "rosidl_default_generators",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "launch",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "launch_ros",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "rclcpp",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "rclcpp_action",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "rclcpp_components",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "geometry_msgs",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "nav2_bringup",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "nav2_lifecycle_manager",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "nav2_map_server",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "nav2_msgs",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "tf2",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "tf2_ros",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "tf2_geometry_msgs",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "tf2_eigen",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_index_cpp",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "std_msgs",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "sensor_msgs",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "geographic_msgs",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "geographiclib",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "eigen",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_action_interface",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_panorama",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "geographiclib",
+          "type": "build_depend",
+          "condition": null
+        },
+        {
+          "name": "robot_localization",
+          "type": "build_depend",
+          "condition": null
+        },
+        {
+          "name": "aruco_opencv",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "aruco_opencv_msgs",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "robot_localization",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "ublox_ubx_msgs",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "behaviortree_cpp_v3",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "nav2_behavior_tree",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_nav2_plugins",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "grid_map_ros",
+          "type": "build_depend",
+          "condition": null
+        },
+        {
+          "name": "grid_map_core",
+          "type": "build_depend",
+          "condition": null
+        },
+        {
+          "name": "grid_map_msgs",
+          "type": "build_depend",
+          "condition": null
+        },
+        {
+          "name": "grid_map_filters",
+          "type": "build_depend",
+          "condition": null
+        },
+        {
+          "name": "filters",
+          "type": "build_depend",
+          "condition": null
+        },
+        {
+          "name": "pluginlib",
+          "type": "build_depend",
+          "condition": null
+        },
+        {
+          "name": "pcl_conversions",
+          "type": "build_depend",
+          "condition": null
+        },
+        {
+          "name": "libopencv-dev",
+          "type": "build_depend",
+          "condition": null
+        },
+        {
+          "name": "grid_map_ros",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "grid_map_core",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "grid_map_msgs",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "grid_map_filters",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "filters",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "pluginlib",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "pcl_conversions",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "libopencv-dev",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "imu_filter_madgwick",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "rosidl_default_runtime",
+          "type": "exec_depend",
+          "condition": null
+        }
+      ]
+    },
+    "mr2_rover_control": {
+      "version": "0.0.0",
+      "path": "rover/ros2_ws/src/mr2_rover_control/package.xml",
+      "dependencies": [
+        {
+          "name": "ament_cmake",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "rclcpp",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "rclcpp_lifecycle",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "controller_interface",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "pluginlib",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "geometry_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "nav_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_action_interface",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "ament_lint_auto",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_lint_common",
+          "type": "test_depend",
+          "condition": null
+        }
+      ]
+    },
+    "mr2_rover_description": {
+      "version": "0.0.0",
+      "path": "rover/ros2_ws/src/mr2_rover_description/package.xml",
+      "dependencies": [
+        {
+          "name": "ros_gz",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "gz_ros2_control",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "gz_ros2_control_demos",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "ros2_controllers",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "ros2_control",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "controller_manager",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_control",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_can_hardware_interface",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_devices_output_actuator",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_devices_robstride",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_battery_monitor",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "joint_state_broadcaster",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "position_controllers",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "rclpy",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "robot_state_publisher",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "ros_gz_bridge",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "ros_gz_sim",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "sensor_msgs",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_copyright",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_flake8",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_pep257",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "python3-pytest",
+          "type": "test_depend",
+          "condition": null
+        }
+      ]
+    },
+    "mr2_science_module": {
+      "version": "0.1.0",
+      "path": "rover/ros2_ws/src/mr2_science_module/package.xml",
+      "dependencies": [
+        {
+          "name": "ament_cmake",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "builtin_interfaces",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_can_bus_core",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "rclcpp",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "rosidl_default_generators",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "launch",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "launch_ros",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "rosidl_default_runtime",
+          "type": "exec_depend",
+          "condition": null
+        }
+      ]
+    },
+    "mr2_spectrophotometer": {
+      "version": "0.1.0",
+      "path": "rover/ros2_ws/src/mr2_spectrophotometer/package.xml",
+      "dependencies": [
+        {
+          "name": "rclpy",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_spectrophotometer_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "python3-numpy",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "python3-opencv",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "v4l-utils",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "launch",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "launch_ros",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_lint_auto",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_lint_common",
+          "type": "test_depend",
+          "condition": null
+        }
+      ]
+    },
+    "mr2_spectrophotometer_msgs": {
+      "version": "0.1.0",
+      "path": "rover/ros2_ws/src/mr2_spectrophotometer_msgs/package.xml",
+      "dependencies": [
+        {
+          "name": "ament_cmake",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "rosidl_default_generators",
+          "type": "build_depend",
+          "condition": null
+        },
+        {
+          "name": "std_msgs",
+          "type": "build_depend",
+          "condition": null
+        },
+        {
+          "name": "rosidl_default_runtime",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "std_msgs",
+          "type": "exec_depend",
+          "condition": null
+        }
+      ]
+    },
+    "mr2_system_status": {
+      "version": "0.0.1",
+      "path": "rover/ros2_ws/src/mr2_system_status/package.xml",
+      "dependencies": [
+        {
+          "name": "rclpy",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "diagnostic_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "python3-psutil",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "chrony",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_copyright",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_flake8",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_pep257",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "python3-pytest",
+          "type": "test_depend",
+          "condition": null
+        }
+      ]
+    },
+    "mr2_video_streaming": {
+      "version": "0.1.0",
+      "path": "rover/ros2_ws/src/mr2_video_streaming/package.xml",
+      "dependencies": [
+        {
+          "name": "ament_cmake",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "pkg-config",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "nlohmann-json-dev",
+          "type": "build_depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_latency_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "rclcpp",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "sensor_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "std_srvs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "std_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "ament_lint_auto",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_lint_common",
+          "type": "test_depend",
+          "condition": null
+        }
+      ]
+    },
+    "mr2_xbee_bridge": {
+      "version": "0.1.0",
+      "path": "rover/ros2_ws/src/mr2_xbee_bridge/package.xml",
+      "dependencies": [
+        {
+          "name": "ament_cmake",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "rclcpp",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "control_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "geometry_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "nav_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "sensor_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "std_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_action_interface",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "mr2_battery_monitor",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "ublox_ubx_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "rtcm_msgs",
+          "type": "depend",
+          "condition": null
+        }
+      ]
+    },
+    "mr2_yolo_perception": {
+      "version": "0.0.0",
+      "path": "rover/ros2_ws/src/mr2_yolo_perception/package.xml",
+      "dependencies": [
+        {
+          "name": "rclpy",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "sensor_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "geometry_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "tf2_ros",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "tf2_geometry_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "image_geometry",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "message_filters",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "python3-numpy",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "python3-opencv",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_lint_auto",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_lint_common",
+          "type": "test_depend",
+          "condition": null
+        }
+      ]
+    },
+    "rtcm_msgs": {
+      "version": "1.1.6",
+      "path": "rover/ros2_ws/src/rtcm_msgs/package.xml",
+      "dependencies": [
+        {
+          "name": "catkin",
+          "type": "buildtool_depend",
+          "condition": "$ROS_VERSION == 1"
+        },
+        {
+          "name": "ament_cmake",
+          "type": "buildtool_depend",
+          "condition": "$ROS_VERSION == 2"
+        },
+        {
+          "name": "rosidl_default_generators",
+          "type": "buildtool_depend",
+          "condition": "$ROS_VERSION == 2"
+        },
+        {
+          "name": "ros_environment",
+          "type": "build_depend",
+          "condition": null
+        },
+        {
+          "name": "message_generation",
+          "type": "build_depend",
+          "condition": "$ROS_VERSION == 1"
+        },
+        {
+          "name": "builtin_interfaces",
+          "type": "build_depend",
+          "condition": "$ROS_VERSION == 2"
+        },
+        {
+          "name": "std_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "message_runtime",
+          "type": "exec_depend",
+          "condition": "$ROS_VERSION == 1"
+        },
+        {
+          "name": "rosidl_default_runtime",
+          "type": "exec_depend",
+          "condition": "$ROS_VERSION == 2"
+        },
+        {
+          "name": "ament_lint_common",
+          "type": "test_depend",
+          "condition": "$ROS_VERSION == 2"
+        }
+      ]
+    },
+    "ntrip_client_node": {
+      "version": "0.7.4",
+      "path": "rover/ros2_ws/src/ublox_dgnss/ntrip_client_node/package.xml",
+      "dependencies": [
+        {
+          "name": "ament_cmake",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "rclcpp",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "rclcpp_components",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "libcurl-dev",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "std_msgs",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "rtcm_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "pkg-config",
+          "type": "build_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_lint_auto",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_lint_common",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_cmake_cppcheck",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_cmake_copyright",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_cmake_uncrustify",
+          "type": "test_depend",
+          "condition": null
+        }
+      ]
+    },
+    "ublox_dgnss": {
+      "version": "0.7.4",
+      "path": "rover/ros2_ws/src/ublox_dgnss/ublox_dgnss/package.xml",
+      "dependencies": [
+        {
+          "name": "ament_cmake",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "ublox_ubx_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "ublox_ubx_interfaces",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "ublox_dgnss_node",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "ublox_nav_sat_fix_hp_node",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "ntrip_client_node",
+          "type": "depend",
+          "condition": null
+        }
+      ]
+    },
+    "ublox_dgnss_node": {
+      "version": "0.7.4",
+      "path": "rover/ros2_ws/src/ublox_dgnss/ublox_dgnss_node/package.xml",
+      "dependencies": [
+        {
+          "name": "ament_cmake",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "rclcpp",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "rclcpp_components",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "libusb-1.0-dev",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "std_msgs",
+          "type": "exec_depend",
+          "condition": null
+        },
+        {
+          "name": "ublox_ubx_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "ublox_ubx_interfaces",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "rtcm_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "ament_index_cpp",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "pkg-config",
+          "type": "build_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_lint_auto",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_lint_common",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_cmake_cppcheck",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_cmake_copyright",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_cmake_uncrustify",
+          "type": "test_depend",
+          "condition": null
+        }
+      ]
+    },
+    "ublox_nav_sat_fix_hp_node": {
+      "version": "0.7.4",
+      "path": "rover/ros2_ws/src/ublox_dgnss/ublox_nav_sat_fix_hp_node/package.xml",
+      "dependencies": [
+        {
+          "name": "ament_cmake",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "rclcpp",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "rclcpp_components",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "std_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "sensor_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "ublox_ubx_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "ublox_ubx_interfaces",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "ament_lint_auto",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_lint_common",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_cmake_cppcheck",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_cmake_copyright",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_cmake_uncrustify",
+          "type": "test_depend",
+          "condition": null
+        }
+      ]
+    },
+    "ublox_ubx_interfaces": {
+      "version": "0.7.4",
+      "path": "rover/ros2_ws/src/ublox_dgnss/ublox_ubx_interfaces/package.xml",
+      "dependencies": [
+        {
+          "name": "ament_cmake",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "rosidl_default_generators",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "ament_lint_auto",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_lint_common",
+          "type": "test_depend",
+          "condition": null
+        }
+      ]
+    },
+    "ublox_ubx_msgs": {
+      "version": "0.7.4",
+      "path": "rover/ros2_ws/src/ublox_dgnss/ublox_ubx_msgs/package.xml",
+      "dependencies": [
+        {
+          "name": "ament_cmake",
+          "type": "buildtool_depend",
+          "condition": null
+        },
+        {
+          "name": "builtin_interfaces",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "std_msgs",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "rosidl_default_generators",
+          "type": "depend",
+          "condition": null
+        },
+        {
+          "name": "ament_lint_auto",
+          "type": "test_depend",
+          "condition": null
+        },
+        {
+          "name": "ament_lint_common",
+          "type": "test_depend",
+          "condition": null
+        }
+      ]
+    }
+  },
+  "manifest_dependency_users": {
+    "action_msgs": [
+      "mr2_action_interface"
+    ],
+    "ament_cmake": [
+      "mr2_action_interface",
+      "mr2_battery_monitor",
+      "mr2_camera_turret",
+      "mr2_can_bus_core",
+      "mr2_can_hardware_interface",
+      "mr2_control",
+      "mr2_devices_ak_servo",
+      "mr2_devices_output_actuator",
+      "mr2_devices_robstride",
+      "mr2_flat_bench",
+      "mr2_latency_msgs",
+      "mr2_led",
+      "mr2_moveit",
+      "mr2_nav2_plugins",
+      "mr2_panorama",
+      "mr2_rover_auto",
+      "mr2_rover_control",
+      "mr2_science_module",
+      "mr2_spectrophotometer_msgs",
+      "mr2_video_streaming",
+      "mr2_xbee_bridge",
+      "ntrip_client_node",
+      "rtcm_msgs",
+      "ublox_dgnss",
+      "ublox_dgnss_node",
+      "ublox_nav_sat_fix_hp_node",
+      "ublox_ubx_interfaces",
+      "ublox_ubx_msgs"
+    ],
+    "ament_cmake_copyright": [
+      "ntrip_client_node",
+      "ublox_dgnss_node",
+      "ublox_nav_sat_fix_hp_node"
+    ],
+    "ament_cmake_cppcheck": [
+      "ntrip_client_node",
+      "ublox_dgnss_node",
+      "ublox_nav_sat_fix_hp_node"
+    ],
+    "ament_cmake_gtest": [
+      "mr2_can_hardware_interface",
+      "mr2_control",
+      "mr2_devices_robstride",
+      "mr2_flat_bench"
+    ],
+    "ament_cmake_pytest": [
+      "mr2_control",
+      "mr2_flat_bench"
+    ],
+    "ament_cmake_python": [
+      "mr2_flat_bench"
+    ],
+    "ament_cmake_uncrustify": [
+      "ntrip_client_node",
+      "ublox_dgnss_node",
+      "ublox_nav_sat_fix_hp_node"
+    ],
+    "ament_copyright": [
+      "mr2_latency_diagnostics",
+      "mr2_launch",
+      "mr2_rover_description",
+      "mr2_system_status"
+    ],
+    "ament_flake8": [
+      "mr2_latency_diagnostics",
+      "mr2_launch",
+      "mr2_rover_description",
+      "mr2_system_status"
+    ],
+    "ament_index_cpp": [
+      "mr2_panorama",
+      "mr2_rover_auto",
+      "ublox_dgnss_node"
+    ],
+    "ament_index_python": [
+      "mr2_flat_bench",
+      "mr2_launch"
+    ],
+    "ament_lint_auto": [
+      "mr2_action_interface",
+      "mr2_can_bus_core",
+      "mr2_devices_ak_servo",
+      "mr2_devices_output_actuator",
+      "mr2_nav2_plugins",
+      "mr2_panorama",
+      "mr2_rover_control",
+      "mr2_spectrophotometer",
+      "mr2_video_streaming",
+      "mr2_yolo_perception",
+      "ntrip_client_node",
+      "ublox_dgnss_node",
+      "ublox_nav_sat_fix_hp_node",
+      "ublox_ubx_interfaces",
+      "ublox_ubx_msgs"
+    ],
+    "ament_lint_common": [
+      "mr2_action_interface",
+      "mr2_can_bus_core",
+      "mr2_devices_ak_servo",
+      "mr2_devices_output_actuator",
+      "mr2_nav2_plugins",
+      "mr2_panorama",
+      "mr2_rover_control",
+      "mr2_spectrophotometer",
+      "mr2_video_streaming",
+      "mr2_yolo_perception",
+      "ntrip_client_node",
+      "rtcm_msgs",
+      "ublox_dgnss_node",
+      "ublox_nav_sat_fix_hp_node",
+      "ublox_ubx_interfaces",
+      "ublox_ubx_msgs"
+    ],
+    "ament_pep257": [
+      "mr2_latency_diagnostics",
+      "mr2_launch",
+      "mr2_rover_description",
+      "mr2_system_status"
+    ],
+    "ament_python": [
+      "mr2_latency_diagnostics"
+    ],
+    "aruco_opencv": [
+      "mr2_launch",
+      "mr2_rover_auto"
+    ],
+    "aruco_opencv_msgs": [
+      "mr2_rover_auto"
+    ],
+    "behaviortree_cpp_v3": [
+      "mr2_rover_auto"
+    ],
+    "builtin_interfaces": [
+      "mr2_action_interface",
+      "mr2_devices_output_actuator",
+      "mr2_science_module",
+      "rtcm_msgs",
+      "ublox_ubx_msgs"
+    ],
+    "camera_calibration_parsers": [
+      "mr2_panorama"
+    ],
+    "catkin": [
+      "rtcm_msgs"
+    ],
+    "chrony": [
+      "mr2_system_status"
+    ],
+    "control_msgs": [
+      "mr2_xbee_bridge"
+    ],
+    "controller_interface": [
+      "mr2_control",
+      "mr2_rover_control"
+    ],
+    "controller_manager": [
+      "mr2_flat_bench",
+      "mr2_moveit",
+      "mr2_rover_description"
+    ],
+    "controller_manager_msgs": [
+      "mr2_flat_bench"
+    ],
+    "diagnostic_msgs": [
+      "mr2_control",
+      "mr2_system_status"
+    ],
+    "eigen": [
+      "mr2_rover_auto"
+    ],
+    "filters": [
+      "mr2_rover_auto"
+    ],
+    "geographic_msgs": [
+      "mr2_rover_auto"
+    ],
+    "geographiclib": [
+      "mr2_rover_auto"
+    ],
+    "geometry_msgs": [
+      "mr2_action_interface",
+      "mr2_camera_turret",
+      "mr2_control",
+      "mr2_flat_bench",
+      "mr2_flat_motor",
+      "mr2_nav2_plugins",
+      "mr2_rover_auto",
+      "mr2_rover_control",
+      "mr2_xbee_bridge",
+      "mr2_yolo_perception"
+    ],
+    "grid_map_core": [
+      "mr2_nav2_plugins",
+      "mr2_rover_auto"
+    ],
+    "grid_map_filters": [
+      "mr2_rover_auto"
+    ],
+    "grid_map_msgs": [
+      "mr2_nav2_plugins",
+      "mr2_rover_auto"
+    ],
+    "grid_map_ros": [
+      "mr2_nav2_plugins",
+      "mr2_rover_auto"
+    ],
+    "gz_ros2_control": [
+      "mr2_rover_description"
+    ],
+    "gz_ros2_control_demos": [
+      "mr2_rover_description"
+    ],
+    "hardware_interface": [
+      "mr2_can_hardware_interface",
+      "mr2_control",
+      "mr2_devices_ak_servo",
+      "mr2_devices_output_actuator",
+      "mr2_devices_robstride",
+      "mr2_flat_bench"
+    ],
+    "image_geometry": [
+      "mr2_yolo_perception"
+    ],
+    "imu_filter_madgwick": [
+      "mr2_rover_auto"
+    ],
+    "joint_state_broadcaster": [
+      "mr2_control",
+      "mr2_flat_bench",
+      "mr2_rover_description"
+    ],
+    "joint_state_publisher": [
+      "mr2_moveit"
+    ],
+    "joint_state_publisher_gui": [
+      "mr2_moveit"
+    ],
+    "joy": [
+      "mr2_moveit"
+    ],
+    "launch": [
+      "mr2_camera_turret",
+      "mr2_flat_bench",
+      "mr2_launch",
+      "mr2_led",
+      "mr2_rover_auto",
+      "mr2_science_module",
+      "mr2_spectrophotometer"
+    ],
+    "launch_ros": [
+      "mr2_camera_turret",
+      "mr2_flat_bench",
+      "mr2_launch",
+      "mr2_led",
+      "mr2_rover_auto",
+      "mr2_science_module",
+      "mr2_spectrophotometer"
+    ],
+    "libcurl-dev": [
+      "ntrip_client_node"
+    ],
+    "libopencv-dev": [
+      "mr2_panorama",
+      "mr2_rover_auto"
+    ],
+    "libusb-1.0-dev": [
+      "ublox_dgnss_node"
+    ],
+    "message_filters": [
+      "mr2_yolo_perception"
+    ],
+    "message_generation": [
+      "rtcm_msgs"
+    ],
+    "message_runtime": [
+      "rtcm_msgs"
+    ],
+    "moveit_configs_utils": [
+      "mr2_moveit"
+    ],
+    "moveit_kinematics": [
+      "mr2_moveit"
+    ],
+    "moveit_planners": [
+      "mr2_moveit"
+    ],
+    "moveit_ros_visualization": [
+      "mr2_moveit"
+    ],
+    "moveit_servo": [
+      "mr2_moveit"
+    ],
+    "moveit_simple_controller_manager": [
+      "mr2_moveit"
+    ],
+    "mr2_action_interface": [
+      "mr2_control",
+      "mr2_flat_bench",
+      "mr2_flat_motor",
+      "mr2_led",
+      "mr2_panorama",
+      "mr2_rover_auto",
+      "mr2_rover_control",
+      "mr2_xbee_bridge"
+    ],
+    "mr2_battery_monitor": [
+      "mr2_rover_description",
+      "mr2_xbee_bridge"
+    ],
+    "mr2_can_bus_core": [
+      "mr2_battery_monitor",
+      "mr2_camera_turret",
+      "mr2_can_hardware_interface",
+      "mr2_control",
+      "mr2_devices_ak_servo",
+      "mr2_devices_output_actuator",
+      "mr2_devices_robstride",
+      "mr2_flat_bench",
+      "mr2_led",
+      "mr2_science_module"
+    ],
+    "mr2_can_hardware_interface": [
+      "mr2_flat_bench",
+      "mr2_rover_description"
+    ],
+    "mr2_control": [
+      "mr2_rover_description"
+    ],
+    "mr2_devices_ak_servo": [
+      "mr2_control"
+    ],
+    "mr2_devices_output_actuator": [
+      "mr2_control",
+      "mr2_devices_robstride",
+      "mr2_rover_description"
+    ],
+    "mr2_devices_robstride": [
+      "mr2_control",
+      "mr2_flat_bench",
+      "mr2_rover_description"
+    ],
+    "mr2_flat_motor": [
+      "mr2_launch"
+    ],
+    "mr2_latency_diagnostics": [
+      "mr2_launch"
+    ],
+    "mr2_latency_msgs": [
+      "mr2_latency_diagnostics",
+      "mr2_video_streaming"
+    ],
+    "mr2_launch": [
+      "mr2_flat_bench"
+    ],
+    "mr2_nav2_plugins": [
+      "mr2_rover_auto"
+    ],
+    "mr2_panorama": [
+      "mr2_launch",
+      "mr2_rover_auto"
+    ],
+    "mr2_rover_control": [
+      "mr2_flat_bench"
+    ],
+    "mr2_rover_description": [
+      "mr2_flat_bench",
+      "mr2_moveit"
+    ],
+    "mr2_science_module": [
+      "mr2_launch"
+    ],
+    "mr2_spectrophotometer_msgs": [
+      "mr2_spectrophotometer"
+    ],
+    "mr2_system_status": [
+      "mr2_latency_diagnostics"
+    ],
+    "mr2_video_streaming": [
+      "mr2_launch"
+    ],
+    "nav2_behavior_tree": [
+      "mr2_rover_auto"
+    ],
+    "nav2_bringup": [
+      "mr2_rover_auto"
+    ],
+    "nav2_costmap_2d": [
+      "mr2_nav2_plugins"
+    ],
+    "nav2_lifecycle_manager": [
+      "mr2_rover_auto"
+    ],
+    "nav2_map_server": [
+      "mr2_rover_auto"
+    ],
+    "nav2_msgs": [
+      "mr2_rover_auto"
+    ],
+    "nav2_util": [
+      "mr2_nav2_plugins"
+    ],
+    "nav_msgs": [
+      "mr2_control",
+      "mr2_flat_bench",
+      "mr2_rover_control",
+      "mr2_xbee_bridge"
+    ],
+    "nlohmann-json-dev": [
+      "mr2_video_streaming"
+    ],
+    "ntrip_client_node": [
+      "ublox_dgnss"
+    ],
+    "pcl_conversions": [
+      "mr2_rover_auto"
+    ],
+    "pkg-config": [
+      "mr2_video_streaming",
+      "ntrip_client_node",
+      "ublox_dgnss_node"
+    ],
+    "pluginlib": [
+      "mr2_can_hardware_interface",
+      "mr2_control",
+      "mr2_devices_ak_servo",
+      "mr2_devices_output_actuator",
+      "mr2_devices_robstride",
+      "mr2_flat_bench",
+      "mr2_nav2_plugins",
+      "mr2_rover_auto",
+      "mr2_rover_control"
+    ],
+    "position_controllers": [
+      "mr2_rover_description"
+    ],
+    "python3": [
+      "mr2_latency_diagnostics"
+    ],
+    "python3-numpy": [
+      "mr2_spectrophotometer",
+      "mr2_yolo_perception"
+    ],
+    "python3-opencv": [
+      "mr2_spectrophotometer",
+      "mr2_yolo_perception"
+    ],
+    "python3-psutil": [
+      "mr2_system_status"
+    ],
+    "python3-pytest": [
+      "mr2_flat_motor",
+      "mr2_latency_diagnostics",
+      "mr2_launch",
+      "mr2_rover_description",
+      "mr2_system_status"
+    ],
+    "python3-yaml": [
+      "mr2_control"
+    ],
+    "rclcpp": [
+      "mr2_battery_monitor",
+      "mr2_camera_turret",
+      "mr2_can_hardware_interface",
+      "mr2_control",
+      "mr2_devices_ak_servo",
+      "mr2_devices_output_actuator",
+      "mr2_devices_robstride",
+      "mr2_flat_bench",
+      "mr2_led",
+      "mr2_nav2_plugins",
+      "mr2_panorama",
+      "mr2_rover_auto",
+      "mr2_rover_control",
+      "mr2_science_module",
+      "mr2_video_streaming",
+      "mr2_xbee_bridge",
+      "ntrip_client_node",
+      "ublox_dgnss_node",
+      "ublox_nav_sat_fix_hp_node"
+    ],
+    "rclcpp_action": [
+      "mr2_panorama",
+      "mr2_rover_auto"
+    ],
+    "rclcpp_components": [
+      "mr2_launch",
+      "mr2_moveit",
+      "mr2_rover_auto",
+      "ntrip_client_node",
+      "ublox_dgnss_node",
+      "ublox_nav_sat_fix_hp_node"
+    ],
+    "rclcpp_lifecycle": [
+      "mr2_rover_control"
+    ],
+    "rclpy": [
+      "mr2_control",
+      "mr2_flat_bench",
+      "mr2_flat_motor",
+      "mr2_latency_diagnostics",
+      "mr2_rover_description",
+      "mr2_spectrophotometer",
+      "mr2_system_status",
+      "mr2_yolo_perception"
+    ],
+    "realsense2_camera": [
+      "mr2_launch"
+    ],
+    "robot_localization": [
+      "mr2_rover_auto"
+    ],
+    "robot_state_publisher": [
+      "mr2_flat_bench",
+      "mr2_rover_description"
+    ],
+    "ros2_control": [
+      "mr2_rover_description"
+    ],
+    "ros2_controllers": [
+      "mr2_rover_description"
+    ],
+    "ros_environment": [
+      "rtcm_msgs"
+    ],
+    "ros_gz": [
+      "mr2_rover_description"
+    ],
+    "ros_gz_bridge": [
+      "mr2_rover_description"
+    ],
+    "ros_gz_sim": [
+      "mr2_rover_description"
+    ],
+    "rosbridge_server": [
+      "mr2_launch"
+    ],
+    "rosidl_default_generators": [
+      "mr2_action_interface",
+      "mr2_battery_monitor",
+      "mr2_devices_output_actuator",
+      "mr2_latency_msgs",
+      "mr2_led",
+      "mr2_rover_auto",
+      "mr2_science_module",
+      "mr2_spectrophotometer_msgs",
+      "rtcm_msgs",
+      "ublox_ubx_interfaces",
+      "ublox_ubx_msgs"
+    ],
+    "rosidl_default_runtime": [
+      "mr2_action_interface",
+      "mr2_battery_monitor",
+      "mr2_devices_output_actuator",
+      "mr2_latency_msgs",
+      "mr2_led",
+      "mr2_rover_auto",
+      "mr2_science_module",
+      "mr2_spectrophotometer_msgs",
+      "rtcm_msgs"
+    ],
+    "rtcm_msgs": [
+      "mr2_xbee_bridge",
+      "ntrip_client_node",
+      "ublox_dgnss_node"
+    ],
+    "rviz2": [
+      "mr2_launch",
+      "mr2_moveit"
+    ],
+    "rviz_common": [
+      "mr2_moveit"
+    ],
+    "rviz_default_plugins": [
+      "mr2_moveit"
+    ],
+    "sensor_msgs": [
+      "mr2_action_interface",
+      "mr2_battery_monitor",
+      "mr2_control",
+      "mr2_flat_bench",
+      "mr2_panorama",
+      "mr2_rover_auto",
+      "mr2_rover_description",
+      "mr2_video_streaming",
+      "mr2_xbee_bridge",
+      "mr2_yolo_perception",
+      "ublox_nav_sat_fix_hp_node"
+    ],
+    "socat": [
+      "mr2_launch"
+    ],
+    "std_msgs": [
+      "mr2_battery_monitor",
+      "mr2_control",
+      "mr2_flat_motor",
+      "mr2_rover_auto",
+      "mr2_spectrophotometer_msgs",
+      "mr2_video_streaming",
+      "mr2_xbee_bridge",
+      "ntrip_client_node",
+      "rtcm_msgs",
+      "ublox_dgnss_node",
+      "ublox_nav_sat_fix_hp_node",
+      "ublox_ubx_msgs"
+    ],
+    "std_srvs": [
+      "mr2_control",
+      "mr2_video_streaming"
+    ],
+    "tf2": [
+      "mr2_nav2_plugins",
+      "mr2_panorama",
+      "mr2_rover_auto"
+    ],
+    "tf2_eigen": [
+      "mr2_rover_auto"
+    ],
+    "tf2_geometry_msgs": [
+      "mr2_nav2_plugins",
+      "mr2_panorama",
+      "mr2_rover_auto",
+      "mr2_yolo_perception"
+    ],
+    "tf2_ros": [
+      "mr2_launch",
+      "mr2_moveit",
+      "mr2_nav2_plugins",
+      "mr2_panorama",
+      "mr2_rover_auto",
+      "mr2_yolo_perception"
+    ],
+    "topic_tools": [
+      "mr2_launch"
+    ],
+    "transmission_interface": [
+      "mr2_can_hardware_interface",
+      "mr2_control"
+    ],
+    "ublox_dgnss": [
+      "mr2_launch"
+    ],
+    "ublox_dgnss_node": [
+      "mr2_launch",
+      "ublox_dgnss"
+    ],
+    "ublox_nav_sat_fix_hp_node": [
+      "mr2_launch",
+      "ublox_dgnss"
+    ],
+    "ublox_ubx_interfaces": [
+      "ublox_dgnss",
+      "ublox_dgnss_node",
+      "ublox_nav_sat_fix_hp_node"
+    ],
+    "ublox_ubx_msgs": [
+      "mr2_rover_auto",
+      "mr2_xbee_bridge",
+      "ublox_dgnss",
+      "ublox_dgnss_node",
+      "ublox_nav_sat_fix_hp_node"
+    ],
+    "v4l-utils": [
+      "mr2_spectrophotometer"
+    ],
+    "v4l2_camera": [
+      "mr2_launch"
+    ],
+    "xacro": [
+      "mr2_control",
+      "mr2_flat_bench",
+      "mr2_launch",
+      "mr2_moveit"
+    ],
+    "yaml-cpp": [
+      "mr2_control"
+    ]
+  },
+  "launch_package_references": [
+    "aruco_opencv",
+    "controller_manager",
+    "imu_filter_madgwick",
+    "moveit_servo",
+    "mr2_battery_monitor",
+    "mr2_camera_turret",
+    "mr2_control",
+    "mr2_devices_ak_servo",
+    "mr2_flat_motor",
+    "mr2_latency_diagnostics",
+    "mr2_led",
+    "mr2_panorama",
+    "mr2_rover_auto",
+    "mr2_rover_description",
+    "mr2_science_module",
+    "mr2_spectrophotometer",
+    "mr2_system_status",
+    "mr2_video_streaming",
+    "mr2_xbee_bridge",
+    "mr2_yolo_perception",
+    "nav2_behaviors",
+    "nav2_bt_navigator",
+    "nav2_controller",
+    "nav2_lifecycle_manager",
+    "nav2_map_server",
+    "nav2_planner",
+    "nav2_smoother",
+    "nav2_velocity_smoother",
+    "nav2_waypoint_follower",
+    "ntrip_client_node",
+    "rclcpp_components",
+    "realsense2_camera",
+    "robot_localization",
+    "robot_state_publisher",
+    "ros_gz_bridge",
+    "ros_gz_sim",
+    "rosbridge_server",
+    "rviz2",
+    "tf2_ros",
+    "topic_tools",
+    "ublox_dgnss_node",
+    "ublox_nav_sat_fix_hp_node",
+    "v4l2_camera"
+  ],
+  "cmake_find_packages": [
+    "CURL",
+    "Eigen3",
+    "GeographicLib",
+    "OpenCV",
+    "PCL",
+    "PkgConfig",
+    "Threads",
+    "action_msgs",
+    "ament_cmake",
+    "ament_cmake_core",
+    "ament_cmake_gtest",
+    "ament_cmake_pytest",
+    "ament_cmake_test",
+    "ament_cmake_uncrustify",
+    "ament_index_cpp",
+    "ament_lint_auto",
+    "aruco_opencv_msgs",
+    "behaviortree_cpp_v3",
+    "builtin_interfaces",
+    "camera_calibration_parsers",
+    "catkin",
+    "control_msgs",
+    "controller_interface",
+    "diagnostic_msgs",
+    "filters",
+    "geographic_msgs",
+    "geometry_msgs",
+    "grid_map_core",
+    "grid_map_filters",
+    "grid_map_msgs",
+    "grid_map_ros",
+    "hardware_interface",
+    "mr2_action_interface",
+    "mr2_battery_monitor",
+    "mr2_can_bus_core",
+    "mr2_devices_output_actuator",
+    "mr2_latency_msgs",
+    "nav2_behavior_tree",
+    "nav2_bringup",
+    "nav2_costmap_2d",
+    "nav2_msgs",
+    "nav2_util",
+    "nav_msgs",
+    "nlohmann_json",
+    "pcl_conversions",
+    "pluginlib",
+    "rclcpp",
+    "rclcpp_action",
+    "rclcpp_components",
+    "rclcpp_lifecycle",
+    "robot_localization",
+    "ros_environment",
+    "rosidl_default_generators",
+    "rtcm_msgs",
+    "sensor_msgs",
+    "std_msgs",
+    "std_srvs",
+    "tf2",
+    "tf2_eigen",
+    "tf2_geometry_msgs",
+    "tf2_ros",
+    "transmission_interface",
+    "ublox_dgnss",
+    "ublox_dgnss_node",
+    "ublox_nav_sat_fix_hp_node",
+    "ublox_ubx_interfaces",
+    "ublox_ubx_msgs",
+    "yaml"
+  ]
+}

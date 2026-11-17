@@ -1,0 +1,33 @@
+NvMMLiteOpen : Block : BlockType = 4 
+===== NvVideo: NVENC =====
+NvMMLiteBlockCreate : Block : BlockType = 4 
+H264: Profile = 66 Level = 0 
+NVMEDIA: Need to set EMC bandwidth : 126000 
+{
+  "gstreamer": "GStreamer 1.20.3",
+  "description": "Generated snow; hardware encode to fakesink; no camera or network",
+  "windows": [
+    {
+      "target_bps": 1800000,
+      "property_bps": 1800000,
+      "observed_bps": 1763855.1109966699,
+      "frames": 60,
+      "frame_bytes_p50": 7296.5
+    },
+    {
+      "target_bps": 300000,
+      "property_bps": 300000,
+      "observed_bps": 481219.17958803585,
+      "frames": 60,
+      "frame_bytes_p50": 1696.5
+    },
+    {
+      "target_bps": 1800000,
+      "property_bps": 1800000,
+      "observed_bps": 1763743.0485191294,
+      "frames": 60,
+      "frame_bytes_p50": 7435.5
+    }
+  ]
+}
+Opening in BLOCKING MODE 

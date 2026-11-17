@@ -1,0 +1,122 @@
+[
+  {
+    "deltas_blocked_recovering": 14,
+    "encoder_kbps": 170,
+    "failed": false,
+    "fps": 15,
+    "frames_admitted": 45,
+    "frames_encoded": 61,
+    "height": 180,
+    "key_sizes_bytes": [
+      22454,
+      2125,
+      4185,
+      2617
+    ],
+    "keys_admitted": 2,
+    "keys_encoded": 4,
+    "pacer_frame_window_us": 150000,
+    "pattern": "snow",
+    "rtp_packets": 79,
+    "sent_kbps": 125.566,
+    "vbv_bits": 180000,
+    "width": 320,
+    "wire_kbps": 200
+  },
+  {
+    "deltas_blocked_recovering": 14,
+    "encoder_kbps": 255,
+    "failed": false,
+    "fps": 15,
+    "frames_admitted": 45,
+    "frames_encoded": 60,
+    "height": 180,
+    "key_sizes_bytes": [
+      23601,
+      2727,
+      4185
+    ],
+    "keys_admitted": 2,
+    "keys_encoded": 3,
+    "pacer_frame_window_us": 150000,
+    "pattern": "snow",
+    "rtp_packets": 107,
+    "sent_kbps": 197.59,
+    "vbv_bits": 180000,
+    "width": 320,
+    "wire_kbps": 300
+  },
+  {
+    "deltas_blocked_recovering": 29,
+    "encoder_kbps": 510,
+    "failed": false,
+    "fps": 30,
+    "frames_admitted": 91,
+    "frames_encoded": 121,
+    "height": 180,
+    "key_sizes_bytes": [
+      23601,
+      4145,
+      5168,
+      4166,
+      5108
+    ],
+    "keys_admitted": 4,
+    "keys_encoded": 5,
+    "pacer_frame_window_us": 150000,
+    "pattern": "snow",
+    "rtp_packets": 210,
+    "sent_kbps": 400.702,
+    "vbv_bits": 180000,
+    "width": 320,
+    "wire_kbps": 600
+  },
+  {
+    "deltas_blocked_recovering": 29,
+    "encoder_kbps": 1530,
+    "failed": false,
+    "fps": 30,
+    "frames_admitted": 91,
+    "frames_encoded": 121,
+    "height": 360,
+    "key_sizes_bytes": [
+      39845,
+      15719,
+      16979,
+      17357,
+      17248
+    ],
+    "keys_admitted": 4,
+    "keys_encoded": 5,
+    "pacer_frame_window_us": 150000,
+    "pattern": "snow",
+    "rtp_packets": 562,
+    "sent_kbps": 1230.216,
+    "vbv_bits": 180000,
+    "width": 640,
+    "wire_kbps": 1800
+  },
+  {
+    "deltas_blocked_recovering": 14,
+    "encoder_kbps": 255,
+    "failed": false,
+    "fps": 15,
+    "frames_admitted": 46,
+    "frames_encoded": 61,
+    "height": 180,
+    "key_sizes_bytes": [
+      5524,
+      3619,
+      3311
+    ],
+    "keys_admitted": 2,
+    "keys_encoded": 3,
+    "pacer_frame_window_us": 150000,
+    "pattern": "smpte",
+    "rtp_packets": 103,
+    "sent_kbps": 201.772,
+    "vbv_bits": 180000,
+    "width": 320,
+    "wire_kbps": 300
+  }
+]

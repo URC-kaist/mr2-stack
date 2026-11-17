@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="rover">
+  <xacro:arg name="actuator" default="custom"/>
   <xacro:arg name="can_iface" default="can0"/>
   <xacro:arg name="ros2_control_mode" default="gazebo"/>
   <xacro:arg name="ros2_control_config" default="$(find mr2_rover_description)/config/controllers/rover_controllers.yaml"/>
@@ -40,6 +41,6 @@
     <xacro:rover_gazebo_ros2_control name="GazeboSimSystem" ros2_control_config="${ros2_control_config_value}" enable_manipulator_module="${enable_manipulator_module_value}"/>
   </xacro:if>
   <xacro:if value="${ros2_control_mode_value == 'real_hardware'}">
-    <xacro:rover_can_ros2_control name="RoverCanSystem" can_iface="${can_iface_value}" enable_manipulator_module="${enable_manipulator_module_value}"/>
+    <xacro:rover_can_ros2_control name="RoverCanSystem" actuator="$(arg actuator)" can_iface="${can_iface_value}" enable_manipulator_module="${enable_manipulator_module_value}"/>
   </xacro:if>
 </robot>

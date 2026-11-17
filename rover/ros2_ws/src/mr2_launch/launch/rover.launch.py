@@ -75,6 +75,11 @@ def generate_launch_description():
         default_value="false",
         description="Run without GUI components",
     )
+    actuator_arg = DeclareLaunchArgument(
+        "actuator", default_value="custom", choices=["custom", "rs"],
+        description="Drive wheel motors: custom firmware or RobStride RS-06",
+    )
+
     can_iface_arg = DeclareLaunchArgument(
         "can_iface",
         default_value="can0",
@@ -312,6 +317,7 @@ def generate_launch_description():
         ),
         launch_arguments={
             "can_iface": LaunchConfiguration("can_iface"),
+            "actuator": LaunchConfiguration("actuator"),
             "controller_config": LaunchConfiguration("controller_config"),
             "control_backend": LaunchConfiguration("control_backend"),
             "controller_spawn_delay": LaunchConfiguration("controller_spawn_delay"),
@@ -514,6 +520,7 @@ def generate_launch_description():
         use_sim_time_arg,
         headless_arg,
         can_iface_arg,
+        actuator_arg,
         control_backend_arg,
         OpaqueFunction(function=_validate_control_backend),
         controller_config_arg,

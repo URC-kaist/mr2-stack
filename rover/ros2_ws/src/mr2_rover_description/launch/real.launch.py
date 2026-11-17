@@ -59,6 +59,11 @@ def generate_launch_description():
         description="Activate manipulator and gripper controllers immediately after spawning",
     )
 
+    actuator_arg = DeclareLaunchArgument(
+        "actuator", default_value="custom", choices=["custom", "rs"],
+        description="Drive wheel motors: custom firmware or RobStride RS-06",
+    )
+
     can_iface, can_iface_arg = declare_can_iface(
         description="CAN interface connected to the rover hardware",
     )
@@ -77,6 +82,7 @@ def generate_launch_description():
         {
             "ros2_control_mode": "real_hardware",
             "can_iface": can_iface,
+            "actuator": LaunchConfiguration("actuator"),
             "ros2_control_config": controller_config,
             "enable_manipulator_module": enable_manipulator_module,
             "enable_autonomous_module": enable_autonomous_module,
@@ -199,6 +205,7 @@ def generate_launch_description():
             controller_spawn_delay_arg,
             start_manipulator_controllers_active_arg,
             can_iface_arg,
+            actuator_arg,
             controller_config_arg,
             use_mock_servos_arg,
             rsp,

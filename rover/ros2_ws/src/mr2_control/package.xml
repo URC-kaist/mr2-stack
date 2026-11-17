@@ -13,6 +13,7 @@
   <depend>yaml-cpp</depend>
   <exec_depend>mr2_devices_ak_servo</exec_depend>
   <exec_depend>mr2_devices_output_actuator</exec_depend>
+  <exec_depend>mr2_devices_robstride</exec_depend>
   <test_depend>ament_cmake_gtest</test_depend>
   <test_depend>ament_cmake_pytest</test_depend>
   <test_depend>controller_interface</test_depend>

@@ -124,6 +124,11 @@ def generate_launch_description():
     DeclareLaunchArgument = profile_arguments("direct")
     load_mr2_env()
 
+    actuator_arg = DeclareLaunchArgument(
+        "actuator", default_value="custom", choices=["custom", "rs"],
+        description="Drive wheel motors: custom firmware or RobStride RS-06",
+    )
+
     can_iface_arg = DeclareLaunchArgument(
         "can_iface",
         default_value="can0",
@@ -380,6 +385,7 @@ def generate_launch_description():
             "headless": LaunchConfiguration("headless"),
             "rviz_config": LaunchConfiguration("rviz_config"),
             "can_iface": LaunchConfiguration("can_iface"),
+            "actuator": LaunchConfiguration("actuator"),
             "controller_config": LaunchConfiguration("controller_config"),
             "control_backend": LaunchConfiguration("control_backend"),
             "controller_spawn_delay": LaunchConfiguration("controller_spawn_delay"),
@@ -494,6 +500,7 @@ def generate_launch_description():
         [
             OpaqueFunction(function=acquire_clock),
             can_iface_arg,
+            actuator_arg,
             controller_spawn_delay_arg,
             control_backend_arg,
             controller_config_arg,

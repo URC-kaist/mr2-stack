@@ -23,21 +23,21 @@ rosidl_generate_interfaces(${PROJECT_NAME}
 
 ament_export_dependencies(rosidl_default_runtime)
 
-add_library(output_actuator_device SHARED
-  src/output_actuator_device.cpp)
-ament_target_dependencies(output_actuator_device
+add_library(custom_actuator_device SHARED
+  src/custom_actuator_device.cpp)
+ament_target_dependencies(custom_actuator_device
   mr2_can_bus_core hardware_interface pluginlib rclcpp)
 
 rosidl_get_typesupport_target(typesupport_target
   ${PROJECT_NAME} "rosidl_typesupport_cpp")
 if(typesupport_target)
-  target_link_libraries(output_actuator_device ${typesupport_target})
+  target_link_libraries(custom_actuator_device ${typesupport_target})
 endif()
-add_dependencies(output_actuator_device ${PROJECT_NAME}__rosidl_generator_cpp)
+add_dependencies(custom_actuator_device ${PROJECT_NAME}__rosidl_generator_cpp)
 
 pluginlib_export_plugin_description_file(mr2_can_bus_core plugin.xml)
 
-install(TARGETS output_actuator_device
+install(TARGETS custom_actuator_device
         LIBRARY DESTINATION lib)
 
 install(FILES plugin.xml

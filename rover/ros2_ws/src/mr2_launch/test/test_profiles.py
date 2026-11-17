@@ -9,11 +9,11 @@ import pytest
 from launch import LaunchContext, LaunchDescription
 from launch.actions import (
     DeclareLaunchArgument, ExecuteProcess, GroupAction, IncludeLaunchDescription,
-    OpaqueFunction, TimerAction,
+    OpaqueFunction, SetEnvironmentVariable, TimerAction,
 )
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.utilities import normalize_to_list_of_substitutions, perform_substitutions
-from launch_ros.actions import Node, SetParameter
+from launch_ros.actions import LoadComposableNodes, Node, SetParameter
 
 from mr2_launch import profile
 
@@ -67,6 +67,24 @@ def test_default_original_invalid_selection_and_explicit_override(selection):
         profile.read_profile(selection)
 
 
+@pytest.mark.parametrize('entrypoint', ['rover.launch.py', 'rover_real.launch.py', 'rover_direct.launch.py'])
+def test_persisted_camera_experiment_uses_usual_launch_without_motors(selection, entrypoint):
+    scripts = selection / 'scripts'
+    scripts.mkdir()
+    script = scripts / 'rover.bash'
+    source = next(p / 'scripts/rover.bash' for p in PACKAGE.parents if (p / 'scripts/rover.bash').exists())
+    shutil.copyfile(source, script)
+    subprocess.run(['bash', str(script), 'start', 'flat', '--cameras-only'], check=True)
+    packages, config = composition(entrypoint)
+    assert 'mr2_video_streaming' in packages and 'mr2_xbee_bridge' in packages
+    assert not {'mr2_flat_motor', 'controller_manager', 'ublox_dgnss_node'} & set(packages)
+    assert Path(config['video_config']).name == 'video_streams_flat.json'
+    _, explicit = composition(entrypoint, {'enable_flat_motor': 'true'})
+    assert explicit['enable_flat_motor'] == 'true'
+    subprocess.run(['bash', str(script), 'start', 'original'], check=True)
+    assert not (selection / '.mr2-rover-profile.options.json').exists()
+
+
 def composition(entrypoint, overrides=None):
     context = LaunchContext()
     context.launch_configurations.update(overrides or {})
@@ -85,7 +103,7 @@ def composition(entrypoint, overrides=None):
         elif isinstance(action, Node):
             packages.append(resolve(action.node_package))
             node_config.update(context.launch_configurations)
-        elif isinstance(action, (ExecuteProcess, OpaqueFunction, SetParameter)):
+        elif isinstance(action, (ExecuteProcess, OpaqueFunction, SetParameter, SetEnvironmentVariable, LoadComposableNodes)):
             pass  # Never execute processes, systemctl, or hardware initialization.
         elif isinstance(action, IncludeLaunchDescription):
             arguments = {resolve(k): resolve(v) for k, v in action.launch_arguments}
@@ -163,6 +181,44 @@ def test_original_profile_does_not_enable_flat_motor(selection):
     assert not actions[-1].condition.evaluate(context)
     profile.profile_arguments('rover')('smooth_drive_commands', default_value='true').execute(context)
     assert context.launch_configurations['smooth_drive_commands'] == 'true'
+
+
+def test_usual_real_command_uses_v4l2_video_without_autonomy_or_realsense_owner(selection):
+    packages, config = composition('rover_real.launch.py', {
+        'enable_manipulator_module': 'false', 'enable_xbee_sim': 'false',
+    })
+    assert packages.count('mr2_video_streaming') == 1
+    assert config['enable_autonomous_module'] == 'false'
+    assert config['enable_realsense'] == 'false'
+    assert config['enable_localization'] == 'false'
+    assert not {'mr2_yolo_perception', 'aruco_opencv', 'robot_localization'} & set(packages)
+    assert 'rgbd_ros_topic' not in config
+    assert 'rgbd_camera' not in config['disabled_stream_ids'].split(',')
+    assert config['video_base_host'] == '192.0.2.1'
+    assert Path(config['video_config']).name == 'video_streams.json'
+    rgbd = json.loads(Path(config['video_config']).read_text())['streams'][0]
+    assert rgbd['source']['type'] == 'v4l2'
+    assert rgbd['source']['device'] == '/dev/videoRGBD'
+    assert rgbd['framerate'] == 30
+
+
+def test_explicit_autonomy_restores_ros_owner_and_excludes_direct_rgbd_capture(selection):
+    packages, config = composition('rover_real.launch.py', {
+        'enable_autonomous_module': 'true', 'video_base_host': '192.168.0.54',
+    })
+    assert config['enable_realsense'] == 'true'
+    assert config['enable_localization'] == 'true'
+    assert 'mr2_yolo_perception' in packages
+    assert 'rgbd_camera' in config['disabled_stream_ids'].split(',')
+    assert 'rgbd_ros_topic' not in config
+    assert config['video_base_host'] == '192.168.0.54'
+
+
+def test_explicit_realsense_off_overrides_autonomy_default(selection):
+    _, config = composition('rover_real.launch.py', {
+        'enable_autonomous_module': 'true', 'enable_realsense': 'false',
+    })
+    assert config['enable_realsense'] == 'false'
 
 
 @pytest.mark.parametrize('entrypoint', ['rover.launch.py', 'rover_real.launch.py', 'rover_direct.launch.py'])

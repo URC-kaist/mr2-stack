@@ -1,8 +1,35 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro">n
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:macro name="rover_can_ros2_control" params="name can_iface:=can0 enable_manipulator_module:=true">
+  <xacro:macro name="rover_can_ros2_control" params="name can_iface:=can0 enable_manipulator_module:=true actuator:=custom">
     <xacro:property name="enable_manipulator_module_value" value="${enable_manipulator_module}"/>
+
+    <!-- Dictionary lookup rejects invalid values even for direct xacro callers. -->
+    <xacro:property name="drive_plugin" value="${dict(custom='mr2_devices_output_actuator/CustomActuatorDevice', rs='mr2_devices_robstride/RobstrideDevice')[actuator]}"/>
+    <xacro:macro name="drive_device_params" params="motor_id">
+      <param name="device_plugin">${drive_plugin}</param>
+      <param name="can_iface">${can_iface}</param>
+      <xacro:if value="${actuator == 'custom'}">
+        <param name="node_id">${motor_id}</param>
+        <param name="command_channel">velocity</param>
+        <param name="desired_profile">VelocityOnly</param>
+        <param name="auto_arm">true</param>
+      </xacro:if>
+      <xacro:if value="${actuator == 'rs'}">
+        <param name="motor_id">${motor_id}</param>
+        <param name="host_id">253</param>
+        <!-- RS06User Manual251112 sample constants; verify installed firmware. -->
+        <param name="feedback_position_max_rad">12.57</param>
+        <param name="feedback_velocity_max_rad_s">50.0</param>
+        <param name="feedback_torque_max_nm">36.0</param>
+        <param name="max_velocity_rad_s">20.0</param>
+        <param name="current_limit_a">14.3</param>
+        <param name="acceleration_rad_s2">20.0</param>
+        <param name="feedback_timeout_ms">200</param>
+        <param name="can_timeout_ms">200</param>
+        <param name="activation_timeout_ms">1500</param>
+      </xacro:if>
+    </xacro:macro>
 
     <ros2_control name="${name}" type="system">
       <hardware>
@@ -13,7 +40,7 @@
         <command_interface name="position"/>
         <state_interface name="position"/>
         <param name="actuator">steering_fl</param>
-        <param name="device_plugin">mr2_devices_output_actuator/OutputActuatorDevice</param>
+        <param name="device_plugin">mr2_devices_output_actuator/CustomActuatorDevice</param>
         <param name="node_id">3</param>
         <param name="can_iface">${can_iface}</param>
         <param name="command_channel">angle</param>
@@ -27,7 +54,7 @@
         <command_interface name="position"/>
         <state_interface name="position"/>
         <param name="actuator">steering_fr</param>
-        <param name="device_plugin">mr2_devices_output_actuator/OutputActuatorDevice</param>
+        <param name="device_plugin">mr2_devices_output_actuator/CustomActuatorDevice</param>
         <param name="node_id">1</param>
         <param name="can_iface">${can_iface}</param>
         <param name="command_channel">angle</param>
@@ -41,7 +68,7 @@
         <command_interface name="position"/>
         <state_interface name="position"/>
         <param name="actuator">steering_rl</param>
-        <param name="device_plugin">mr2_devices_output_actuator/OutputActuatorDevice</param>
+        <param name="device_plugin">mr2_devices_output_actuator/CustomActuatorDevice</param>
         <param name="node_id">4</param>
         <param name="can_iface">${can_iface}</param>
         <param name="command_channel">angle</param>
@@ -55,7 +82,7 @@
         <command_interface name="position"/>
         <state_interface name="position"/>
         <param name="actuator">steering_rr</param>
-        <param name="device_plugin">mr2_devices_output_actuator/OutputActuatorDevice</param>
+        <param name="device_plugin">mr2_devices_output_actuator/CustomActuatorDevice</param>
         <param name="node_id">2</param>
         <param name="can_iface">${can_iface}</param>
         <param name="command_channel">angle</param>
@@ -70,12 +97,7 @@
         <state_interface name="position"/>
         <state_interface name="velocity"/>
         <param name="actuator">drive_fl</param>
-        <param name="device_plugin">mr2_devices_output_actuator/OutputActuatorDevice</param>
-        <param name="node_id">7</param>
-        <param name="can_iface">${can_iface}</param>
-        <param name="command_channel">velocity</param>
-        <param name="desired_profile">VelocityOnly</param>
-        <param name="auto_arm">true</param>
+        <xacro:drive_device_params motor_id="7"/>
       </joint>
 
       <joint name="fr_wheel_joint">
@@ -83,12 +105,7 @@
         <state_interface name="position"/>
         <state_interface name="velocity"/>
         <param name="actuator">drive_fr</param>
-        <param name="device_plugin">mr2_devices_output_actuator/OutputActuatorDevice</param>
-        <param name="node_id">5</param>
-        <param name="can_iface">${can_iface}</param>
-        <param name="command_channel">velocity</param>
-        <param name="desired_profile">VelocityOnly</param>
-        <param name="auto_arm">true</param>
+        <xacro:drive_device_params motor_id="5"/>
       </joint>
 
       <joint name="rl_wheel_joint">
@@ -96,12 +113,7 @@
         <state_interface name="position"/>
         <state_interface name="velocity"/>
         <param name="actuator">drive_rl</param>
-        <param name="device_plugin">mr2_devices_output_actuator/OutputActuatorDevice</param>
-        <param name="node_id">8</param>
-        <param name="can_iface">${can_iface}</param>
-        <param name="command_channel">velocity</param>
-        <param name="desired_profile">VelocityOnly</param>
-        <param name="auto_arm">true</param>
+        <xacro:drive_device_params motor_id="8"/>
       </joint>
 
       <joint name="rr_wheel_joint">
@@ -109,12 +121,7 @@
         <state_interface name="position"/>
         <state_interface name="velocity"/>
         <param name="actuator">drive_rr</param>
-        <param name="device_plugin">mr2_devices_output_actuator/OutputActuatorDevice</param>
-        <param name="node_id">6</param>
-        <param name="can_iface">${can_iface}</param>
-        <param name="command_channel">velocity</param>
-        <param name="desired_profile">VelocityOnly</param>
-        <param name="auto_arm">true</param>
+        <xacro:drive_device_params motor_id="6"/>
       </joint>
 
 
@@ -207,7 +214,7 @@
         <command_interface name="position"/>
         <state_interface name="position"/>
         <param name="actuator">gripper_motor</param>
-        <param name="device_plugin">mr2_devices_output_actuator/OutputActuatorDevice</param>
+        <param name="device_plugin">mr2_devices_output_actuator/CustomActuatorDevice</param>
         <param name="node_id">9</param>
         <param name="can_iface">${can_iface}</param>
         <param name="command_channel">angle</param>

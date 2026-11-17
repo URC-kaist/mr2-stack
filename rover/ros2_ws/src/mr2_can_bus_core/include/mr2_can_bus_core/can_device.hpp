@@ -15,7 +15,8 @@
 struct CanFeedback {
   double position{std::numeric_limits<double>::quiet_NaN()};
   double velocity{std::numeric_limits<double>::quiet_NaN()};
-  // Driver units (AK amperes), not a physical joint torque measurement.
+  // Plugin-defined actuator units: AK amperes; RobStride output-shaft Nm.
+  // This is not necessarily a physical joint torque measurement.
   double effort{std::numeric_limits<double>::quiet_NaN()};
   int64_t position_received_ns{0};
   int64_t velocity_received_ns{0};

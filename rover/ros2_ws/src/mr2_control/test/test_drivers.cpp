@@ -1,5 +1,5 @@
 #include "../../mr2_devices_ak_servo/src/ak_servo_device.cpp"
-#include "../../mr2_devices_output_actuator/src/output_actuator_device.cpp"
+#include "../../mr2_devices_output_actuator/src/custom_actuator_device.cpp"
 #include <atomic>
 #include <gtest/gtest.h>
 #include <thread>
@@ -54,7 +54,7 @@ struct DeviceTestPeer {
 } // namespace mr2_devices_ak_servo
 namespace mr2_devices_output_actuator {
 struct DeviceTestPeer {
-  static auto prepare(OutputActuatorDevice &device, bool velocity = false) {
+  static auto prepare(CustomActuatorDevice &device, bool velocity = false) {
     device.node_id_ = 3;
     device.auto_arm_ = false;
     device.channel_ =
@@ -63,34 +63,34 @@ struct DeviceTestPeer {
     CanBusTestPeer::capture(device, device.bus_);
     return device.bus_;
   }
-  static void angle(OutputActuatorDevice &device, int32_t mdeg) {
+  static void angle(CustomActuatorDevice &device, int32_t mdeg) {
     can_frame frame{};
     frame.can_dlc = 4;
     encode_i32_le(frame, mdeg);
     device.on_angle_status(frame);
   }
-  static void velocity(OutputActuatorDevice &device, int32_t mdeg) {
+  static void velocity(CustomActuatorDevice &device, int32_t mdeg) {
     can_frame frame{};
     frame.can_dlc = 4;
     encode_i32_le(frame, mdeg);
     device.on_velocity_status(frame);
   }
-  static void node(OutputActuatorDevice &device, rclcpp::Node *node) {
+  static void node(CustomActuatorDevice &device, rclcpp::Node *node) {
     device.node_ = node;
   }
-  static void optional(OutputActuatorDevice &device, bool required) {
+  static void optional(CustomActuatorDevice &device, bool required) {
     device.auto_arm_ = true;
     device.required_at_activation_ = required;
     device.activation_timeout_ms_ = 1;
   }
-  static void ready(OutputActuatorDevice &device) {
+  static void ready(CustomActuatorDevice &device) {
     device.auto_arm_ = true;
     device.desired_profile_ = Profile::DirectInput;
     device.require_limits_status_ = false;
     device.require_config_status_ = false;
     device.activation_timeout_ms_ = 200;
   }
-  static void diag(OutputActuatorDevice &device, bool armed) {
+  static void diag(CustomActuatorDevice &device, bool armed) {
     can_frame frame{};
     frame.can_dlc = 8;
     frame.data[0] = 0xFB;
@@ -105,7 +105,7 @@ struct DeviceTestPeer {
 } // namespace mr2_devices_output_actuator
 using Ak = mr2_devices_ak_servo::AkServoDevice;
 using AkPeer = mr2_devices_ak_servo::DeviceTestPeer;
-using Output = mr2_devices_output_actuator::OutputActuatorDevice;
+using Output = mr2_devices_output_actuator::CustomActuatorDevice;
 using OutputPeer = mr2_devices_output_actuator::DeviceTestPeer;
 TEST(Drivers, AkBytesHoldTimeoutRecoveryAndInvalidFrame) {
   Ak device;

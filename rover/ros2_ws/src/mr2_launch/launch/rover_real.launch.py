@@ -92,6 +92,11 @@ def generate_launch_description():
         default_value="10.0",
         description="Delay (seconds) before spawning ros2_control controllers",
     )
+    actuator_arg = DeclareLaunchArgument(
+        "actuator", default_value="custom", choices=["custom", "rs"],
+        description="Drive wheel motors: custom firmware or RobStride RS-06",
+    )
+
     can_iface_arg = DeclareLaunchArgument(
         "can_iface",
         default_value="can0",
@@ -431,6 +436,7 @@ def generate_launch_description():
             "control_backend": LaunchConfiguration("control_backend"),
             "controller_spawn_delay": LaunchConfiguration("controller_spawn_delay"),
             "can_iface": LaunchConfiguration("can_iface"),
+            "actuator": LaunchConfiguration("actuator"),
             "use_mock_servos": LaunchConfiguration("use_mock_servos"),
             "enable_manipulator_module": LaunchConfiguration("enable_manipulator_module"),
             "enable_autonomous_module": LaunchConfiguration("enable_autonomous_module"),
@@ -609,6 +615,7 @@ def generate_launch_description():
             controller_config_arg,
             controller_spawn_delay_arg,
             can_iface_arg,
+            actuator_arg,
             use_mock_servos_arg,
             enable_manipulator_module_arg,
             enable_xbee_sim_arg,

@@ -153,7 +153,7 @@ bool profile_requires_selection(Profile profile) {
 
 } // namespace
 
-class OutputActuatorDevice : public CanDevice {
+class CustomActuatorDevice : public CanDevice {
   friend struct DeviceTestPeer;
 
 public:
@@ -161,7 +161,7 @@ public:
                  rclcpp::Node *node) override {
     node_ = node;
     logger_ = node_ ? node_->get_logger()
-                    : rclcpp::get_logger("output_actuator_device");
+                    : rclcpp::get_logger("custom_actuator_device");
 
     const auto iface_it = info.parameters.find("can_iface");
     if (iface_it == info.parameters.end()) {
@@ -1029,7 +1029,7 @@ private:
 
   std::shared_ptr<CanBusManager> bus_;
   rclcpp::Node *node_{nullptr};
-  rclcpp::Logger logger_{rclcpp::get_logger("output_actuator_device")};
+  rclcpp::Logger logger_{rclcpp::get_logger("custom_actuator_device")};
   rclcpp::Clock clock_{RCL_STEADY_TIME};
   std::string iface_;
   std::string status_topic_base_;
@@ -1065,5 +1065,5 @@ private:
 
 } // namespace mr2_devices_output_actuator
 
-PLUGINLIB_EXPORT_CLASS(mr2_devices_output_actuator::OutputActuatorDevice,
+PLUGINLIB_EXPORT_CLASS(mr2_devices_output_actuator::CustomActuatorDevice,
                        CanDevice)

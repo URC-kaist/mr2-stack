@@ -28,6 +28,7 @@ using hardware_interface::return_type;
 namespace mr2_can_hardware_interface {
 
 class CanHW : public hardware_interface::SystemInterface {
+  friend struct CanHWTestPeer;
 public:
   CanHW() = default;
   ~CanHW() override {
@@ -436,6 +437,8 @@ public:
     for (auto &dev : devs_) {
       if (!dev->on_activate()) {
         RCLCPP_ERROR(node_->get_logger(), "CAN device activation failed");
+        // A later wheel may fail after earlier motors were enabled.
+        for (auto &configured : devs_) configured->on_deactivate();
         return CallbackReturn::ERROR;
       }
     }

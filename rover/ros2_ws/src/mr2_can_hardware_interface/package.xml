@@ -16,6 +16,7 @@
   <depend>pluginlib</depend>
   <depend>rclcpp</depend>
   <depend>transmission_interface</depend>
+  <test_depend>ament_cmake_gtest</test_depend>
 
   <!-- Export the plugin -->
   <export>

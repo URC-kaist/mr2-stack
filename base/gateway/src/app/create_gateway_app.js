@@ -140,7 +140,7 @@ function createGatewayApp(options = {}) {
       return messages
     },
   })
-  const freshnessEnabled = false
+  const freshnessEnabled = !String(config.videoGstBinary || 'gst-launch-1.0').endsWith('gst-launch-1.0')
   const videoControl = createVideoControl({ initialKbps: config.videoInitialKbps, maxKbps: config.videoMaxKbps, streams: videoConfig.streams, nextSeq, writeFrame,
     freshness: freshnessEnabled, onReceivePolicy: (policy) => videoGateway?.setReceivePolicy(policy),
     broadcast: (msg) => wsHub.broadcast(msg) })

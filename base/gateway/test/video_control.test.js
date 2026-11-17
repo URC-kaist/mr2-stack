@@ -21,6 +21,27 @@ function fixture() {
     writeFrame: (f) => { frames.push(f); return true }, broadcast: (m) => messages.push(m) })
   return { control, frames, messages, advance: (ms) => { now += ms } }
 }
+test('production feedback bootstrap and native policy wait for a session-bound XBee/UDP probe', () => {
+  let now = 100000, seq = 0
+  const frames = [], policies = []
+  const control = createVideoControl({ streams:[{stream_id:'front',udp_port:5010,encoder:{bitrate_kbps:1800}}],
+    session:123, freshness:true, now:()=>now, nextSeq:()=>seq++, writeFrame:f=>{frames.push(f);return true},
+    onReceivePolicy:p=>policies.push(p) })
+  control.handleState(state({ session:123 }))
+  control.tick()
+  const feedback = frames.find(f=>f[1]===VIDEO_FEEDBACK)
+  assert.equal(feedback.readUInt32LE(12),0)
+  const id=feedback.readUInt16LE(26)
+  assert(id)
+  assert.equal(policies.at(-1).paused,true)
+  control.observe('front',{ssrc:0x4d523250,rtp_timestamp:probeToken(123,id),sequence:0,
+    send_us:(100020+900000)*1000,arrival_us:100050000,bytes:100})
+  now+=200;control.tick()
+  const resumed=frames.filter(f=>f[1]===VIDEO_FEEDBACK).at(-1)
+  assert.equal(resumed.readUInt32LE(12),32)
+  assert.equal(policies.at(-1).paused,false)
+  assert.equal(policies.at(-1).lower_bound_us,-900020012.5)
+})
 test('keyframe recovery travels over XBee with a bounded per-camera request rate', () => {
   const f = fixture()
   assert.equal(f.control.requestKeyframe('missing'), false)

@@ -2,6 +2,7 @@
 const { encodeFrame } = require('../protocol/xbee')
 const { VIDEO_SET, VIDEO_FEEDBACK, VIDEO_KEYFRAME, newer, probeToken, setPayload, feedbackPayload, decodeState } = require('./control_protocol')
 const { DelayController } = require('./congestion')
+const { LinkFreshnessGuard } = require('./freshness')
 
 function createVideoControl({ streams, nextSeq, writeFrame, broadcast = () => {}, initialKbps = 3000, maxKbps = 0, now = () => Number(process.hrtime.bigint()) / 1e6, session = Date.now() >>> 0, freshness = false, onReceivePolicy = () => {} }) {
   const states = new Map()
@@ -22,6 +23,7 @@ function createVideoControl({ streams, nextSeq, writeFrame, broadcast = () => {}
   const configuredMax = streams.reduce((n, s) => n + (s.encoder.bitrate_kbps || 1800), 0)
   const ceiling = maxKbps > 0 ? Math.min(configuredMax, maxKbps) : configuredMax
   const controller = new DelayController({ initialKbps: initialKbps > 0 ? initialKbps : 3000, maxKbps: ceiling, now, probeSession: session })
+  const guard = freshness ? new LinkFreshnessGuard({ now, nextProbeId: () => controller.nextProbeId(), token: id => probeToken(session, id) }) : null
   const byPort = new Map(streams.map((s) => [s.udp_port, s]))
   const get = (id) => states.get(id) || { state: null, priority: streams.find((s) => s.stream_id === id)?.priority || 'low' }
   function command(msg) {
@@ -73,11 +75,17 @@ function createVideoControl({ streams, nextSeq, writeFrame, broadcast = () => {}
     for (const { id, p } of batch) {
       const observation = { ...p, received_at_ms: at - (newest - p.arrival_us) / 1000 }
       controller.observe(id, observation)
+      guard?.observe(observation)
     }
     const active = [...states.values()].some((s) => s.state === 'ON')
     const demand = streams.reduce((total, stream) => total +
       (states.get(stream.stream_id)?.state === 'ON' ? stream.encoder.bitrate_kbps : 0), 0)
-    let metrics = controller.update(active, demand || ceiling)
+    let metrics = controller.update(active && (!guard || guard.mode === 'ready'), demand || ceiling)
+    if (guard) {
+      const fps = Math.max(3, ...[...states.values()].filter(s=>s.state==='ON'&&s.bitrate_kbps>0).map(s=>s.fps||3))
+      metrics = guard.update(metrics, active, controller, 1000 / fps)
+      onReceivePolicy(guard.policy())
+    }
     if (active) writeFrame(encodeFrame(VIDEO_FEEDBACK, nextSeq(), feedbackPayload(session, ++feedback, metrics)), 'video')
     // Browser telemetry uses the existing receiver observations and rover
     // reports. It adds no radio polls or XBee packets and does not affect GCC.

@@ -95,6 +95,9 @@ These are individual input trials, not latency percentiles.
 4. Ubuntu base's tcpdump AppArmor profile denied capture writes under
    `~/.local/state`. Its artifact directory was moved to
    `/home/mr2/latency-router-20260918/artifacts`; AppArmor remains enabled.
+5. The Python chrony parser used by preflight rejected the base local reference's
+   empty hostname (`7F7F0101 ()`). It now accepts the same format as the gateway's
+   parser; a regression test covers local references with and without parentheses.
 
 Gateway unit tests: 73 passed. Dashboard latency tests, TypeScript, lint, and
 production build passed on the x86 base. Rover's six changed ROS packages built

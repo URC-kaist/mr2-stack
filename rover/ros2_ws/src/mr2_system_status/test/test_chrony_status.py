@@ -41,6 +41,16 @@ class ChronyStatusTest(unittest.TestCase):
         self.assertEqual(status["system_time_offset_s"], -0.000125)
         self.assertIs(status["synchronized"], False)
 
+    def test_local_reference_without_hostname(self) -> None:
+        for reference in ("7F7F0101 ()", "7F7F0101"):
+            status = parse_chronyc_tracking(
+                TRACKING.replace("C0A8010A (192.168.1.10)", reference)
+                .replace("Stratum         : 9", "Stratum         : 8")
+            )
+            self.assertIs(status["synchronized"], True)
+            self.assertEqual(status["reference_id"], "7F7F0101")
+            self.assertIsNone(status["reference_name"])
+
     def test_read_uses_allow_listed_command(self) -> None:
         calls = []
 

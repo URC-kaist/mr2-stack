@@ -34,7 +34,7 @@ def parse_chronyc_tracking(
     leap_status = fields.get("Leap status", "")
     stratum = _number(fields, "Stratum")
     reference_raw = fields.get("Reference ID", "")
-    reference_match = re.fullmatch(r"([^\s]+)(?:\s+\((.+)\))?", reference_raw)
+    reference_match = re.fullmatch(r"([^\s]+)(?:\s+\((.*)\))?", reference_raw)
     system_match = re.fullmatch(
         r"([+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?)\s+"
         r"seconds\s+(fast|slow)\s+of\s+NTP\s+time",
@@ -60,7 +60,7 @@ def parse_chronyc_tracking(
         "available": True,
         "synchronized": synchronized,
         "reference_id": reference_match.group(1),
-        "reference_name": reference_match.group(2),
+        "reference_name": reference_match.group(2) or None,
         "stratum": int(stratum),
         "system_time_offset_s": system_time_offset_s,
         "last_offset_s": _number(fields, "Last offset"),

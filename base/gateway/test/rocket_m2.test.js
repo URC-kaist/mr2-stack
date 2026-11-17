@@ -54,7 +54,7 @@ test('formatRocketM2Error summarizes connection failures', () => {
       'Command failed: curl -k https://192.168.1.106/login.cgi --data username=mr2&password=secret',
   })
 
-  assert.equal(message, 'Rocket M2 is down')
+  assert.equal(message, 'Rocket M2 management interface unreachable')
 })
 
 test('createRocketM2Status uses explicit timing defaults', () => {

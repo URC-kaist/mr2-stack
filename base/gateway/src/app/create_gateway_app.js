@@ -28,6 +28,7 @@ const { startRosTopicRelay } = require('../runtime/ros_topic_relay')
 const { XbeeSerialLink } = require('../runtime/serial_link')
 const { createWsRouteRegistry } = require('../runtime/ws_route_registry')
 const { createWsHub } = require('../runtime/ws_hub')
+const { createRosbridgeProxy } = require('../runtime/rosbridge_proxy')
 const { createVideoControl } = require('../video/control')
 const { createVideoGateway } = require('../video/service')
 const { loadVideoConfig } = require('../video/stream_config')
@@ -123,6 +124,7 @@ function createGatewayApp(options = {}) {
   )
   const routeRegistry = createWsRouteRegistry({ server })
 
+  const rosbridgeProxy = createRosbridgeProxy({ routeRegistry, host: config.roverHost || "192.168.1.102" })
   const wsHub = createWsHub({
     path: '/xbee-ws',
     routeRegistry,
@@ -519,6 +521,7 @@ function createGatewayApp(options = {}) {
       videoGateway = null
     }
     wsHub.close()
+    rosbridgeProxy.close()
     routeRegistry.close()
 
     if (serverListening) {

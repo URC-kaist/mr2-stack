@@ -38,8 +38,16 @@ process.on('SIGTERM', () => {
   shutdown('SIGTERM')
 })
 
-app.start().catch((err) => {
+app.start().catch(async (err) => {
   // eslint-disable-next-line no-console
-  console.error(`[gateway] Startup failed: ${err.message || err}`)
+  console.error(err.code === 'EADDRINUSE'
+    ? `[gateway] ${config.host}:${config.port} is already in use. Stop the existing gateway before starting another instance.`
+    : `[gateway] Startup failed: ${err.message || err}`)
+  try {
+    await app.stop()
+  } catch (cleanupError) {
+    // eslint-disable-next-line no-console
+    console.error(`[gateway] Startup cleanup failed: ${cleanupError.message || cleanupError}`)
+  }
   process.exit(1)
 })

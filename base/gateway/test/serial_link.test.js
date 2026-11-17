@@ -64,3 +64,13 @@ test('XbeeSerialLink refuses writes before open', () => {
   link.start()
   assert.equal(link.write(Buffer.from([1])), false)
 })
+
+test('legacy /dev/XBEE command resolves only the known current alias when absent', () => {
+  const link = new XbeeSerialLink({ device: '/dev/XBEE', baud: 115200,
+    existsSync: p => p === '/dev/ttyXBEE', SerialPortImpl: FakeSerialPort })
+  link.start()
+  assert.equal(link.port.options.path, '/dev/ttyXBEE')
+  link.stop()
+  assert.equal(new XbeeSerialLink({ device: '/dev/XBEE', existsSync: () => true }).device, '/dev/XBEE')
+  assert.equal(new XbeeSerialLink({ device: '/tmp/custom', existsSync: () => false }).device, '/tmp/custom')
+})

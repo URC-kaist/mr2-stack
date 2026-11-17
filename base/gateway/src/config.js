@@ -8,6 +8,7 @@ const DEFAULTS = {
   device: '/dev/ttyXBEE',
   host: '0.0.0.0',
   port: 8081,
+  roverHost: "192.168.1.102",
   videoConfigPath: path.resolve(
     __dirname,
     '../../../rover/ros2_ws/src/mr2_launch/config/video_streams.json'
@@ -42,7 +43,7 @@ const DEFAULTS = {
   rocketM2Pass: '',
   rocketM2PollMs: 5000,
   rocketM2TimeoutMs: 4000,
-  mavproxyEnable: true,
+  mavproxyEnable: false,
   mavproxyBinary: 'mavproxy.py',
   mavproxyMasterDevice: '/dev/ttySIK',
   mavproxyMasterBaud: 57600,
@@ -138,17 +139,17 @@ function parseGatewayConfig(args = process.argv.slice(2), env = process.env) {
     {
       target: 'base',
       label: 'Base',
-      ip: getArg(args, '--base-rocket-m2-ip') || env.MR2_BASE_ROCKET_IP || '',
+      ip: getArg(args, '--base-rocket') ?? env.MR2_BASE_ROCKET_IP ?? '',
     },
     {
       target: 'drone',
       label: 'Drone',
-      ip: getArg(args, '--drone-rocket-m2-ip') || env.MR2_DRONE_ROCKET_IP || '',
+      ip: getArg(args, '--drone-rocket') ?? env.MR2_DRONE_ROCKET_IP ?? '',
     },
     {
       target: 'rover',
       label: 'Rover',
-      ip: getArg(args, '--rover-rocket-m2-ip') || env.MR2_ROVER_ROCKET_IP || '',
+      ip: getArg(args, '--rover-rocket') ?? env.MR2_ROVER_ROCKET_IP ?? '',
     },
   ]
 
@@ -165,6 +166,7 @@ function parseGatewayConfig(args = process.argv.slice(2), env = process.env) {
     port: toInt(
       getArg(args, '--gateway-port') || env.MR2_GATEWAY_PORT || DEFAULTS.port
     ),
+    roverHost: getArg(args, "--rover-host") || env.MR2_ROVER_IP || DEFAULTS.roverHost,
     videoConfigPath:
       getArg(args, '--video-config') || env.VIDEO_CONFIG_PATH || DEFAULTS.videoConfigPath,
     videoGstBinary:

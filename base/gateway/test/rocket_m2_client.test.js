@@ -79,7 +79,10 @@ test('RocketM2Client poll publishes successful status', async () => {
   client.cookiePath = '/tmp/test.cookies'
   await client.poll()
 
-  assert.equal(execCalls.length, 2)
+  assert.equal(execCalls.length, 3)
+  assert(execCalls[0].some(a => a.endsWith('/login.cgi')))
+  assert(!execCalls[1].includes('-X'), 'redirect must switch the login POST to GET')
+  assert(execCalls[1].includes('--data'))
   assert.equal(statuses.length, 1)
   assert.equal(statuses[0].target, 'base')
   assert.equal(statuses[0].label, 'Base')

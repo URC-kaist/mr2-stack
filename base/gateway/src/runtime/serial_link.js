@@ -1,6 +1,7 @@
 'use strict'
 
 const { EventEmitter } = require('events')
+const { existsSync } = require('fs')
 
 const { consumeFrames } = require('../protocol/xbee')
 
@@ -10,6 +11,8 @@ class XbeeSerialLink extends EventEmitter {
   constructor(options = {}) {
     super()
     this.device = options.device
+    const exists = options.existsSync || existsSync
+    if (this.device === "/dev/XBEE" && !exists(this.device) && exists("/dev/ttyXBEE")) this.device = "/dev/ttyXBEE"
     this.baud = options.baud
     this.log = typeof options.log === 'function' ? options.log : () => {}
     this.SerialPortImpl = options.SerialPortImpl || null

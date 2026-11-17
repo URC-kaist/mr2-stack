@@ -1,13 +1,20 @@
 'use strict'
 
 const { spawn } = require('child_process')
+const { PacketObservations } = require('./congestion')
 
-const { AnnexBAccessUnitParser } = require('./h264')
+const { AnnexBAccessUnitParser, FramedAccessUnitParser } = require('./h264')
 const { RtpStreamParser } = require('./rtp_stream_parser')
 const { accessUnitFingerprint, RtpFrameFingerprint } = require('./rtp_frame_fingerprint')
 
 function buildGstReceiveArgs(stream, options = {}) {
   const latencyMs = Math.max(0, Math.floor(options.jitterLatencyMs || 0))
+  if (options.framedAccessUnits) return ['-q', 'udpsrc', `port=${stream.udp_port}`,
+    'caps=application/x-rtp,media=video,encoding-name=H264,payload=96,clock-rate=90000', '!',
+    'rtpjitterbuffer', 'name=video_jitter', `latency=${latencyMs}`, 'drop-on-latency=true', '!',
+    'rtph264depay', 'wait-for-keyframe=true', 'request-keyframe=true', '!', 'h264parse', 'disable-passthrough=true', '!',
+    'video/x-h264,stream-format=byte-stream,alignment=au', '!',
+    'appsink', 'name=video_output', 'sync=false', 'async=false']
 
   return [
     '-q',
@@ -32,8 +39,7 @@ function buildGstReceiveArgs(stream, options = {}) {
     '!',
     'video/x-h264,stream-format=byte-stream,alignment=au',
     '!',
-    'fdsink',
-    'fd=1',
+    ...(options.framedAccessUnits ? ['appsink', 'name=video_output'] : ['fdsink', 'fd=1']),
     'sync=false',
     // Both live tee branches must enter PLAYING without waiting for preroll.
     // H.264 may need the next keyframe while the RTP branch already has data.
@@ -62,6 +68,8 @@ function createVideoStreamReceiver(options = {}) {
       ? options.onAvailabilityChange
       : () => {}
   const gstBinary = options.gstBinary || 'gst-launch-1.0'
+  const nativeReceiver = !gstBinary.endsWith('gst-launch-1.0')
+  let observations = new PacketObservations((p) => options.onPacket?.(stream.stream_id, p))
   const restartMs = Math.max(250, Math.floor(options.restartMs || 1000))
   const availabilityStaleMs = Math.max(250, Math.floor(options.availabilityStaleMs || 1000))
 
@@ -69,13 +77,26 @@ function createVideoStreamReceiver(options = {}) {
   let stopping = false
   let restartTimer = null
   let availabilityTimer = null
-  let parser = new AnnexBAccessUnitParser()
+  const makeParser = () => nativeReceiver ? new FramedAccessUnitParser() : new AnnexBAccessUnitParser()
+  let parser = makeParser()
   let rtpParser = new RtpStreamParser()
   const fingerprint = new RtpFrameFingerprint()
   let pendingAccessUnits = []
   let pendingMarkers = []
   let pairingTimer = null
   let available = false
+  let receivePolicy = { paused: true, lower_bound_us: 0, anchor_at_us: 0, valid_until_us: 0 }
+  function setReceivePolicy(policy) {
+    receivePolicy = policy
+    if (options.freshness && child?.stdin?.writable) {
+      const data = Buffer.alloc(32)
+      data.writeUInt32LE(0x4d523246); data.writeUInt32LE(policy.paused ? 1 : 0, 4)
+      data.writeBigInt64LE(BigInt(Math.floor(policy.lower_bound_us)), 8)
+      data.writeBigUInt64LE(BigInt(Math.max(0, Math.floor(policy.anchor_at_us))), 16)
+      data.writeBigUInt64LE(BigInt(Math.max(0, Math.floor(policy.valid_until_us))), 24)
+      child.stdin.write(data)
+    }
+  }
 
   const maximumPairingQueue = Math.max(4, Math.floor(options.maximumPairingQueue || 64))
   const pairingTimeoutMs = Math.max(25, Math.floor(options.pairingTimeoutMs || 100))
@@ -85,7 +106,8 @@ function createVideoStreamReceiver(options = {}) {
       clearTimeout(pairingTimer)
       pairingTimer = null
     }
-    parser = new AnnexBAccessUnitParser()
+    observations = new PacketObservations((p) => options.onPacket?.(stream.stream_id, p))
+    parser = makeParser()
     rtpParser = new RtpStreamParser()
     fingerprint.reset()
     pendingAccessUnits = []
@@ -179,8 +201,20 @@ function createVideoStreamReceiver(options = {}) {
   }
 
   function handleStdout(chunk) {
-    for (const accessUnit of parser.push(chunk)) {
+    let units
+    try { units = parser.push(chunk) } catch (error) {
+      log(`[video:${stream.stream_id}] access unit framing error: ${error.message}`)
+      child?.kill('SIGTERM')
+      return
+    }
+    for (const accessUnit of units) {
       if (!accessUnit.payload || accessUnit.payload.length === 0) continue
+      if (accessUnit.native_metadata) {
+        if (options.freshness && receivePolicy.paused) continue
+        touchAvailability()
+        onAccessUnit(stream.stream_id, { ...accessUnit, timestamp_us: accessUnit.timestamp_us || Date.now() * 1000 })
+        continue
+      }
       pendingAccessUnits.push({
         queuedAt: Date.now(), value: accessUnit,
         fingerprint: accessUnitFingerprint(accessUnit.payload),
@@ -225,13 +259,18 @@ function createVideoStreamReceiver(options = {}) {
 
     const args = buildGstReceiveArgs(stream, {
       jitterLatencyMs: options.jitterLatencyMs,
+      framedAccessUnits: nativeReceiver,
     })
+    if (nativeReceiver) { args.shift(); args.splice(1, 0, 'name=video_source') }
     log(`[video:${stream.stream_id}] spawning ${gstBinary} ${args.join(' ')}`)
 
     resetCorrelation()
     child = spawnImpl(gstBinary, args, {
-      stdio: ['ignore', 'pipe', 'pipe', 'pipe'],
+      stdio: [options.freshness && nativeReceiver ? 'pipe' : 'ignore', 'pipe', 'pipe', 'pipe', 'pipe'],
+      ...(options.freshness && nativeReceiver ? { env: { ...process.env, MR2_VIDEO_FRESHNESS_FD: '0' } } : {}),
     })
+    child.stdin?.on('error', () => {}) // Child exit can race a small policy write.
+    setReceivePolicy(receivePolicy)
     let ended = false
 
     function finalizeChild(logMessage) {
@@ -254,6 +293,9 @@ function createVideoStreamReceiver(options = {}) {
     } else {
       log(`[video:${stream.stream_id}] RTP metadata output fd=3 is unavailable`)
     }
+    child.stdio?.[4]?.on('data', (chunk) => {
+      try { observations.push(chunk) } catch (e) { log(`[video:${stream.stream_id}] ${e.message}`) }
+    })
     child.on('error', (error) => {
       finalizeChild(
         `[video:${stream.stream_id}] receiver process error: ${error.message || String(error)}`
@@ -288,6 +330,7 @@ function createVideoStreamReceiver(options = {}) {
   return {
     start,
     stop,
+    setReceivePolicy,
   }
 }
 

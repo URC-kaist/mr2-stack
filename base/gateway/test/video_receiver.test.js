@@ -29,6 +29,41 @@ function createFakeChild() {
   return child
 }
 
+test('native receiver pairs a complete low-FPS frame without waiting for another frame', () => {
+  const units = []; let child, args
+  const receiver = createVideoStreamReceiver({
+    stream: {stream_id:'rgbd',udp_port:5022}, gstBinary:'/native/video_receiver',
+    spawnImpl: (_binary, argv) => {args=argv;return (child=createFakeChild())},
+    onAccessUnit: (_id, unit) => units.push(unit),
+  })
+  receiver.start()
+  assert(args.includes('name=video_output'))
+  assert(!args.includes('fd=1'))
+  child.stdio[3].emit('data', rtpStreamPacket())
+  const payload=Buffer.from([0,0,0,1,0x65,0xe0]), framed=Buffer.alloc(4+payload.length)
+  framed.writeUInt32BE(payload.length);payload.copy(framed,4)
+  child.stdout.emit('data',framed.subarray(0,5));assert.equal(units.length,0)
+  child.stdout.emit('data',framed.subarray(5));assert.equal(units.length,1)
+  assert.equal(units[0].correlation.rtp_timestamp,90000)
+  assert.equal(units[0].key,true)
+  receiver.stop()
+})
+
+test('native metadata and video arrive atomically without a second RTP pipe or timeout', () => {
+  const units = []; let child
+  const receiver = createVideoStreamReceiver({ stream: { stream_id:'rgbd',udp_port:5022 }, gstBinary:'/native/video_receiver',
+    spawnImpl: () => (child=createFakeChild()), onAccessUnit: (_id,u) => units.push(u) })
+  receiver.start()
+  const payload=Buffer.from([0,0,0,1,0x65,0xe0]), frame=Buffer.alloc(28+payload.length)
+  frame.writeUInt32BE((0x80000000+payload.length)>>>0); frame.writeUInt32BE(1,4)
+  frame.writeUInt32BE(123,8); frame.writeUInt32BE(90000,12); frame.writeUInt16BE(7,16); frame.writeBigUInt64BE(123456n,20); payload.copy(frame,28)
+  child.stdout.emit('data',frame.subarray(0,27));assert.equal(units.length,0)
+  child.stdout.emit('data',frame.subarray(27));assert.equal(units.length,1)
+  assert.deepEqual(units[0].correlation,{ssrc:123,rtp_timestamp:90000,marker_sequence:7});assert.equal(units[0].timestamp_us,123456)
+  frame.writeUInt32BE(0,4); child.stdout.emit('data',frame);assert.equal(units.length,2);assert.equal(units[1].correlation,undefined)
+  receiver.stop()
+})
+
 test('buildGstReceiveArgs uses the configured jitter latency and supported drop policy', () => {
   const args = buildGstReceiveArgs(
     {

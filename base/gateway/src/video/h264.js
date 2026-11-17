@@ -377,8 +377,40 @@ class AnnexBAccessUnitParser {
   }
 }
 
+// Native h264parse already emits complete access units. Preserve that boundary
+// across the byte-stream pipe instead of waiting for the next frame's NALs.
+class FramedAccessUnitParser {
+  constructor() { this.pending = Buffer.alloc(0) }
+
+  push(chunk) {
+    this.pending = Buffer.concat([this.pending, chunk])
+    const emitted = []
+    while (this.pending.length >= 4) {
+      const tagged = this.pending.readUInt32BE(0)
+      const nativeMetadata = (tagged & 0x80000000) !== 0
+      const length = tagged & 0x7fffffff
+      const headerLength = nativeMetadata ? 28 : 4
+      if (!length || length > 16 * 1024 * 1024) throw Error('invalid native access unit length')
+      if (this.pending.length < length + headerLength) break
+      const payload = this.pending.subarray(headerLength, length + headerLength)
+      const unit = classifyAccessUnit(splitAnnexBNalus(payload, true).nals)
+      if (nativeMetadata) {
+        unit.native_metadata = true
+        unit.timestamp_us = Number(this.pending.readBigUInt64BE(20))
+        if (this.pending.readUInt32BE(4) & 1) unit.correlation = { ssrc: this.pending.readUInt32BE(8), rtp_timestamp: this.pending.readUInt32BE(12), marker_sequence: this.pending.readUInt16BE(16) }
+      }
+      emitted.push(unit)
+      this.pending = this.pending.subarray(length + headerLength)
+    }
+    return emitted
+  }
+
+  flush() { return [] }
+}
+
 module.exports = {
   AnnexBAccessUnitParser,
+  FramedAccessUnitParser,
   classifyAccessUnit,
   deriveCodecString,
   getFirstMbInSlice,

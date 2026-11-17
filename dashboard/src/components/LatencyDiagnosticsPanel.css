@@ -1,3 +1,8 @@
+.latency-tab-panel {
+  min-width: 0;
+  align-self: start;
+}
+
 .latency-diagnostics {
   display: flex;
   flex-direction: column;
@@ -5,13 +10,13 @@
   min-width: 0;
   max-width: 100%;
   box-sizing: border-box;
-  gap: 8px;
-  padding: 10px;
+  gap: 12px;
+  padding: 16px;
   border: 1px solid rgba(95, 196, 255, 0.25);
   border-radius: 8px;
   background: rgba(5, 12, 20, 0.72);
   color: #dcecff;
-  font-size: 0.72rem;
+  font-size: 0.875rem;
 }
 
 .latency-diagnostics__header,
@@ -47,7 +52,8 @@
   padding: 7px;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 5px;
-  gap: 5px;
+  gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 }
 
 .latency-diagnostics__camera-selection legend {
@@ -240,7 +246,7 @@
 }
 
 .latency-diagnostics__feed .video-stream-overlay {
-  font-size: 0.62rem;
+  font-size: 0.8rem;
 }
 
 .latency-diagnostics__result-heading {
@@ -275,7 +281,7 @@
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
-  font-size: 0.62rem;
+  font-size: 0.8rem;
   font-variant-numeric: tabular-nums;
 }
 

@@ -53,6 +53,9 @@ export type AutomatedUplinkStreamReport = {
 export type AutomatedLatencyDistribution = RtpLatencyDistribution & { count: number }
 
 export type AutomatedUplinkSegments = {
+  source_to_rtp: AutomatedLatencyDistribution
+  h264_encode: AutomatedLatencyDistribution
+  source_to_render: AutomatedLatencyDistribution
   rocket_m2: AutomatedLatencyDistribution
   base_to_browser: AutomatedLatencyDistribution
   decode_render: AutomatedLatencyDistribution
@@ -225,7 +228,14 @@ function automatedSegments(value: unknown, field: string): AutomatedUplinkSegmen
     if (parsed.count == null) throw new Error(`${name}.count is required`)
     return parsed as AutomatedLatencyDistribution
   }
+  const optionalDistribution = (key: string): AutomatedLatencyDistribution =>
+    value[key] == null
+      ? { count: 0, min: null, mean: null, p50: null, p95: null, p99: null, max: null }
+      : requiredDistribution(value[key], `${field}.${key}`)
   return {
+    source_to_rtp: optionalDistribution('source_to_rtp'),
+    h264_encode: optionalDistribution('h264_encode'),
+    source_to_render: optionalDistribution('source_to_render'),
     rocket_m2: requiredDistribution(value.rocket_m2, `${field}.rocket_m2`),
     base_to_browser: requiredDistribution(value.base_to_browser, `${field}.base_to_browser`),
     decode_render: requiredDistribution(value.decode_render, `${field}.decode_render`),

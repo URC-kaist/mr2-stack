@@ -89,6 +89,18 @@ const automated = parseAutomatedUplinkReport({
   ],
 })
 assert.equal(automated.aggregate.total.p95, 195)
+assert.equal(automated.aggregate.source_to_render.count, 0)
+assert.equal(automated.aggregate.h264_encode.p50, null)
+const withSender = parseAutomatedUplinkReport({
+  ...automated,
+  aggregate: { ...automated.aggregate, source_to_rtp: segment,
+    h264_encode: segment, source_to_render: segment },
+})
+assert.equal(withSender.aggregate.source_to_render.p95, 195)
+assert.throws(() => parseAutomatedUplinkReport({
+  ...automated, aggregate: { ...automated.aggregate, h264_encode: { ...segment, p50: NaN } },
+}), /finite/)
+
 assert.throws(
   () => parseAutomatedUplinkReport({ ...automated, aggregate: { total: segment } }),
   /aggregate.rocket_m2/

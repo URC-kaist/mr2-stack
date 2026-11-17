@@ -4,6 +4,7 @@ import './MissionTabs.css'
 const TABS = [
   { id: 'status', label: 'Status' },
   { id: 'live-feed', label: 'Live Feed' },
+  { id: 'latency', label: 'Latency' },
   { id: 'science', label: 'Science' },
   { id: 'delivery', label: 'Delivery / Servicing' },
   { id: 'autonomous', label: 'Autonomous' },
@@ -12,7 +13,7 @@ const TABS = [
 type MissionTabId = (typeof TABS)[number]['id']
 
 const visibleTabs = isRoverDirectProfile
-  ? TABS.filter((tab) => ['status', 'live-feed', 'delivery'].includes(tab.id)).map((tab) =>
+  ? TABS.filter((tab) => ['status', 'live-feed', 'latency', 'delivery'].includes(tab.id)).map((tab) =>
       tab.id === 'delivery' ? { ...tab, label: 'Arm' } : tab
     )
   : TABS
@@ -30,6 +31,7 @@ const MissionTabs = ({ activeTab, onTabChange }: MissionTabsProps) => {
           key={tab.id}
           className={`tab ${activeTab === tab.id ? 'active' : ''}`}
           role="tab"
+          aria-selected={activeTab === tab.id}
           type="button"
           onClick={() => onTabChange(tab.id)}
         >

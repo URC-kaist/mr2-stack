@@ -24,10 +24,11 @@ import {
 } from '../lib/latencyDiagnostics'
 import { parseAutomatedUplinkReport } from '../lib/rtpLatencyReport'
 import { fetchVideoStreams } from '../lib/videoGateway'
+import { videoLatencyMinimum } from '../lib/videoLinkLatency'
 import type { UplinkTrialStatusMsg } from '../lib/rosMessages'
 import LatencyResultTable from './LatencyResultTable'
 import VideoStreamCard from './VideoStreamCard'
-import './ControlPanel/LatencyDiagnosticsPanel.css'
+import './LatencyDiagnosticsPanel.css'
 
 function formatMs(value: number | null | undefined) {
   return value == null || !Number.isFinite(value) ? '--' : `${value.toFixed(1)} ms`
@@ -57,6 +58,11 @@ const LatencyDiagnosticsPanel = () => {
   const { ros, connected: rosConnected } = useRosBridge()
   const clockReadiness = useLatencyClockReadiness(ros)
   const checkClockNow = clockReadiness.checkNow
+  const clockReadyRef = useRef(false)
+  useEffect(() => { clockReadyRef.current = clockReadiness.readiness.ready }, [clockReadiness.readiness.ready])
+  useEffect(() => gateway.onVideoLinkMetrics((metrics) => {
+    videoLatencyMinimum.observe(metrics, clockReadyRef.current)
+  }), [gateway])
   const { streams, loading: streamsLoading, error: streamsError } = useVideoStreams()
   const [excludedUplinkStreamIds, setExcludedUplinkStreamIds] = useState<Set<string>>(
     () => new Set()
@@ -455,7 +461,7 @@ const LatencyDiagnosticsPanel = () => {
   return (
     <section className="latency-diagnostics" aria-label="Latency diagnostics">
       <div className="latency-diagnostics__header">
-        <strong>Latency diagnostics</strong>
+        <strong>Clock &amp; latency diagnostics</strong>
         <span>{snapshot.recordCount} events</span>
       </div>
 
@@ -589,6 +595,11 @@ const LatencyDiagnosticsPanel = () => {
       )}
 
       <div className="latency-diagnostics__section-title">Uplink result</div>
+      <small>
+        Jetson frame starts when the video source delivers a frame. Camera exposure and
+        earlier USB transfer are excluded. H.264 encode is included in Jetson frame → RTP.
+        Rows use matched frames only; N = 0 means unavailable.
+      </small>
       <div
         className={`latency-diagnostics__readiness latency-diagnostics__readiness--${uplinkStatusTone}`}
         role="status"
@@ -659,6 +670,18 @@ const LatencyDiagnosticsPanel = () => {
       </div>
 
       <div className="latency-diagnostics__section-title">Base/rover chrony</div>
+      <div className="latency-diagnostics__clock">
+        UTC: {clockReadiness.base?.utcState === 'internet-synchronized'
+          ? 'Internet verified'
+          : clockReadiness.base?.utcState === 'held'
+            ? 'Held during ROS launch; UTC accuracy not verified'
+            : 'RTC / saved time; UTC accuracy not verified'}
+        {' · '}External correction: {clockReadiness.base?.policyAvailable && clockReadiness.rover?.policyAvailable
+          ? clockReadiness.base.policyLocked && clockReadiness.rover.policyLocked
+            ? 'Locked on both hosts'
+            : 'Not locked on both hosts'
+          : 'Policy unavailable'}
+      </div>
       <div
         className={`latency-diagnostics__readiness latency-diagnostics__readiness--${clockReadiness.readiness.ready ? 'ready' : 'blocked'}`}
       >

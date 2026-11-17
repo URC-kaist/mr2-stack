@@ -5,10 +5,13 @@ type LatencyResultTableProps = {
 }
 
 const rows: Array<{ key: keyof AutomatedUplinkSegments; label: string }> = [
+  { key: 'source_to_rtp', label: 'Jetson frame -> RTP' },
+  { key: 'h264_encode', label: 'H.264 encode (included above)' },
   { key: 'rocket_m2', label: 'Rover RTP -> Base RTP' },
   { key: 'base_to_browser', label: 'Base RTP -> Browser' },
   { key: 'decode_render', label: 'Browser -> Render' },
-  { key: 'total', label: 'Total' },
+  { key: 'total', label: 'RTP -> Render' },
+  { key: 'source_to_render', label: 'Jetson frame -> Render' },
 ]
 
 function formatUs(value: number | null) {
@@ -20,7 +23,7 @@ const LatencyResultTable = ({ segments }: LatencyResultTableProps) => (
     <table className="latency-result-table">
       <thead>
         <tr>
-          <th>Segment</th>
+          <th>Segment (ms)</th>
           <th>N</th>
           <th>p50</th>
           <th>p95</th>

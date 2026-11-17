@@ -440,6 +440,57 @@ def load_browser_samples(path: Path) -> list[dict[str, object]]:
     return samples
 
 
+SENDER_SEGMENTS = ("source_to_rtp", "h264_encode", "source_to_render")
+UPLINK_SEGMENTS = ("rocket_m2", "base_to_browser", "decode_render", "total", *SENDER_SEGMENTS)
+
+
+def sender_timing_by_key(metadata: dict | None) -> tuple[dict, list[str]]:
+    """Fail closed on malformed/ambiguous probe samples; retain legacy RTP results."""
+    warnings = []
+    if not isinstance(metadata, dict) or metadata.get("schema_version") != 1:
+        return {}, ["Sender timing unavailable; source-to-render latency is not measured"]
+    samples = metadata.get("samples", [])
+    if not isinstance(samples, list) or len(samples) > 2000:
+        return {}, ["Sender timing samples are invalid"]
+    result, ambiguous = {}, set()
+    invalid = 0
+    for sample in samples:
+        try:
+            if not isinstance(sample, dict) or sample.get("schema_version") != 1:
+                raise ValueError()
+            if not isinstance(sample.get("stream_id"), str):
+                raise ValueError()
+            for name, maximum in (("ssrc", 2**32 - 1), ("rtp_timestamp", 2**32 - 1),
+                                  ("marker_sequence", 65535)):
+                value = sample.get(name)
+                if type(value) is not int or not 0 <= value <= maximum:
+                    raise ValueError()
+            for name in ("ingest_epoch_us", "pay_epoch_us", "ingest_to_pay_us", "encode_us"):
+                value = sample.get(name)
+                if type(value) not in (int, float) or not math.isfinite(value):
+                    raise ValueError()
+            elapsed = sample["pay_epoch_us"] - sample["ingest_epoch_us"]
+            if not 0 <= sample["encode_us"] <= sample["ingest_to_pay_us"] <= 10_000_000:
+                raise ValueError()
+            if elapsed < 0 or abs(elapsed - sample["ingest_to_pay_us"]) > 2000:
+                raise ValueError()
+            key = (sample["stream_id"], sample["ssrc"], sample["marker_sequence"], sample["rtp_timestamp"])
+            if key in result:
+                ambiguous.add(key)
+            result[key] = sample
+        except (KeyError, TypeError, ValueError):
+            invalid += 1
+    for key in ambiguous:
+        result.pop(key, None)
+    if invalid or ambiguous:
+        warnings.append(f"Excluded {invalid} invalid and {len(ambiguous)} ambiguous sender timing samples")
+    if metadata.get("dropped_samples"):
+        warnings.append("Sender timing sample limit reached; sender statistics cover a subset of frames")
+    if metadata.get("invalid_samples"):
+        warnings.append("Malformed sender timing datagrams were discarded")
+    return result, warnings
+
+
 def build_automated_uplink_report(
     link_report: dict[str, object],
     matched_packets: Sequence[MatchedPacket],
@@ -447,7 +498,9 @@ def build_automated_uplink_report(
     browser_clock_offset_us: float,
     trial_id: str,
     feed_count: int,
+    video_timing: dict | None = None,
 ) -> dict[str, object]:
+    sender_by_key, sender_warnings = sender_timing_by_key(video_timing)
     matched_by_key: dict[tuple[str, int, int, int], list[MatchedPacket]] = defaultdict(list)
     for packet in matched_packets:
         if packet.marker:
@@ -484,19 +537,29 @@ def build_automated_uplink_report(
             )
             receive_in_base_clock = browser_receive + browser_clock_offset_us
             render_in_base_clock = browser_render + browser_clock_offset_us
-            frames_by_stream[packet.stream_id].append(
-                {
-                    "rocket_m2": packet.base_capture_epoch_us - rover_in_base_clock,
-                    "base_to_browser": receive_in_base_clock - packet.base_capture_epoch_us,
-                    "decode_render": browser_render - browser_receive,
-                    "total": render_in_base_clock - rover_in_base_clock,
-                }
-            )
+            frame = {
+                "rocket_m2": packet.base_capture_epoch_us - rover_in_base_clock,
+                "base_to_browser": receive_in_base_clock - packet.base_capture_epoch_us,
+                "decode_render": browser_render - browser_receive,
+                "total": render_in_base_clock - rover_in_base_clock,
+            }
+            timing = sender_by_key.get(key)
+            # Exact RTP key and a plausible same-host capture time are both required.
+            # Ambiguous repeated packet/browser keys cannot extend the measurement.
+            if timing and len(packet_values) == 1 and len(browser_values) == 1:
+                pre_send = packet.rover_capture_epoch_us - timing["ingest_epoch_us"]
+                after_pay = packet.rover_capture_epoch_us - timing["pay_epoch_us"]
+                source_to_render = frame["total"] + pre_send
+                if (0 <= after_pay <= 1_000_000 and timing["encode_us"] <= pre_send <= 10_000_000
+                        and source_to_render >= pre_send):
+                    frame.update(source_to_rtp=pre_send, h264_encode=timing["encode_us"],
+                                 source_to_render=source_to_render)
+            frames_by_stream[packet.stream_id].append(frame)
 
     stream_reports = []
     aggregate_frames: list[dict[str, float]] = []
     link_streams = {str(stream["stream_id"]): stream for stream in link_report["streams"]}
-    warnings = list(link_report["warnings"])
+    warnings = list(link_report["warnings"]) + sender_warnings
     if duplicate_keys:
         warnings.append(f"paired {duplicate_keys} duplicate RTP/browser frame keys by time order")
     for stream_id, link_stream in link_streams.items():
@@ -505,9 +568,12 @@ def build_automated_uplink_report(
         stream_warnings: list[str] = []
         if not frames:
             stream_warnings.append("no marker frames matched browser render samples")
+        sender_count = sum("source_to_render" in frame for frame in frames)
+        if sender_count < len(frames):
+            stream_warnings.append(f"Sender timing matched {sender_count}/{len(frames)} rendered frames; missing frames are excluded from sender statistics")
         segments = {
-            name: distribution([frame[name] for frame in frames])
-            for name in ("rocket_m2", "base_to_browser", "decode_render", "total")
+            name: distribution([frame[name] for frame in frames if name in frame])
+            for name in UPLINK_SEGMENTS
         }
         stream_reports.append(
             {
@@ -530,8 +596,8 @@ def build_automated_uplink_report(
     if not aggregate_frames:
         raise ValueError("no RTP marker frames could be correlated with browser render samples")
     aggregate = {
-        name: distribution([frame[name] for frame in aggregate_frames])
-        for name in ("rocket_m2", "base_to_browser", "decode_render", "total")
+        name: distribution([frame[name] for frame in aggregate_frames if name in frame])
+        for name in UPLINK_SEGMENTS
     }
     return {
         "schema_version": 2,
@@ -655,6 +721,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                 )
             if args.feed_count != len(streams):
                 raise ValueError("feed count must match selected streams")
+            rover_metadata_path = metadata_path_for(Path(args.rover).resolve())
+            rover_metadata = json.loads(rover_metadata_path.read_text()) if rover_metadata_path.exists() else {}
             report = build_automated_uplink_report(
                 report,
                 samples,
@@ -662,6 +730,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 args.browser_clock_offset_us,
                 args.trial_id,
                 args.feed_count,
+                rover_metadata.get("video_timing"),
             )
         write_report(Path(args.output).resolve(), report, args.overwrite)
         if args.samples_csv:

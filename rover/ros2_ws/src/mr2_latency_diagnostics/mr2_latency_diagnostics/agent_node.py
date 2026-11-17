@@ -32,6 +32,7 @@ from .capture import (
     upload_bytes,
     upload_file,
 )
+from .video_timing import VideoTimingCollector
 from .trial_state import UplinkTrial, validate_duration, validate_trial_id
 
 
@@ -288,9 +289,10 @@ class UplinkAgent(Node):
                 capture_path,
                 ports,
             )
-            exit_code, stderr, started_us, finished_us = run_capture(
-                command, duration_s, self._cancel_event, check_clock=require_measurement_clock
-            )
+            with VideoTimingCollector(stream_ids) as timing:
+                exit_code, stderr, started_us, finished_us = run_capture(
+                    command, duration_s, self._cancel_event, check_clock=require_measurement_clock
+                )
             metadata = {
                 "schema_version": 1,
                 "kind": "mr2_rtp_capture_metadata",
@@ -304,6 +306,7 @@ class UplinkAgent(Node):
                 "finished_epoch_us": finished_us,
                 "tcpdump_exit_code": exit_code,
                 "tcpdump_stderr": stderr,
+                "video_timing": timing.metadata(),
             }
             metadata_path.write_text(
                 json.dumps(metadata, separators=(",", ":")) + "\n", encoding="utf-8"

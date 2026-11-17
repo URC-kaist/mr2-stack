@@ -7,7 +7,6 @@ import ControlVectorPlot, {
   type OrbitCenter,
   type SensitivityLevel,
 } from './ControlPanel/ControlVectorPlot'
-import LatencyDiagnosticsPanel from './LatencyDiagnosticsPanel'
 import { useXbeeGateway } from '../hooks/useXbeeGateway'
 import { latencyDiagnostics } from '../lib/latencyDiagnostics'
 import './ControlPanel/ControlPanel.css'
@@ -335,7 +334,6 @@ const ControlPanel = () => {
   return (
     <aside className="control-panel">
       <ControlStatusList />
-      <LatencyDiagnosticsPanel />
       <ControlVectorPlot
         cmdVel={cmdVel}
         controlMode={controlMode}

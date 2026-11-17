@@ -71,6 +71,7 @@ def composition(entrypoint, overrides=None):
     context = LaunchContext()
     context.launch_configurations.update(overrides or {})
     packages = []
+    node_config = {}
 
     def resolve(value):
         return perform_substitutions(context, normalize_to_list_of_substitutions(value))
@@ -83,6 +84,7 @@ def composition(entrypoint, overrides=None):
             action.execute(context)
         elif isinstance(action, Node):
             packages.append(resolve(action.node_package))
+            node_config.update(context.launch_configurations)
         elif isinstance(action, (ExecuteProcess, OpaqueFunction, SetParameter)):
             pass  # Never execute processes, systemctl, or hardware initialization.
         elif isinstance(action, IncludeLaunchDescription):
@@ -104,7 +106,9 @@ def composition(entrypoint, overrides=None):
             raise AssertionError(f"Unexpected launch action: {type(action)}")
 
     visit(PythonLaunchDescriptionSource(str(PACKAGE / "launch" / entrypoint)).get_launch_description(context))
-    return packages, context.launch_configurations
+    # Nested launches may correctly scope their private arguments. Keep the
+    # configuration actually seen by nodes for assertions about nested defaults.
+    return packages, {**node_config, **context.launch_configurations}
 
 
 @pytest.mark.parametrize("entrypoint", ["rover.launch.py", "rover_real.launch.py", "rover_direct.launch.py"])
@@ -137,6 +141,17 @@ def test_flat_latency_agent_preserves_video_and_motor_profile(selection, entrypo
     assert config['enable_rover_hardware'] == 'false'
     assert config['smooth_drive_commands'] == 'false'
     assert Path(config['video_config']).name == 'video_streams_flat.json'
+
+
+@pytest.mark.parametrize('entrypoint', ['rover.launch.py', 'rover_real.launch.py', 'rover_direct.launch.py'])
+def test_flat_camera_only_diagnostics_exclude_gnss_and_motor(selection, entrypoint):
+    (selection / '.mr2-rover-profile').write_text('flat\n')
+    packages, _ = composition(entrypoint, {'enable_gnss': 'false',
+                                         'enable_flat_motor': 'false',
+                                         'enable_latency_diagnostics': 'true'})
+    assert 'mr2_latency_diagnostics' in packages
+    assert 'mr2_video_streaming' in packages
+    assert not {'ublox_dgnss_node', 'ublox_nav_sat_fix_hp_node', 'mr2_flat_motor'} & set(packages)
 
 
 def test_original_profile_does_not_enable_flat_motor(selection):

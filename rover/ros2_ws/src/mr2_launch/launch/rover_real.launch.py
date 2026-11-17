@@ -1,6 +1,7 @@
 from launch import LaunchDescription
 from launch.actions import (
     ExecuteProcess,
+    GroupAction,
     IncludeLaunchDescription,
     TimerAction,
 )
@@ -21,6 +22,11 @@ from mr2_launch.profile import profile_arguments
 def generate_launch_description():
     DeclareLaunchArgument = profile_arguments("real")
     load_mr2_env(required=["MR2_BASE_IP"])
+
+    enable_gnss_arg = DeclareLaunchArgument(
+        "enable_gnss", default_value="true",
+        description="Start the wrapper's two GNSS receivers and NavSat relays",
+    )
 
     enable_realsense_arg = DeclareLaunchArgument(
         "enable_realsense", default_value="true",
@@ -478,11 +484,13 @@ def generate_launch_description():
     ublox_left_launch_delayed = TimerAction(
         period=0.0,
         actions=[ublox_left_launch],
+        condition=IfCondition(LaunchConfiguration("enable_gnss")),
     )
 
     ublox_right_launch_delayed = TimerAction(
         period=3.0,
         actions=[ublox_right_launch],
+        condition=IfCondition(LaunchConfiguration("enable_gnss")),
     )
 
     left_navsat_relay = Node(
@@ -491,6 +499,7 @@ def generate_launch_description():
         name="left_gnss_navsat_relay",
         output="screen",
         arguments=["/left_gnss/fix", "/left_gnss/navsat"],
+        condition=IfCondition(LaunchConfiguration("enable_gnss")),
     )
 
     right_navsat_relay = Node(
@@ -499,6 +508,7 @@ def generate_launch_description():
         name="right_gnss_navsat_relay",
         output="screen",
         arguments=["/right_gnss/fix", "/right_gnss/navsat"],
+        condition=IfCondition(LaunchConfiguration("enable_gnss")),
     )
 
     led_node = Node(
@@ -613,6 +623,7 @@ def generate_launch_description():
             yolo_publish_annotated_arg,
             yolo_annotated_fps_arg,
             left_gnss_serial_arg,
+            enable_gnss_arg,
             right_gnss_serial_arg,
             left_gnss_frame_arg,
             right_gnss_frame_arg,
@@ -639,7 +650,9 @@ def generate_launch_description():
             panorama_server,
             science_module_launch,
             ntrip_client_launch,
-            rover_launch,
+            # The nested stack disables its own GNSS owners. Scope that override
+            # so it does not change this wrapper's enable_gnss argument.
+            GroupAction(actions=[rover_launch]),
             ublox_left_launch_delayed,
             ublox_right_launch_delayed,
             left_navsat_relay,

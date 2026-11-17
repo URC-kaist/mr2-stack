@@ -100,7 +100,9 @@ function buildDecoderCandidates(message: VideoConfigMessage) {
   const codec = normalizeCodecString(message.codec, message.sps)
   const baseConfig: VideoDecoderConfig = {
     codec,
-    hardwareAcceleration: 'prefer-hardware',
+    // Let the browser fall back to software when hardware H.264 decoding is
+    // unavailable (for example, on a base station without an active GPU).
+    hardwareAcceleration: 'no-preference',
   }
   if (message.width > 0) {
     baseConfig.codedWidth = message.width

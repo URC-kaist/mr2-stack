@@ -5,8 +5,9 @@ flat video feeds and the existing XBee command path. Install the same commit on
 both machines. Source checkout changes alone do not update running programs,
 ROS installations, `/var/www/mr2-dashboard`, or nginx.
 
-The code is integrated; host deployment is a separate operation. No host clocks,
-services, network settings, or physical motor state were changed during integration.
+The initial integration did not change host configuration. The subsequent
+two-host deployment and measured results are recorded in
+[the router acceptance report](latency-router-acceptance-20260918.md).
 The prior feasibility review is in [latency-integration-assessment.md](latency-integration-assessment.md).
 
 ## Delivery and version agreement
@@ -53,11 +54,14 @@ binaries, or local environment files to the base; rebuild for the base architect
    npm --prefix dashboard run test:latency
    npm --prefix dashboard run check
    node scripts/latency/smoke_video.cjs > /tmp/base-latency-video-smoke.json
+   node scripts/latency/smoke_video.cjs --late-join > /tmp/base-latency-video-late-join.json
    ```
 
    The smoke check generates four synthetic feeds on ephemeral loopback ports.
    It runs the real gateway video receiver and WebSocket path, requires no cameras,
    serial devices or CAN, and does not test browser rendering or radio latency.
+   The late-join variant drops the initial keyframe before starting the receivers
+   to check that both receiver branches recover when joining an active stream.
 
 2. Merge [the flat example](../base/gateway/.env.latency-flat.example) into the
    existing ignored `base/gateway/.env.local`. Keep all unrelated settings.
@@ -78,6 +82,12 @@ binaries, or local environment files to the base; rebuild for the base architect
    Explicit gateway `--video-config` arguments override `VIDEO_CONFIG_PATH`;
    update the existing startup command/service if it supplies the original file.
    The flat selector on the rover does not configure the base gateway.
+
+   Use `/tmp/mr2-latency-base` or a non-hidden writable directory such as
+   `/home/mr2/latency-artifacts` for captures. Ubuntu's tcpdump AppArmor profile
+   explicitly denies hidden home directories, including `~/.local/state`, even
+   when file capabilities and Unix permissions are correct. Keep AppArmor
+   enabled; select a permitted artifact directory instead.
 
 3. Configure the two-host clock arrangement using the preview/validation/install
    procedure in [chrony/README.md](../scripts/latency/chrony/README.md).

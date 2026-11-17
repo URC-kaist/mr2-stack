@@ -49,6 +49,10 @@ test('buildGstReceiveArgs uses the configured jitter latency and supported drop 
     'latency=40',
     'drop-on-latency=true',
   ])
+  for (const fd of ['fd=1', 'fd=3']) {
+    const at = args.indexOf(fd)
+    assert.deepEqual(args.slice(at + 1, at + 3), ['sync=false', 'async=false'])
+  }
 })
 
 test('createVideoStreamReceiver drops trailing partial access units when the child exits', () => {

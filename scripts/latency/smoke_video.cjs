@@ -16,6 +16,7 @@ const { createWsRouteRegistry } = require('../../base/gateway/src/runtime/ws_rou
 const { loadVideoConfig } = require('../../base/gateway/src/video/stream_config')
 
 async function main() {
+  const lateJoin = process.argv.includes('--late-join')
   for (const plugin of ['videotestsrc', 'x264enc', 'rtph264pay', 'rtpstreampay']) {
     execFileSync('gst-inspect-1.0', [plugin], { stdio: 'ignore', timeout: 5000 })
   }
@@ -72,20 +73,29 @@ async function main() {
     for (const stream of videoConfig.streams) {
       ws.send(JSON.stringify({ type: 'subscribe', stream_id: stream.stream_id }))
     }
-    for (const socket of reservations.splice(0)) socket.close()
-    gateway.start()
-    await delay(500)
+    if (!lateJoin) {
+      for (const socket of reservations.splice(0)) socket.close()
+      gateway.start()
+      await delay(500)
+    }
     for (const [index, stream] of videoConfig.streams.entries()) {
       const child = spawn('gst-launch-1.0', ['-q',
-        'videotestsrc', 'is-live=true', 'num-buffers=120', `pattern=${index}`,
+        'videotestsrc', 'is-live=true', `num-buffers=${lateJoin ? 240 : 120}`, `pattern=${index}`,
         '!', 'video/x-raw,width=320,height=180,framerate=30/1',
-        '!', 'x264enc', 'tune=zerolatency', 'speed-preset=ultrafast', 'bitrate=1800', 'key-int-max=30',
+        '!', 'x264enc', 'tune=zerolatency', 'speed-preset=ultrafast', 'bitrate=1800', `key-int-max=${lateJoin ? 120 : 30}`,
         '!', 'rtph264pay', 'pt=96', 'config-interval=1',
         '!', 'udpsink', 'host=127.0.0.1', `port=${stream.udp_port}`, 'sync=false'],
       { stdio: ['ignore', 'ignore', 'pipe'] })
       child.stderr.on('data', (data) => errors.push(data.toString().trim()))
       child.on('error', (error) => errors.push(error.message))
       senders.push(child)
+    }
+    if (lateJoin) {
+      // Drop startup SPS/IDR, then join mid-GOP. The H.264 branch must wait for
+      // a later keyframe without deadlocking the parallel RTP metadata branch.
+      await delay(1500)
+      for (const socket of reservations.splice(0)) socket.close()
+      gateway.start()
     }
     const deadline = Date.now() + 10_000
     while (Date.now() < deadline && !errors.length &&
@@ -97,7 +107,7 @@ async function main() {
     }
     assert.ok(gateway.getBrowserStreams().every((s) => s.available &&
       s.encoded_width === 320 && s.encoded_height === 180))
-    console.log(JSON.stringify({ passed: true, scope: 'Synthetic RTP to WebSocket; no browser rendering or radio link', streams: counts }, null, 2))
+    console.log(JSON.stringify({ passed: true, late_join: lateJoin, scope: 'Synthetic RTP to WebSocket; no browser rendering or radio link', streams: counts }, null, 2))
   } finally {
     for (const socket of reservations) socket.close()
     for (const child of senders) child.kill('SIGTERM')

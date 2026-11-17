@@ -34,6 +34,9 @@ function buildGstReceiveArgs(stream, options = {}) {
     'fdsink',
     'fd=1',
     'sync=false',
+    // Both live tee branches must enter PLAYING without waiting for preroll.
+    // H.264 may need the next keyframe while the RTP branch already has data.
+    'async=false',
     'rtp.',
     '!',
     'queue',
@@ -43,6 +46,7 @@ function buildGstReceiveArgs(stream, options = {}) {
     'fdsink',
     'fd=3',
     'sync=false',
+    'async=false',
   ]
 }
 

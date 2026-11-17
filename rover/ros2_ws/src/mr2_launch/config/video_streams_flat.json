@@ -5,7 +5,7 @@
       "stream_id": "flat_cam_1",
       "source": {
         "type": "v4l2",
-        "device": "/dev/v4l/by-path/platform-3610000.usb-usb-0:2.2.1:1.0-video-index0",
+        "device": "/dev/v4l/by-path/platform-3610000.usb-usb-0:2.3.1:1.0-video-index0",
         "pixel_format": "MJPG",
         "capture_width": 640,
         "capture_height": 360
@@ -22,10 +22,11 @@
         "tune": "zerolatency"
       },
       "display": {
-        "label": "USB 2.2.1",
+        "label": "USB 2.3.1",
         "panel": "delivery",
         "order": 1
-      }
+      },
+      "priority": "high"
     },
     {
       "stream_id": "flat_cam_2",
@@ -51,7 +52,8 @@
         "label": "USB 2.2.2",
         "panel": "delivery",
         "order": 2
-      }
+      },
+      "priority": "low"
     },
     {
       "stream_id": "flat_cam_3",
@@ -77,7 +79,8 @@
         "label": "USB 2.4.1",
         "panel": "delivery",
         "order": 3
-      }
+      },
+      "priority": "low"
     },
     {
       "stream_id": "flat_cam_4",
@@ -103,7 +106,8 @@
         "label": "USB 2.4.2",
         "panel": "delivery",
         "order": 4
-      }
+      },
+      "priority": "low"
     }
   ]
 }

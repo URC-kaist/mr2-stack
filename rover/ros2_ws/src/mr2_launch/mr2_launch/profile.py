@@ -23,6 +23,11 @@ def read_profile(root):
 
     config = Path(get_package_share_directory("mr2_launch")) / "config"
     data = json.loads((config / f"profile_{name}.json").read_text(encoding="utf-8"))
+    options = root / ".mr2-rover-profile.options.json" if root else None
+    if options and options.exists():
+        local = json.loads(options.read_text(encoding="utf-8"))
+        if local.get("profile") == name:
+            data["common"] = {**data.get("common", {}), **local.get("common", {})}
     return name, config, data
 
 

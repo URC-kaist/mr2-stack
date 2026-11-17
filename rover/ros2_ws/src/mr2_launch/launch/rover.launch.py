@@ -119,7 +119,9 @@ def generate_launch_description():
     )
     enable_autonomous_module_arg = DeclareLaunchArgument(
         "enable_autonomous_module",
-        default_value="true",
+        default_value=PythonExpression([
+            "'true' if '", LaunchConfiguration("mode"), "' == 'sim' else 'false'",
+        ]),
         description="Enable autonomous camera module (front_camera)",
     )
     enable_science_module_arg = DeclareLaunchArgument(
@@ -134,7 +136,7 @@ def generate_launch_description():
     )
     enable_localization_arg = DeclareLaunchArgument(
         "enable_localization",
-        default_value="true",
+        default_value=LaunchConfiguration("enable_autonomous_module"),
         description="Start the delayed robot_localization stack",
     )
     start_manipulator_controllers_active_arg = DeclareLaunchArgument(
@@ -181,7 +183,7 @@ def generate_launch_description():
     )
     enable_aruco_arg = DeclareLaunchArgument(
         "enable_aruco",
-        default_value="true",
+        default_value=LaunchConfiguration("enable_autonomous_module"),
         description="Start ArUco tracker node",
     )
     aruco_cam_topic_arg = DeclareLaunchArgument(
@@ -326,34 +328,19 @@ def generate_launch_description():
             LaunchConfiguration("enable_rover_hardware"), "' == 'true'",
         ])),
     )
-    disabled_video_stream_ids = PythonExpression(
-        [
-            "','.join(filter(None, ["
-            "'rgbd_camera' if (('",
-            LaunchConfiguration("mode"),
-            "' == 'real' and '",
-            LaunchConfiguration("enable_autonomous_module"),
-            "' == 'true') or ('",
-            LaunchConfiguration("mode"),
-            "' == 'sim' and '",
-            LaunchConfiguration("enable_autonomous_module_sim"),
-            "' == 'true')) else '', "
-            "'arm_cam,gripper_cam' if (('",
-            LaunchConfiguration("mode"),
-            "' == 'real' and '",
-            LaunchConfiguration("enable_manipulator_module"),
-            "' != 'true') or ('",
-            LaunchConfiguration("mode"),
-            "' == 'sim' and '",
-            LaunchConfiguration("enable_manipulator_module_sim"),
-            "' != 'true')) else '', "
-            "'left_cam,right_cam' if ('",
-            LaunchConfiguration("mode"),
-            "' == 'real' and '",
-            LaunchConfiguration("enable_science_module"),
-            "' == 'true') else '']))",
-        ]
-    )
+    disabled_video_stream_ids = PythonExpression([
+        "','.join(filter(None, ["
+        "'rgbd_camera' if (('", LaunchConfiguration("mode"), "' == 'real' and '",
+        LaunchConfiguration("enable_autonomous_module"), "' == 'true') or ('",
+        LaunchConfiguration("mode"), "' == 'sim' and '",
+        LaunchConfiguration("enable_autonomous_module_sim"), "' == 'true')) else '', "
+        "'arm_cam,gripper_cam' if (('", LaunchConfiguration("mode"), "' == 'real' and '",
+        LaunchConfiguration("enable_manipulator_module"), "' != 'true') or ('",
+        LaunchConfiguration("mode"), "' == 'sim' and '",
+        LaunchConfiguration("enable_manipulator_module_sim"), "' != 'true')) else '', "
+        "'left_cam,right_cam' if ('", LaunchConfiguration("mode"), "' == 'real' and '",
+        LaunchConfiguration("enable_science_module"), "' == 'true') else '']))",
+    ])
     video_streaming_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             PathJoinSubstitution(

@@ -2,7 +2,6 @@ from mr2_launch.clock_guard import video_base_host_default
 from launch import LaunchDescription
 from launch.actions import (
     ExecuteProcess,
-    GroupAction,
     OpaqueFunction,
     IncludeLaunchDescription,
     TimerAction,
@@ -32,8 +31,8 @@ def generate_launch_description():
     )
 
     enable_realsense_arg = DeclareLaunchArgument(
-        "enable_realsense", default_value="true",
-        description="Start RealSense RGB-D/IMU hardware",
+        "enable_realsense", default_value=LaunchConfiguration("enable_autonomous_module"),
+        description="Start RealSense ROS hardware; defaults to the autonomous module setting",
     )
 
     # Optional manual datum setter for navsat_transform if base survey-in message
@@ -110,7 +109,7 @@ def generate_launch_description():
     )
     enable_autonomous_module_arg = DeclareLaunchArgument(
         "enable_autonomous_module",
-        default_value="true",
+        default_value="false",
         description=(
             "Enable autonomous module: launch RealSense RGB-D, the UVC "
             "front_camera, and autonomous perception/navigation"
@@ -134,7 +133,7 @@ def generate_launch_description():
     )
     enable_video_streaming_arg = DeclareLaunchArgument(
         "enable_video_streaming",
-        default_value="false",
+        default_value="true",
         description="Start the rover H.264 RTP/UDP video streaming node",
     )
     video_base_host_arg = DeclareLaunchArgument(
@@ -424,7 +423,7 @@ def generate_launch_description():
         ),
         launch_arguments={
             # This wrapper already owns both GNSS receivers and relays.
-            "enable_gnss": "false",
+            "gnss_managed_externally": "true",
             "mode": "real",
             "rviz_config": LaunchConfiguration("rviz_config"),
             "headless": LaunchConfiguration("headless"),
@@ -598,6 +597,7 @@ def generate_launch_description():
     return LaunchDescription(
         [
             OpaqueFunction(function=acquire_clock),
+            enable_autonomous_module_arg,
             enable_realsense_arg,
             set_manual_datum_arg,
             datum_lat_arg,
@@ -616,7 +616,6 @@ def generate_launch_description():
             xbee_sim_device_arg,
             xbee_sim_peer_arg,
             xbee_device_arg,
-            enable_autonomous_module_arg,
             enable_science_module_arg,
             panorama_stale_goal_timeout_arg,
             enable_video_streaming_arg,
@@ -654,9 +653,9 @@ def generate_launch_description():
             panorama_server,
             science_module_launch,
             ntrip_client_launch,
-            # The nested stack disables its own GNSS owners. Scope that override
-            # so it does not change this wrapper's enable_gnss argument.
-            GroupAction(actions=[rover_launch]),
+            # Humble timers resolve launch configurations after this inclusion.
+            # Keep them available; a separate ownership flag prevents duplicate GNSS.
+            rover_launch,
             ublox_left_launch_delayed,
             ublox_right_launch_delayed,
             left_navsat_relay,

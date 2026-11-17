@@ -3,7 +3,7 @@
 from launch.actions import GroupAction, IncludeLaunchDescription, TimerAction
 from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
+from launch.substitutions import LaunchConfiguration, PathJoinSubstitution, PythonExpression
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
@@ -11,6 +11,8 @@ from launch_ros.substitutions import FindPackageShare
 def gnss_actions(declare):
     declarations = [
         declare("enable_gnss", default_value="false", description="Start the two GNSS receivers without navigation"),
+        declare("gnss_managed_externally", default_value="false",
+                description="The real wrapper already owns the GNSS receivers"),
         declare("left_gnss_serial", default_value="TowerRx_"),
         declare("right_gnss_serial", default_value="NorthRx_"),
         declare("left_gnss_frame_id", default_value="left_gnss"),
@@ -38,4 +40,7 @@ def gnss_actions(declare):
                 arguments=[f"/{side}_gnss/fix", f"/{side}_gnss/navsat"], output="screen",
             ),
         ])
-    return [*declarations, GroupAction(actions=actions, condition=IfCondition(LaunchConfiguration("enable_gnss")))]
+    return [*declarations, GroupAction(actions=actions, condition=IfCondition(PythonExpression([
+        "'", LaunchConfiguration("enable_gnss"), "' == 'true' and '",
+        LaunchConfiguration("gnss_managed_externally"), "' != 'true'",
+    ])))]

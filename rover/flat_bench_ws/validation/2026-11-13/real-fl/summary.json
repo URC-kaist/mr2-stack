@@ -1,0 +1,38 @@
+{
+  "result": "PASS",
+  "real_wheel": "fl",
+  "controllers": {
+    "joint_state_broadcaster": {
+      "type": "joint_state_broadcaster/JointStateBroadcaster",
+      "state": "active"
+    },
+    "rover_controller": {
+      "type": "mr2_rover_control/TwistToCommandsController",
+      "state": "active"
+    }
+  },
+  "hardware": [
+    {
+      "name": "RoverCanSystem",
+      "plugin": "mr2_can_hardware_interface/CanHW",
+      "state": "active"
+    }
+  ],
+  "forward": {
+    "mean_fl_velocity": 0.11431550570941695,
+    "fl_position_delta": 0.08516182192721367,
+    "samples": 100
+  },
+  "timeout": {
+    "mean_fl_velocity": 0.020684451904410633,
+    "fl_position_delta": 0.0759551384756243,
+    "samples": 151
+  },
+  "reverse": {
+    "mean_fl_velocity": -0.09443639107177641,
+    "fl_position_delta": -0.0736534676127274,
+    "samples": 101
+  },
+  "joint_samples": 786,
+  "odom_samples": 190
+}

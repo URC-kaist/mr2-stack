@@ -1,0 +1,15 @@
+{
+  "old_video_pid": 29438,
+  "parent_launch_pid": 29121,
+  "backup": "/home/mr2/.local/state/mr2-video-backups/pacer-20261029-135641",
+  "params": [
+    "--ros-args",
+    "-r",
+    "__node:=video_streaming",
+    "-p",
+    "use_sim_time:=False",
+    "--params-file",
+    "/tmp/launch_params__m8h_rsr"
+  ],
+  "new_video_pid": 43029
+}

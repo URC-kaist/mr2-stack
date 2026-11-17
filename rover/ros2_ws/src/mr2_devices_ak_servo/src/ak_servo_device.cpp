@@ -7,6 +7,7 @@
 #include "rclcpp/node.hpp"
 #include "rclcpp/qos.hpp"
 #include "sensor_msgs/msg/temperature.hpp"
+#include "startup_feedback_filter.hpp"
 #include <atomic>
 #include <cmath>
 #include <cstdint>
@@ -17,6 +18,8 @@
 namespace mr2_devices_ak_servo {
 
 class AkServoDevice : public CanDevice {
+  friend struct DeviceTestPeer;
+
 public:
   static constexpr int64_t kStatusTimeoutNanosec = 500000000; // 0.5 s
   static constexpr double kCommandReleaseThreshold = 1e-3;
@@ -30,6 +33,7 @@ public:
     id_ = std::stoi(ji.parameters.at("motor_id"));
     iface_ = ji.parameters.at("can_iface");
     joint_name_ = ji.name;
+    configure_startup_filter(ji);
 
     std::string temperature_topic =
         "ak_servo/motor_" + std::to_string(id_) + "/temperature";
@@ -50,6 +54,30 @@ public:
     temperature_pub_ = node_->create_publisher<sensor_msgs::msg::Temperature>(
         temperature_topic, rclcpp::SystemDefaultsQoS());
 
+    telemetry_timer_ =
+        node_->create_wall_timer(std::chrono::milliseconds(10), [this] {
+          StatusSample sample;
+          bool stabilization_warning;
+          {
+            std::lock_guard<std::mutex> lock(feedback_mutex_);
+            sample = telemetry_sample_;
+            stabilization_warning =
+                startup_filter_.warning_due(clock_.now().nanoseconds());
+          }
+          if (stabilization_warning)
+            RCLCPP_WARN(logger_, "AK servo %d feedback has not stabilized.", id_);
+          if (sample.timestamp_ns != published_timestamp_) {
+            published_timestamp_ = sample.timestamp_ns;
+            publish_temperature(sample);
+          }
+          const int reason = timeout_notice_.exchange(0);
+          if (reason)
+            RCLCPP_ERROR(logger_,
+                         "AK servo %d timed out waiting for feedback (%s)", id_,
+                         reason == 1 ? "no status frames received"
+                                     : "status stream stalled");
+        });
+
     // Add CAN bus feedback filter
     const uint32_t canonical_feedback_id =
         (0x00002900U | (static_cast<uint32_t>(id_) & 0xFFU));
@@ -60,11 +88,56 @@ public:
   // Runs every control cycle; validates feedback health and pushes the next
   // position command out on the bus once the controller has taken over.
   void process(const rclcpp::Time &) override {
+    process_at(clock_.now().nanoseconds());
+  }
+
+  void export_state(double *&position, double *&velocity,
+                    double *&effort) override {
+    copy_feedback(exported_);
+    position = &exported_.position;
+    velocity = &exported_.velocity;
+    effort = &exported_.effort;
+  }
+
+  bool copy_feedback(CanFeedback &out) override {
+    std::lock_guard<std::mutex> lock(feedback_mutex_);
+    out = feedback_;
+    return true;
+  }
+
+  void export_command(double *&command) override {
+    command = &desired_command_rad_;
+  }
+
+private:
+  void configure_startup_filter(const hardware_interface::ComponentInfo &ji) {
+    const auto integer = [&](const char *name, int64_t fallback, int64_t minimum,
+                             int64_t maximum) {
+      const auto it = ji.parameters.find(name);
+      if (it == ji.parameters.end())
+        return fallback;
+      size_t consumed = 0;
+      const auto value = std::stoll(it->second, &consumed);
+      if (consumed != it->second.size() || value < minimum || value > maximum)
+        throw std::invalid_argument(std::string("Invalid AK startup parameter: ") + name);
+      return static_cast<int64_t>(value);
+    };
+    StartupFeedbackFilter::Config config;
+    config.min_duration_ns =
+        integer("startup_min_duration_ms", 200, 0, 60000) * 1000000;
+    config.stable_samples = integer("startup_stable_samples", 5, 2, 1000);
+    config.tolerance_tenths_deg =
+        integer("startup_position_tolerance_tenths_deg", 1, 0, 65535);
+    config.max_gap_ns = integer("startup_max_gap_ms", 100, 1, 500) * 1000000;
+    std::lock_guard<std::mutex> lock(feedback_mutex_);
+    startup_filter_.reset(config);
+    feedback_ = CanFeedback{};
+  }
+
+  void process_at(int64_t now_ns) {
     if (timed_out_.load(std::memory_order_acquire)) {
       return;
     }
-
-    const int64_t now_ns = clock_.now().nanoseconds();
 
     // Record first configure time
     if (!configure_time_recorded_) {
@@ -76,16 +149,18 @@ public:
       return;
     }
 
-    const double position_rad = position_rad_;
-    if (std::isnan(position_rad)) {
+    CanFeedback sample;
+    copy_feedback(sample);
+    const double position_rad = sample.position;
+    if (!std::isfinite(position_rad)) {
       return;
     }
 
     // Retrieve the latest desired command, else defaulting to "hold"
     double desired = desired_command_rad_;
-    if (std::isnan(desired)) {
+    if (!std::isfinite(desired)) {
       if (std::isnan(hold_position_rad_)) {
-        hold_position_rad_ = position_rad_;
+        hold_position_rad_ = position_rad;
       }
       desired = hold_position_rad_;
     } else {
@@ -95,24 +170,13 @@ public:
     // Initialize controller state
     controller_initialized_.store(true, std::memory_order_relaxed);
 
-    command_out_rad_ = compute_target_command(desired);
+    command_out_rad_ = desired;
 
     transmit_command();
   }
 
-  void export_state(double *&position, double *&velocity,
-                    double *&effort) override {
-    position = &position_rad_;
-    velocity = &velocity_rad_;
-    effort = &effort_amp_;
-  }
-
-  void export_command(double *&command) override {
-    command = &desired_command_rad_;
-  }
-
-private:
   struct StatusSample {
+    int16_t position_tenths_deg;
     double position_rad;
     double velocity_rad;
     double current_amp;
@@ -140,22 +204,15 @@ private:
     return true;
   }
 
-  // Decide which angle should be sent to the driver (initially the first
-  // sampled position, then whatever the controller requests).
-  double compute_target_command(double desired) {
-    std::lock_guard<std::mutex> lock(command_mutex_);
-    return desired;
-  }
-
   void transmit_command() {
-    struct can_frame fr {};
+    struct can_frame fr{};
     fr.can_id = (0x00000400 | id_) | CAN_EFF_FLAG;
     fr.can_dlc = 4;
     const int32_t p = std::lround(command_out_rad_ * 180.0 / M_PI * 1e4);
     fr.data[0] = (p >> 24) & 0xFF;
     fr.data[1] = (p >> 16) & 0xFF;
     fr.data[2] = (p >> 8) & 0xFF;
-    fr.data[3] = (p)&0xFF;
+    fr.data[3] = (p) & 0xFF;
     send(fr, bus_);
   }
 
@@ -171,6 +228,7 @@ private:
         static_cast<int16_t>((static_cast<uint16_t>(f.data[4]) << 8) |
                              static_cast<uint16_t>(f.data[5]));
 
+    sample.position_tenths_deg = p10;
     sample.position_rad = (p10 / 10.0) * (M_PI / 180.0);
     sample.velocity_rad = (v10 * 10.0) * (M_PI / 30.0);
     sample.current_amp = c01 / 100.0;
@@ -260,15 +318,25 @@ private:
   // Callback registered with the CAN manager; updates telemetry and command
   // state whenever the servo publishes a feedback frame.
   void on_status(const can_frame &f) {
-    const int64_t now_ns = clock_.now().nanoseconds();
+    on_status_at(f, clock_.now().nanoseconds());
+  }
+
+  void on_status_at(const can_frame &f, int64_t now_ns) {
+    if (!(f.can_id & CAN_EFF_FLAG) ||
+        (f.can_id & (CAN_RTR_FLAG | CAN_ERR_FLAG)) || f.can_dlc != 8)
+      return;
     const StatusSample sample = decode_status_frame(f, now_ns);
 
-    position_rad_ = sample.position_rad;
-    velocity_rad_ = sample.velocity_rad;
-    effort_amp_ = sample.current_amp;
+    {
+      std::lock_guard<std::mutex> lock(feedback_mutex_);
+      if (startup_filter_.observe(sample.position_tenths_deg, sample.error_code,
+                                  now_ns)) {
+        feedback_ = {sample.position_rad, sample.velocity_rad, sample.current_amp,
+                     sample.timestamp_ns, sample.timestamp_ns};
+      }
+      telemetry_sample_ = sample;
+    }
     last_temperature_c_ = sample.temperature_c;
-
-    publish_temperature(sample);
 
     const uint8_t previous_error = last_error_code_;
     last_error_code_ = sample.error_code;
@@ -284,8 +352,7 @@ private:
     if (timed_out_.compare_exchange_strong(expected, true,
                                            std::memory_order_acq_rel)) {
       recovered_logged_.store(false, std::memory_order_relaxed);
-      RCLCPP_ERROR(logger_, "AK servo %d timed out waiting for feedback (%s)",
-                   id_, reason);
+      timeout_notice_.store(reason[0] == 'n' ? 1 : 2);
     }
   }
 
@@ -308,17 +375,19 @@ private:
   int8_t last_temperature_c_{0};
   uint8_t last_error_code_{0};
 
-  // Keep position invalid until the first real feedback frame arrives. The
-  // hardware interface uses finite actuator position to capture boot-origin
-  // references, so a placeholder value here can become a false zero.
-  double position_rad_{std::numeric_limits<double>::quiet_NaN()};
-  double velocity_rad_{std::numeric_limits<double>::quiet_NaN()};
-  double effort_amp_{std::numeric_limits<double>::quiet_NaN()};
+  // Only stabilized startup feedback may establish a boot reference or permit
+  // process_at() to transmit, including its automatic position-hold fallback.
   double command_out_rad_{std::numeric_limits<double>::quiet_NaN()};
   double desired_command_rad_{std::numeric_limits<double>::quiet_NaN()};
   double hold_position_rad_{std::numeric_limits<double>::quiet_NaN()};
 
-  mutable std::mutex command_mutex_;
+  std::mutex feedback_mutex_;
+  StartupFeedbackFilter startup_filter_;
+  CanFeedback feedback_, exported_;
+  StatusSample telemetry_sample_{};
+  int64_t published_timestamp_{};
+  std::atomic<int> timeout_notice_{0};
+  rclcpp::TimerBase::SharedPtr telemetry_timer_;
 
   template <typename MsgT>
   void safe_publish(const typename rclcpp::Publisher<MsgT>::SharedPtr &pub,

@@ -845,6 +845,15 @@
   white-space: nowrap;
 }
 
+.video-feed-quality {
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
 .video-feed-stream-toggle {
   flex: 0 0 auto;
   border: 1px solid rgba(255, 255, 255, 0.12);

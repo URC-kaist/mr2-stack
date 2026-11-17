@@ -1,0 +1,19 @@
+[WARN] [1793275771.645183319] [xbee_bridge]: XBee serial unavailable /tmp/mr2-xbee-reconnect-zk_qv4g2/ttyXBEE: No such file or directory; retrying
+[WARN] [1793275773.649244626] [xbee_bridge]: XBee serial configuration failed /tmp/mr2-xbee-reconnect-zk_qv4g2/ttyXBEE: Inappropriate ioctl for device; retrying
+[INFO] [1793275775.653236365] [xbee_bridge]: XBee serial connected /tmp/mr2-xbee-reconnect-zk_qv4g2/ttyXBEE @ 115200
+[WARN] [1793275776.270034850] [xbee_bridge]: XBee serial disconnected /tmp/mr2-xbee-reconnect-zk_qv4g2/ttyXBEE: serial hangup/error; reconnecting
+[WARN] [1793275776.671068466] [xbee_bridge]: XBee serial unavailable /tmp/mr2-xbee-reconnect-zk_qv4g2/ttyXBEE: No such file or directory; retrying
+[INFO] [1793275778.675077325] [xbee_bridge]: XBee serial connected /tmp/mr2-xbee-reconnect-zk_qv4g2/ttyXBEE @ 115200
+[WARN] [1793275779.383180302] [xbee_bridge]: XBee serial disconnected /tmp/mr2-xbee-reconnect-zk_qv4g2/ttyXBEE: serial hangup/error; reconnecting
+[INFO] [1793275781.687966853] [xbee_bridge]: XBee serial connected /tmp/mr2-xbee-reconnect-zk_qv4g2/ttyXBEE @ 115200
+[WARN] [1793275782.372257481] [xbee_bridge]: XBee serial disconnected /tmp/mr2-xbee-reconnect-zk_qv4g2/ttyXBEE: serial hangup/error; reconnecting
+[WARN] [1793275782.723679801] [xbee_bridge]: XBee serial unavailable /tmp/mr2-xbee-reconnect-zk_qv4g2/ttyXBEE: No such file or directory; retrying
+[INFO] [1793275784.727682964] [xbee_bridge]: XBee serial connected /tmp/mr2-xbee-reconnect-zk_qv4g2/ttyXBEE @ 115200
+[WARN] [1793275785.371985836] [xbee_bridge]: XBee serial disconnected /tmp/mr2-xbee-reconnect-zk_qv4g2/ttyXBEE: serial hangup/error; reconnecting
+[INFO] [1793275787.777370269] [xbee_bridge]: XBee serial connected /tmp/mr2-xbee-reconnect-zk_qv4g2/ttyXBEE @ 115200
+[WARN] [1793275788.371758767] [xbee_bridge]: XBee serial disconnected /tmp/mr2-xbee-reconnect-zk_qv4g2/ttyXBEE: serial hangup/error; reconnecting
+[WARN] [1793275788.822906633] [xbee_bridge]: XBee serial unavailable /tmp/mr2-xbee-reconnect-zk_qv4g2/ttyXBEE: No such file or directory; retrying
+[INFO] [1793275789.825079305] [xbee_bridge]: XBee serial connected /tmp/mr2-xbee-reconnect-zk_qv4g2/ttyXBEE @ 115200
+[WARN] [1793275790.390842564] [xbee_bridge]: XBee serial disconnected /tmp/mr2-xbee-reconnect-zk_qv4g2/ttyXBEE: serial hangup/error; reconnecting
+[INFO] [1793275791.843574707] [xbee_bridge]: XBee serial connected /tmp/mr2-xbee-reconnect-zk_qv4g2/ttyXBEE @ 115200
+[INFO] [1793275792.270864462] [rclcpp]: signal_handler(SIGINT/SIGTERM)

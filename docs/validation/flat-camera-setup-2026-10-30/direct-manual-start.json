@@ -1,0 +1,62 @@
+{
+  "passed": true,
+  "observation_s": 60,
+  "start_method": "npm start and manual source /opt/ros/humble/setup.bash; source install/setup.bash; ros2 launch mr2_launch rover_real.launch.py",
+  "test_ip_overrides": {
+    "base_rover_host": "192.168.0.57",
+    "rover_video_base_host": "192.168.0.55"
+  },
+  "field_defaults": {
+    "base": "192.168.1.101",
+    "rover": "192.168.1.102"
+  },
+  "render_fps_final_20s": {
+    "flat_cam_1": 30.002362573543806,
+    "flat_cam_3": 30.05236651116638,
+    "flat_cam_4": 30.002362573543806
+  },
+  "decoder_errors": 0,
+  "codec_configurations": 10,
+  "first_key_nals": [
+    [
+      5,
+      273
+    ]
+  ],
+  "last_sample": {
+    "at_s": 59.00031347,
+    "frames": {
+      "flat_cam_1": 1360,
+      "flat_cam_3": 1079,
+      "flat_cam_4": 1163
+    },
+    "feeds": [
+      {
+        "label": "USB 2.3.1",
+        "quality": "640\u00d7360 \u00b7 30.0 FPS",
+        "status": "Live"
+      },
+      {
+        "label": "USB 2.2.2",
+        "quality": "\u2014 \u00b7 0 FPS",
+        "status": "Waiting for video ingest..."
+      },
+      {
+        "label": "USB 2.4.1",
+        "quality": "640\u00d7360 \u00b7 30.0 FPS",
+        "status": "Live"
+      },
+      {
+        "label": "USB 2.4.2",
+        "quality": "640\u00d7360 \u00b7 30.0 FPS",
+        "status": "Live"
+      }
+    ],
+    "delays": [
+      "2.1 ms",
+      "5.9 ms",
+      "0.3 ms",
+      "1.3 ms"
+    ]
+  }
+}

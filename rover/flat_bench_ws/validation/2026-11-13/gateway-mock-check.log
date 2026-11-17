@@ -1,0 +1,20 @@
+initial_zero 0.0
+forward 0.11764705619391279
+abort_with_held_drive 0.11764705619391279
+release_triggers 0.0
+reverse -0.11764705619391279
+final_zero 0.0
+{
+  "result": "PASS",
+  "real_wheel": "none",
+  "public_websocket": "wss://10.42.0.1/xbee-ws",
+  "forward_joint_velocity": 0.11764705619391279,
+  "reverse_joint_velocity": -0.11764705619391279,
+  "twist_messages": 145,
+  "joint_messages": 714,
+  "existing_stack_abort_behavior": {
+    "abort_reaches_mission_control": true,
+    "drive_continues_while_held": true,
+    "mean_velocity_after_abort": 0.11764705619391279
+  }
+}

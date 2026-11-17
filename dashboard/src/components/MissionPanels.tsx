@@ -2,6 +2,7 @@ import { useState } from 'react'
 import AutonomousTabPanel from './AutonomousTabPanel'
 import DeliveryPanel from './DeliveryPanel'
 import LiveFeedTabPanel from './LiveFeedTabPanel'
+import LatencyDiagnosticsPanel from './LatencyDiagnosticsPanel'
 import ScienceTabPanel from './ScienceTabPanel'
 import type { MissionTabId } from './MissionTabs'
 import SystemStatusPanel from './SystemStatusPanel'
@@ -39,6 +40,10 @@ const MissionPanels = ({ activeTab }: MissionPanelsProps) => {
     <section className="tab-panels">
       {activeTab === 'status' && <SystemStatusPanel />}
       {activeTab === 'live-feed' && <LiveFeedTabPanel />}
+      {/* Keep subscriptions, clock verification, and camera selection alive across tab changes. */}
+      <div className="latency-tab-panel" hidden={activeTab !== 'latency'}>
+        <LatencyDiagnosticsPanel />
+      </div>
       {activeTab === 'delivery' && <DeliveryPanel />}
       {activeTab === 'science' && <ScienceTabPanel />}
       {activeTab === 'autonomous' && (

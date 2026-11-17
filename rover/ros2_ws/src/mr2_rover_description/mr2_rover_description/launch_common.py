@@ -49,7 +49,7 @@ def robot_description_from_xacro(xacro_file, mappings: Mapping[str, LaunchConfig
 
 
 def robot_state_publisher_node(robot_description, use_sim_time):
-    """Standard robot_state_publisher node with shared sim time handling."""
+    """Create a robot_state_publisher node with shared sim time handling."""
     return Node(
         package="robot_state_publisher",
         executable="robot_state_publisher",
@@ -134,3 +134,32 @@ def mock_servo_nodes(
             )
         )
     return nodes
+
+
+def control_backend_actions(legacy_actions, controller_config, robot_description,
+                            use_sim_time, *, enable_manipulator=True,
+                            start_manipulator_active=False, standalone=False):
+    """Select exactly one owner of actuator commands and authoritative feedback."""
+    from launch.actions import GroupAction
+    from launch.conditions import LaunchConfigurationEquals
+    backend = DeclareLaunchArgument(
+        "control_backend", default_value="ros2_control",
+        choices=["ros2_control", "mr2_control"],
+        description="Actuator runtime; legacy remains default pending hardware validation",
+    )
+    parameters = {
+        "controller_config": controller_config,
+        "use_sim_time": ParameterValue(use_sim_time, value_type=bool),
+        "enable_manipulator_module": ParameterValue(enable_manipulator, value_type=bool),
+        "start_manipulator_controllers_active": ParameterValue(start_manipulator_active, value_type=bool),
+    }
+    if standalone:
+        parameters["start_gripper_active"] = True
+    return [
+        backend,
+        GroupAction(actions=legacy_actions,
+                    condition=LaunchConfigurationEquals("control_backend", "ros2_control")),
+        Node(package="mr2_control", executable="mr2_control_node", name="mr2_control",
+             parameters=[robot_description, parameters], output="screen",
+             condition=LaunchConfigurationEquals("control_backend", "mr2_control")),
+    ]

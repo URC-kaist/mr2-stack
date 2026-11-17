@@ -2,7 +2,11 @@
 
 const { WebSocketServer } = require('ws')
 
-const { encodeChunkMessage, encodeConfigMessage } = require('./protocol')
+const {
+  encodeChunkMessage,
+  encodeConfigMessage,
+  encodeTimedChunkMessage,
+} = require('./protocol')
 const { createVideoStreamReceiver } = require('./receiver')
 const { listBrowserStreams } = require('./stream_config')
 
@@ -20,6 +24,8 @@ function createStreamState(stream) {
     encodedHeight: 0,
     encodedWidth: 0,
     latestKeyAccessUnit: null,
+    keyReceivedAt: 0,
+    lastDecodeTimestampUs: 0,
     pps: null,
     sps: null,
     stream,
@@ -47,6 +53,14 @@ function createVideoGateway(options = {}) {
   const createVideoStreamReceiverImpl =
     options.createVideoStreamReceiverImpl || createVideoStreamReceiver
   const spawnImpl = options.spawnImpl
+  const now = options.now || (() => performance.now())
+  const maxBufferedMs = Math.max(30, options.clientMaxBufferedMs || 150)
+  const keyRequests = new Map()
+  function requestKeyframe(id) {
+    if (now() - (keyRequests.get(id) ?? -Infinity) < 500) return
+    keyRequests.set(id, now())
+    options.requestKeyframe?.(id)
+  }
 
   const streamStates = new Map(
     videoConfig.streams.map((stream) => [stream.stream_id, createStreamState(stream)])
@@ -55,12 +69,14 @@ function createVideoGateway(options = {}) {
     videoConfig.streams.map((stream) => [stream.stream_id, new Set()])
   )
   const clients = new Set()
+  let receivePaused = Boolean(options.freshness)
   const wss = new WebSocketServerImpl({ noServer: true })
 
   routeRegistry.register(path, wss)
 
   const receivers = videoConfig.streams.map((stream) =>
     createVideoStreamReceiverImpl({
+      freshness: options.freshness,
       availabilityStaleMs: options.availabilityStaleMs,
       gstBinary: options.gstBinary,
       idleFlushMs: options.idleFlushMs,
@@ -71,12 +87,14 @@ function createVideoGateway(options = {}) {
       restartMs: options.restartMs,
       spawnImpl,
       stream,
+      onPacket: options.onPacket,
     })
   )
 
   wss.on('connection', (ws) => {
     const client = {
       subscriptions: new Map(),
+      writes: new Map(),
       ws,
     }
     clients.add(client)
@@ -158,18 +176,33 @@ function createVideoGateway(options = {}) {
     if (client.ws.readyState !== 1) return false
     const subscription = client.subscriptions.get(streamId)
     if (!subscription) return false
-    if (client.ws.bufferedAmount > clientMaxBufferedBytes) {
-      subscription.needsBootstrap = true
+    const oldest = client.writes.values().next().value
+    if (client.ws.bufferedAmount > 0 && oldest != null && now() - oldest > maxBufferedMs) {
+      // Already queued TCP bytes cannot be withdrawn. Reconnect the video
+      // socket to discard stale data, then resume every feed at a fresh IDR.
+      client.ws.terminate()
       return false
     }
-    client.ws.send(payload)
+    if (client.ws.bufferedAmount + payload.length > clientMaxBufferedBytes) {
+      for (const s of client.subscriptions.values()) s.needsBootstrap = true
+      return false
+    }
+    const token = {}
+    client.writes.set(token, now())
+    client.ws.send(payload, (error) => {
+      client.writes.delete(token)
+      if (error) client.ws.terminate()
+    })
     return true
   }
 
   function maybeSendBootstrap(client, state, subscription, keyAccessUnit) {
     if (!state.sps || !state.pps) return false
     const keyUnit = keyAccessUnit || state.latestKeyAccessUnit
-    if (!keyUnit) return false
+    if (!keyUnit || (!keyAccessUnit && now() - state.keyReceivedAt > maxBufferedMs)) {
+      requestKeyframe(state.stream.stream_id)
+      return false
+    }
 
     if (subscription.configVersionSent !== state.configVersion) {
       const configMessage = encodeConfigMessage({
@@ -186,11 +219,9 @@ function createVideoGateway(options = {}) {
       subscription.configVersionSent = state.configVersion
     }
 
-    const chunkMessage = encodeChunkMessage({
+    const chunkMessage = encodeAccessUnitMessage(state, {
+      ...keyUnit,
       key: true,
-      payload: keyUnit.payload,
-      stream_id: state.stream.stream_id,
-      timestamp_us: keyUnit.timestamp_us,
     })
     if (!trySend(client, chunkMessage, state.stream.stream_id)) {
       return false
@@ -210,29 +241,55 @@ function createVideoGateway(options = {}) {
 
       if (subscription.needsBootstrap || subscription.configVersionSent !== state.configVersion) {
         if (!accessUnit.key) {
-          maybeSendBootstrap(client, state, subscription, null)
+          requestKeyframe(state.stream.stream_id)
           continue
         }
         maybeSendBootstrap(client, state, subscription, accessUnit)
         continue
       }
 
-      trySend(
-        client,
-        encodeChunkMessage({
-          key: accessUnit.key,
-          payload: accessUnit.payload,
-          stream_id: state.stream.stream_id,
-          timestamp_us: accessUnit.timestamp_us,
-        }),
-        state.stream.stream_id
-      )
+      trySend(client, encodeAccessUnitMessage(state, accessUnit), state.stream.stream_id)
     }
+  }
+
+  function encodeAccessUnitMessage(state, accessUnit) {
+    if (!accessUnit.correlation) {
+      return encodeChunkMessage({
+        key: accessUnit.key,
+        payload: accessUnit.payload,
+        stream_id: state.stream.stream_id,
+        timestamp_us: accessUnit.timestamp_us,
+      })
+    }
+    state.lastDecodeTimestampUs = Math.max(
+      state.lastDecodeTimestampUs + 1,
+      Math.floor(accessUnit.timestamp_us)
+    )
+    return encodeTimedChunkMessage({
+      key: accessUnit.key,
+      payload: accessUnit.payload,
+      stream_id: state.stream.stream_id,
+      decode_timestamp_us: state.lastDecodeTimestampUs,
+      base_access_unit_epoch_us: accessUnit.timestamp_us,
+      ...accessUnit.correlation,
+    })
   }
 
   function handleAccessUnit(streamId, accessUnit) {
     const state = streamStates.get(streamId)
     if (!state) return
+
+    // Native AU time is from this same base host, so this only measures local
+    // pipe/event-loop residence and needs no rover/laptop clock alignment.
+    if (options.freshness && Date.now() * 1000 - accessUnit.timestamp_us > 150000) {
+      state.latestKeyAccessUnit = null
+      for (const client of subscriptionsByStream.get(streamId) || []) {
+        const subscription = client.subscriptions.get(streamId)
+        if (subscription) subscription.needsBootstrap = true
+      }
+      requestKeyframe(streamId)
+      return
+    }
 
     updateCodecState(state, accessUnit)
 
@@ -242,9 +299,15 @@ function createVideoGateway(options = {}) {
 
     if (accessUnit.key && state.sps && state.pps) {
       state.latestKeyAccessUnit = {
+        correlation: accessUnit.correlation,
         payload: Buffer.from(accessUnit.payload),
         timestamp_us: accessUnit.timestamp_us,
       }
+      state.keyReceivedAt = now()
+    } else if (accessUnit.delta) {
+      // Replaying an older IDR followed by current P-frames omits references.
+      // A later subscriber must wait for a fresh IDR once a delta has passed.
+      state.latestKeyAccessUnit = null
     }
 
     dispatchAccessUnit(state, accessUnit)
@@ -287,6 +350,11 @@ function createVideoGateway(options = {}) {
       return
     }
 
+    if (message.type === 'request_keyframe' && client.subscriptions.has(message.stream_id)) {
+      requestKeyframe(message.stream_id)
+      return
+    }
+
     if (message.type === 'subscribe' && typeof message.stream_id === 'string') {
       subscribeClient(client, message.stream_id)
       return
@@ -298,6 +366,13 @@ function createVideoGateway(options = {}) {
   }
 
   return {
+    setReceivePolicy(policy) {
+      for (const receiver of receivers) receiver.setReceivePolicy?.(policy)
+      if (policy.paused && !receivePaused) {
+        for (const id of streamStates.keys()) handleAvailabilityChange(id, false)
+      }
+      receivePaused = policy.paused
+    },
     getBrowserStreams() {
       return listBrowserStreams(videoConfig).map((stream) => {
         const state = streamStates.get(stream.stream_id)
@@ -310,6 +385,7 @@ function createVideoGateway(options = {}) {
           encoded_width: encodedWidth,
           encoded_height: encodedHeight,
           available: state?.available === true,
+          ...options.getControlState?.(stream.stream_id),
         }
       })
     },

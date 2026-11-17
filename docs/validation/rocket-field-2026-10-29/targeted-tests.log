@@ -1,0 +1,29 @@
+✔ parseGatewayConfig prefers argv over env and coerces values (3.40826ms)
+✔ parseGatewayConfig falls back to defaults when values are absent (0.903058ms)
+✔ base keeps XBee as the control device when optional MAVProxy is explicitly enabled (0.656301ms)
+✔ parseGatewayConfig applies rover-direct native defaults (0.674734ms)
+✔ parseGatewayConfig lets explicit runtime settings override rover-direct defaults (0.497674ms)
+✔ parseGatewayConfig accepts top-level MR2 network env fallbacks (3.545063ms)
+✔ parseGatewayConfig reads automated uplink diagnostics settings (0.545131ms)
+✔ parseGatewayConfig ignores removed legacy gateway env and flags (0.573292ms)
+✔ field defaults remain field addresses; development networking is CLI-only (0.834672ms)
+✔ createMavproxyArgs builds the startup command arguments (3.225057ms)
+✔ startMavproxy spawns MAVProxy and stops it with SIGTERM (1.194712ms)
+✔ startMavproxy is a no-op when disabled (0.434633ms)
+✔ parseRocketM2Signal coerces numeric fields and arrays (3.767435ms)
+✔ formatRocketM2Error redacts password-like content (1.056341ms)
+✔ formatRocketM2Error summarizes connection failures (0.447881ms)
+✔ createRocketM2Status uses explicit timing defaults (0.642189ms)
+✔ redactRocketM2Secrets leaves unrelated text unchanged (0.476681ms)
+✔ RocketM2Client getState reflects configuration (3.831501ms)
+✔ RocketM2Client does not auto-enable configured radios when profile disables it (0.931827ms)
+✔ RocketM2Client poll publishes successful status (2.91481ms)
+✔ RocketM2Client poll preserves previous radio metrics on failure (1.741827ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 159.366111

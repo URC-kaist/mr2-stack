@@ -3,11 +3,37 @@
 const test = require('node:test')
 const assert = require('node:assert/strict')
 
-const { AnnexBAccessUnitParser, deriveCodecString, parseSpsDimensions } = require('../src/video/h264')
+const { AnnexBAccessUnitParser, FramedAccessUnitParser, deriveCodecString, parseSpsDimensions } = require('../src/video/h264')
 
 function annexb(bytes) {
   return Buffer.from([0x00, 0x00, 0x00, 0x01, ...bytes])
 }
+
+test('native AU framing emits a single frame immediately for every pipe split', () => {
+  const payload = Buffer.concat([annexb([0x67, 0x42, 0xe0, 0x1f]), annexb([0x68, 0xce]), annexb([0x65, 0xe0])])
+  const wire = Buffer.alloc(4 + payload.length)
+  wire.writeUInt32BE(payload.length); payload.copy(wire, 4)
+  for (let split = 1; split < wire.length; split++) {
+    const parser = new FramedAccessUnitParser()
+    assert.deepEqual(parser.push(wire.subarray(0, split)), [])
+    const [frame] = parser.push(wire.subarray(split))
+    assert.equal(frame.key, true)
+    assert.deepEqual(frame.payload, payload)
+    assert.deepEqual(parser.flush(), [])
+  }
+  const parser = new FramedAccessUnitParser()
+  assert.equal(parser.push(Buffer.concat([wire, wire])).length, 2)
+})
+
+test('native AU framing rejects corrupt lengths and discards incomplete tails', () => {
+  for (const length of [0, 16 * 1024 * 1024 + 1]) {
+    const header = Buffer.alloc(4); header.writeUInt32BE(length)
+    assert.throws(() => new FramedAccessUnitParser().push(header), /invalid native/)
+  }
+  const parser = new FramedAccessUnitParser()
+  assert.deepEqual(parser.push(Buffer.from([0, 0, 0, 8, 0, 0])), [])
+  assert.deepEqual(parser.flush(), [])
+})
 
 test('AnnexBAccessUnitParser groups SPS/PPS/IDR into one key access unit', () => {
   const parser = new AnnexBAccessUnitParser()

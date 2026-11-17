@@ -1,0 +1,8 @@
+NvMMLiteOpen : Block : BlockType = 4 
+===== NvVideo: NVENC =====
+NvMMLiteBlockCreate : Block : BlockType = 4 
+H264: Profile = 66 Level = 0 
+NVMEDIA: Need to set EMC bandwidth : 126000 
+Opening in BLOCKING MODE 
+{"encoder": "x264", "matched_frames": 60}
+{"encoder": "jetson", "matched_frames": 57}

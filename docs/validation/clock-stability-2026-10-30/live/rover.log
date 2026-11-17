@@ -1,0 +1,301 @@
+[INFO] [launch]: All log files can be found below /home/mr2/.ros/log/2026-10-30-00-12-20-066192-rover-65922
+[INFO] [launch]: Default logging verbosity is set to INFO
+[mr2_launch] rover profile: original (real)
+[mr2_launch] rover profile: original (rover)
+[mr2_launch] rover profile: original (video)
+[clock] Preparing relative time before video load (up to 90 s)
+[clock] Relative time pending; starting with Clock sync
+[INFO] [launch.user]: Clock locked for ROS launch; base=192.168.0.55
+[mr2_launch] rover profile: original (rover)
+[mr2_launch] rover profile: original (video)
+[INFO] [launch.user]: Clock locked for ROS launch; base=192.168.0.55
+[mr2_launch] rover profile: original (video)
+[INFO] [system_status-1]: process started with pid [66897]
+[INFO] [xbee_bridge_node-2]: process started with pid [66899]
+[INFO] [video_streaming_node-3]: process started with pid [66901]
+[INFO] [rosbridge_websocket-4]: process started with pid [66903]
+[xbee_bridge_node-2] [INFO] [1793286842.319979845] [xbee_bridge]: XBee serial connected /dev/ttyXBEE @ 115200
+[video_streaming_node-3] [INFO] [1793286842.334685858] [video_streaming]: Configured video stream rgbd_camera source=v4l2 port=5022 service=/video_streaming/streams/rgbd_camera/set_enabled device=/dev/videoRGBD pixel_format=YUY2 capture=640x480 output=320x240
+[video_streaming_node-3] [INFO] [1793286842.335581553] [video_streaming]: Configured video stream top_cam source=v4l2 port=5008 service=/video_streaming/streams/top_cam/set_enabled device=/dev/videoTOP pixel_format=MJPG capture=640x360 output=320x180
+[video_streaming_node-3] [INFO] [1793286842.336264765] [video_streaming]: Configured video stream front_left_cam source=v4l2 port=5010 service=/video_streaming/streams/front_left_cam/set_enabled device=/dev/videoFL pixel_format=MJPG capture=640x360 output=320x180
+[video_streaming_node-3] [INFO] [1793286842.336930249] [video_streaming]: Configured video stream front_right_cam source=v4l2 port=5012 service=/video_streaming/streams/front_right_cam/set_enabled device=/dev/videoFR pixel_format=MJPG capture=640x360 output=320x180
+[video_streaming_node-3] [INFO] [1793286842.337583508] [video_streaming]: Configured video stream left_cam source=v4l2 port=5014 service=/video_streaming/streams/left_cam/set_enabled device=/dev/videoLEFT pixel_format=MJPG capture=640x360 output=320x180
+[video_streaming_node-3] [INFO] [1793286842.338227551] [video_streaming]: Configured video stream right_cam source=v4l2 port=5016 service=/video_streaming/streams/right_cam/set_enabled device=/dev/videoRIGHT pixel_format=MJPG capture=640x360 output=320x180
+[video_streaming_node-3] [INFO] [1793286842.338315808] [video_streaming]: Disabled video stream arm_cam
+[video_streaming_node-3] [INFO] [1793286842.339018765] [video_streaming]: Configured video stream arm_cam source=v4l2 port=5018 service=/video_streaming/streams/arm_cam/set_enabled device=/dev/videoARM pixel_format=MJPG capture=640x360 output=320x180
+[video_streaming_node-3] [INFO] [1793286842.339090446] [video_streaming]: Disabled video stream gripper_cam
+[video_streaming_node-3] [INFO] [1793286842.339693496] [video_streaming]: Configured video stream gripper_cam source=v4l2 port=5020 service=/video_streaming/streams/gripper_cam/set_enabled device=/dev/videoGRIPPER pixel_format=MJPG capture=640x360 output=320x180
+[video_streaming_node-3] [INFO] [1793286842.340678281] [video_streaming]: Configured video stream science_left_cam source=v4l2 port=5026 service=/video_streaming/streams/science_left_cam/set_enabled device=/dev/videoSCIENCELEFT pixel_format=MJPG capture=640x360 output=320x180
+[video_streaming_node-3] [INFO] [1793286842.341378741] [video_streaming]: Configured video stream left_beaker_cam source=v4l2 port=5030 service=/video_streaming/streams/left_beaker_cam/set_enabled device=/dev/videoLEFTBEAKER pixel_format=MJPG capture=640x360 output=320x180
+[video_streaming_node-3] [INFO] [1793286842.342081569] [video_streaming]: Configured video stream microscope_cam source=v4l2 port=5032 service=/video_streaming/streams/microscope_cam/set_enabled device=/dev/videoMICROSCOPE pixel_format=YUY2 capture=640x480 output=320x240
+[video_streaming_node-3] [INFO] [1793286842.343259830] [video_streaming]: Configured video stream science_right_cam source=v4l2 port=5034 service=/video_streaming/streams/science_right_cam/set_enabled device=/dev/videoSCIENCERIGHT pixel_format=MJPG capture=640x360 output=320x180
+[video_streaming_node-3] [INFO] [1793286842.343968258] [video_streaming]: Configured video stream right_beaker_cam source=v4l2 port=5036 service=/video_streaming/streams/right_beaker_cam/set_enabled device=/dev/videoRIGHTBEAKER pixel_format=MJPG capture=640x360 output=320x180
+[rosbridge_websocket-4] [WARN] [1793286843.185584672] [rosbridge_websocket]: The 'default_call_service_timeout' parameter is currently set to 0.0, which means service calls will block indefinitely if no response is received. Please note that in the Jazzy and later releases, the default value for this parameter will be updated to 5.0 seconds.
+[rosbridge_websocket-4] [WARN] [1793286843.186468911] [rosbridge_websocket]: The 'call_services_in_new_thread' parameter is currently set to False, which means service calls will block the main thread. Please note that in the Jazzy and later releases, the default value for this parameter will be updated to True.
+[rosbridge_websocket-4] [WARN] [1793286843.187242364] [rosbridge_websocket]: The 'send_action_goals_in_new_thread' parameter is currently set to False, which means sending action goals will block the main thread. Please note that in the Jazzy and later releases, the default value for this parameter will be updated to True.
+[rosbridge_websocket-4] [INFO] [1793286843.189811913] [rosbridge_websocket]: Rosbridge WebSocket server started on port 9090
+[video_streaming_node-3] rgbd_camera/capture-check: exposure_dynamic_framerate=0 (exposure mode unchanged)
+[video_streaming_node-3] front_right_cam/capture-check: exposure_dynamic_framerate=0 (exposure mode unchanged)
+[video_streaming_node-3] right_cam/capture-check: exposure_dynamic_framerate=0 (exposure mode unchanged)
+[video_streaming_node-3] front_left_cam/capture-check: exposure_dynamic_framerate=0 (exposure mode unchanged)
+[video_streaming_node-3] left_cam/capture-check: exposure_dynamic_framerate=0 (exposure mode unchanged)
+[rosbridge_websocket-4] [INFO] [1793286844.240744571] [rosbridge_websocket]: Calling services in existing thread
+[rosbridge_websocket-4] [INFO] [1793286844.242815455] [rosbridge_websocket]: Sending action goals in existing thread
+[rosbridge_websocket-4] [INFO] [1793286844.245999958] [rosbridge_websocket]: Client connected. 1 clients total.
+[rosbridge_websocket-4] [INFO] [1793286844.279131280] [rosbridge_websocket]: [Client 2b10921a-8e99-473d-8c68-45b2eae31b89] Subscribed to /mission_status
+[rosbridge_websocket-4] [INFO] [1793286844.359926784] [rosbridge_websocket]: [Client 2b10921a-8e99-473d-8c68-45b2eae31b89] Subscribed to /left_gnss/ubx_nav_status
+[rosbridge_websocket-4] [INFO] [1793286844.362844434] [rosbridge_websocket]: [Client 2b10921a-8e99-473d-8c68-45b2eae31b89] Subscribed to /right_gnss/ubx_nav_status
+[rosbridge_websocket-4] [INFO] [1793286844.381483603] [rosbridge_websocket]: [Client 2b10921a-8e99-473d-8c68-45b2eae31b89] Subscribed to /system_status/clock
+[rosbridge_websocket-4] [INFO] [1793286844.384715147] [rosbridge_websocket]: [Client 2b10921a-8e99-473d-8c68-45b2eae31b89] Subscribed to /latency/trace
+[rosbridge_websocket-4] [INFO] [1793286844.391189178] [rosbridge_websocket]: [Client 2b10921a-8e99-473d-8c68-45b2eae31b89] Subscribed to /latency/uplink/status
+[rosbridge_websocket-4] [INFO] [1793286844.394287503] [rosbridge_websocket]: [Client 2b10921a-8e99-473d-8c68-45b2eae31b89] Subscribed to /mission_status
+[rosbridge_websocket-4] [INFO] [1793286844.396808475] [rosbridge_websocket]: [Client 2b10921a-8e99-473d-8c68-45b2eae31b89] Subscribed to /left_gnss/ubx_nav_status
+[rosbridge_websocket-4] [INFO] [1793286844.399264773] [rosbridge_websocket]: [Client 2b10921a-8e99-473d-8c68-45b2eae31b89] Subscribed to /right_gnss/ubx_nav_status
+[rosbridge_websocket-4] [INFO] [1793286844.401937683] [rosbridge_websocket]: [Client 2b10921a-8e99-473d-8c68-45b2eae31b89] Subscribed to /system_status/clock
+[rosbridge_websocket-4] [INFO] [1793286844.404162553] [rosbridge_websocket]: [Client 2b10921a-8e99-473d-8c68-45b2eae31b89] Subscribed to /latency/trace
+[rosbridge_websocket-4] [INFO] [1793286844.407612437] [rosbridge_websocket]: [Client 2b10921a-8e99-473d-8c68-45b2eae31b89] Subscribed to /latency/uplink/status
+[video_streaming_node-3] [INFO] [1793286844.852831752] [video_streaming]: Started V4L2 video stream rgbd_camera device=/dev/videoRGBD port=5022 capture=640x480 output=320x240 fps=15 pixel_format=YUY2
+[video_streaming_node-3] [INFO] [1793286844.854881163] [video_streaming]: Started V4L2 video stream front_left_cam device=/dev/videoFL port=5010 capture=640x360 output=480x270 fps=30 pixel_format=MJPG
+[video_streaming_node-3] [INFO] [1793286844.856622729] [video_streaming]: Started V4L2 video stream front_right_cam device=/dev/videoFR port=5012 capture=640x360 output=480x270 fps=30 pixel_format=MJPG
+[video_streaming_node-3] [INFO] [1793286844.858768974] [video_streaming]: Started V4L2 video stream left_cam device=/dev/videoLEFT port=5014 capture=640x360 output=320x180 fps=15 pixel_format=MJPG
+[video_streaming_node-3] NvMMLiteOpen : Block : BlockType = 4 
+[video_streaming_node-3] ===== NvVideo: NVENC =====
+[video_streaming_node-3] NvMMLiteBlockCreate : Block : BlockType = 4 
+[video_streaming_node-3] rgbd_camera: exposure_dynamic_framerate=0 (exposure mode unchanged)
+[video_streaming_node-3] NvMMLiteOpen : Block : BlockType = 277 
+[video_streaming_node-3] NvMMLiteOpen : Block : BlockType = 277 
+[video_streaming_node-3] NvMMLiteOpen : Block : BlockType = 277 
+[video_streaming_node-3] NvMMLiteBlockCreate : Block : BlockType = 277 
+[video_streaming_node-3] NvMMLiteBlockCreate : Block : BlockType = 277 
+[video_streaming_node-3] NvMMLiteBlockCreate : Block : BlockType = 277 
+[video_streaming_node-3] front_left_cam: exposure_dynamic_framerate=0 (exposure mode unchanged)
+[video_streaming_node-3] left_cam: exposure_dynamic_framerate=0 (exposure mode unchanged)
+[video_streaming_node-3] front_right_cam: exposure_dynamic_framerate=0 (exposure mode unchanged)
+[video_streaming_node-3] NvMMLiteOpen : Block : BlockType = 4 
+[video_streaming_node-3] ===== NvVideo: NVENC =====
+[video_streaming_node-3] NvMMLiteBlockCreate : Block : BlockType = 4 
+[video_streaming_node-3] NvMMLiteOpen : Block : BlockType = 4 
+[video_streaming_node-3] ===== NvVideo: NVENC =====
+[video_streaming_node-3] NvMMLiteBlockCreate : Block : BlockType = 4 
+[video_streaming_node-3] H264: Profile = 66 Level = 31 
+[video_streaming_node-3] NVMEDIA: Need to set EMC bandwidth : 126000 
+[video_streaming_node-3] H264: Profile = 66 Level = 31 
+[video_streaming_node-3] NvMMLiteOpen : Block : BlockType = 4 
+[video_streaming_node-3] ===== NvVideo: NVENC =====
+[video_streaming_node-3] NvMMLiteBlockCreate : Block : BlockType = 4 
+[video_streaming_node-3] NVMEDIA: Need to set EMC bandwidth : 63000 
+[video_streaming_node-3] H264: Profile = 66 Level = 31 
+[video_streaming_node-3] NVMEDIA: Need to set EMC bandwidth : 63000 
+[rosbridge_websocket-4] [INFO] [1793286845.714649506] [rosbridge_websocket]: Calling services in existing thread
+[rosbridge_websocket-4] [INFO] [1793286845.715554194] [rosbridge_websocket]: Sending action goals in existing thread
+[rosbridge_websocket-4] [INFO] [1793286845.717295024] [rosbridge_websocket]: Client connected. 2 clients total.
+[rosbridge_websocket-4] [INFO] [1793286845.722488745] [rosbridge_websocket]: [Client d7042999-9d63-44f6-87dd-513a71397658] Subscribed to /system_status/clock
+[video_streaming_node-3] H264: Profile = 66 Level = 31 
+[video_streaming_node-3] NVMEDIA: Need to set EMC bandwidth : 126000 
+[rosbridge_websocket-4] [INFO] [1793286846.102883104] [rosbridge_websocket]: Calling services in existing thread
+[rosbridge_websocket-4] [INFO] [1793286846.104411418] [rosbridge_websocket]: Sending action goals in existing thread
+[rosbridge_websocket-4] [INFO] [1793286846.106637249] [rosbridge_websocket]: Client connected. 3 clients total.
+[rosbridge_websocket-4] [INFO] [1793286846.144861299] [rosbridge_websocket]: [Client e88c47e6-34c1-4f36-86ac-2b9485a2d39e] Subscribed to /mission_status
+[rosbridge_websocket-4] [INFO] [1793286846.146335148] [rosbridge_websocket]: [Client e88c47e6-34c1-4f36-86ac-2b9485a2d39e] Subscribed to /left_gnss/ubx_nav_status
+[rosbridge_websocket-4] [INFO] [1793286846.147717220] [rosbridge_websocket]: [Client e88c47e6-34c1-4f36-86ac-2b9485a2d39e] Subscribed to /right_gnss/ubx_nav_status
+[rosbridge_websocket-4] [INFO] [1793286846.149527651] [rosbridge_websocket]: [Client e88c47e6-34c1-4f36-86ac-2b9485a2d39e] Subscribed to /system_status/clock
+[rosbridge_websocket-4] [INFO] [1793286846.151453924] [rosbridge_websocket]: [Client e88c47e6-34c1-4f36-86ac-2b9485a2d39e] Subscribed to /latency/trace
+[rosbridge_websocket-4] [INFO] [1793286846.152842012] [rosbridge_websocket]: [Client e88c47e6-34c1-4f36-86ac-2b9485a2d39e] Subscribed to /latency/uplink/status
+[rosbridge_websocket-4] [INFO] [1793286846.168361960] [rosbridge_websocket]: [Client e88c47e6-34c1-4f36-86ac-2b9485a2d39e] Subscribed to /science/carriage_motor/telemetry
+[rosbridge_websocket-4] [INFO] [1793286846.173148666] [rosbridge_websocket]: [Client e88c47e6-34c1-4f36-86ac-2b9485a2d39e] Subscribed to /science/carriage_motor/telemetry
+[rosbridge_websocket-4] [INFO] [1793286846.401293811] [rosbridge_websocket]: [Client e88c47e6-34c1-4f36-86ac-2b9485a2d39e] Unsubscribed from /science/carriage_motor/telemetry
+[rosbridge_websocket-4] [INFO] [1793286846.406645935] [rosbridge_websocket]: [Client e88c47e6-34c1-4f36-86ac-2b9485a2d39e] Unsubscribed from /science/carriage_motor/telemetry
+[video_streaming_node-3] Opening in BLOCKING MODE 
+[video_streaming_node-3] Opening in BLOCKING MODE 
+[video_streaming_node-3] Opening in BLOCKING MODE 
+[video_streaming_node-3] [INFO] [1793286847.853186911] [video_streaming]: Started V4L2 video stream rgbd_camera device=/dev/videoRGBD port=5022 capture=640x480 output=320x240 fps=15 pixel_format=YUY2
+[video_streaming_node-3] [INFO] [1793286847.855792876] [video_streaming]: Started V4L2 video stream left_cam device=/dev/videoLEFT port=5014 capture=640x360 output=320x180 fps=15 pixel_format=MJPG
+[video_streaming_node-3] [INFO] [1793286847.858841696] [video_streaming]: Started V4L2 video stream right_cam device=/dev/videoRIGHT port=5016 capture=640x360 output=320x180 fps=15 pixel_format=MJPG
+[video_streaming_node-3] [INFO] [1793286848.353152577] [video_streaming]: Started V4L2 video stream rgbd_camera device=/dev/videoRGBD port=5022 capture=640x480 output=320x240 fps=30 pixel_format=YUY2
+[video_streaming_node-3] [INFO] [1793286848.356495483] [video_streaming]: Started V4L2 video stream left_cam device=/dev/videoLEFT port=5014 capture=640x360 output=320x180 fps=30 pixel_format=MJPG
+[video_streaming_node-3] [INFO] [1793286848.359066887] [video_streaming]: Started V4L2 video stream right_cam device=/dev/videoRIGHT port=5016 capture=640x360 output=320x180 fps=30 pixel_format=MJPG
+[video_streaming_node-3] NvMMLiteOpen : Block : BlockType = 4 
+[video_streaming_node-3] ===== NvVideo: NVENC =====
+[video_streaming_node-3] NvMMLiteBlockCreate : Block : BlockType = 4 
+[video_streaming_node-3] rgbd_camera: exposure_dynamic_framerate=0 (exposure mode unchanged)
+[video_streaming_node-3] NvMMLiteOpen : Block : BlockType = 277 
+[video_streaming_node-3] NvMMLiteOpen : Block : BlockType = 277 
+[video_streaming_node-3] NvMMLiteBlockCreate : Block : BlockType = 277 
+[video_streaming_node-3] NvMMLiteBlockCreate : Block : BlockType = 277 
+[video_streaming_node-3] right_cam: exposure_dynamic_framerate=0 (exposure mode unchanged)
+[video_streaming_node-3] left_cam: exposure_dynamic_framerate=0 (exposure mode unchanged)
+[video_streaming_node-3] NvMMLiteOpen : Block : BlockType = 4 
+[video_streaming_node-3] ===== NvVideo: NVENC =====
+[video_streaming_node-3] NvMMLiteBlockCreate : Block : BlockType = 4 
+[video_streaming_node-3] NvMMLiteOpen : Block : BlockType = 4 
+[video_streaming_node-3] ===== NvVideo: NVENC =====
+[video_streaming_node-3] NvMMLiteBlockCreate : Block : BlockType = 4 
+[video_streaming_node-3] H264: Profile = 66 Level = 31 
+[video_streaming_node-3] NVMEDIA: Need to set EMC bandwidth : 126000 
+[video_streaming_node-3] H264: Profile = 66 Level = 31 
+[video_streaming_node-3] NVMEDIA: Need to set EMC bandwidth : 126000 
+[video_streaming_node-3] H264: Profile = 66 Level = 31 
+[video_streaming_node-3] NVMEDIA: Need to set EMC bandwidth : 126000 
+[video_streaming_node-3] Opening in BLOCKING MODE 
+[video_streaming_node-3] Opening in BLOCKING MODE 
+[video_streaming_node-3] Opening in BLOCKING MODE 
+[video_streaming_node-3] Opening in BLOCKING MODE 
+[video_streaming_node-3] [INFO] [1793286849.903398570] [video_streaming]: Started V4L2 video stream front_left_cam device=/dev/videoFL port=5010 capture=640x360 output=640x360 fps=30 pixel_format=MJPG
+[video_streaming_node-3] [INFO] [1793286849.906281884] [video_streaming]: Started V4L2 video stream front_right_cam device=/dev/videoFR port=5012 capture=640x360 output=640x360 fps=30 pixel_format=MJPG
+[video_streaming_node-3] NvMMLiteOpen : Block : BlockType = 277 
+[video_streaming_node-3] NvMMLiteBlockCreate : Block : BlockType = 277 
+[video_streaming_node-3] front_left_cam: exposure_dynamic_framerate=0 (exposure mode unchanged)
+[video_streaming_node-3] NvMMLiteOpen : Block : BlockType = 277 
+[video_streaming_node-3] NvMMLiteBlockCreate : Block : BlockType = 277 
+[video_streaming_node-3] front_right_cam: exposure_dynamic_framerate=0 (exposure mode unchanged)
+[video_streaming_node-3] NvMMLiteOpen : Block : BlockType = 4 
+[video_streaming_node-3] ===== NvVideo: NVENC =====
+[video_streaming_node-3] NvMMLiteBlockCreate : Block : BlockType = 4 
+[video_streaming_node-3] H264: Profile = 66 Level = 31 
+[video_streaming_node-3] NVMEDIA: Need to set EMC bandwidth : 126000 
+[video_streaming_node-3] NvMMLiteOpen : Block : BlockType = 4 
+[video_streaming_node-3] ===== NvVideo: NVENC =====
+[video_streaming_node-3] NvMMLiteBlockCreate : Block : BlockType = 4 
+[video_streaming_node-3] H264: Profile = 66 Level = 31 
+[video_streaming_node-3] NVMEDIA: Need to set EMC bandwidth : 126000 
+[video_streaming_node-3] Opening in BLOCKING MODE 
+[video_streaming_node-3] Opening in BLOCKING MODE 
+[video_streaming_node-3] Opening in BLOCKING MODE 
+[video_streaming_node-3] Opening in BLOCKING MODE 
+[video_streaming_node-3] Opening in BLOCKING MODE 
+[video_streaming_node-3] [INFO] [1793286859.144792457] [video_streaming]: Started V4L2 video stream rgbd_camera device=/dev/videoRGBD port=5022 capture=640x480 output=640x480 fps=30 pixel_format=YUY2
+[video_streaming_node-3] [INFO] [1793286859.147216495] [video_streaming]: Started V4L2 video stream left_cam device=/dev/videoLEFT port=5014 capture=640x360 output=640x360 fps=30 pixel_format=MJPG
+[video_streaming_node-3] [INFO] [1793286859.149557459] [video_streaming]: Started V4L2 video stream right_cam device=/dev/videoRIGHT port=5016 capture=640x360 output=640x360 fps=30 pixel_format=MJPG
+[video_streaming_node-3] NvMMLiteOpen : Block : BlockType = 4 
+[video_streaming_node-3] ===== NvVideo: NVENC =====
+[video_streaming_node-3] NvMMLiteBlockCreate : Block : BlockType = 4 
+[video_streaming_node-3] rgbd_camera: exposure_dynamic_framerate=0 (exposure mode unchanged)
+[video_streaming_node-3] NvMMLiteOpen : Block : BlockType = 277 
+[video_streaming_node-3] NvMMLiteBlockCreate : Block : BlockType = 277 
+[video_streaming_node-3] right_cam: exposure_dynamic_framerate=0 (exposure mode unchanged)
+[video_streaming_node-3] NvMMLiteOpen : Block : BlockType = 277 
+[video_streaming_node-3] NvMMLiteBlockCreate : Block : BlockType = 277 
+[video_streaming_node-3] left_cam: exposure_dynamic_framerate=0 (exposure mode unchanged)
+[video_streaming_node-3] NvMMLiteOpen : Block : BlockType = 4 
+[video_streaming_node-3] ===== NvVideo: NVENC =====
+[video_streaming_node-3] NvMMLiteBlockCreate : Block : BlockType = 4 
+[video_streaming_node-3] H264: Profile = 66 Level = 31 
+[video_streaming_node-3] NVMEDIA: Need to set EMC bandwidth : 126000 
+[video_streaming_node-3] NvMMLiteOpen : Block : BlockType = 4 
+[video_streaming_node-3] ===== NvVideo: NVENC =====
+[video_streaming_node-3] NvMMLiteBlockCreate : Block : BlockType = 4 
+[video_streaming_node-3] H264: Profile = 66 Level = 31 
+[video_streaming_node-3] NVMEDIA: Need to set EMC bandwidth : 126000 
+[video_streaming_node-3] H264: Profile = 66 Level = 31 
+[video_streaming_node-3] NVMEDIA: Need to set EMC bandwidth : 126000 
+[video_streaming_node-3] Opening in BLOCKING MODE 
+[video_streaming_node-3] Opening in BLOCKING MODE 
+[video_streaming_node-3] Opening in BLOCKING MODE 
+[video_streaming_node-3] Opening in BLOCKING MODE 
+[video_streaming_node-3] Opening in BLOCKING MODE 
+[video_streaming_node-3] [INFO] [1793286870.229820932] [video_streaming]: Started V4L2 video stream rgbd_camera device=/dev/videoRGBD port=5022 capture=640x480 output=320x240 fps=30 pixel_format=YUY2
+[video_streaming_node-3] [INFO] [1793286870.232818707] [video_streaming]: Started V4L2 video stream left_cam device=/dev/videoLEFT port=5014 capture=640x360 output=320x180 fps=30 pixel_format=MJPG
+[video_streaming_node-3] [INFO] [1793286870.235475516] [video_streaming]: Started V4L2 video stream right_cam device=/dev/videoRIGHT port=5016 capture=640x360 output=320x180 fps=30 pixel_format=MJPG
+[video_streaming_node-3] NvMMLiteOpen : Block : BlockType = 4 
+[video_streaming_node-3] ===== NvVideo: NVENC =====
+[video_streaming_node-3] NvMMLiteBlockCreate : Block : BlockType = 4 
+[video_streaming_node-3] rgbd_camera: exposure_dynamic_framerate=0 (exposure mode unchanged)
+[video_streaming_node-3] NvMMLiteOpen : Block : BlockType = 277 
+[video_streaming_node-3] NvMMLiteBlockCreate : Block : BlockType = 277 
+[video_streaming_node-3] left_cam: exposure_dynamic_framerate=0 (exposure mode unchanged)
+[video_streaming_node-3] NvMMLiteOpen : Block : BlockType = 277 
+[video_streaming_node-3] NvMMLiteBlockCreate : Block : BlockType = 277 
+[video_streaming_node-3] right_cam: exposure_dynamic_framerate=0 (exposure mode unchanged)
+[video_streaming_node-3] NvMMLiteOpen : Block : BlockType = 4 
+[video_streaming_node-3] ===== NvVideo: NVENC =====
+[video_streaming_node-3] NvMMLiteBlockCreate : Block : BlockType = 4 
+[video_streaming_node-3] H264: Profile = 66 Level = 31 
+[video_streaming_node-3] NVMEDIA: Need to set EMC bandwidth : 126000 
+[video_streaming_node-3] NvMMLiteOpen : Block : BlockType = 4 
+[video_streaming_node-3] ===== NvVideo: NVENC =====
+[video_streaming_node-3] NvMMLiteBlockCreate : Block : BlockType = 4 
+[video_streaming_node-3] H264: Profile = 66 Level = 31 
+[video_streaming_node-3] NVMEDIA: Need to set EMC bandwidth : 126000 
+[video_streaming_node-3] H264: Profile = 66 Level = 31 
+[video_streaming_node-3] NVMEDIA: Need to set EMC bandwidth : 126000 
+[video_streaming_node-3] Opening in BLOCKING MODE 
+[video_streaming_node-3] Opening in BLOCKING MODE 
+[video_streaming_node-3] Opening in BLOCKING MODE 
+[video_streaming_node-3] Opening in BLOCKING MODE 
+[video_streaming_node-3] Opening in BLOCKING MODE 
+[video_streaming_node-3] [INFO] [1793286890.006243046] [video_streaming]: Started V4L2 video stream rgbd_camera device=/dev/videoRGBD port=5022 capture=640x480 output=640x480 fps=30 pixel_format=YUY2
+[video_streaming_node-3] [INFO] [1793286890.009105331] [video_streaming]: Started V4L2 video stream left_cam device=/dev/videoLEFT port=5014 capture=640x360 output=640x360 fps=30 pixel_format=MJPG
+[video_streaming_node-3] [INFO] [1793286890.011722109] [video_streaming]: Started V4L2 video stream right_cam device=/dev/videoRIGHT port=5016 capture=640x360 output=640x360 fps=30 pixel_format=MJPG
+[video_streaming_node-3] NvMMLiteOpen : Block : BlockType = 4 
+[video_streaming_node-3] ===== NvVideo: NVENC =====
+[video_streaming_node-3] NvMMLiteBlockCreate : Block : BlockType = 4 
+[video_streaming_node-3] rgbd_camera: exposure_dynamic_framerate=0 (exposure mode unchanged)
+[video_streaming_node-3] NvMMLiteOpen : Block : BlockType = 277 
+[video_streaming_node-3] NvMMLiteBlockCreate : Block : BlockType = 277 
+[video_streaming_node-3] left_cam: exposure_dynamic_framerate=0 (exposure mode unchanged)
+[video_streaming_node-3] NvMMLiteOpen : Block : BlockType = 277 
+[video_streaming_node-3] NvMMLiteBlockCreate : Block : BlockType = 277 
+[video_streaming_node-3] right_cam: exposure_dynamic_framerate=0 (exposure mode unchanged)
+[video_streaming_node-3] NvMMLiteOpen : Block : BlockType = 4 
+[video_streaming_node-3] ===== NvVideo: NVENC =====
+[video_streaming_node-3] NvMMLiteBlockCreate : Block : BlockType = 4 
+[video_streaming_node-3] NvMMLiteOpen : Block : BlockType = 4 
+[video_streaming_node-3] ===== NvVideo: NVENC =====
+[video_streaming_node-3] NvMMLiteBlockCreate : Block : BlockType = 4 
+[video_streaming_node-3] H264: Profile = 66 Level = 31 
+[video_streaming_node-3] NVMEDIA: Need to set EMC bandwidth : 126000 
+[video_streaming_node-3] H264: Profile = 66 Level = 31 
+[video_streaming_node-3] NVMEDIA: Need to set EMC bandwidth : 126000 
+[video_streaming_node-3] H264: Profile = 66 Level = 31 
+[video_streaming_node-3] NVMEDIA: Need to set EMC bandwidth : 126000 
+[rosbridge_websocket-4] [INFO] [1793287152.147505605] [rosbridge_websocket]: Client disconnected. 2 clients total.
+[rosbridge_websocket-4] [INFO] [1793287152.161072051] [rosbridge_websocket]: Client disconnected. 1 clients total.
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[xbee_bridge_node-2] [INFO] [1793287152.172573655] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [rosbridge_websocket-4]: sending signal 'SIGINT' to process[rosbridge_websocket-4]
+[INFO] [video_streaming_node-3]: sending signal 'SIGINT' to process[video_streaming_node-3]
+[INFO] [xbee_bridge_node-2]: sending signal 'SIGINT' to process[xbee_bridge_node-2]
+[INFO] [system_status-1]: sending signal 'SIGINT' to process[system_status-1]
+[video_streaming_node-3] [INFO] [1793287152.172538999] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[rosbridge_websocket-4] registered capabilities (classes):
+[rosbridge_websocket-4]  - <class 'rosbridge_library.capabilities.advertise.Advertise'>
+[rosbridge_websocket-4]  - <class 'rosbridge_library.capabilities.publish.Publish'>
+[rosbridge_websocket-4]  - <class 'rosbridge_library.capabilities.subscribe.Subscribe'>
+[rosbridge_websocket-4]  - <class 'rosbridge_library.capabilities.defragmentation.Defragment'>
+[rosbridge_websocket-4]  - <class 'rosbridge_library.capabilities.advertise_service.AdvertiseService'>
+[rosbridge_websocket-4]  - <class 'rosbridge_library.capabilities.call_service.CallService'>
+[rosbridge_websocket-4]  - <class 'rosbridge_library.capabilities.service_response.ServiceResponse'>
+[rosbridge_websocket-4]  - <class 'rosbridge_library.capabilities.unadvertise_service.UnadvertiseService'>
+[rosbridge_websocket-4]  - <class 'rosbridge_library.capabilities.advertise_action.AdvertiseAction'>
+[rosbridge_websocket-4]  - <class 'rosbridge_library.capabilities.action_feedback.ActionFeedback'>
+[rosbridge_websocket-4]  - <class 'rosbridge_library.capabilities.action_result.ActionResult'>
+[rosbridge_websocket-4]  - <class 'rosbridge_library.capabilities.send_action_goal.SendActionGoal'>
+[rosbridge_websocket-4]  - <class 'rosbridge_library.capabilities.unadvertise_action.UnadvertiseAction'>
+[rosbridge_websocket-4] Exiting due to SIGINT
+[video_streaming_node-3] [INFO] [1793287152.193636026] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[xbee_bridge_node-2] [INFO] [1793287152.194082275] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[system_status-1] Traceback (most recent call last):
+[system_status-1]   File "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_system_status/lib/mr2_system_status/system_status", line 33, in <module>
+[system_status-1]     sys.exit(load_entry_point('mr2-system-status', 'console_scripts', 'system_status')())
+[system_status-1]   File "/home/mr2/mr2-stack/rover/ros2_ws/build/mr2_system_status/mr2_system_status/system_status_node.py", line 162, in main
+[system_status-1]     node.destroy_node()
+[system_status-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1691, in destroy_node
+[system_status-1]     self.destroy_service(self._services[0])
+[system_status-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1615, in destroy_service
+[system_status-1]     service.destroy()
+[system_status-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/service.py", line 93, in destroy
+[system_status-1]     self.__service.destroy_when_not_in_use()
+[system_status-1] KeyboardInterrupt
+[video_streaming_node-3] Opening in BLOCKING MODE 
+[ERROR] [rosbridge_websocket-4]: process has died [pid 66903, exit code -2, cmd '/opt/ros/humble/lib/rosbridge_server/rosbridge_websocket --ros-args -r __node:=rosbridge_websocket -p use_sim_time:=False --params-file /tmp/launch_params_vuet7vcr --params-file /tmp/launch_params_i51c6fvk --params-file /tmp/launch_params_5vmo2h2r --params-file /tmp/launch_params_u95ldwz6'].
+[video_streaming_node-3] Opening in BLOCKING MODE 
+[video_streaming_node-3] Opening in BLOCKING MODE 
+[ERROR] [system_status-1]: process has died [pid 66897, exit code -2, cmd '/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_system_status/lib/mr2_system_status/system_status --ros-args -r __node:=system_status -p use_sim_time:=False'].
+[INFO] [xbee_bridge_node-2]: process has finished cleanly [pid 66899]
+[video_streaming_node-3] Opening in BLOCKING MODE 
+[video_streaming_node-3] Opening in BLOCKING MODE 
+[video_streaming_node-3] Opening in BLOCKING MODE 
+[video_streaming_node-3] Opening in BLOCKING MODE 
+[video_streaming_node-3] Opening in BLOCKING MODE 
+[video_streaming_node-3] Opening in BLOCKING MODE 
+[INFO] [video_streaming_node-3]: process has finished cleanly [pid 66901]

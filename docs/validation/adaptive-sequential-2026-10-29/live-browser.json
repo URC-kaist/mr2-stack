@@ -1,0 +1,2427 @@
+{
+  "phases": [
+    {
+      "name": "normal-initial",
+      "elapsed_s": 10.015,
+      "states": [
+        {
+          "priority": "low",
+          "stream_id": "rgbd_camera",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoRGBD",
+          "v4l2_pixel_format": "YUY2",
+          "udp_port": 5022,
+          "width": 640,
+          "height": 480,
+          "framerate": 30,
+          "display": {
+            "label": "RGB-D Cam",
+            "panel": "autonomy",
+            "order": 1
+          },
+          "encoded_width": 640,
+          "encoded_height": 480,
+          "available": true,
+          "boot": 2097729165,
+          "session": 2264961810,
+          "request": 1,
+          "port": 5022,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 1324,
+          "fps": 30,
+          "result": 0
+        },
+        {
+          "priority": "high",
+          "stream_id": "front_left_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoFL",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5010,
+          "width": 640,
+          "height": 360,
+          "framerate": 30,
+          "display": {
+            "label": "Front Left",
+            "panel": "delivery",
+            "order": 4
+          },
+          "encoded_width": 640,
+          "encoded_height": 360,
+          "available": true,
+          "boot": 2097729165,
+          "session": 2264961810,
+          "request": 2,
+          "port": 5010,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 1530,
+          "fps": 30,
+          "result": 0
+        },
+        {
+          "priority": "high",
+          "stream_id": "front_right_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoFR",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5012,
+          "width": 640,
+          "height": 360,
+          "framerate": 30,
+          "display": {
+            "label": "Front Right",
+            "panel": "delivery",
+            "order": 5
+          },
+          "encoded_width": 640,
+          "encoded_height": 360,
+          "available": true,
+          "boot": 2097729165,
+          "session": 2264961810,
+          "request": 3,
+          "port": 5012,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 1530,
+          "fps": 30,
+          "result": 0
+        },
+        {
+          "priority": "low",
+          "stream_id": "left_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoLEFT",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5014,
+          "width": 640,
+          "height": 360,
+          "framerate": 30,
+          "display": {
+            "label": "Left",
+            "panel": "delivery",
+            "order": 6
+          },
+          "encoded_width": 640,
+          "encoded_height": 360,
+          "available": true,
+          "boot": 2097729165,
+          "session": 2264961810,
+          "request": 4,
+          "port": 5014,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 1324,
+          "fps": 30,
+          "result": 0
+        },
+        {
+          "priority": "low",
+          "stream_id": "right_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoRIGHT",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5016,
+          "width": 640,
+          "height": 360,
+          "framerate": 30,
+          "display": {
+            "label": "Right",
+            "panel": "delivery",
+            "order": 7
+          },
+          "encoded_width": 640,
+          "encoded_height": 360,
+          "available": true,
+          "boot": 2097729165,
+          "session": 2264961810,
+          "request": 5,
+          "port": 5016,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 1323,
+          "fps": 30,
+          "result": 0
+        }
+      ],
+      "rendered": {
+        "Front Right": {
+          "count": 301,
+          "sizes": [
+            "640x360"
+          ]
+        },
+        "Front Left": {
+          "count": 301,
+          "sizes": [
+            "640x360"
+          ]
+        },
+        "Left": {
+          "count": 220,
+          "sizes": [
+            "640x360"
+          ]
+        },
+        "Right": {
+          "count": 300,
+          "sizes": [
+            "640x360"
+          ]
+        },
+        "RGB-D Cam": {
+          "count": 300,
+          "sizes": [
+            "640x480"
+          ]
+        }
+      },
+      "metrics": [
+        {
+          "type": "video_link_metrics",
+          "updated_at_ms": 1793266373030,
+          "budget_kbps": 8405.975846335217,
+          "receive_kbps": 6642.182606802937,
+          "loss_pct": 0,
+          "trend_ms_s": 16.17629969541519,
+          "classes": {
+            "high": {
+              "budget_kbps": 3600,
+              "receive_kbps": 3056.231872684678,
+              "utilization_pct": 84.89532979679662,
+              "streams": 2
+            },
+            "low": {
+              "budget_kbps": 4800,
+              "receive_kbps": 3585.9507341182643,
+              "utilization_pct": 74.70730696079718,
+              "streams": 3
+            }
+          }
+        },
+        {
+          "type": "video_link_metrics",
+          "updated_at_ms": 1793266374030,
+          "budget_kbps": 8418.472170637888,
+          "receive_kbps": 6746.01282633099,
+          "loss_pct": 0,
+          "trend_ms_s": 4.1224852099583345,
+          "classes": {
+            "high": {
+              "budget_kbps": 3600,
+              "receive_kbps": 3102.923771125685,
+              "utilization_pct": 86.19232697571348,
+              "streams": 2
+            },
+            "low": {
+              "budget_kbps": 4810.588235294117,
+              "receive_kbps": 3643.0890552053042,
+              "utilization_pct": 75.73063577707285,
+              "streams": 3
+            }
+          }
+        },
+        {
+          "type": "video_link_metrics",
+          "updated_at_ms": 1793266375032,
+          "budget_kbps": 8430.964816677477,
+          "receive_kbps": 6864.195389522661,
+          "loss_pct": 0,
+          "trend_ms_s": 4.205071823758627,
+          "classes": {
+            "high": {
+              "budget_kbps": 3600,
+              "receive_kbps": 3024.5105689653433,
+              "utilization_pct": 84.01418247125955,
+              "streams": 2
+            },
+            "low": {
+              "budget_kbps": 4825.882352941177,
+              "receive_kbps": 3839.6848205573338,
+              "utilization_pct": 79.56440998229482,
+              "streams": 3
+            }
+          }
+        }
+      ],
+      "headers": [
+        {
+          "label": "Network · Rocket M2"
+        },
+        {
+          "label": "RGB-D Cam",
+          "quality": "640×480 · 30.0 FPS"
+        },
+        {
+          "label": "Top Cam",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Front Left",
+          "quality": "640×360 · 29.0 FPS"
+        },
+        {
+          "label": "Front Right",
+          "quality": "640×360 · 29.0 FPS"
+        },
+        {
+          "label": "Left",
+          "quality": "640×360 · 24.0 FPS"
+        },
+        {
+          "label": "Right",
+          "quality": "640×360 · 29.0 FPS"
+        },
+        {
+          "label": "Arm",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Gripper",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Science Left",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Left Beaker",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Microscope",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Science Right",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Right Beaker",
+          "quality": "— · 0 FPS"
+        }
+      ]
+    },
+    {
+      "name": "32-all-low",
+      "elapsed_s": 10.009,
+      "states": [
+        {
+          "priority": "low",
+          "stream_id": "rgbd_camera",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoRGBD",
+          "v4l2_pixel_format": "YUY2",
+          "udp_port": 5022,
+          "width": 80,
+          "height": 60,
+          "framerate": 30,
+          "display": {
+            "label": "RGB-D Cam",
+            "panel": "autonomy",
+            "order": 1
+          },
+          "encoded_width": 80,
+          "encoded_height": 60,
+          "available": true,
+          "boot": 2097729165,
+          "session": 2265014228,
+          "request": 1,
+          "port": 5022,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 27,
+          "fps": 3,
+          "result": 0
+        },
+        {
+          "priority": "low",
+          "stream_id": "front_left_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoFL",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5010,
+          "width": 640,
+          "height": 360,
+          "framerate": 30,
+          "display": {
+            "label": "Front Left",
+            "panel": "delivery",
+            "order": 4
+          },
+          "encoded_width": 640,
+          "encoded_height": 360,
+          "available": false,
+          "boot": 2097729165,
+          "session": 2265014228,
+          "request": 2,
+          "port": 5010,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 0,
+          "fps": 30,
+          "result": 0
+        },
+        {
+          "priority": "low",
+          "stream_id": "front_right_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoFR",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5012,
+          "width": 80,
+          "height": 44,
+          "framerate": 30,
+          "display": {
+            "label": "Front Right",
+            "panel": "delivery",
+            "order": 5
+          },
+          "encoded_width": 640,
+          "encoded_height": 360,
+          "available": false,
+          "boot": 2097729165,
+          "session": 2265014228,
+          "request": 3,
+          "port": 5012,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 0,
+          "fps": 3,
+          "result": 0
+        },
+        {
+          "priority": "low",
+          "stream_id": "left_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoLEFT",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5014,
+          "width": 640,
+          "height": 360,
+          "framerate": 30,
+          "display": {
+            "label": "Left",
+            "panel": "delivery",
+            "order": 6
+          },
+          "encoded_width": 640,
+          "encoded_height": 360,
+          "available": false,
+          "boot": 2097729165,
+          "session": 2265014228,
+          "request": 4,
+          "port": 5014,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 0,
+          "fps": 30,
+          "result": 0
+        },
+        {
+          "priority": "low",
+          "stream_id": "right_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoRIGHT",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5016,
+          "width": 640,
+          "height": 360,
+          "framerate": 30,
+          "display": {
+            "label": "Right",
+            "panel": "delivery",
+            "order": 7
+          },
+          "encoded_width": 640,
+          "encoded_height": 360,
+          "available": false,
+          "boot": 2097729165,
+          "session": 2265014228,
+          "request": 5,
+          "port": 5016,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 0,
+          "fps": 30,
+          "result": 0
+        }
+      ],
+      "rendered": {
+        "RGB-D Cam": {
+          "count": 30,
+          "sizes": [
+            "80x60"
+          ]
+        }
+      },
+      "metrics": [
+        {
+          "type": "video_link_metrics",
+          "updated_at_ms": 1793266398989,
+          "budget_kbps": 32,
+          "receive_kbps": 24.352005891361223,
+          "loss_pct": 0,
+          "trend_ms_s": 0.07246837684055298,
+          "classes": {
+            "high": {
+              "budget_kbps": 0,
+              "receive_kbps": 0,
+              "utilization_pct": null,
+              "streams": 0
+            },
+            "low": {
+              "budget_kbps": 31.764705882352942,
+              "receive_kbps": 24.352005891361223,
+              "utilization_pct": 76.66372225058163,
+              "streams": 5
+            }
+          }
+        },
+        {
+          "type": "video_link_metrics",
+          "updated_at_ms": 1793266399989,
+          "budget_kbps": 32,
+          "receive_kbps": 24.761605349278263,
+          "loss_pct": 0,
+          "trend_ms_s": 0.11712932186456874,
+          "classes": {
+            "high": {
+              "budget_kbps": 0,
+              "receive_kbps": 0,
+              "utilization_pct": null,
+              "streams": 0
+            },
+            "low": {
+              "budget_kbps": 31.764705882352942,
+              "receive_kbps": 24.761605349278263,
+              "utilization_pct": 77.95320202550563,
+              "streams": 5
+            }
+          }
+        },
+        {
+          "type": "video_link_metrics",
+          "updated_at_ms": 1793266400990,
+          "budget_kbps": 32,
+          "receive_kbps": 24.57578598220304,
+          "loss_pct": 0,
+          "trend_ms_s": -0.042505876638483646,
+          "classes": {
+            "high": {
+              "budget_kbps": 0,
+              "receive_kbps": 0,
+              "utilization_pct": null,
+              "streams": 0
+            },
+            "low": {
+              "budget_kbps": 31.764705882352942,
+              "receive_kbps": 24.575785982203044,
+              "utilization_pct": 77.36821512915772,
+              "streams": 5
+            }
+          }
+        }
+      ],
+      "headers": [
+        {
+          "label": "Network · Rocket M2"
+        },
+        {
+          "label": "RGB-D Cam",
+          "quality": "80×60 · 3.0 FPS"
+        },
+        {
+          "label": "Top Cam",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Front Left",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Front Right",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Left",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Right",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Arm",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Gripper",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Science Left",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Left Beaker",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Microscope",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Science Right",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Right Beaker",
+          "quality": "— · 0 FPS"
+        }
+      ]
+    },
+    {
+      "name": "600-all-low",
+      "elapsed_s": 8.004,
+      "states": [
+        {
+          "priority": "low",
+          "stream_id": "rgbd_camera",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoRGBD",
+          "v4l2_pixel_format": "YUY2",
+          "udp_port": 5022,
+          "width": 320,
+          "height": 240,
+          "framerate": 30,
+          "display": {
+            "label": "RGB-D Cam",
+            "panel": "autonomy",
+            "order": 1
+          },
+          "encoded_width": 320,
+          "encoded_height": 240,
+          "available": true,
+          "boot": 2097729165,
+          "session": 2265039879,
+          "request": 1,
+          "port": 5022,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 255,
+          "fps": 15,
+          "result": 0
+        },
+        {
+          "priority": "low",
+          "stream_id": "front_left_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoFL",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5010,
+          "width": 320,
+          "height": 180,
+          "framerate": 30,
+          "display": {
+            "label": "Front Left",
+            "panel": "delivery",
+            "order": 4
+          },
+          "encoded_width": 320,
+          "encoded_height": 180,
+          "available": true,
+          "boot": 2097729165,
+          "session": 2265039879,
+          "request": 2,
+          "port": 5010,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 255,
+          "fps": 15,
+          "result": 0
+        },
+        {
+          "priority": "low",
+          "stream_id": "front_right_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoFR",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5012,
+          "width": 80,
+          "height": 44,
+          "framerate": 30,
+          "display": {
+            "label": "Front Right",
+            "panel": "delivery",
+            "order": 5
+          },
+          "encoded_width": null,
+          "encoded_height": null,
+          "available": false,
+          "boot": 2097729165,
+          "session": 2265039879,
+          "request": 3,
+          "port": 5012,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 0,
+          "fps": 3,
+          "result": 0
+        },
+        {
+          "priority": "low",
+          "stream_id": "left_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoLEFT",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5014,
+          "width": 640,
+          "height": 360,
+          "framerate": 30,
+          "display": {
+            "label": "Left",
+            "panel": "delivery",
+            "order": 6
+          },
+          "encoded_width": null,
+          "encoded_height": null,
+          "available": false,
+          "boot": 2097729165,
+          "session": 2265039879,
+          "request": 4,
+          "port": 5014,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 0,
+          "fps": 30,
+          "result": 0
+        },
+        {
+          "priority": "low",
+          "stream_id": "right_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoRIGHT",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5016,
+          "width": 640,
+          "height": 360,
+          "framerate": 30,
+          "display": {
+            "label": "Right",
+            "panel": "delivery",
+            "order": 7
+          },
+          "encoded_width": null,
+          "encoded_height": null,
+          "available": false,
+          "boot": 2097729165,
+          "session": 2265039879,
+          "request": 5,
+          "port": 5016,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 0,
+          "fps": 30,
+          "result": 0
+        }
+      ],
+      "rendered": {
+        "Front Left": {
+          "count": 121,
+          "sizes": [
+            "320x180"
+          ]
+        },
+        "RGB-D Cam": {
+          "count": 120,
+          "sizes": [
+            "320x240"
+          ]
+        }
+      },
+      "metrics": [
+        {
+          "type": "video_link_metrics",
+          "updated_at_ms": 1793266418963,
+          "budget_kbps": 600,
+          "receive_kbps": 403.16241197229823,
+          "loss_pct": 0,
+          "trend_ms_s": 0.25567976215131094,
+          "classes": {
+            "high": {
+              "budget_kbps": 0,
+              "receive_kbps": 0,
+              "utilization_pct": null,
+              "streams": 0
+            },
+            "low": {
+              "budget_kbps": 600,
+              "receive_kbps": 403.1624119722983,
+              "utilization_pct": 67.19373532871639,
+              "streams": 5
+            }
+          }
+        },
+        {
+          "type": "video_link_metrics",
+          "updated_at_ms": 1793266419964,
+          "budget_kbps": 600,
+          "receive_kbps": 398.94168455010816,
+          "loss_pct": 0,
+          "trend_ms_s": 0.27916236737502553,
+          "classes": {
+            "high": {
+              "budget_kbps": 0,
+              "receive_kbps": 0,
+              "utilization_pct": null,
+              "streams": 0
+            },
+            "low": {
+              "budget_kbps": 600,
+              "receive_kbps": 398.94168455010816,
+              "utilization_pct": 66.49028075835136,
+              "streams": 5
+            }
+          }
+        },
+        {
+          "type": "video_link_metrics",
+          "updated_at_ms": 1793266421163,
+          "budget_kbps": 600,
+          "receive_kbps": 404.39918524317005,
+          "loss_pct": 0,
+          "trend_ms_s": -2.0049868355936398,
+          "classes": {
+            "high": {
+              "budget_kbps": 0,
+              "receive_kbps": 0,
+              "utilization_pct": null,
+              "streams": 0
+            },
+            "low": {
+              "budget_kbps": 600,
+              "receive_kbps": 404.3991852431701,
+              "utilization_pct": 67.39986420719502,
+              "streams": 5
+            }
+          }
+        }
+      ],
+      "headers": [
+        {
+          "label": "Network · Rocket M2"
+        },
+        {
+          "label": "RGB-D Cam",
+          "quality": "320×240 · 15.0 FPS"
+        },
+        {
+          "label": "Top Cam",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Front Left",
+          "quality": "320×180 · 15.0 FPS"
+        },
+        {
+          "label": "Front Right",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Left",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Right",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Arm",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Gripper",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Science Left",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Left Beaker",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Microscope",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Science Right",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Right Beaker",
+          "quality": "— · 0 FPS"
+        }
+      ]
+    },
+    {
+      "name": "600-two-high-json-order",
+      "elapsed_s": 8.007,
+      "states": [
+        {
+          "priority": "low",
+          "stream_id": "rgbd_camera",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoRGBD",
+          "v4l2_pixel_format": "YUY2",
+          "udp_port": 5022,
+          "width": 240,
+          "height": 180,
+          "framerate": 30,
+          "display": {
+            "label": "RGB-D Cam",
+            "panel": "autonomy",
+            "order": 1
+          },
+          "encoded_width": 240,
+          "encoded_height": 180,
+          "available": true,
+          "boot": 2097729165,
+          "session": 2265039879,
+          "request": 1,
+          "port": 5022,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 102,
+          "fps": 10,
+          "result": 0
+        },
+        {
+          "priority": "high",
+          "stream_id": "front_left_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoFL",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5010,
+          "width": 320,
+          "height": 180,
+          "framerate": 30,
+          "display": {
+            "label": "Front Left",
+            "panel": "delivery",
+            "order": 4
+          },
+          "encoded_width": 320,
+          "encoded_height": 180,
+          "available": true,
+          "boot": 2097729165,
+          "session": 2265039879,
+          "request": 7,
+          "port": 5010,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 408,
+          "fps": 30,
+          "result": 0
+        },
+        {
+          "priority": "high",
+          "stream_id": "front_right_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoFR",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5012,
+          "width": 320,
+          "height": 180,
+          "framerate": 30,
+          "display": {
+            "label": "Front Right",
+            "panel": "delivery",
+            "order": 5
+          },
+          "encoded_width": null,
+          "encoded_height": null,
+          "available": false,
+          "boot": 2097729165,
+          "session": 2265039879,
+          "request": 6,
+          "port": 5012,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 0,
+          "fps": 30,
+          "result": 0
+        },
+        {
+          "priority": "low",
+          "stream_id": "left_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoLEFT",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5014,
+          "width": 640,
+          "height": 360,
+          "framerate": 30,
+          "display": {
+            "label": "Left",
+            "panel": "delivery",
+            "order": 6
+          },
+          "encoded_width": null,
+          "encoded_height": null,
+          "available": false,
+          "boot": 2097729165,
+          "session": 2265039879,
+          "request": 4,
+          "port": 5014,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 0,
+          "fps": 30,
+          "result": 0
+        },
+        {
+          "priority": "low",
+          "stream_id": "right_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoRIGHT",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5016,
+          "width": 640,
+          "height": 360,
+          "framerate": 30,
+          "display": {
+            "label": "Right",
+            "panel": "delivery",
+            "order": 7
+          },
+          "encoded_width": null,
+          "encoded_height": null,
+          "available": false,
+          "boot": 2097729165,
+          "session": 2265039879,
+          "request": 5,
+          "port": 5016,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 0,
+          "fps": 30,
+          "result": 0
+        }
+      ],
+      "rendered": {
+        "Front Left": {
+          "count": 240,
+          "sizes": [
+            "320x180"
+          ]
+        },
+        "RGB-D Cam": {
+          "count": 80,
+          "sizes": [
+            "240x180"
+          ]
+        }
+      },
+      "metrics": [
+        {
+          "type": "video_link_metrics",
+          "updated_at_ms": 1793266437772,
+          "budget_kbps": 600,
+          "receive_kbps": 420.3775217061344,
+          "loss_pct": 0,
+          "trend_ms_s": -2.650263268739451,
+          "classes": {
+            "high": {
+              "budget_kbps": 480,
+              "receive_kbps": 351.32556141890916,
+              "utilization_pct": 73.19282529560607,
+              "streams": 2
+            },
+            "low": {
+              "budget_kbps": 120,
+              "receive_kbps": 69.05196028722524,
+              "utilization_pct": 57.543300239354366,
+              "streams": 3
+            }
+          }
+        },
+        {
+          "type": "video_link_metrics",
+          "updated_at_ms": 1793266438972,
+          "budget_kbps": 600,
+          "receive_kbps": 420.42358277470004,
+          "loss_pct": 0,
+          "trend_ms_s": 0.5012535421134214,
+          "classes": {
+            "high": {
+              "budget_kbps": 480,
+              "receive_kbps": 351.4182365820253,
+              "utilization_pct": 73.21213262125528,
+              "streams": 2
+            },
+            "low": {
+              "budget_kbps": 120,
+              "receive_kbps": 69.00534619267457,
+              "utilization_pct": 57.50445516056214,
+              "streams": 3
+            }
+          }
+        },
+        {
+          "type": "video_link_metrics",
+          "updated_at_ms": 1793266439974,
+          "budget_kbps": 600,
+          "receive_kbps": 410.16410256543253,
+          "loss_pct": 0,
+          "trend_ms_s": -1.039172625843841,
+          "classes": {
+            "high": {
+              "budget_kbps": 480,
+              "receive_kbps": 342.10967597447336,
+              "utilization_pct": 71.27284916134862,
+              "streams": 2
+            },
+            "low": {
+              "budget_kbps": 120,
+              "receive_kbps": 68.05442659095931,
+              "utilization_pct": 56.71202215913276,
+              "streams": 3
+            }
+          }
+        }
+      ],
+      "headers": [
+        {
+          "label": "Network · Rocket M2"
+        },
+        {
+          "label": "RGB-D Cam",
+          "quality": "240×180 · 10.0 FPS"
+        },
+        {
+          "label": "Top Cam",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Front Left",
+          "quality": "320×180 · 30.0 FPS"
+        },
+        {
+          "label": "Front Right",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Left",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Right",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Arm",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Gripper",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Science Left",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Left Beaker",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Microscope",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Science Right",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Right Beaker",
+          "quality": "— · 0 FPS"
+        }
+      ]
+    },
+    {
+      "name": "1500-one-high",
+      "elapsed_s": 8.001,
+      "states": [
+        {
+          "priority": "low",
+          "stream_id": "rgbd_camera",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoRGBD",
+          "v4l2_pixel_format": "YUY2",
+          "udp_port": 5022,
+          "width": 320,
+          "height": 240,
+          "framerate": 30,
+          "display": {
+            "label": "RGB-D Cam",
+            "panel": "autonomy",
+            "order": 1
+          },
+          "encoded_width": 320,
+          "encoded_height": 240,
+          "available": true,
+          "boot": 2097729165,
+          "session": 2265079195,
+          "request": 1,
+          "port": 5022,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 255,
+          "fps": 15,
+          "result": 0
+        },
+        {
+          "priority": "high",
+          "stream_id": "front_left_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoFL",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5010,
+          "width": 480,
+          "height": 270,
+          "framerate": 30,
+          "display": {
+            "label": "Front Left",
+            "panel": "delivery",
+            "order": 4
+          },
+          "encoded_width": 480,
+          "encoded_height": 270,
+          "available": true,
+          "boot": 2097729165,
+          "session": 2265079195,
+          "request": 2,
+          "port": 5010,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 1020,
+          "fps": 30,
+          "result": 0
+        },
+        {
+          "priority": "low",
+          "stream_id": "front_right_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoFR",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5012,
+          "width": 320,
+          "height": 180,
+          "framerate": 30,
+          "display": {
+            "label": "Front Right",
+            "panel": "delivery",
+            "order": 5
+          },
+          "encoded_width": null,
+          "encoded_height": null,
+          "available": false,
+          "boot": 2097729165,
+          "session": 2265079195,
+          "request": 3,
+          "port": 5012,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 0,
+          "fps": 30,
+          "result": 0
+        },
+        {
+          "priority": "low",
+          "stream_id": "left_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoLEFT",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5014,
+          "width": 640,
+          "height": 360,
+          "framerate": 30,
+          "display": {
+            "label": "Left",
+            "panel": "delivery",
+            "order": 6
+          },
+          "encoded_width": null,
+          "encoded_height": null,
+          "available": false,
+          "boot": 2097729165,
+          "session": 2265079195,
+          "request": 4,
+          "port": 5014,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 0,
+          "fps": 30,
+          "result": 0
+        },
+        {
+          "priority": "low",
+          "stream_id": "right_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoRIGHT",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5016,
+          "width": 640,
+          "height": 360,
+          "framerate": 30,
+          "display": {
+            "label": "Right",
+            "panel": "delivery",
+            "order": 7
+          },
+          "encoded_width": null,
+          "encoded_height": null,
+          "available": false,
+          "boot": 2097729165,
+          "session": 2265079195,
+          "request": 5,
+          "port": 5016,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 0,
+          "fps": 30,
+          "result": 0
+        }
+      ],
+      "rendered": {
+        "Front Left": {
+          "count": 241,
+          "sizes": [
+            "480x270"
+          ]
+        },
+        "RGB-D Cam": {
+          "count": 121,
+          "sizes": [
+            "320x240"
+          ]
+        }
+      },
+      "metrics": [
+        {
+          "type": "video_link_metrics",
+          "updated_at_ms": 1793266458596,
+          "budget_kbps": 1500,
+          "receive_kbps": 1220.7556740488756,
+          "loss_pct": 0,
+          "trend_ms_s": -2.466498434760609,
+          "classes": {
+            "high": {
+              "budget_kbps": 1200,
+              "receive_kbps": 1018.7930758693487,
+              "utilization_pct": 84.8994229891124,
+              "streams": 1
+            },
+            "low": {
+              "budget_kbps": 300,
+              "receive_kbps": 201.96259817952594,
+              "utilization_pct": 67.32086605984199,
+              "streams": 4
+            }
+          }
+        },
+        {
+          "type": "video_link_metrics",
+          "updated_at_ms": 1793266459796,
+          "budget_kbps": 1500,
+          "receive_kbps": 1212.2214605058473,
+          "loss_pct": 0,
+          "trend_ms_s": -1.9107201951478718,
+          "classes": {
+            "high": {
+              "budget_kbps": 1200,
+              "receive_kbps": 1014.5660087420864,
+              "utilization_pct": 84.54716739517387,
+              "streams": 1
+            },
+            "low": {
+              "budget_kbps": 300,
+              "receive_kbps": 197.65545176376193,
+              "utilization_pct": 65.88515058792063,
+              "streams": 4
+            }
+          }
+        },
+        {
+          "type": "video_link_metrics",
+          "updated_at_ms": 1793266460797,
+          "budget_kbps": 1500,
+          "receive_kbps": 1202.1595866688967,
+          "loss_pct": 0,
+          "trend_ms_s": -0.030548586644415284,
+          "classes": {
+            "high": {
+              "budget_kbps": 1200,
+              "receive_kbps": 1007.9452839512487,
+              "utilization_pct": 83.99544032927072,
+              "streams": 1
+            },
+            "low": {
+              "budget_kbps": 300,
+              "receive_kbps": 194.21430271764666,
+              "utilization_pct": 64.73810090588222,
+              "streams": 4
+            }
+          }
+        }
+      ],
+      "headers": [
+        {
+          "label": "Network · Rocket M2"
+        },
+        {
+          "label": "RGB-D Cam",
+          "quality": "320×240 · 15.0 FPS"
+        },
+        {
+          "label": "Top Cam",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Front Left",
+          "quality": "480×270 · 30.0 FPS"
+        },
+        {
+          "label": "Front Right",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Left",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Right",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Arm",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Gripper",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Science Left",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Left Beaker",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Microscope",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Science Right",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Right Beaker",
+          "quality": "— · 0 FPS"
+        }
+      ]
+    },
+    {
+      "name": "recovered-normal",
+      "elapsed_s": 10.006,
+      "states": [
+        {
+          "priority": "low",
+          "stream_id": "rgbd_camera",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoRGBD",
+          "v4l2_pixel_format": "YUY2",
+          "udp_port": 5022,
+          "width": 640,
+          "height": 480,
+          "framerate": 30,
+          "display": {
+            "label": "RGB-D Cam",
+            "panel": "autonomy",
+            "order": 1
+          },
+          "encoded_width": 640,
+          "encoded_height": 480,
+          "available": true,
+          "boot": 2097729165,
+          "session": 2265099491,
+          "request": 1,
+          "port": 5022,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 1353,
+          "fps": 30,
+          "result": 0
+        },
+        {
+          "priority": "high",
+          "stream_id": "front_left_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoFL",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5010,
+          "width": 640,
+          "height": 360,
+          "framerate": 30,
+          "display": {
+            "label": "Front Left",
+            "panel": "delivery",
+            "order": 4
+          },
+          "encoded_width": 640,
+          "encoded_height": 360,
+          "available": true,
+          "boot": 2097729165,
+          "session": 2265099491,
+          "request": 2,
+          "port": 5010,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 1530,
+          "fps": 30,
+          "result": 0
+        },
+        {
+          "priority": "high",
+          "stream_id": "front_right_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoFR",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5012,
+          "width": 640,
+          "height": 360,
+          "framerate": 30,
+          "display": {
+            "label": "Front Right",
+            "panel": "delivery",
+            "order": 5
+          },
+          "encoded_width": 640,
+          "encoded_height": 360,
+          "available": true,
+          "boot": 2097729165,
+          "session": 2265099491,
+          "request": 3,
+          "port": 5012,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 1530,
+          "fps": 30,
+          "result": 0
+        },
+        {
+          "priority": "low",
+          "stream_id": "left_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoLEFT",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5014,
+          "width": 640,
+          "height": 360,
+          "framerate": 30,
+          "display": {
+            "label": "Left",
+            "panel": "delivery",
+            "order": 6
+          },
+          "encoded_width": 640,
+          "encoded_height": 360,
+          "available": true,
+          "boot": 2097729165,
+          "session": 2265099491,
+          "request": 4,
+          "port": 5014,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 1352,
+          "fps": 30,
+          "result": 0
+        },
+        {
+          "priority": "low",
+          "stream_id": "right_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoRIGHT",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5016,
+          "width": 640,
+          "height": 360,
+          "framerate": 30,
+          "display": {
+            "label": "Right",
+            "panel": "delivery",
+            "order": 7
+          },
+          "encoded_width": 640,
+          "encoded_height": 360,
+          "available": true,
+          "boot": 2097729165,
+          "session": 2265099491,
+          "request": 5,
+          "port": 5016,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 1352,
+          "fps": 30,
+          "result": 0
+        }
+      ],
+      "rendered": {
+        "Left": {
+          "count": 225,
+          "sizes": [
+            "640x360"
+          ]
+        },
+        "Right": {
+          "count": 300,
+          "sizes": [
+            "640x360"
+          ]
+        },
+        "RGB-D Cam": {
+          "count": 300,
+          "sizes": [
+            "640x480"
+          ]
+        },
+        "Front Left": {
+          "count": 300,
+          "sizes": [
+            "640x360"
+          ]
+        },
+        "Front Right": {
+          "count": 300,
+          "sizes": [
+            "640x360"
+          ]
+        }
+      },
+      "metrics": [
+        {
+          "type": "video_link_metrics",
+          "updated_at_ms": 1793266507681,
+          "budget_kbps": 8508.01406645691,
+          "receive_kbps": 6461.629120131079,
+          "loss_pct": 0,
+          "trend_ms_s": -1.8117433796950975,
+          "classes": {
+            "high": {
+              "budget_kbps": 3600,
+              "receive_kbps": 2998.179261771081,
+              "utilization_pct": 83.28275727141893,
+              "streams": 2
+            },
+            "low": {
+              "budget_kbps": 4890.588235294118,
+              "receive_kbps": 3463.4498583599943,
+              "utilization_pct": 70.81867643988441,
+              "streams": 3
+            }
+          }
+        },
+        {
+          "type": "video_link_metrics",
+          "updated_at_ms": 1793266508684,
+          "budget_kbps": 8523.826041097413,
+          "receive_kbps": 6767.7326534912245,
+          "loss_pct": 0,
+          "trend_ms_s": 8.572826176830407,
+          "classes": {
+            "high": {
+              "budget_kbps": 3600,
+              "receive_kbps": 3077.6212342268905,
+              "utilization_pct": 85.48947872852473,
+              "streams": 2
+            },
+            "low": {
+              "budget_kbps": 4905.882352941177,
+              "receive_kbps": 3690.1114192643226,
+              "utilization_pct": 75.21809847421281,
+              "streams": 3
+            }
+          }
+        },
+        {
+          "type": "video_link_metrics",
+          "updated_at_ms": 1793266509686,
+          "budget_kbps": 8539.652015484004,
+          "receive_kbps": 6871.669718613519,
+          "loss_pct": 0,
+          "trend_ms_s": -0.8093609243083539,
+          "classes": {
+            "high": {
+              "budget_kbps": 3600,
+              "receive_kbps": 3055.516919659144,
+              "utilization_pct": 84.87546999053177,
+              "streams": 2
+            },
+            "low": {
+              "budget_kbps": 4921.176470588235,
+              "receive_kbps": 3816.152798954362,
+              "utilization_pct": 77.54553858740636,
+              "streams": 3
+            }
+          }
+        }
+      ],
+      "headers": [
+        {
+          "label": "Network · Rocket M2"
+        },
+        {
+          "label": "RGB-D Cam",
+          "quality": "640×480 · 30.0 FPS"
+        },
+        {
+          "label": "Top Cam",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Front Left",
+          "quality": "640×360 · 30.0 FPS"
+        },
+        {
+          "label": "Front Right",
+          "quality": "640×360 · 30.0 FPS"
+        },
+        {
+          "label": "Left",
+          "quality": "640×360 · 25.0 FPS"
+        },
+        {
+          "label": "Right",
+          "quality": "640×360 · 30.0 FPS"
+        },
+        {
+          "label": "Arm",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Gripper",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Science Left",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Left Beaker",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Microscope",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Science Right",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Right Beaker",
+          "quality": "— · 0 FPS"
+        }
+      ]
+    },
+    {
+      "name": "rgbd-disabled",
+      "elapsed_s": 6.005,
+      "states": [
+        {
+          "priority": "low",
+          "stream_id": "rgbd_camera",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoRGBD",
+          "v4l2_pixel_format": "YUY2",
+          "udp_port": 5022,
+          "width": 640,
+          "height": 480,
+          "framerate": 30,
+          "display": {
+            "label": "RGB-D Cam",
+            "panel": "autonomy",
+            "order": 1
+          },
+          "encoded_width": 640,
+          "encoded_height": 480,
+          "available": false,
+          "boot": 2097729165,
+          "session": 2265099491,
+          "request": 6,
+          "port": 5022,
+          "state": "OFF",
+          "enabled": false,
+          "bitrate_kbps": 0,
+          "fps": 30,
+          "result": 0
+        },
+        {
+          "priority": "high",
+          "stream_id": "front_left_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoFL",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5010,
+          "width": 640,
+          "height": 360,
+          "framerate": 30,
+          "display": {
+            "label": "Front Left",
+            "panel": "delivery",
+            "order": 4
+          },
+          "encoded_width": 640,
+          "encoded_height": 360,
+          "available": true,
+          "boot": 2097729165,
+          "session": 2265099491,
+          "request": 2,
+          "port": 5010,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 1530,
+          "fps": 30,
+          "result": 0
+        },
+        {
+          "priority": "high",
+          "stream_id": "front_right_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoFR",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5012,
+          "width": 640,
+          "height": 360,
+          "framerate": 30,
+          "display": {
+            "label": "Front Right",
+            "panel": "delivery",
+            "order": 5
+          },
+          "encoded_width": 640,
+          "encoded_height": 360,
+          "available": true,
+          "boot": 2097729165,
+          "session": 2265099491,
+          "request": 3,
+          "port": 5012,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 1530,
+          "fps": 30,
+          "result": 0
+        },
+        {
+          "priority": "low",
+          "stream_id": "left_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoLEFT",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5014,
+          "width": 640,
+          "height": 360,
+          "framerate": 30,
+          "display": {
+            "label": "Left",
+            "panel": "delivery",
+            "order": 6
+          },
+          "encoded_width": 640,
+          "encoded_height": 360,
+          "available": true,
+          "boot": 2097729165,
+          "session": 2265099491,
+          "request": 4,
+          "port": 5014,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 1530,
+          "fps": 30,
+          "result": 0
+        },
+        {
+          "priority": "low",
+          "stream_id": "right_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoRIGHT",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5016,
+          "width": 640,
+          "height": 360,
+          "framerate": 30,
+          "display": {
+            "label": "Right",
+            "panel": "delivery",
+            "order": 7
+          },
+          "encoded_width": 640,
+          "encoded_height": 360,
+          "available": true,
+          "boot": 2097729165,
+          "session": 2265099491,
+          "request": 5,
+          "port": 5016,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 1530,
+          "fps": 30,
+          "result": 0
+        }
+      ],
+      "rendered": {
+        "Front Left": {
+          "count": 181,
+          "sizes": [
+            "640x360"
+          ]
+        },
+        "Right": {
+          "count": 180,
+          "sizes": [
+            "640x360"
+          ]
+        },
+        "Front Right": {
+          "count": 180,
+          "sizes": [
+            "640x360"
+          ]
+        },
+        "Left": {
+          "count": 149,
+          "sizes": [
+            "640x360"
+          ]
+        }
+      },
+      "metrics": [
+        {
+          "type": "video_link_metrics",
+          "updated_at_ms": 1793266522285,
+          "budget_kbps": 7200,
+          "receive_kbps": 5623.459544298399,
+          "loss_pct": 0,
+          "trend_ms_s": -4.636578267720809,
+          "classes": {
+            "high": {
+              "budget_kbps": 3600,
+              "receive_kbps": 3073.7567661734183,
+              "utilization_pct": 85.38213239370606,
+              "streams": 2
+            },
+            "low": {
+              "budget_kbps": 3600,
+              "receive_kbps": 2549.702778124989,
+              "utilization_pct": 70.82507717013858,
+              "streams": 2
+            }
+          }
+        },
+        {
+          "type": "video_link_metrics",
+          "updated_at_ms": 1793266523285,
+          "budget_kbps": 7200,
+          "receive_kbps": 5651.36042177661,
+          "loss_pct": 0,
+          "trend_ms_s": 0.5413407876698304,
+          "classes": {
+            "high": {
+              "budget_kbps": 3600,
+              "receive_kbps": 3075.0100199339167,
+              "utilization_pct": 85.41694499816435,
+              "streams": 2
+            },
+            "low": {
+              "budget_kbps": 3600,
+              "receive_kbps": 2576.350401842701,
+              "utilization_pct": 71.56528894007504,
+              "streams": 2
+            }
+          }
+        },
+        {
+          "type": "video_link_metrics",
+          "updated_at_ms": 1793266524288,
+          "budget_kbps": 7200,
+          "receive_kbps": 5573.7525307833575,
+          "loss_pct": 0,
+          "trend_ms_s": 10.076131782075496,
+          "classes": {
+            "high": {
+              "budget_kbps": 3600,
+              "receive_kbps": 2997.8921069871462,
+              "utilization_pct": 83.27478074964294,
+              "streams": 2
+            },
+            "low": {
+              "budget_kbps": 3600,
+              "receive_kbps": 2575.860423796218,
+              "utilization_pct": 71.55167843878384,
+              "streams": 2
+            }
+          }
+        }
+      ],
+      "headers": [
+        {
+          "label": "Network · Rocket M2"
+        },
+        {
+          "label": "RGB-D Cam",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Top Cam",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Front Left",
+          "quality": "640×360 · 31.0 FPS"
+        },
+        {
+          "label": "Front Right",
+          "quality": "640×360 · 30.0 FPS"
+        },
+        {
+          "label": "Left",
+          "quality": "640×360 · 25.0 FPS"
+        },
+        {
+          "label": "Right",
+          "quality": "640×360 · 30.0 FPS"
+        },
+        {
+          "label": "Arm",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Gripper",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Science Left",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Left Beaker",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Microscope",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Science Right",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Right Beaker",
+          "quality": "— · 0 FPS"
+        }
+      ]
+    },
+    {
+      "name": "rgbd-reenabled",
+      "elapsed_s": 10.015,
+      "states": [
+        {
+          "priority": "low",
+          "stream_id": "rgbd_camera",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoRGBD",
+          "v4l2_pixel_format": "YUY2",
+          "udp_port": 5022,
+          "width": 640,
+          "height": 480,
+          "framerate": 30,
+          "display": {
+            "label": "RGB-D Cam",
+            "panel": "autonomy",
+            "order": 1
+          },
+          "encoded_width": 640,
+          "encoded_height": 480,
+          "available": true,
+          "boot": 2097729165,
+          "session": 2265099491,
+          "request": 7,
+          "port": 5022,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 1289,
+          "fps": 30,
+          "result": 0
+        },
+        {
+          "priority": "high",
+          "stream_id": "front_left_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoFL",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5010,
+          "width": 640,
+          "height": 360,
+          "framerate": 30,
+          "display": {
+            "label": "Front Left",
+            "panel": "delivery",
+            "order": 4
+          },
+          "encoded_width": 640,
+          "encoded_height": 360,
+          "available": true,
+          "boot": 2097729165,
+          "session": 2265099491,
+          "request": 2,
+          "port": 5010,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 1530,
+          "fps": 30,
+          "result": 0
+        },
+        {
+          "priority": "high",
+          "stream_id": "front_right_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoFR",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5012,
+          "width": 640,
+          "height": 360,
+          "framerate": 30,
+          "display": {
+            "label": "Front Right",
+            "panel": "delivery",
+            "order": 5
+          },
+          "encoded_width": 640,
+          "encoded_height": 360,
+          "available": true,
+          "boot": 2097729165,
+          "session": 2265099491,
+          "request": 3,
+          "port": 5012,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 1530,
+          "fps": 30,
+          "result": 0
+        },
+        {
+          "priority": "low",
+          "stream_id": "left_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoLEFT",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5014,
+          "width": 640,
+          "height": 360,
+          "framerate": 30,
+          "display": {
+            "label": "Left",
+            "panel": "delivery",
+            "order": 6
+          },
+          "encoded_width": 640,
+          "encoded_height": 360,
+          "available": true,
+          "boot": 2097729165,
+          "session": 2265099491,
+          "request": 4,
+          "port": 5014,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 1289,
+          "fps": 30,
+          "result": 0
+        },
+        {
+          "priority": "low",
+          "stream_id": "right_cam",
+          "source_type": "v4l2",
+          "ros_topic": null,
+          "ros_encoding": null,
+          "v4l2_device": "/dev/videoRIGHT",
+          "v4l2_pixel_format": "MJPG",
+          "udp_port": 5016,
+          "width": 640,
+          "height": 360,
+          "framerate": 30,
+          "display": {
+            "label": "Right",
+            "panel": "delivery",
+            "order": 7
+          },
+          "encoded_width": 640,
+          "encoded_height": 360,
+          "available": true,
+          "boot": 2097729165,
+          "session": 2265099491,
+          "request": 5,
+          "port": 5016,
+          "state": "ON",
+          "enabled": true,
+          "bitrate_kbps": 1289,
+          "fps": 30,
+          "result": 0
+        }
+      ],
+      "rendered": {
+        "Right": {
+          "count": 301,
+          "sizes": [
+            "640x360"
+          ]
+        },
+        "Front Left": {
+          "count": 301,
+          "sizes": [
+            "640x360"
+          ]
+        },
+        "RGB-D Cam": {
+          "count": 300,
+          "sizes": [
+            "640x480"
+          ]
+        },
+        "Left": {
+          "count": 249,
+          "sizes": [
+            "640x360"
+          ]
+        },
+        "Front Right": {
+          "count": 300,
+          "sizes": [
+            "640x360"
+          ]
+        }
+      },
+      "metrics": [
+        {
+          "type": "video_link_metrics",
+          "updated_at_ms": 1793266550695,
+          "budget_kbps": 8270.239972510288,
+          "receive_kbps": 6803.6709799099235,
+          "loss_pct": 0,
+          "trend_ms_s": -16.23902269613258,
+          "classes": {
+            "high": {
+              "budget_kbps": 3600,
+              "receive_kbps": 3104.4257378361976,
+              "utilization_pct": 86.2340482732277,
+              "streams": 2
+            },
+            "low": {
+              "budget_kbps": 4658.823529411765,
+              "receive_kbps": 3699.24524207373,
+              "utilization_pct": 79.40299130713814,
+              "streams": 3
+            }
+          }
+        },
+        {
+          "type": "video_link_metrics",
+          "updated_at_ms": 1793266551696,
+          "budget_kbps": 8286.110140390363,
+          "receive_kbps": 6429.525061453292,
+          "loss_pct": 0,
+          "trend_ms_s": -7.285447510196083,
+          "classes": {
+            "high": {
+              "budget_kbps": 3600,
+              "receive_kbps": 2986.0694970341374,
+              "utilization_pct": 82.94637491761493,
+              "streams": 2
+            },
+            "low": {
+              "budget_kbps": 4668.235294117647,
+              "receive_kbps": 3443.4555644191623,
+              "utilization_pct": 73.76353905635806,
+              "streams": 3
+            }
+          }
+        },
+        {
+          "type": "video_link_metrics",
+          "updated_at_ms": 1793266552698,
+          "budget_kbps": 8302.024766267183,
+          "receive_kbps": 6759.476308047577,
+          "loss_pct": 0,
+          "trend_ms_s": -2.5358778095142784,
+          "classes": {
+            "high": {
+              "budget_kbps": 3600,
+              "receive_kbps": 3123.7958705067294,
+              "utilization_pct": 86.77210751407583,
+              "streams": 2
+            },
+            "low": {
+              "budget_kbps": 4683.529411764706,
+              "receive_kbps": 3635.6804375408337,
+              "utilization_pct": 77.62693724967869,
+              "streams": 3
+            }
+          }
+        }
+      ],
+      "headers": [
+        {
+          "label": "Network · Rocket M2"
+        },
+        {
+          "label": "RGB-D Cam",
+          "quality": "640×480 · 30.0 FPS"
+        },
+        {
+          "label": "Top Cam",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Front Left",
+          "quality": "640×360 · 30.0 FPS"
+        },
+        {
+          "label": "Front Right",
+          "quality": "640×360 · 30.0 FPS"
+        },
+        {
+          "label": "Left",
+          "quality": "640×360 · 25.0 FPS"
+        },
+        {
+          "label": "Right",
+          "quality": "640×360 · 31.0 FPS"
+        },
+        {
+          "label": "Arm",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Gripper",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Science Left",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Left Beaker",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Microscope",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Science Right",
+          "quality": "— · 0 FPS"
+        },
+        {
+          "label": "Right Beaker",
+          "quality": "— · 0 FPS"
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "passed": true,
+  "restored": true
+}

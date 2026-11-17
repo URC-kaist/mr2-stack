@@ -32,6 +32,24 @@ test('RocketM2Client getState reflects configuration', () => {
   })
 })
 
+test('RocketM2Client does not auto-enable configured radios when profile disables it', () => {
+  const client = new RocketM2Client({
+    config: createConfig({
+      rocketM2Enable: false,
+      rocketM2AutoEnable: false,
+    }),
+    execFileAsync: async () => ({ stdout: '' }),
+  })
+
+  assert.deepEqual(client.getState(), {
+    target: 'base',
+    label: 'Base',
+    enabled: false,
+    configured: true,
+    status: null,
+  })
+})
+
 test('RocketM2Client poll publishes successful status', async () => {
   const statuses = []
   const execCalls = []
@@ -61,7 +79,10 @@ test('RocketM2Client poll publishes successful status', async () => {
   client.cookiePath = '/tmp/test.cookies'
   await client.poll()
 
-  assert.equal(execCalls.length, 2)
+  assert.equal(execCalls.length, 3)
+  assert(execCalls[0].some(a => a.endsWith('/login.cgi')))
+  assert(!execCalls[1].includes('-X'), 'redirect must switch the login POST to GET')
+  assert(execCalls[1].includes('--data'))
   assert.equal(statuses.length, 1)
   assert.equal(statuses[0].target, 'base')
   assert.equal(statuses[0].label, 'Base')

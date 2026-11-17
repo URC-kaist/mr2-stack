@@ -1,0 +1,24 @@
+{
+  "deployed_to_base": "192.168.0.55",
+  "gateway_pid": 110930,
+  "features": [
+    "first Live Feed tile",
+    "60-second traffic/GCC budget and Rocket M2 signal graphs",
+    "HIGH/LOW receive, allocation and utilization",
+    "hover timestamp and values"
+  ],
+  "verification": {
+    "gateway_tests_passed": 96,
+    "dashboard_typecheck": "passed",
+    "dashboard_lint": "passed",
+    "dashboard_build": "passed",
+    "dashboard_existing_tests": "passed",
+    "live_browser_passed": true,
+    "compact_layout_passed": true
+  },
+  "radio_traffic_added": false,
+  "field_ip_defaults_changed": false,
+  "allocation_precision": "Rover encoder targets divided by 0.85, within 1.2 kbps per active stream",
+  "camera_configuration_changed_by_test": false,
+  "existing_low_feed_issue": "still visible as zero received traffic; this change adds monitoring"
+}

@@ -20,6 +20,7 @@
 #include "transmission_interface/transmission_interface_exception.hpp"
 
 #include "mr2_can_bus_core/can_device.hpp"
+#include "mr2_can_bus_core/can_bus_registry.hpp"
 
 using hardware_interface::CallbackReturn;
 using hardware_interface::return_type;
@@ -27,9 +28,18 @@ using hardware_interface::return_type;
 namespace mr2_can_hardware_interface {
 
 class CanHW : public hardware_interface::SystemInterface {
+  friend struct CanHWTestPeer;
 public:
   CanHW() = default;
-  ~CanHW() override = default;
+  ~CanHW() override {
+    // Listener callbacks capture device `this` pointers and use node-owned ROS
+    // publishers. Stop the shared receive thread before member destruction
+    // tears down either the node or the devices.
+    for (auto &dev : devs_) dev->stop_transport();
+    CanBusRegistry::stop_all();
+    if (executor_) executor_->cancel();
+    if (executor_thread_.joinable()) executor_thread_.join();
+  }
 
   CallbackReturn
   on_init(const hardware_interface::HardwareInfo &info) override {
@@ -165,6 +175,12 @@ public:
         dev->export_state(device_state.state_ptr, device_state.velocity_ptr,
                           device_state.effort_ptr);
         dev->export_command(device_state.command_ptr);
+        device_state.device = dev.get();
+        if (dev->copy_feedback(device_state.feedback)) {
+          device_state.state_ptr = &device_state.feedback.position;
+          if (device_state.velocity_ptr) device_state.velocity_ptr = &device_state.feedback.velocity;
+          if (device_state.effort_ptr) device_state.effort_ptr = &device_state.feedback.effort;
+        }
 
         if (!device_state.state_ptr || !device_state.command_ptr) {
           RCLCPP_ERROR(node_->get_logger(),
@@ -341,6 +357,10 @@ public:
       return CallbackReturn::ERROR;
     }
 
+    executor_ = std::make_unique<rclcpp::executors::SingleThreadedExecutor>();
+    executor_->add_node(node_);
+    executor_thread_ = std::thread([this] { executor_->spin(); });
+
     RCLCPP_INFO(
         node_->get_logger(),
         "CanHW initialised: %zu joints, %zu actuators, %zu transmissions",
@@ -417,6 +437,8 @@ public:
     for (auto &dev : devs_) {
       if (!dev->on_activate()) {
         RCLCPP_ERROR(node_->get_logger(), "CAN device activation failed");
+        // A later wheel may fail after earlier motors were enabled.
+        for (auto &configured : devs_) configured->on_deactivate();
         return CallbackReturn::ERROR;
       }
     }
@@ -434,7 +456,8 @@ public:
 
   return_type read(const rclcpp::Time &, const rclcpp::Duration &) override {
     for (auto &actuator : actuators_) {
-      const auto *device = actuator.device;
+      auto *device = actuator.device;
+      if (device && device->device) device->device->copy_feedback(device->feedback);
       actuator.state = (device && device->state_ptr)
                            ? *device->state_ptr
                            : std::numeric_limits<double>::quiet_NaN();
@@ -584,6 +607,8 @@ private:
   };
 
   struct DevicePointers {
+    CanDevice *device{nullptr};
+    CanFeedback feedback;
     double *state_ptr{nullptr};
     double *velocity_ptr{nullptr};
     double *effort_ptr{nullptr};
@@ -639,6 +664,8 @@ private:
   std::unordered_map<std::string, DevicePointers> device_states_;
 
   rclcpp::Node::SharedPtr node_;
+  std::unique_ptr<rclcpp::executors::SingleThreadedExecutor> executor_;
+  std::thread executor_thread_;
 };
 
 } // namespace mr2_can_hardware_interface

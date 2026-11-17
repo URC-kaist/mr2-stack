@@ -5,6 +5,8 @@ const { execFile } = require('child_process')
 const { promisify } = require('util')
 
 const { AntennaTracker } = require('../antenna/tracker')
+const { UplinkTrialManager } = require('../latency/uplink_trial_manager')
+const { readSourceRevision } = require('../runtime/source_revision')
 const {
   MsgId,
   createSequencer,
@@ -19,16 +21,52 @@ const {
   encodeMissionControl,
 } = require('../protocol/xbee')
 const { createGatewayHttpHandler } = require('../runtime/http_handlers')
+const { createChronyStatusProvider } = require('../runtime/chrony_status')
 const { startMavproxy } = require('../runtime/mavproxy')
 const { RocketM2Client } = require('../runtime/rocket_m2_client')
 const { startRosTopicRelay } = require('../runtime/ros_topic_relay')
 const { XbeeSerialLink } = require('../runtime/serial_link')
 const { createWsRouteRegistry } = require('../runtime/ws_route_registry')
 const { createWsHub } = require('../runtime/ws_hub')
+const { createRosbridgeProxy } = require('../runtime/rosbridge_proxy')
+const { createVideoControl } = require('../video/control')
 const { createVideoGateway } = require('../video/service')
 const { loadVideoConfig } = require('../video/stream_config')
 
 const XBEE_BAUD = 115200
+
+function encodeDashboardDriveMessage(msg, nextSeq, gatewayRxEpochUs = Date.now() * 1000) {
+  const coerceNumber = (value) => {
+    const num = Number(value)
+    return Number.isFinite(num) ? num : 0
+  }
+  const wireTimestampMs = Math.floor(gatewayRxEpochUs / 1000) >>> 0
+  const frame = encodeCmdDrive(
+    {
+      timestamp_ms: wireTimestampMs,
+      linear_x_m_s: coerceNumber(msg.linear_x_m_s),
+      linear_y_m_s: coerceNumber(msg.linear_y_m_s),
+      angular_z_rad_s: coerceNumber(msg.angular_z_rad_s),
+    },
+    nextSeq
+  )
+  const trialId = typeof msg.trial_id === 'string' ? msg.trial_id.slice(0, 128) : ''
+  const clientTxEpochUs = coerceNumber(msg.client_tx_epoch_us)
+  return {
+    frame,
+    trace:
+      trialId && clientTxEpochUs > 0
+        ? {
+            type: 'latency_trace',
+            trial_id: trialId,
+            client_tx_epoch_us: clientTxEpochUs,
+            gateway_rx_epoch_us: gatewayRxEpochUs,
+            xbee_seq: frame[3],
+            wire_timestamp_ms: wireTimestampMs,
+          }
+        : null,
+  }
+}
 
 // Compose the gateway runtime out of small adapters so the entrypoint stays thin
 // and each integration point can be tested independently.
@@ -36,7 +74,24 @@ function createGatewayApp(options = {}) {
   const config = options.config
   const env = options.env || process.env
   const execFileAsync = options.execFileAsync || promisify(execFile)
+  const getChronyStatus = createChronyStatusProvider({ execFileAsync })
   const videoConfig = loadVideoConfig(config.videoConfigPath)
+  const uplinkTrialManager = options.uplinkTrialManager || new UplinkTrialManager({
+    sourceRevision: readSourceRevision(),
+    enabled: config.latencyDiagnosticsEnable,
+    interfaceName: config.latencyBaseInterface,
+    artifactRoot: config.latencyArtifactRoot,
+    publicBaseUrl: config.latencyPublicBaseUrl,
+    captureDurationS: config.latencyCaptureDurationS,
+    captureEdgeMarginS: config.latencyCaptureEdgeMarginS,
+    maxUploadBytes: config.latencyMaxUploadBytes,
+    pythonBinary: config.latencyPythonBinary,
+    tcpdumpBinary: config.latencyTcpdumpBinary,
+    analyzerPath: config.latencyAnalyzerPath,
+    videoConfigPath: config.videoConfigPath,
+    streams: videoConfig.streams,
+    spawn: options.latencySpawn,
+  })
 
   const nextSeq = createSequencer()
   const serialLink = new XbeeSerialLink({
@@ -63,16 +118,21 @@ function createGatewayApp(options = {}) {
       log,
       getRocketM2State: () => getRocketM2FleetState(),
       getVideoStreams: () => (videoGateway ? videoGateway.getBrowserStreams() : []),
+      getChronyStatus,
+      uplinkTrialManager,
     })
   )
   const routeRegistry = createWsRouteRegistry({ server })
 
+  const rosbridgeProxy = createRosbridgeProxy({ routeRegistry, host: config.roverHost || "192.168.1.102" })
   const wsHub = createWsHub({
     path: '/xbee-ws',
     routeRegistry,
     onMessage: handleDashboardMessage,
     getInitialMessages: () => {
       const messages = [getLinkStatus()]
+      const videoMetrics = videoControl.getMetrics()
+      if (videoMetrics) messages.push(videoMetrics)
       for (const rocketM2Client of rocketM2Clients) {
         const rocketM2Status = rocketM2Client.getStatus()
         if (rocketM2Status) {
@@ -82,7 +142,15 @@ function createGatewayApp(options = {}) {
       return messages
     },
   })
+  const freshnessEnabled = !String(config.videoGstBinary || 'gst-launch-1.0').endsWith('gst-launch-1.0')
+  const videoControl = createVideoControl({ initialKbps: config.videoInitialKbps, maxKbps: config.videoMaxKbps, streams: videoConfig.streams, nextSeq, writeFrame,
+    freshness: freshnessEnabled, onReceivePolicy: (policy) => videoGateway?.setReceivePolicy(policy),
+    broadcast: (msg) => wsHub.broadcast(msg) })
   videoGateway = createVideoGateway({
+    freshness: freshnessEnabled,
+    requestKeyframe: (id) => videoControl.requestKeyframe(id),
+    onPacket: (id, p) => videoControl.observe(id, p),
+    getControlState: (id) => videoControl.get(id),
     availabilityStaleMs: config.videoAvailabilityStaleMs,
     clientMaxBufferedBytes: config.videoClientMaxBufferedBytes,
     gstBinary: config.videoGstBinary,
@@ -135,8 +203,8 @@ function createGatewayApp(options = {}) {
     }
   }
 
-  function writeFrame(frame) {
-    serialLink.write(frame)
+  function writeFrame(frame, traffic) {
+    return serialLink.write(frame, traffic)
   }
 
   function getLinkStatus() {
@@ -174,28 +242,25 @@ function createGatewayApp(options = {}) {
   }
 
   function handleDashboardMessage(msg) {
+    const gatewayRxEpochUs = Date.now() * 1000
     if (!msg || typeof msg !== 'object') return
 
     // Older clients sometimes send `event`; current clients send `type`.
     const type = msg.type || msg.event
     if (!type) return
 
+    if (type === 'video_set') { videoControl.command(msg); return }
+
     if (type === 'cmd_drive') {
       const linear = coerceNumber(msg.linear_x_m_s)
       const lateral = coerceNumber(msg.linear_y_m_s)
       const angular = coerceNumber(msg.angular_z_rad_s)
       log(`cmd_drive rx x=${linear} y=${lateral} yaw=${angular}`)
-      writeFrame(
-        encodeCmdDrive(
-          {
-            timestamp_ms: Date.now() >>> 0,
-            linear_x_m_s: linear,
-            linear_y_m_s: lateral,
-            angular_z_rad_s: angular,
-          },
-          nextSeq
-        )
-      )
+      const encoded = encodeDashboardDriveMessage(msg, nextSeq, gatewayRxEpochUs)
+      writeFrame(encoded.frame)
+      if (encoded.trace) {
+        wsHub.broadcast(encoded.trace)
+      }
       return
     }
 
@@ -308,6 +373,7 @@ function createGatewayApp(options = {}) {
 
   function handleFrame(msgId, payload) {
     lastRxMs = Date.now()
+    if (msgId === MsgId.VIDEO_STATE) { videoControl.handleState(payload); return }
 
     // Link liveness is defined by heartbeat frames arriving from the rover side.
     if (msgId === MsgId.HEARTBEAT) {
@@ -333,6 +399,18 @@ function createGatewayApp(options = {}) {
   }
 
   async function start() {
+    // Claim the port before touching serial devices or starting child processes.
+    // A duplicate invocation must fail without disrupting the running gateway.
+    await new Promise((resolve, reject) => {
+      server.once('error', reject)
+      server.listen(config.port, config.host, () => {
+        server.removeListener('error', reject)
+        serverListening = true
+        log(`HTTP/WebSocket listening on ${config.host}:${config.port}`)
+        resolve()
+      })
+    })
+
     serialLink.start()
     mavproxy = startMavproxy({
       config,
@@ -366,27 +444,23 @@ function createGatewayApp(options = {}) {
       }
     }
 
-    // Start the ROS topic relay before opening the server so base-side data can
-    // flow immediately once dashboard clients connect.
-    rosTopicRelay = await startRosTopicRelay({
-      nextSeq,
-      writeFrame,
-      log,
-      onBaseSurveyIn: (msg) => {
-        if (antennaTracker) {
-          antennaTracker.updateBaseSurveyIn(msg)
-        }
-      },
-    })
-    videoGateway.start()
-
-    await new Promise((resolve) => {
-      server.listen(config.port, config.host, () => {
-        serverListening = true
-        log(`HTTP/WebSocket listening on ${config.host}:${config.port}`)
-        resolve()
+    if (config.rosTopicRelayEnable !== false) {
+      // Start base-side data producers before video and periodic telemetry.
+      rosTopicRelay = await startRosTopicRelay({
+        nextSeq,
+        writeFrame,
+        log,
+        onBaseSurveyIn: (msg) => {
+          if (antennaTracker) {
+            antennaTracker.updateBaseSurveyIn(msg)
+          }
+        },
       })
-    })
+    } else {
+      log('Base ROS GNSS/RTCM topic relay disabled')
+    }
+    videoGateway.start()
+    videoControl.start()
 
     for (const rocketM2Client of rocketM2Clients) {
       rocketM2Client.start()
@@ -438,12 +512,16 @@ function createGatewayApp(options = {}) {
       mavproxy = null
     }
 
+    await uplinkTrialManager.stop()
+
+    videoControl.stop()
     serialLink.stop()
     if (videoGateway) {
       videoGateway.stop()
       videoGateway = null
     }
     wsHub.close()
+    rosbridgeProxy.close()
     routeRegistry.close()
 
     if (serverListening) {
@@ -464,4 +542,5 @@ function createGatewayApp(options = {}) {
 
 module.exports = {
   createGatewayApp,
+  encodeDashboardDriveMessage,
 }

@@ -1,0 +1,25 @@
+{
+  "common": {
+    "headless": "true",
+    "enable_rover_hardware": "false",
+    "enable_flat_motor": "true",
+    "enable_manipulator_module": "false",
+    "enable_autonomous_module": "false",
+    "enable_science_module": "false",
+    "enable_localization": "false",
+    "enable_aruco": "false",
+    "enable_led": "false",
+    "enable_camera_turret": "false",
+    "enable_realsense": "false",
+    "enable_video_streaming": "true",
+    "video_config": "video_streams_flat.json",
+    "enable_gnss": "true",
+    "left_gnss_serial": "TowerRx_",
+    "right_gnss_serial": "NorthRx_",
+    "enable_xbee_bridge": "true",
+    "smooth_drive_commands": "false"
+  },
+  "rover": {
+    "mode": "real"
+  }
+}

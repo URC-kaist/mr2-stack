@@ -1,0 +1,72 @@
+[
+  {
+    "bitrate_updates": 24,
+    "deltas_blocked_recovering": 0,
+    "encoder_kbps": 27,
+    "failed": false,
+    "fps": 3,
+    "frames_admitted": 15,
+    "frames_encoded": 15,
+    "height": 60,
+    "key_sizes_bytes": [
+      868
+    ],
+    "keys_admitted": 1,
+    "keys_encoded": 1,
+    "pacer_frame_window_us": 300000,
+    "pattern": "snow",
+    "rtp_packets": 35,
+    "sent_kbps": 21.7712,
+    "update_interval_ms": 200,
+    "vbv_bits": 9018,
+    "width": 80,
+    "wire_kbps": 32
+  },
+  {
+    "bitrate_updates": 24,
+    "deltas_blocked_recovering": 0,
+    "encoder_kbps": 42,
+    "failed": false,
+    "fps": 3,
+    "frames_admitted": 16,
+    "frames_encoded": 16,
+    "height": 60,
+    "key_sizes_bytes": [
+      1289
+    ],
+    "keys_admitted": 1,
+    "keys_encoded": 1,
+    "pacer_frame_window_us": 300000,
+    "pattern": "snow",
+    "rtp_packets": 37,
+    "sent_kbps": 31.6256,
+    "update_interval_ms": 200,
+    "vbv_bits": 14028,
+    "width": 80,
+    "wire_kbps": 50
+  },
+  {
+    "bitrate_updates": 24,
+    "deltas_blocked_recovering": 4,
+    "encoder_kbps": 63,
+    "failed": false,
+    "fps": 5,
+    "frames_admitted": 21,
+    "frames_encoded": 26,
+    "height": 120,
+    "key_sizes_bytes": [
+      9267,
+      1364
+    ],
+    "keys_admitted": 1,
+    "keys_encoded": 2,
+    "pacer_frame_window_us": 300000,
+    "pattern": "snow",
+    "rtp_packets": 41,
+    "sent_kbps": 47.5344,
+    "update_interval_ms": 200,
+    "vbv_bits": 12663,
+    "width": 160,
+    "wire_kbps": 75
+  }
+]

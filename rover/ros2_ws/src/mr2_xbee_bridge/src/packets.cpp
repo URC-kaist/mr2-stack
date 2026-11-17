@@ -624,4 +624,13 @@ std::optional<BaseRtcmFrag> decode_base_rtcm_frag(const Frame &frame) {
   return frag;
 }
 
+std::vector<uint8_t> encode_video_packet(uint8_t seq, const std::vector<uint8_t> & packet) {
+  if (packet.size() != 27 || packet[0] != uint8_t(MsgId::kVideoState)) return {};
+  std::vector<uint8_t> bytes{kMagic, packet[0], uint8_t(packet.size() - 1), seq};
+  bytes.insert(bytes.end(), packet.begin() + 1, packet.end());
+  const auto crc = crc16_ccitt_false(bytes.data(), bytes.size());
+  bytes.push_back(crc & 255); bytes.push_back(crc >> 8);
+  return bytes;
+}
+
 }  // namespace mr2_xbee_bridge

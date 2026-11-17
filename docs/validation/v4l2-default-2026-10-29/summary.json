@@ -1,0 +1,48 @@
+{
+  "rollback": {
+    "removed_rgbd_ros_topic_override": true,
+    "removed_forced_6fps_stream_limit": true,
+    "json_source": "v4l2 /dev/videoRGBD",
+    "json_capture_fps": 30,
+    "autonomy_default": "off",
+    "realsense_ros_default": "follows autonomy (off)",
+    "localization_default": "follows autonomy (off)",
+    "explicit_autonomy_mode": "keeps existing ROS sensor configuration; disables direct RGBD video to avoid ownership conflict",
+    "field_ip_defaults_changed": false
+  },
+  "verification": {
+    "launch_tests_passed": 29,
+    "camera_capture_fps": 30,
+    "no_realsense_ros_or_yolo_process": true,
+    "direct_children": [
+      "  54257 robot_state_pub",
+      "  54259 static_joint_st",
+      "  54261 ros2_control_no",
+      "  54263 battery_monitor",
+      "  54265 battery_monitor",
+      "  54267 system_status",
+      "  54269 servo_node_main",
+      "  54272 xbee_bridge_nod",
+      "  54290 video_streaming",
+      "  54308 python3",
+      "  54319 relay",
+      "  54324 relay",
+      "  54331 led_can_node",
+      "  54354 camera_turret_c",
+      "  54358 mission_status_",
+      "  54368 static_joint_st",
+      "  54406 ublox_dgnss_nod",
+      "  54417 ublox_nav_sat_f",
+      "  54627 ublox_dgnss_nod",
+      "  54629 ublox_nav_sat_f"
+    ],
+    "browser_passed": true,
+    "browser_rgbd_fps": 29.885057471264364,
+    "browser_rgbd_sizes": [
+      "480x360"
+    ],
+    "browser_test_budget": "temporarily set RGBD priority high; restored original priority afterward",
+    "output_rate_and_size": "still adapt to GCC budget"
+  },
+  "test_processes": "started by assistant for verification; stopped afterward"
+}

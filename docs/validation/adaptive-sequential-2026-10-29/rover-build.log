@@ -1,0 +1,9 @@
+Starting >>> mr2_video_streaming
+Starting >>> mr2_xbee_bridge
+[Processing: mr2_video_streaming, mr2_xbee_bridge]
+Finished <<< mr2_video_streaming [44.3s]
+Starting >>> mr2_launch
+Finished <<< mr2_launch [3.31s]
+Finished <<< mr2_xbee_bridge [52.6s]
+
+Summary: 3 packages finished [53.7s]

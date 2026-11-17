@@ -25,7 +25,8 @@
         "label": "RGB-D Cam",
         "panel": "autonomy",
         "order": 1
-      }
+      },
+      "priority": "low"
     },
     {
       "stream_id": "top_cam",
@@ -51,7 +52,8 @@
         "label": "Top Cam",
         "panel": "delivery",
         "order": 3
-      }
+      },
+      "priority": "low"
     },
     {
       "stream_id": "front_left_cam",
@@ -77,7 +79,8 @@
         "label": "Front Left",
         "panel": "delivery",
         "order": 4
-      }
+      },
+      "priority": "high"
     },
     {
       "stream_id": "front_right_cam",
@@ -103,7 +106,8 @@
         "label": "Front Right",
         "panel": "delivery",
         "order": 5
-      }
+      },
+      "priority": "high"
     },
     {
       "stream_id": "left_cam",
@@ -129,7 +133,8 @@
         "label": "Left",
         "panel": "delivery",
         "order": 6
-      }
+      },
+      "priority": "low"
     },
     {
       "stream_id": "right_cam",
@@ -155,7 +160,8 @@
         "label": "Right",
         "panel": "delivery",
         "order": 7
-      }
+      },
+      "priority": "low"
     },
     {
       "stream_id": "arm_cam",
@@ -181,7 +187,8 @@
         "label": "Arm",
         "panel": "delivery",
         "order": 8
-      }
+      },
+      "priority": "low"
     },
     {
       "stream_id": "gripper_cam",
@@ -207,7 +214,8 @@
         "label": "Gripper",
         "panel": "delivery",
         "order": 9
-      }
+      },
+      "priority": "low"
     },
     {
       "stream_id": "science_left_cam",
@@ -233,7 +241,8 @@
         "label": "Science Left",
         "panel": "science",
         "order": 11
-      }
+      },
+      "priority": "low"
     },
     {
       "stream_id": "left_beaker_cam",
@@ -259,7 +268,8 @@
         "label": "Left Beaker",
         "panel": "science",
         "order": 13
-      }
+      },
+      "priority": "low"
     },
     {
       "stream_id": "microscope_cam",
@@ -285,7 +295,8 @@
         "label": "Microscope",
         "panel": "science",
         "order": 14
-      }
+      },
+      "priority": "low"
     },
     {
       "stream_id": "science_right_cam",
@@ -311,7 +322,8 @@
         "label": "Science Right",
         "panel": "science",
         "order": 15
-      }
+      },
+      "priority": "low"
     },
     {
       "stream_id": "right_beaker_cam",
@@ -337,7 +349,8 @@
         "label": "Right Beaker",
         "panel": "science",
         "order": 16
-      }
+      },
+      "priority": "low"
     }
   ]
 }

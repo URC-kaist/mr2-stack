@@ -1,0 +1,6 @@
+Starting >>> mr2_can_hardware_interface
+Starting >>> mr2_devices_robstride
+Finished <<< mr2_can_hardware_interface [0.47s]
+Finished <<< mr2_devices_robstride [0.58s]
+
+Summary: 2 packages finished [1.44s]

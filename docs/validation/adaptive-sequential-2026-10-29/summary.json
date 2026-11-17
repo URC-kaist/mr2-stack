@@ -1,0 +1,69 @@
+{
+  "passed": true,
+  "allocation_combinations": 100000,
+  "gateway_tests_each_host": 119,
+  "cpp_tests": 3,
+  "node_phases": 17,
+  "real_browser_phases": 8,
+  "real_cameras": 5,
+  "field_defaults_changed": false,
+  "test_caps_removed": true,
+  "sender_ingest_to_send_ms": {
+    "samples": 4570,
+    "p50": 41.089,
+    "p95": 128.008,
+    "max": 331.693
+  },
+  "final_streams": [
+    {
+      "stream_id": "rgbd_camera",
+      "priority": "low",
+      "enabled": true,
+      "available": true,
+      "width": 640,
+      "height": 480,
+      "fps": 30,
+      "bitrate_kbps": 1530
+    },
+    {
+      "stream_id": "front_left_cam",
+      "priority": "high",
+      "enabled": true,
+      "available": true,
+      "width": 640,
+      "height": 360,
+      "fps": 30,
+      "bitrate_kbps": 1530
+    },
+    {
+      "stream_id": "front_right_cam",
+      "priority": "high",
+      "enabled": true,
+      "available": true,
+      "width": 640,
+      "height": 360,
+      "fps": 30,
+      "bitrate_kbps": 1530
+    },
+    {
+      "stream_id": "left_cam",
+      "priority": "low",
+      "enabled": true,
+      "available": true,
+      "width": 640,
+      "height": 360,
+      "fps": 30,
+      "bitrate_kbps": 1530
+    },
+    {
+      "stream_id": "right_cam",
+      "priority": "low",
+      "enabled": true,
+      "available": true,
+      "width": 640,
+      "height": 360,
+      "fps": 30,
+      "bitrate_kbps": 1530
+    }
+  ]
+}

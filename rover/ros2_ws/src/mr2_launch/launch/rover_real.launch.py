@@ -1,7 +1,12 @@
+from mr2_launch.clock_guard import video_base_host_default
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, SetEnvironmentVariable, TimerAction
+from launch.actions import (
+    ExecuteProcess,
+    OpaqueFunction,
+    IncludeLaunchDescription,
+    TimerAction,
+)
 from launch.conditions import IfCondition
-from launch.actions import ExecuteProcess
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import (
     EnvironmentVariable,
@@ -12,10 +17,23 @@ from launch.substitutions import (
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 from mr2_launch.env import load_mr2_env
+from mr2_launch.profile import profile_arguments
+from mr2_launch.clock_guard import acquire_clock
 
 
 def generate_launch_description():
+    DeclareLaunchArgument = profile_arguments("real")
     load_mr2_env(required=["MR2_BASE_IP"])
+
+    enable_gnss_arg = DeclareLaunchArgument(
+        "enable_gnss", default_value="true",
+        description="Start the wrapper's two GNSS receivers and NavSat relays",
+    )
+
+    enable_realsense_arg = DeclareLaunchArgument(
+        "enable_realsense", default_value=LaunchConfiguration("enable_autonomous_module"),
+        description="Start RealSense ROS hardware; defaults to the autonomous module setting",
+    )
 
     # Optional manual datum setter for navsat_transform if base survey-in message
     # is not available on the rover network. Disabled by default.
@@ -52,10 +70,20 @@ def generate_launch_description():
         default_value="true",
         description="Run without GUI components (disables RViz)",
     )
+    control_backend_arg = DeclareLaunchArgument(
+        "control_backend", default_value="ros2_control",
+        choices=["ros2_control", "mr2_control"],
+        description="Real actuator runtime (simulation uses ros2_control)",
+    )
     controller_config_arg = DeclareLaunchArgument(
         "controller_config",
         default_value=PathJoinSubstitution(
-            [FindPackageShare("mr2_rover_description"), "config", "controllers", "rover_controllers.yaml"]
+            [
+                FindPackageShare("mr2_rover_description"),
+                "config",
+                "controllers",
+                "rover_controllers.yaml",
+            ]
         ),
         description="Controller manager YAML shared by sim and hardware",
     )
@@ -64,6 +92,11 @@ def generate_launch_description():
         default_value="10.0",
         description="Delay (seconds) before spawning ros2_control controllers",
     )
+    actuator_arg = DeclareLaunchArgument(
+        "actuator", default_value="custom", choices=["custom", "rs"],
+        description="Drive wheel motors: custom firmware or RobStride RS-06",
+    )
+
     can_iface_arg = DeclareLaunchArgument(
         "can_iface",
         default_value="can0",
@@ -81,27 +114,36 @@ def generate_launch_description():
     )
     enable_autonomous_module_arg = DeclareLaunchArgument(
         "enable_autonomous_module",
-        default_value="true",
-        description="Enable autonomous module: launch RealSense RGB-D, the UVC front_camera, and autonomous perception/navigation",
+        default_value="false",
+        description=(
+            "Enable autonomous module: launch RealSense RGB-D, the UVC "
+            "front_camera, and autonomous perception/navigation"
+        ),
     )
     enable_science_module_arg = DeclareLaunchArgument(
         "enable_science_module",
         default_value="false",
-        description="Enable science module: start science CAN controls and the direct V4L2 panorama capture action server for /dev/videoSCIENCEFRONT",
+        description=(
+            "Enable science module: start science CAN controls and the direct "
+            "V4L2 panorama capture action server for /dev/videoSCIENCEFRONT"
+        ),
     )
     panorama_stale_goal_timeout_arg = DeclareLaunchArgument(
         "panorama_stale_goal_timeout_sec",
         default_value="60.0",
-        description="Seconds before a new panorama goal may replace a stale active goal after client disconnect",
+        description=(
+            "Seconds before a new panorama goal may replace a stale active goal "
+            "after client disconnect"
+        ),
     )
     enable_video_streaming_arg = DeclareLaunchArgument(
         "enable_video_streaming",
-        default_value="false",
+        default_value="true",
         description="Start the rover H.264 RTP/UDP video streaming node",
     )
     video_base_host_arg = DeclareLaunchArgument(
         "video_base_host",
-        default_value=EnvironmentVariable("MR2_BASE_IP"),
+        default_value=video_base_host_default(),
         description="Base-station host/IP for rover RTP/UDP video streams",
     )
     video_config_arg = DeclareLaunchArgument(
@@ -135,6 +177,11 @@ def generate_launch_description():
         "enable_xbee_sim",
         default_value="false",
         description="Start socat to emulate a XBEE serial port pair in real mode",
+    )
+    enable_latency_diagnostics_arg = DeclareLaunchArgument(
+        "enable_latency_diagnostics",
+        default_value="false",
+        description="Publish experimental command and motion latency traces",
     )
     xbee_sim_device_arg = DeclareLaunchArgument(
         "xbee_sim_device",
@@ -182,7 +229,10 @@ def generate_launch_description():
     rtcm_input_topic_arg = DeclareLaunchArgument(
         "rtcm_input_topic",
         default_value="/base/rtcm",
-        description="Topic providing RTCM corrections for rover F9Ps (set to /ntrip_client/rtcm to use NTRIP)",
+        description=(
+            "Topic providing RTCM corrections for rover F9Ps (set to "
+            "/ntrip_client/rtcm to use NTRIP)"
+        ),
     )
     enable_ntrip_arg = DeclareLaunchArgument(
         "enable_ntrip",
@@ -280,6 +330,7 @@ def generate_launch_description():
                 [FindPackageShare("mr2_launch"), "launch", "realsense_rgbd.launch.py"]
             )
         ),
+        condition=IfCondition(LaunchConfiguration("enable_realsense")),
         launch_arguments={
             "camera_name": "rgbd_camera",
             "camera_namespace": "",
@@ -376,12 +427,16 @@ def generate_launch_description():
             )
         ),
         launch_arguments={
+            # This wrapper already owns both GNSS receivers and relays.
+            "gnss_managed_externally": "true",
             "mode": "real",
             "rviz_config": LaunchConfiguration("rviz_config"),
             "headless": LaunchConfiguration("headless"),
             "controller_config": LaunchConfiguration("controller_config"),
+            "control_backend": LaunchConfiguration("control_backend"),
             "controller_spawn_delay": LaunchConfiguration("controller_spawn_delay"),
             "can_iface": LaunchConfiguration("can_iface"),
+            "actuator": LaunchConfiguration("actuator"),
             "use_mock_servos": LaunchConfiguration("use_mock_servos"),
             "enable_manipulator_module": LaunchConfiguration("enable_manipulator_module"),
             "enable_autonomous_module": LaunchConfiguration("enable_autonomous_module"),
@@ -389,6 +444,7 @@ def generate_launch_description():
             "xbee_device": LaunchConfiguration("xbee_device"),
             "xbee_sim_device": LaunchConfiguration("xbee_sim_device"),
             "xbee_sim_peer": LaunchConfiguration("xbee_sim_peer"),
+            "enable_latency_diagnostics": LaunchConfiguration("enable_latency_diagnostics"),
             "enable_aruco": LaunchConfiguration("enable_autonomous_module"),
             "aruco_cam_topic": "/front_camera/image_raw",
             "enable_video_streaming": LaunchConfiguration("enable_video_streaming"),
@@ -436,11 +492,13 @@ def generate_launch_description():
     ublox_left_launch_delayed = TimerAction(
         period=0.0,
         actions=[ublox_left_launch],
+        condition=IfCondition(LaunchConfiguration("enable_gnss")),
     )
 
     ublox_right_launch_delayed = TimerAction(
         period=3.0,
         actions=[ublox_right_launch],
+        condition=IfCondition(LaunchConfiguration("enable_gnss")),
     )
 
     left_navsat_relay = Node(
@@ -449,6 +507,7 @@ def generate_launch_description():
         name="left_gnss_navsat_relay",
         output="screen",
         arguments=["/left_gnss/fix", "/left_gnss/navsat"],
+        condition=IfCondition(LaunchConfiguration("enable_gnss")),
     )
 
     right_navsat_relay = Node(
@@ -457,6 +516,7 @@ def generate_launch_description():
         name="right_gnss_navsat_relay",
         output="screen",
         arguments=["/right_gnss/fix", "/right_gnss/navsat"],
+        condition=IfCondition(LaunchConfiguration("enable_gnss")),
     )
 
     led_node = Node(
@@ -503,6 +563,7 @@ def generate_launch_description():
         executable="static_joint_state_publisher",
         name="passive_rocker_joint_state",
         output="screen",
+        condition=IfCondition(LaunchConfiguration("enable_manipulator_module")),
         parameters=[
             {"joint_names": ["left_rocker_joint"]},
             {"positions": [0.0]},
@@ -541,22 +602,27 @@ def generate_launch_description():
 
     return LaunchDescription(
         [
+            OpaqueFunction(function=acquire_clock),
+            enable_autonomous_module_arg,
+            enable_realsense_arg,
             set_manual_datum_arg,
             datum_lat_arg,
             datum_lon_arg,
             datum_alt_arg,
             rviz_arg,
             headless_arg,
+            control_backend_arg,
             controller_config_arg,
             controller_spawn_delay_arg,
             can_iface_arg,
+            actuator_arg,
             use_mock_servos_arg,
             enable_manipulator_module_arg,
             enable_xbee_sim_arg,
+            enable_latency_diagnostics_arg,
             xbee_sim_device_arg,
             xbee_sim_peer_arg,
             xbee_device_arg,
-            enable_autonomous_module_arg,
             enable_science_module_arg,
             panorama_stale_goal_timeout_arg,
             enable_video_streaming_arg,
@@ -567,6 +633,7 @@ def generate_launch_description():
             yolo_publish_annotated_arg,
             yolo_annotated_fps_arg,
             left_gnss_serial_arg,
+            enable_gnss_arg,
             right_gnss_serial_arg,
             left_gnss_frame_arg,
             right_gnss_frame_arg,
@@ -593,6 +660,8 @@ def generate_launch_description():
             panorama_server,
             science_module_launch,
             ntrip_client_launch,
+            # Humble timers resolve launch configurations after this inclusion.
+            # Keep them available; a separate ownership flag prevents duplicate GNSS.
             rover_launch,
             ublox_left_launch_delayed,
             ublox_right_launch_delayed,

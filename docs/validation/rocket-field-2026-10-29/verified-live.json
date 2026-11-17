@@ -1,0 +1,56 @@
+{
+  "xbee_device": "/dev/ttyXBEE",
+  "mavproxy_enabled": false,
+  "field_targets": [
+    {
+      "target": "base",
+      "label": "Base",
+      "ip": "192.168.1.100"
+    },
+    {
+      "target": "drone",
+      "label": "Drone",
+      "ip": "192.168.1.103"
+    },
+    {
+      "target": "rover",
+      "label": "Rover",
+      "ip": "192.168.1.106"
+    }
+  ],
+  "checks": [
+    {
+      "ip": "192.168.1.100",
+      "target": "base",
+      "connected": true,
+      "signal": -24,
+      "noise": -92,
+      "error": null
+    },
+    {
+      "ip": "192.168.1.106",
+      "target": "rover",
+      "connected": true,
+      "signal": -26,
+      "noise": -92,
+      "error": null
+    },
+    {
+      "ip": "192.168.0.244",
+      "target": "base",
+      "connected": true,
+      "signal": -26,
+      "noise": -92,
+      "error": null
+    },
+    {
+      "ip": "192.168.0.245",
+      "target": "rover",
+      "connected": true,
+      "signal": -25,
+      "noise": -92,
+      "error": null
+    }
+  ],
+  "passed": true
+}

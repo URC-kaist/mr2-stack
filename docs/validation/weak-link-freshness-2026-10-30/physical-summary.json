@@ -1,0 +1,49 @@
+{
+  "requested_s": 120,
+  "observed_s": 119.008026235,
+  "normal_commands": true,
+  "physical_xbee": true,
+  "serial": {
+    "rover": "/dev/ttyXBEE -> ttyUSB0",
+    "base": "/dev/ttyXBEE -> ttyUSB1"
+  },
+  "acceptance": "four functioning cameras passed; five-camera assertion failed on Left USB camera",
+  "test_error": "AssertionError [ERR_ASSERTION]: Feed did not render continuously at end: left_cam\n    at main (/tmp/mr2-weak-link/physical/observe.cjs:54:27)",
+  "ui_samples": 120,
+  "ui_clock_sync_samples": 0,
+  "frame_rates_final_20s": {
+    "front_left_cam": 28.891751794901214,
+    "front_right_cam": 29.091694713897073,
+    "rgbd_camera": 29.94145211962946,
+    "right_cam": 28.94173752465018
+  },
+  "last_quality": {
+    "RGB-D Cam": "640\u00d7480 \u00b7 30.0 FPS",
+    "Top Cam": "\u2014 \u00b7 0 FPS",
+    "Front Left": "640\u00d7360 \u00b7 30.0 FPS",
+    "Front Right": "640\u00d7360 \u00b7 31.0 FPS",
+    "Left": "\u2014 \u00b7 0 FPS",
+    "Right": "640\u00d7360 \u00b7 30.0 FPS",
+    "Arm": "\u2014 \u00b7 0 FPS",
+    "Gripper": "\u2014 \u00b7 0 FPS",
+    "Science Left": "\u2014 \u00b7 0 FPS",
+    "Left Beaker": "\u2014 \u00b7 0 FPS",
+    "Microscope": "\u2014 \u00b7 0 FPS",
+    "Science Right": "\u2014 \u00b7 0 FPS",
+    "Right Beaker": "\u2014 \u00b7 0 FPS"
+  },
+  "last_budget_kbps": 7200,
+  "stable_matched_frames": 7720,
+  "source_to_canvas_ms": {
+    "p50": 28.669,
+    "p95": 45.439
+  },
+  "final_ui_delay": [
+    "2.2 ms",
+    "6.6 ms",
+    "0.2 ms",
+    "1.6 ms"
+  ],
+  "rf_attenuation_injected": false,
+  "notes": "Stable source-to-canvas samples are after 60 s from first browser frame. Excludes sensor/USB input and physical monitor scanout. Measured before the final pause-watchdog hardening."
+}

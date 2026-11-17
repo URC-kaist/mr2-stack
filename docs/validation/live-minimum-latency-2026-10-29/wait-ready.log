@@ -1,0 +1,9 @@
+{"at_s": 0.039943979999975454, "offset_ms": 0.046046, "bound_ms": 4.631957, "peer_ready": false, "stable": 0}
+{"at_s": 10.269900978999999, "offset_ms": 0.092069, "bound_ms": 1.714156, "peer_ready": true, "stable": 2}
+{"at_s": 20.503344104999996, "offset_ms": 0.122561, "bound_ms": 2.039585, "peer_ready": true, "stable": 0}
+{"at_s": 30.74034816699998, "offset_ms": 0.084094, "bound_ms": 2.147647, "peer_ready": false, "stable": 0}
+{"at_s": 40.977207438999926, "offset_ms": 0.08569700000000001, "bound_ms": 2.275296, "peer_ready": false, "stable": 0}
+{"at_s": 51.214432912999996, "offset_ms": 0.03031, "bound_ms": 2.306253, "peer_ready": false, "stable": 0}
+{"at_s": 61.46415613800002, "offset_ms": 0.006562, "bound_ms": 2.4924679999999997, "peer_ready": false, "stable": 0}
+{"at_s": 71.71450847899996, "offset_ms": 0.013195, "bound_ms": 1.3879944999999998, "peer_ready": true, "stable": 4}
+READY: five consecutive checks within 2 ms

@@ -151,12 +151,73 @@ the gateway so `rclnodejs` can initialize correctly.
 
 ## Running
 
+From a fresh base terminal, the wrapper loads ROS, the workspace, and the
+repository's Node version before forwarding gateway arguments:
+
+```bash
+bash ~/mr2-stack/scripts/start_chrony_base.sh \
+  --latency-diagnostics-enable true \
+  --latency-public-base-url http://192.168.0.62
+```
+
+Use the base's current address (field default: `192.168.1.101`). If SiK is
+disconnected, add `--mavproxy-enable false` for that run.
+
+If startup reports a missing `ublox_ubx_msgs/msg/UBXNavSvin` or
+`rtcm_msgs/msg/Message` despite those ROS packages being installed, regenerate
+the JavaScript bindings with the workspace sourced and the gateway stopped:
+
+```bash
+source /opt/ros/humble/setup.bash
+source ~/mr2-stack/rover/ros2_ws/install/setup.bash
+cd ~/mr2-stack/base/gateway
+node -e 'require("rclnodejs").regenerateAll().catch(error => { console.error(error); process.exitCode = 1 })'
+```
+
+This is needed when bindings were generated before the workspace was sourced;
+the on-demand loader may miss message files in symlink installations.
+
 Minimal example:
 
 ```bash
 cd base/gateway
 npm start -- --base-xbee-device /dev/ttyXBEE --gateway-port 8081
 ```
+
+These values are already defaults, so `npm start` is sufficient on base. The
+legacy `/dev/XBEE` spelling also works when only `/dev/ttyXBEE` exists.
+Field addresses remain in `.env`: base `192.168.1.101`, rover `192.168.1.102`,
+base Rocket `192.168.1.100`, rover Rocket `192.168.1.106`, drone `192.168.1.103`.
+For another network, override addresses only for that run, for example:
+
+```bash
+npm start -- \
+  --rover-host 192.168.0.57 \
+  --base-rocket 192.168.0.244 \
+  --rover-rocket 192.168.0.245 \
+  --drone-rocket ''
+```
+
+`--rover-host` selects the ROS WebSocket upstream through the gateway and nginx;
+no nginx IP edit or dashboard rebuild is needed when changing networks. An
+explicit empty Rocket IP omits that radio for this run. The matching rover
+launch needs `video_base_host:=192.168.0.55` on this example network; the clock
+lease uses the same explicit base for that launch only.
+
+Rover-local direct operation:
+
+```bash
+cd base/gateway
+npm start -- \
+  --gateway-profile rover-direct \
+  --base-xbee-device /tmp/mr2_xbee_gateway \
+  --gateway-host 127.0.0.1
+```
+
+The `rover-direct` profile keeps the XBEE and video WebSocket services. Its
+defaults bind to loopback, use the local xbeesim PTY, and disable MAVProxy,
+antenna tracking, Rocket M2 auto-enable, and the base GNSS/RTCM topic relay.
+Explicit CLI settings still override profile defaults.
 
 Example with antenna tracking enabled:
 
@@ -184,7 +245,10 @@ npm start -- \
 The base station needs a GStreamer runtime with `gst-launch-1.0`, `rtph264depay`,
 `h264parse`, and `fdsink` available.
 
-MAVProxy starts with the gateway by default:
+XBee is the default 900 MHz control link (`/dev/ttyXBEE`). MAVProxy is disabled
+by default. Enable the separate SiK/MAVLink path only when that device is used,
+with `--mavproxy-enable true`. Do not point MAVProxy at the XBee control device.
+When enabled, its default command is:
 
 ```bash
 mavproxy.py --master=/dev/ttySIK,57600 --out=udp:192.168.1.108:14550 --default-modules= --non-interactive
@@ -211,17 +275,23 @@ values such as `MR2_GATEWAY_HOST`, `MR2_GATEWAY_PORT`, and
 
 | CLI flag | Environment variable | Default |
 | --- | --- | --- |
+| `--gateway-profile` | `MR2_GATEWAY_PROFILE` | `base` |
 | `--base-xbee-device` | `BASE_XBEE_DEVICE` | `/dev/ttyXBEE` |
 | `--gateway-host` | `MR2_GATEWAY_HOST` | `0.0.0.0` |
 | `--gateway-port` | `MR2_GATEWAY_PORT` | `8081` |
 | `--base-xbee-heartbeat-hz` | `BASE_XBEE_HEARTBEAT_HZ` | `2` |
 | `--base-xbee-link-timeout-ms` | `BASE_XBEE_LINK_TIMEOUT_MS` | `2000` |
+| `--ros-topic-relay-enable` | `BASE_ROS_TOPIC_RELAY_ENABLE` | `true` |
+
+For `rover-direct`, the profile defaults change the XBEE device to
+`/tmp/mr2_xbee_gateway`, the bind host to `127.0.0.1`, and the topic relay to
+`false`.
 
 ### MAVProxy
 
 | CLI flag | Environment variable | Default |
 | --- | --- | --- |
-| `--mavproxy-enable` | `MAVPROXY_ENABLE` | `true` |
+| `--mavproxy-enable` | `MAVPROXY_ENABLE` | `false` |
 | `--mavproxy-binary` | `MAVPROXY_BINARY` | `mavproxy.py` |
 | `--mavproxy-master-device` | `MAVPROXY_MASTER_DEVICE` | `/dev/ttySIK` |
 | `--mavproxy-master-baud` | `MAVPROXY_MASTER_BAUD` | `57600` |
@@ -237,7 +307,9 @@ such as `adsb` being absent from the local Python environment.
 | CLI flag | Environment variable | Default |
 | --- | --- | --- |
 | `--video-config` | `VIDEO_CONFIG_PATH` | `rover/ros2_ws/src/mr2_launch/config/video_streams.json` |
-| `--video-gst-binary` | `VIDEO_GST_BINARY` | `gst-launch-1.0` |
+| `--video-gst-binary` | `VIDEO_GST_BINARY` | workspace `mr2_video_streaming/lib/mr2_video_streaming/video_receiver` |
+| `--video-initial-kbps` | `VIDEO_INITIAL_KBPS` | `3000` |
+| `--video-max-kbps` | `VIDEO_MAX_KBPS` | `0` (sum of configured maxima) |
 | `--video-jitter-ms` | `VIDEO_JITTER_LATENCY_MS` | `40` |
 | `--video-restart-ms` | `VIDEO_RECEIVER_RESTART_MS` | `1000` |
 | `--video-client-max-buffered-bytes` | `VIDEO_CLIENT_MAX_BUFFERED_BYTES` | `1048576` |
@@ -262,18 +334,24 @@ such as `adsb` being absent from the local Python environment.
 
 ### Rocket M2 Polling
 
+The following IPs are supplied by the checked-in field environment; the parser
+itself leaves an unset radio IP empty. `/rosbridge-ws` uses `--rover-host` /
+`MR2_ROVER_IP` (fallback `192.168.1.102`).
+
 | CLI flag | Environment variable | Default |
 | --- | --- | --- |
 | `--rocket-m2-enable` | `ROCKET_M2_ENABLE` | `false` |
-| `--base-rocket-m2-ip` | `MR2_BASE_ROCKET_IP` | empty |
-| `--drone-rocket-m2-ip` | `MR2_DRONE_ROCKET_IP` | empty |
-| `--rover-rocket-m2-ip` | `MR2_ROVER_ROCKET_IP` | empty |
+| `--base-rocket` | `MR2_BASE_ROCKET_IP` | empty |
+| `--drone-rocket` | `MR2_DRONE_ROCKET_IP` | empty |
+| `--rover-rocket` | `MR2_ROVER_ROCKET_IP` | empty |
 | `--rocket-m2-user` | `ROCKET_M2_USER` | empty |
 | `--rocket-m2-pass` | `ROCKET_M2_PASS` | empty |
 | `--rocket-m2-poll-ms` | `ROCKET_M2_POLL_MS` | `5000` |
 | `--rocket-m2-timeout-ms` | `ROCKET_M2_TIMEOUT_MS` | `4000` |
 
-Rocket M2 polling auto-enables if IP, user, and password are configured.
+Rocket M2 polling auto-enables if IP, user, and password are configured in the
+base profile. The `rover-direct` profile disables this credential-based
+auto-enable.
 
 ## Socket Interface
 
@@ -298,6 +376,35 @@ Clients connect to the same HTTP server port configured by `--gateway-port`.
 
 - Path: `/video/streams`
 - Content: JSON stream definitions derived from the central `video_streams.json` file
+
+### Latency Clock Endpoint
+
+- Path: `/latency/time`
+- Content: no-cache gateway receive/send epoch timestamps used for NTP-style
+  browser-to-base clock-offset sampling
+
+### Chrony Status Endpoint
+
+- Path: `/latency/clock-status`
+- Content: no-cache, read-only base `chronyc -n tracking` status
+- Runtime requirement: the `chronyc` executable and local chronyd command
+  socket; missing/unsynchronized chrony is returned as structured JSON instead
+  of failing the gateway
+
+The endpoint executes only the fixed `chronyc -n tracking` argument list with a
+1.5 second timeout. It cannot start chrony, modify its configuration, or step a
+clock. nginx proxies this endpoint alongside `/latency/time`; chrony's NTP UDP
+port 123 is independent of nginx.
+
+An experimentally tagged `cmd_drive` keeps the normal 16-byte XBEE payload.
+The gateway broadcasts a JSON `latency_trace` mapping the dashboard `trial_id`
+to the encoded `(xbee_seq, wire_timestamp_ms)` key. Untagged commands and the
+XBEE wire protocol are unchanged.
+
+Rocket M2 video-link latency uses matched rover/base RTP captures. The
+dashboard can create and run these trials through `/latency/uplink/trials` when
+the `MR2_LATENCY_*` settings documented in `scripts/latency/README.md` are
+configured. This does not change the gateway video wire format.
 
 ### Dashboard -> Gateway
 
@@ -328,6 +435,8 @@ Clients connect to the same HTTP server port configured by `--gateway-port`.
   Fields: `enabled`, `antenna_ready`, `auto_home`, `heading_offset_deg`, `base_lat_deg`, `base_lon_deg`, `base_alt_m`, `antenna_heading_deg`, `last_cmd_heading_deg`, `last_cmd_age_ms`, `base_fix_age_ms`, `rover_nav_age_ms`, `base_fix_valid`, `rover_nav_valid`, `idle_reason`
 - `rocket_m2_status`
   Fields: `target` (`base`, `drone`, or `rover`), `label`, `connected`, `updated_at_ms`, `last_success_ms`, `signal`, `rssi`, `noisef`, `chwidth`, `rx_chainmask`, `chainrssi`, `chainrssimgmt`, `chainrssiext`, `error`
+- `latency_trace` (only for a dashboard-tagged experiment command)
+  Fields: `trial_id`, `client_tx_epoch_us`, `gateway_rx_epoch_us`, `xbee_seq`, `wire_timestamp_ms`
 
 Notes:
 
@@ -336,6 +445,20 @@ Notes:
   becomes `false` if no heartbeat is received within `BASE_XBEE_LINK_TIMEOUT_MS`.
 
 ## HTTP Endpoints
+
+### `/latency/uplink/trials`
+
+- `POST /latency/uplink/trials`: create one validated trial
+- `POST /latency/uplink/trials/<id>/start`: start base capture and issue rover upload credentials
+- `PUT /latency/uplink/trials/<id>/rover-metadata`: upload rover capture metadata
+- `PUT /latency/uplink/trials/<id>/rover-capture`: stream the rover pcap
+- `POST /latency/uplink/trials/<id>/browser-samples`: upload correlated browser receive/render samples
+- `GET /latency/uplink/trials/<id>`: read progress and the completed report
+- `DELETE /latency/uplink/trials/<id>`: cancel and clean up the active capture
+
+Only one Uplink trial can be active. Uploads require the per-trial bearer token,
+explicit content length/type, and remain bounded by
+`MR2_LATENCY_MAX_UPLOAD_BYTES`.
 
 ### `GET /rocket-m2/status`
 

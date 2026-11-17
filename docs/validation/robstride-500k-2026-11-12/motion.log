@@ -1,0 +1,6 @@
+initial_zero mean_velocity=-0.0201889 rad/s position=2.8347 rad
+forward mean_velocity=0.188684 rad/s position=2.9797 rad
+zero_between mean_velocity=0.0144961 rad/s position=3.02535 rad
+reverse mean_velocity=-0.194846 rad/s position=2.88841 rad
+final_zero mean_velocity=-0.0105052 rad/s position=2.83547 rad
+PASS motor=127 forward_delta=0.145005 reverse_delta=-0.136949 stop_confirmed=true stop_samples=3 stop_mean_velocity=0.00483202

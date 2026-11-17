@@ -1,0 +1,56 @@
+{
+  "passed": true,
+  "injected_udp_delay_ms": 75,
+  "observations": 2176,
+  "decoded_access_units": 240,
+  "metrics": [
+    {
+      "network_delay_ms": 75.627,
+      "network_delay_p95_ms": 79.165,
+      "queue_delay_ms": 0.6912104959999965,
+      "network_delay_samples": 174
+    },
+    {
+      "network_delay_ms": 75.483,
+      "network_delay_p95_ms": 76.039,
+      "queue_delay_ms": 0.8418303812499914,
+      "network_delay_samples": 269
+    },
+    {
+      "network_delay_ms": 75.389,
+      "network_delay_p95_ms": 76.184,
+      "queue_delay_ms": 0.7889319429999944,
+      "network_delay_samples": 275
+    },
+    {
+      "network_delay_ms": 75.349,
+      "network_delay_p95_ms": 76.081,
+      "queue_delay_ms": 0.7372009135000042,
+      "network_delay_samples": 275
+    },
+    {
+      "network_delay_ms": 75.318,
+      "network_delay_p95_ms": 76.214,
+      "queue_delay_ms": 0.637863671250031,
+      "network_delay_samples": 275
+    },
+    {
+      "network_delay_ms": 75.345,
+      "network_delay_p95_ms": 75.959,
+      "queue_delay_ms": 0.743942883750023,
+      "network_delay_samples": 275
+    },
+    {
+      "network_delay_ms": 75.34,
+      "network_delay_p95_ms": 76.13,
+      "queue_delay_ms": 0.7809029372500618,
+      "network_delay_samples": 275
+    },
+    {
+      "network_delay_ms": 75.273,
+      "network_delay_p95_ms": 76.172,
+      "queue_delay_ms": 0.7702348965000141,
+      "network_delay_samples": 199
+    }
+  ]
+}

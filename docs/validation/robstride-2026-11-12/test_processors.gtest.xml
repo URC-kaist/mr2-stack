@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="7" failures="0" disabled="0" errors="0" time="0.63" timestamp="2026-11-12T23:23:52" name="AllTests">
+  <testsuite name="Drive" tests="2" failures="0" disabled="0" errors="0" time="0" timestamp="2026-11-12T23:23:52">
+    <testcase name="ForwardReverseTimeoutAndSlew" status="run" result="completed" time="0" timestamp="2026-11-12T23:23:52" classname="mr2_control.Drive" />
+    <testcase name="SteeringGateInvalidAndOdom" status="run" result="completed" time="0" timestamp="2026-11-12T23:23:52" classname="mr2_control.Drive" />
+  </testsuite>
+  <testsuite name="Selector" tests="1" failures="0" disabled="0" errors="0" time="0" timestamp="2026-11-12T23:23:52">
+    <testcase name="PreservesSourceAge" status="run" result="completed" time="0" timestamp="2026-11-12T23:23:52" classname="mr2_control.Selector" />
+  </testsuite>
+  <testsuite name="Position" tests="1" failures="0" disabled="0" errors="0" time="0" timestamp="2026-11-12T23:23:52">
+    <testcase name="ActivationOrderAndMalformedInput" status="run" result="completed" time="0" timestamp="2026-11-12T23:23:52" classname="mr2_control.Position" />
+  </testsuite>
+  <testsuite name="Inputs" tests="1" failures="0" disabled="0" errors="0" time="0.049" timestamp="2026-11-12T23:23:52">
+    <testcase name="ConcurrentPayloadAndTimestampRemainCoherent" status="run" result="completed" time="0.049" timestamp="2026-11-12T23:23:52" classname="mr2_control.Inputs" />
+  </testsuite>
+  <testsuite name="Scheduling" tests="2" failures="0" disabled="0" errors="0" time="0.581" timestamp="2026-11-12T23:23:52">
+    <testcase name="SkipsMissedDeadlinesAndStopsCleanly" status="run" result="completed" time="0.551" timestamp="2026-11-12T23:23:52" classname="mr2_control.Scheduling" />
+    <testcase name="ReportsWorkerFailureAndJoins" status="run" result="completed" time="0.03" timestamp="2026-11-12T23:23:53" classname="mr2_control.Scheduling" />
+  </testsuite>
+</testsuites>

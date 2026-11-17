@@ -1,0 +1,178 @@
+{
+  "maxOverflow": 39.75,
+  "passed": false,
+  "failures": [
+    {
+      "width": 1600,
+      "font": 16,
+      "tileWidth": 397.65625,
+      "parts": [
+        {
+          "class": "video-link-body",
+          "left": 348,
+          "right": 748,
+          "width": 400,
+          "height": 225,
+          "overflowRight": 2.34375,
+          "scrollOverflow": 0
+        },
+        {
+          "class": "video-link-plot",
+          "left": 358,
+          "right": 738,
+          "width": 380,
+          "height": 98,
+          "overflowRight": -7.65625,
+          "scrollOverflow": 0
+        },
+        {
+          "class": "",
+          "left": 358,
+          "right": 738,
+          "width": 380,
+          "height": 98,
+          "overflowRight": -7.65625,
+          "scrollOverflow": 0
+        },
+        {
+          "class": "video-link-classes",
+          "left": 358,
+          "right": 738,
+          "width": 380,
+          "height": 70.796875,
+          "overflowRight": -7.65625,
+          "scrollOverflow": 0
+        }
+      ]
+    },
+    {
+      "width": 1920,
+      "font": 16,
+      "tileWidth": 360.25,
+      "parts": [
+        {
+          "class": "video-link-body",
+          "left": 412,
+          "right": 812,
+          "width": 400,
+          "height": 225,
+          "overflowRight": 39.75,
+          "scrollOverflow": 0
+        },
+        {
+          "class": "video-link-plot",
+          "left": 422,
+          "right": 802,
+          "width": 380,
+          "height": 98,
+          "overflowRight": 29.75,
+          "scrollOverflow": 0
+        },
+        {
+          "class": "",
+          "left": 422,
+          "right": 802,
+          "width": 380,
+          "height": 98,
+          "overflowRight": 29.75,
+          "scrollOverflow": 0
+        },
+        {
+          "class": "video-link-classes",
+          "left": 422,
+          "right": 802,
+          "width": 380,
+          "height": 70.796875,
+          "overflowRight": 29.75,
+          "scrollOverflow": 0
+        }
+      ]
+    },
+    {
+      "width": 1600,
+      "font": 20,
+      "tileWidth": 397.65625,
+      "parts": [
+        {
+          "class": "video-link-body",
+          "left": 348,
+          "right": 748,
+          "width": 400,
+          "height": 225,
+          "overflowRight": 2.34375,
+          "scrollOverflow": 0
+        },
+        {
+          "class": "video-link-plot",
+          "left": 358,
+          "right": 738,
+          "width": 380,
+          "height": 98,
+          "overflowRight": -7.65625,
+          "scrollOverflow": 0
+        },
+        {
+          "class": "",
+          "left": 358,
+          "right": 738,
+          "width": 380,
+          "height": 98,
+          "overflowRight": -7.65625,
+          "scrollOverflow": 0
+        },
+        {
+          "class": "video-link-classes",
+          "left": 358,
+          "right": 738,
+          "width": 380,
+          "height": 83.828125,
+          "overflowRight": -7.65625,
+          "scrollOverflow": 0
+        }
+      ]
+    },
+    {
+      "width": 1920,
+      "font": 20,
+      "tileWidth": 360.25,
+      "parts": [
+        {
+          "class": "video-link-body",
+          "left": 412,
+          "right": 812,
+          "width": 400,
+          "height": 225,
+          "overflowRight": 39.75,
+          "scrollOverflow": 0
+        },
+        {
+          "class": "video-link-plot",
+          "left": 422,
+          "right": 802,
+          "width": 380,
+          "height": 98,
+          "overflowRight": 29.75,
+          "scrollOverflow": 0
+        },
+        {
+          "class": "",
+          "left": 422,
+          "right": 802,
+          "width": 380,
+          "height": 98,
+          "overflowRight": 29.75,
+          "scrollOverflow": 0
+        },
+        {
+          "class": "video-link-classes",
+          "left": 422,
+          "right": 802,
+          "width": 380,
+          "height": 83.828125,
+          "overflowRight": 29.75,
+          "scrollOverflow": 0
+        }
+      ]
+    }
+  ]
+}

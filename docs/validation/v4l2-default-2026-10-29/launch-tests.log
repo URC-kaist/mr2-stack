@@ -1,0 +1,7 @@
+.............................                                            [100%]
+=============================== warnings summary ===============================
+test/test_profiles.py::test_explicit_autonomy_restores_ros_owner_and_excludes_direct_rgbd_capture
+  Warning: private variables, such as '_ConstructUnits__ConstructUnitsValue', will be normal attributes in 3.11
+
+-- Docs: https://docs.pytest.org/en/stable/warnings.html
+29 passed, 1 warning in 2.27s

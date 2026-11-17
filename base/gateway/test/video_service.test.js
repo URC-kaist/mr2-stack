@@ -19,8 +19,9 @@ class FakeClient {
     this.handlers.set(event, handler)
   }
 
-  send(payload) {
+  send(payload, callback) {
     this.sent.push(Buffer.from(payload))
+    callback?.()
   }
 
   emitJson(message) {
@@ -96,6 +97,56 @@ function createVideoConfig(overrides = {}) {
     ],
   }
 }
+
+function recoveryFixture() {
+  let time = 0
+  const routeRegistry = createRouteRegistry(), receiverHarness = createReceiverHarness(), requests = []
+  const gateway = createVideoGateway({ WebSocketServerImpl: FakeWebSocketServer,
+    createVideoStreamReceiverImpl: receiverHarness.factory, routeRegistry, videoConfig: createVideoConfig(),
+    now: () => time, requestKeyframe: (id) => requests.push(id), clientMaxBufferedBytes: 4096 })
+  const connect = () => {
+    const c = new FakeClient(); routeRegistry.wss.emit('connection', c)
+    c.emitJson({ type: 'subscribe', stream_id: 'front_nav_cam' }); return c
+  }
+  const picture = (key) => receiverHarness.callbacksByStream.get('front_nav_cam').onAccessUnit('front_nav_cam', {
+    codec: 'avc1.42E01F', key, delta: !key, sps: Buffer.from([0x67, 0x42, 0xe0, 0x1f]),
+    pps: Buffer.from([0x68, 0xce, 0x38, 0x80]), payload: Buffer.from([0, 0, 0, 1, key ? 0x65 : 0x41, 0xe0]),
+    timestamp_us: 1000 + time * 1000 })
+  return { gateway, connect, picture, requests, advance: (ms) => { time += ms } }
+}
+
+test('late viewers wait for a fresh IDR instead of replaying an incomplete GOP', () => {
+  const f = recoveryFixture()
+  f.picture(true); f.picture(false)
+  const c = f.connect()
+  assert.equal(c.sent.length, 0)
+  assert.equal(f.requests.length, 1)
+  f.picture(false); assert.equal(c.sent.length, 0)
+  f.picture(true); assert.equal(c.sent.length, 2)
+  f.gateway.stop()
+})
+
+test('backpressure resumes at a fresh IDR without skipping its reference chain', () => {
+  const f = recoveryFixture(), c = f.connect()
+  f.picture(true); assert.equal(c.sent.length, 2)
+  c.bufferedAmount = 5000; f.picture(false)
+  c.bufferedAmount = 0; f.picture(false); assert.equal(c.sent.length, 2)
+  f.picture(true); assert.equal(c.sent.length, 3)
+  f.picture(false); assert.equal(c.sent.length, 4)
+  assert.equal(c.terminated, false)
+  f.gateway.stop()
+})
+
+test('a stalled TCP write is discarded by age even when it is below the byte cap', () => {
+  const f = recoveryFixture(), c = f.connect()
+  c.send = (payload) => { c.sent.push(Buffer.from(payload)); c.bufferedAmount += payload.length }
+  f.picture(true)
+  assert(c.bufferedAmount < 4096)
+  f.advance(151); f.picture(false)
+  assert.equal(c.terminated, true)
+  assert.equal(c.sent.length, 2)
+  f.gateway.stop()
+})
 
 test('video gateway drops non-picture access units and re-sends config after restart', () => {
   const routeRegistry = createRouteRegistry()
@@ -272,5 +323,38 @@ test('video gateway preserves configured display dimensions separately from enco
   assert.equal(stream.encoded_width, 640)
   assert.equal(stream.encoded_height, 480)
 
+  gateway.stop()
+})
+
+test('video gateway sends timed chunks when an access unit has RTP marker metadata', () => {
+  const routeRegistry = createRouteRegistry()
+  const receiverHarness = createReceiverHarness()
+  const gateway = createVideoGateway({
+    WebSocketServerImpl: FakeWebSocketServer,
+    createVideoStreamReceiverImpl: receiverHarness.factory,
+    routeRegistry,
+    videoConfig: createVideoConfig(),
+  })
+  const client = new FakeClient()
+  routeRegistry.wss.emit('connection', client)
+  client.emitJson({ type: 'subscribe', stream_id: 'front_nav_cam' })
+  const receiver = receiverHarness.callbacksByStream.get('front_nav_cam')
+  receiver.onAccessUnit('front_nav_cam', {
+    codec: 'avc1.42E01F',
+    correlation: { marker_sequence: 9, rtp_timestamp: 90000, ssrc: 42 },
+    delta: false,
+    key: true,
+    payload: Buffer.from([0x00, 0x00, 0x00, 0x01, 0x65, 0xe0]),
+    pps: Buffer.from([0x68, 0xce, 0x38, 0x80]),
+    sps: Buffer.from([0x67, 0x42, 0xe0, 0x1f]),
+    timestamp_us: 123456,
+  })
+  assert.equal(client.sent.length, 2)
+  const timed = client.sent[1]
+  assert.equal(timed.readUInt8(0), 3)
+  assert.equal(timed.readUInt32LE(12), 42)
+  assert.equal(timed.readUInt32LE(16), 90000)
+  assert.equal(timed.readUInt16LE(20), 9)
+  assert.equal(Number(timed.readBigUInt64LE(22)), 123456)
   gateway.stop()
 })

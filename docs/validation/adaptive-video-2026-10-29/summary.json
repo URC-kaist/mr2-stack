@@ -1,0 +1,21 @@
+{
+  "scope": "Actual rover cameras -> base UDP/GStreamer -> HTTPS WebSocket -> Chromium WebCodecs; physical XBee control and feedback",
+  "rover": "192.168.0.57",
+  "base": "192.168.0.54",
+  "capture_boundary": "Immediately before UDP send, after pacing -> udpsrc before jitterbuffer",
+  "wire_budget_ceiling_kbps": 2000,
+  "encoder_margin": 0.85,
+  "feedback_samples": 61,
+  "received_kbps_min": 1497,
+  "received_kbps_max": 1881,
+  "maximum_reported_loss": 0.0,
+  "clock_note": "Clock policy was not locked during this video-only test; absolute one-way latency is not asserted",
+  "camera_issue": "left_cam (/dev/videoLEFT) returns V4L2 EINVAL and disconnect/reconnect events even without encoding; left OFF",
+  "radio_note": "Video used the current 192.168.0.x Ethernet interfaces. Dedicated Rocket radio path was not independently proven or impaired.",
+  "base_source_backup": "/home/mr2/mr2-video-backups/20261028",
+  "gateway_tests_passed": 92,
+  "browser_result": "browser-result.json",
+  "feedback_context": "Stable restored priorities after the passing browser test",
+  "budget_kbps_min": 2000,
+  "budget_kbps_max": 2000
+}

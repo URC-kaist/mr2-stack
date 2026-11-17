@@ -1,0 +1,35 @@
+PHASE normal-initial
+{"name":"normal-initial","funded":["front_left_cam","front_right_cam","left_cam","rgbd_camera","right_cam"],"rendered":{"Front Right":{"count":301,"sizes":["640x360"]},"Front Left":{"count":301,"sizes":["640x360"]},"Left":{"count":220,"sizes":["640x360"]},"Right":{"count":300,"sizes":["640x360"]},"RGB-D Cam":{"count":300,"sizes":["640x480"]}}}
+{"pid": 171724, "cap_kbps": 32, "args": ["index.js", "--rover-host", "192.168.0.57", "--base-rocket", "192.168.0.244", "--rover-rocket", "192.168.0.245", "--drone-rocket", "", "--video-max-kbps", "32", "--video-initial-kbps", "32"], "log": "/tmp/mr2-adaptive-gateway-32.log"}
+PHASE 32-all-low
+{"name":"32-all-low","funded":["rgbd_camera"],"rendered":{"RGB-D Cam":{"count":30,"sizes":["80x60"]}}}
+{"pid": 172159, "cap_kbps": 600, "args": ["index.js", "--rover-host", "192.168.0.57", "--base-rocket", "192.168.0.244", "--rover-rocket", "192.168.0.245", "--drone-rocket", "", "--video-max-kbps", "600", "--video-initial-kbps", "600"], "log": "/tmp/mr2-adaptive-gateway-600.log"}
+PHASE 600-all-low
+{"name":"600-all-low","funded":["front_left_cam","rgbd_camera"],"rendered":{"Front Left":{"count":121,"sizes":["320x180"]},"RGB-D Cam":{"count":120,"sizes":["320x240"]}}}
+PHASE 600-two-high-json-order
+{"name":"600-two-high-json-order","funded":["front_left_cam","rgbd_camera"],"rendered":{"Front Left":{"count":240,"sizes":["320x180"]},"RGB-D Cam":{"count":80,"sizes":["240x180"]}}}
+{"pid": 172738, "cap_kbps": 1500, "args": ["index.js", "--rover-host", "192.168.0.57", "--base-rocket", "192.168.0.244", "--rover-rocket", "192.168.0.245", "--drone-rocket", "", "--video-max-kbps", "1500", "--video-initial-kbps", "1500"], "log": "/tmp/mr2-adaptive-gateway-1500.log"}
+PHASE 1500-one-high
+{"name":"1500-one-high","funded":["front_left_cam","rgbd_camera"],"rendered":{"Front Left":{"count":241,"sizes":["480x270"]},"RGB-D Cam":{"count":121,"sizes":["320x240"]}}}
+{"pid": 173045, "cap_kbps": 0, "args": ["index.js", "--rover-host", "192.168.0.57", "--base-rocket", "192.168.0.244", "--rover-rocket", "192.168.0.245", "--drone-rocket", ""], "log": "/tmp/mr2-adaptive-gateway-0.log"}
+PHASE recovered-normal
+{"name":"recovered-normal","funded":["front_left_cam","front_right_cam","left_cam","rgbd_camera","right_cam"],"rendered":{"Left":{"count":225,"sizes":["640x360"]},"Right":{"count":300,"sizes":["640x360"]},"RGB-D Cam":{"count":300,"sizes":["640x480"]},"Front Left":{"count":300,"sizes":["640x360"]},"Front Right":{"count":300,"sizes":["640x360"]}}}
+PHASE rgbd-disabled
+{"name":"rgbd-disabled","funded":["front_left_cam","front_right_cam","left_cam","right_cam"],"rendered":{"Front Left":{"count":181,"sizes":["640x360"]},"Right":{"count":180,"sizes":["640x360"]},"Front Right":{"count":180,"sizes":["640x360"]},"Left":{"count":149,"sizes":["640x360"]}}}
+PHASE rgbd-reenabled
+{"name":"rgbd-reenabled","funded":["front_left_cam","front_right_cam","left_cam","rgbd_camera","right_cam"],"rendered":{"Right":{"count":301,"sizes":["640x360"]},"Front Left":{"count":301,"sizes":["640x360"]},"RGB-D Cam":{"count":300,"sizes":["640x480"]},"Left":{"count":249,"sizes":["640x360"]},"Front Right":{"count":300,"sizes":["640x360"]}}}
+{"pid": 174260, "cap_kbps": 0, "args": ["index.js", "--rover-host", "192.168.0.57", "--base-rocket", "192.168.0.244", "--rover-rocket", "192.168.0.245", "--drone-rocket", ""], "log": "/tmp/mr2-adaptive-gateway-0.log"}
+{
+  "passed": true,
+  "phases": [
+    "normal-initial",
+    "32-all-low",
+    "600-all-low",
+    "600-two-high-json-order",
+    "1500-one-high",
+    "recovered-normal",
+    "rgbd-disabled",
+    "rgbd-reenabled"
+  ],
+  "restored": true
+}

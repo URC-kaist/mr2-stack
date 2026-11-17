@@ -1,0 +1,15 @@
+{
+  "result": "PASS",
+  "motor_id": 127,
+  "bitrate": 500000,
+  "checks": [
+    "held startup rejected",
+    "neutral arms",
+    "positive and negative Twist reach plugin",
+    "input timeout stops",
+    "held input cannot rearm",
+    "MissionControl ABORT disables",
+    "neutral cannot clear emergency stop"
+  ],
+  "status_samples": 79
+}

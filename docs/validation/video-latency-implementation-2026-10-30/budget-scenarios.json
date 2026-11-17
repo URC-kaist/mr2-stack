@@ -1,0 +1,743 @@
+{
+  "phases": [
+    {
+      "name": "minimum32",
+      "budget": 32,
+      "states": {
+        "53930": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 27,
+          "width": 80,
+          "height": 60,
+          "fps": 3
+        },
+        "53932": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 0,
+          "width": 320,
+          "height": 180,
+          "fps": 30
+        },
+        "53934": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 0,
+          "width": 320,
+          "height": 180,
+          "fps": 30
+        }
+      },
+      "decoded_total": [
+        21,
+        0,
+        0
+      ],
+      "decoded_stable": [
+        11,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "zeroBudget",
+      "budget": 0,
+      "states": {
+        "53930": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 0,
+          "width": 80,
+          "height": 60,
+          "fps": 3
+        },
+        "53932": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 0,
+          "width": 320,
+          "height": 180,
+          "fps": 30
+        },
+        "53934": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 0,
+          "width": 320,
+          "height": 180,
+          "fps": 30
+        }
+      },
+      "decoded_total": [
+        0,
+        0,
+        0
+      ],
+      "decoded_stable": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "minimum100",
+      "budget": 100,
+      "states": {
+        "53930": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 85,
+          "width": 160,
+          "height": 120,
+          "fps": 5
+        },
+        "53932": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 0,
+          "width": 320,
+          "height": 180,
+          "fps": 30
+        },
+        "53934": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 0,
+          "width": 320,
+          "height": 180,
+          "fps": 30
+        }
+      },
+      "decoded_total": [
+        31,
+        0,
+        0
+      ],
+      "decoded_stable": [
+        17,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "two600",
+      "budget": 600,
+      "states": {
+        "53930": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 255,
+          "width": 320,
+          "height": 240,
+          "fps": 15
+        },
+        "53932": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 255,
+          "width": 320,
+          "height": 180,
+          "fps": 15
+        },
+        "53934": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 0,
+          "width": 320,
+          "height": 180,
+          "fps": 30
+        }
+      },
+      "decoded_total": [
+        118,
+        112,
+        0
+      ],
+      "decoded_stable": [
+        60,
+        60,
+        0
+      ]
+    },
+    {
+      "name": "three900",
+      "budget": 900,
+      "states": {
+        "53930": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 255,
+          "width": 320,
+          "height": 240,
+          "fps": 15
+        },
+        "53932": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 255,
+          "width": 320,
+          "height": 180,
+          "fps": 15
+        },
+        "53934": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 255,
+          "width": 320,
+          "height": 180,
+          "fps": 15
+        }
+      },
+      "decoded_total": [
+        105,
+        105,
+        101
+      ],
+      "decoded_stable": [
+        52,
+        53,
+        52
+      ]
+    },
+    {
+      "name": "maximum5400",
+      "budget": 5400,
+      "states": {
+        "53930": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 1530,
+          "width": 640,
+          "height": 480,
+          "fps": 30
+        },
+        "53932": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 1530,
+          "width": 640,
+          "height": 360,
+          "fps": 30
+        },
+        "53934": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 1530,
+          "width": 640,
+          "height": 360,
+          "fps": 30
+        }
+      },
+      "decoded_total": [
+        287,
+        257,
+        279
+      ],
+      "decoded_stable": [
+        176,
+        174,
+        174
+      ]
+    },
+    {
+      "name": "abrupt5400to100",
+      "budget": 100,
+      "states": {
+        "53930": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 85,
+          "width": 160,
+          "height": 120,
+          "fps": 5
+        },
+        "53932": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 0,
+          "width": 640,
+          "height": 360,
+          "fps": 30
+        },
+        "53934": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 0,
+          "width": 640,
+          "height": 360,
+          "fps": 30
+        }
+      },
+      "decoded_total": [
+        33,
+        2,
+        3
+      ],
+      "decoded_stable": [
+        17,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "recover5400",
+      "budget": 5400,
+      "states": {
+        "53930": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 1530,
+          "width": 640,
+          "height": 480,
+          "fps": 30
+        },
+        "53932": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 1530,
+          "width": 640,
+          "height": 360,
+          "fps": 30
+        },
+        "53934": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 1530,
+          "width": 640,
+          "height": 360,
+          "fps": 30
+        }
+      },
+      "decoded_total": [
+        290,
+        287,
+        257
+      ],
+      "decoded_stable": [
+        177,
+        176,
+        176
+      ]
+    },
+    {
+      "name": "oneHigh900",
+      "budget": 900,
+      "states": {
+        "53930": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 153,
+          "width": 240,
+          "height": 180,
+          "fps": 10
+        },
+        "53932": {
+          "state": 1,
+          "priority": 1,
+          "enabled": true,
+          "bitrate": 612,
+          "width": 320,
+          "height": 180,
+          "fps": 30
+        },
+        "53934": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 0,
+          "width": 640,
+          "height": 360,
+          "fps": 30
+        }
+      },
+      "decoded_total": [
+        89,
+        263,
+        5
+      ],
+      "decoded_stable": [
+        50,
+        146,
+        0
+      ]
+    },
+    {
+      "name": "disableFirst900",
+      "budget": 900,
+      "states": {
+        "53930": {
+          "state": 0,
+          "priority": 0,
+          "enabled": false,
+          "bitrate": 0,
+          "width": 320,
+          "height": 240,
+          "fps": 15
+        },
+        "53932": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 382,
+          "width": 320,
+          "height": 180,
+          "fps": 30
+        },
+        "53934": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 382,
+          "width": 320,
+          "height": 180,
+          "fps": 30
+        }
+      },
+      "decoded_total": [
+        0,
+        132,
+        109
+      ],
+      "decoded_stable": [
+        0,
+        80,
+        65
+      ]
+    },
+    {
+      "name": "missingFirst900",
+      "budget": 900,
+      "states": {
+        "53930": {
+          "state": 2,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 0,
+          "width": 320,
+          "height": 240,
+          "fps": 15
+        },
+        "53932": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 382,
+          "width": 320,
+          "height": 180,
+          "fps": 15
+        },
+        "53934": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 382,
+          "width": 320,
+          "height": 180,
+          "fps": 15
+        }
+      },
+      "decoded_total": [
+        0,
+        90,
+        82
+      ],
+      "decoded_stable": [
+        0,
+        45,
+        45
+      ]
+    },
+    {
+      "name": "cameraReconnect900",
+      "budget": 900,
+      "states": {
+        "53930": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 255,
+          "width": 320,
+          "height": 240,
+          "fps": 15
+        },
+        "53932": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 255,
+          "width": 320,
+          "height": 180,
+          "fps": 15
+        },
+        "53934": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 255,
+          "width": 320,
+          "height": 180,
+          "fps": 15
+        }
+      },
+      "decoded_total": [
+        103,
+        97,
+        98
+      ],
+      "decoded_stable": [
+        52,
+        53,
+        53
+      ]
+    },
+    {
+      "name": "tenRapidPriorityChanges",
+      "budget": 900,
+      "states": {
+        "53930": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 255,
+          "width": 320,
+          "height": 240,
+          "fps": 15
+        },
+        "53932": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 255,
+          "width": 320,
+          "height": 180,
+          "fps": 15
+        },
+        "53934": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 255,
+          "width": 320,
+          "height": 180,
+          "fps": 15
+        }
+      },
+      "decoded_total": [
+        119,
+        127,
+        97
+      ],
+      "decoded_stable": [
+        90,
+        90,
+        91
+      ]
+    },
+    {
+      "name": "allCamerasMissing",
+      "budget": 900,
+      "states": {
+        "53930": {
+          "state": 2,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 0,
+          "width": 320,
+          "height": 240,
+          "fps": 15
+        },
+        "53932": {
+          "state": 2,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 0,
+          "width": 320,
+          "height": 180,
+          "fps": 15
+        },
+        "53934": {
+          "state": 2,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 0,
+          "width": 320,
+          "height": 180,
+          "fps": 15
+        }
+      },
+      "decoded_total": [
+        2,
+        0,
+        0
+      ],
+      "decoded_stable": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "allCamerasReturn",
+      "budget": 900,
+      "states": {
+        "53930": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 255,
+          "width": 320,
+          "height": 240,
+          "fps": 15
+        },
+        "53932": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 255,
+          "width": 320,
+          "height": 180,
+          "fps": 15
+        },
+        "53934": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 255,
+          "width": 320,
+          "height": 180,
+          "fps": 15
+        }
+      },
+      "decoded_total": [
+        119,
+        112,
+        112
+      ],
+      "decoded_stable": [
+        61,
+        59,
+        60
+      ]
+    },
+    {
+      "name": "feedbackTimeout",
+      "budget": 900,
+      "states": {
+        "53930": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 425,
+          "width": 320,
+          "height": 240,
+          "fps": 30
+        },
+        "53932": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 0,
+          "width": 320,
+          "height": 180,
+          "fps": 15
+        },
+        "53934": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 0,
+          "width": 320,
+          "height": 180,
+          "fps": 15
+        }
+      },
+      "decoded_total": [
+        73,
+        31,
+        31
+      ],
+      "decoded_stable": [
+        44,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "feedbackRestored900",
+      "budget": 900,
+      "states": {
+        "53930": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 255,
+          "width": 320,
+          "height": 240,
+          "fps": 15
+        },
+        "53932": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 255,
+          "width": 320,
+          "height": 180,
+          "fps": 15
+        },
+        "53934": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 255,
+          "width": 320,
+          "height": 180,
+          "fps": 15
+        }
+      },
+      "decoded_total": [
+        120,
+        113,
+        112
+      ],
+      "decoded_stable": [
+        61,
+        60,
+        59
+      ]
+    }
+  ],
+  "ingest_to_send_ms": {
+    "samples": 4583,
+    "p50": 28.637,
+    "p95": 88.839,
+    "max": 309.192
+  },
+  "probe_packets": 15,
+  "passed": true
+}

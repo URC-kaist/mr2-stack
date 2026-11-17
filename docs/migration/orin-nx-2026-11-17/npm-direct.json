@@ -1,0 +1,202 @@
+{
+  "base/gateway": [
+    {
+      "name": "dotenv",
+      "section": "dependencies",
+      "required": "^16.4.7",
+      "locked": "16.6.1",
+      "installed": "16.6.1"
+    },
+    {
+      "name": "rclnodejs",
+      "section": "dependencies",
+      "required": "^1.5.0",
+      "locked": "1.8.1",
+      "installed": "1.8.1"
+    },
+    {
+      "name": "serialport",
+      "section": "dependencies",
+      "required": "^12.0.0",
+      "locked": "12.0.0",
+      "installed": "12.0.0"
+    },
+    {
+      "name": "ws",
+      "section": "dependencies",
+      "required": "^8.16.0",
+      "locked": "8.18.3",
+      "installed": "8.18.3"
+    }
+  ],
+  "dashboard": [
+    {
+      "name": "@fontsource/dm-mono",
+      "section": "dependencies",
+      "required": "^5.2.7",
+      "locked": "5.2.7",
+      "installed": "5.2.7"
+    },
+    {
+      "name": "@fontsource/space-grotesk",
+      "section": "dependencies",
+      "required": "^5.2.10",
+      "locked": "5.2.10",
+      "installed": "5.2.10"
+    },
+    {
+      "name": "bootstrap",
+      "section": "dependencies",
+      "required": "^5.3.3",
+      "locked": "5.3.8",
+      "installed": "5.3.8"
+    },
+    {
+      "name": "maplibre-gl",
+      "section": "dependencies",
+      "required": "^4.7.1",
+      "locked": "4.7.1",
+      "installed": "4.7.1"
+    },
+    {
+      "name": "react",
+      "section": "dependencies",
+      "required": "^18.3.1",
+      "locked": "18.3.1",
+      "installed": "18.3.1"
+    },
+    {
+      "name": "react-bootstrap",
+      "section": "dependencies",
+      "required": "^2.10.10",
+      "locked": "2.10.10",
+      "installed": "2.10.10"
+    },
+    {
+      "name": "react-dom",
+      "section": "dependencies",
+      "required": "^18.3.1",
+      "locked": "18.3.1",
+      "installed": "18.3.1"
+    },
+    {
+      "name": "react-icons",
+      "section": "dependencies",
+      "required": "^5.5.0",
+      "locked": "5.5.0",
+      "installed": "5.5.0"
+    },
+    {
+      "name": "roslib",
+      "section": "dependencies",
+      "required": "^1.4.0",
+      "locked": "1.4.1",
+      "installed": "1.4.1"
+    },
+    {
+      "name": "three",
+      "section": "dependencies",
+      "required": "^0.184.0",
+      "locked": "0.184.0",
+      "installed": "0.184.0"
+    },
+    {
+      "name": "uplot",
+      "section": "dependencies",
+      "required": "^1.6.32",
+      "locked": "1.6.32",
+      "installed": "1.6.32"
+    },
+    {
+      "name": "@eslint/js",
+      "section": "devDependencies",
+      "required": "^9.39.1",
+      "locked": "9.39.2",
+      "installed": "9.39.2"
+    },
+    {
+      "name": "@types/react",
+      "section": "devDependencies",
+      "required": "^18.3.3",
+      "locked": "18.3.27",
+      "installed": "18.3.27"
+    },
+    {
+      "name": "@types/react-dom",
+      "section": "devDependencies",
+      "required": "^18.3.0",
+      "locked": "18.3.7",
+      "installed": "18.3.7"
+    },
+    {
+      "name": "@types/three",
+      "section": "devDependencies",
+      "required": "^0.184.1",
+      "locked": "0.184.1",
+      "installed": "0.184.1"
+    },
+    {
+      "name": "@typescript-eslint/eslint-plugin",
+      "section": "devDependencies",
+      "required": "^8.44.0",
+      "locked": "8.51.0",
+      "installed": "8.51.0"
+    },
+    {
+      "name": "@typescript-eslint/parser",
+      "section": "devDependencies",
+      "required": "^8.44.0",
+      "locked": "8.51.0",
+      "installed": "8.51.0"
+    },
+    {
+      "name": "@vitejs/plugin-react",
+      "section": "devDependencies",
+      "required": "^5.1.1",
+      "locked": "5.1.2",
+      "installed": "5.1.2"
+    },
+    {
+      "name": "eslint",
+      "section": "devDependencies",
+      "required": "^9.39.1",
+      "locked": "9.39.2",
+      "installed": "9.39.2"
+    },
+    {
+      "name": "eslint-plugin-react-hooks",
+      "section": "devDependencies",
+      "required": "^7.0.1",
+      "locked": "7.0.1",
+      "installed": "7.0.1"
+    },
+    {
+      "name": "eslint-plugin-react-refresh",
+      "section": "devDependencies",
+      "required": "^0.4.24",
+      "locked": "0.4.26",
+      "installed": "0.4.26"
+    },
+    {
+      "name": "globals",
+      "section": "devDependencies",
+      "required": "^16.5.0",
+      "locked": "16.5.0",
+      "installed": "16.5.0"
+    },
+    {
+      "name": "typescript",
+      "section": "devDependencies",
+      "required": "^5.8.3",
+      "locked": "5.9.3",
+      "installed": "5.9.3"
+    },
+    {
+      "name": "vite",
+      "section": "devDependencies",
+      "required": "^7.2.4",
+      "locked": "7.3.0",
+      "installed": "7.3.0"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "real_wheel": "fl",
+  "public_websocket": "wss://10.42.0.1/xbee-ws",
+  "forward_joint_velocity": 0.10757610437170939,
+  "reverse_joint_velocity": -0.12520875189678074,
+  "twist_messages": 129,
+  "joint_messages": 644,
+  "existing_stack_abort_behavior": null
+}

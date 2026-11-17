@@ -1,0 +1,57 @@
+{
+  "phases": [
+    {
+      "name": "failedFirstDoesNotBlockJsonSuccessor",
+      "budget": 300,
+      "states": {
+        "53928": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 0,
+          "width": 320,
+          "height": 180,
+          "fps": 30
+        },
+        "53930": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 255,
+          "width": 320,
+          "height": 240,
+          "fps": 15
+        },
+        "53932": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 0,
+          "width": 320,
+          "height": 180,
+          "fps": 30
+        },
+        "53934": {
+          "state": 1,
+          "priority": 0,
+          "enabled": true,
+          "bitrate": 0,
+          "width": 320,
+          "height": 180,
+          "fps": 30
+        }
+      },
+      "decoded_total": [
+        175,
+        0,
+        0
+      ],
+      "decoded_stable": [
+        121,
+        0,
+        0
+      ]
+    }
+  ],
+  "passed": true
+}

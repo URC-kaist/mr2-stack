@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "streams": [
+    {
+      "stream_id": "flat_cam_1",
+      "source": {
+        "type": "v4l2",
+        "device": "/dev/v4l/by-path/platform-3610000.usb-usb-0:2.3.1:1.0-video-index0",
+        "pixel_format": "MJPG",
+        "capture_width": 640,
+        "capture_height": 360
+      },
+      "udp_port": 5010,
+      "width": 320,
+      "height": 180,
+      "framerate": 30,
+      "encoder": {
+        "type": "nvv4l2h264enc",
+        "bitrate_kbps": 1800,
+        "keyframe_interval": 30,
+        "speed_preset": "ultrafast",
+        "tune": "zerolatency"
+      },
+      "display": {
+        "label": "USB 2.3.1",
+        "panel": "delivery",
+        "order": 1
+      },
+      "priority": "high"
+    },
+    {
+      "stream_id": "flat_cam_2",
+      "source": {
+        "type": "v4l2",
+        "device": "/dev/v4l/by-path/platform-3610000.usb-usb-0:2.2.2:1.0-video-index0",
+        "pixel_format": "MJPG",
+        "capture_width": 640,
+        "capture_height": 360
+      },
+      "udp_port": 5012,
+      "width": 320,
+      "height": 180,
+      "framerate": 30,
+      "encoder": {
+        "type": "nvv4l2h264enc",
+        "bitrate_kbps": 1800,
+        "keyframe_interval": 30,
+        "speed_preset": "ultrafast",
+        "tune": "zerolatency"
+      },
+      "display": {
+        "label": "USB 2.2.2",
+        "panel": "delivery",
+        "order": 2
+      },
+      "priority": "low"
+    },
+    {
+      "stream_id": "flat_cam_3",
+      "source": {
+        "type": "v4l2",
+        "device": "/dev/v4l/by-path/platform-3610000.usb-usb-0:2.4.1:1.0-video-index0",
+        "pixel_format": "MJPG",
+        "capture_width": 640,
+        "capture_height": 360
+      },
+      "udp_port": 5014,
+      "width": 320,
+      "height": 180,
+      "framerate": 30,
+      "encoder": {
+        "type": "nvv4l2h264enc",
+        "bitrate_kbps": 1800,
+        "keyframe_interval": 30,
+        "speed_preset": "ultrafast",
+        "tune": "zerolatency"
+      },
+      "display": {
+        "label": "USB 2.4.1",
+        "panel": "delivery",
+        "order": 3
+      },
+      "priority": "low"
+    },
+    {
+      "stream_id": "flat_cam_4",
+      "source": {
+        "type": "v4l2",
+        "device": "/dev/v4l/by-path/platform-3610000.usb-usb-0:2.4.2:1.0-video-index0",
+        "pixel_format": "MJPG",
+        "capture_width": 640,
+        "capture_height": 360
+      },
+      "udp_port": 5016,
+      "width": 320,
+      "height": 180,
+      "framerate": 30,
+      "encoder": {
+        "type": "nvv4l2h264enc",
+        "bitrate_kbps": 1800,
+        "keyframe_interval": 30,
+        "speed_preset": "ultrafast",
+        "tune": "zerolatency"
+      },
+      "display": {
+        "label": "USB 2.4.2",
+        "panel": "delivery",
+        "order": 4
+      },
+      "priority": "low"
+    }
+  ]
+}

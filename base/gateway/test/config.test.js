@@ -74,6 +74,7 @@ test('parseGatewayConfig falls back to defaults when values are absent', () => {
   const config = parseGatewayConfig([], {})
 
   assert.equal(config.device, '/dev/ttyXBEE')
+  assert.equal(config.profile, 'base')
   assert.equal('baud' in config, false)
   assert.equal(config.host, '0.0.0.0')
   assert.equal(config.port, 8081)
@@ -83,12 +84,65 @@ test('parseGatewayConfig falls back to defaults when values are absent', () => {
   assert.match(config.videoConfigPath, /video_streams\.json$/)
   assert.equal(config.videoReceiverRestartMs, 1000)
   assert.equal(config.videoAvailabilityStaleMs, 1500)
-  assert.equal(config.mavproxyEnable, true)
+  assert.equal(config.mavproxyEnable, false)
   assert.equal(config.mavproxyBinary, 'mavproxy.py')
   assert.equal(config.mavproxyMasterDevice, '/dev/ttySIK')
   assert.equal(config.mavproxyMasterBaud, 57600)
   assert.equal(config.mavproxyOut, 'udp:192.168.1.108:14550')
   assert.equal(config.mavproxyDefaultModules, '')
+  assert.equal(config.rosTopicRelayEnable, true)
+})
+
+test('base keeps XBee as the control device when optional MAVProxy is explicitly enabled', () => {
+  for (const config of [parseGatewayConfig(['--mavproxy-enable', 'true'], {}),
+    parseGatewayConfig([], { MAVPROXY_ENABLE: 'true' })]) {
+    assert.equal(config.device, '/dev/ttyXBEE')
+    assert.equal(config.mavproxyEnable, true)
+    assert.equal(config.mavproxyMasterDevice, '/dev/ttySIK')
+  }
+})
+
+test('parseGatewayConfig applies rover-direct native defaults', () => {
+  const config = parseGatewayConfig([], {
+    MR2_GATEWAY_PROFILE: 'rover-direct',
+    MR2_BASE_ROCKET_IP: '192.168.1.20',
+    ROCKET_M2_USER: 'leftover-user',
+    ROCKET_M2_PASS: 'leftover-password',
+  })
+
+  assert.equal(config.profile, 'rover-direct')
+  assert.equal(config.device, '/tmp/mr2_xbee_gateway')
+  assert.equal(config.host, '127.0.0.1')
+  assert.equal(config.port, 8081)
+  assert.equal(config.antennaEnable, false)
+  assert.equal(config.rocketM2Enable, false)
+  assert.equal(config.rocketM2AutoEnable, false)
+  assert.equal(config.mavproxyEnable, false)
+  assert.equal(config.rosTopicRelayEnable, false)
+  assert.match(config.videoConfigPath, /video_streams\.json$/)
+})
+
+test('parseGatewayConfig lets explicit runtime settings override rover-direct defaults', () => {
+  const config = parseGatewayConfig(
+    [
+      '--gateway-profile',
+      'rover-direct',
+      '--base-xbee-device',
+      '/tmp/direct-peer',
+      '--gateway-host',
+      '127.0.0.2',
+      '--mavproxy-enable',
+      'true',
+      '--ros-topic-relay-enable',
+      'true',
+    ],
+    {}
+  )
+
+  assert.equal(config.device, '/tmp/direct-peer')
+  assert.equal(config.host, '127.0.0.2')
+  assert.equal(config.mavproxyEnable, true)
+  assert.equal(config.rosTopicRelayEnable, true)
 })
 
 test('parseGatewayConfig accepts top-level MR2 network env fallbacks', () => {
@@ -109,6 +163,26 @@ test('parseGatewayConfig accepts top-level MR2 network env fallbacks', () => {
       ['rover', ''],
     ]
   )
+})
+
+test('parseGatewayConfig reads automated uplink diagnostics settings', () => {
+  const config = parseGatewayConfig([], {
+    MR2_LATENCY_DIAGNOSTICS_ENABLE: 'true',
+    MR2_BASE_ROCKET_INTERFACE: 'eth1',
+    MR2_LATENCY_ARTIFACT_DIR: '/tmp/latency-test',
+    MR2_LATENCY_PUBLIC_BASE_URL: 'http://192.168.1.101:8081',
+    MR2_LATENCY_CAPTURE_DURATION_S: '12',
+    MR2_LATENCY_CAPTURE_EDGE_MARGIN_S: '4',
+    MR2_LATENCY_MAX_UPLOAD_BYTES: '1048576',
+  })
+
+  assert.equal(config.latencyDiagnosticsEnable, true)
+  assert.equal(config.latencyBaseInterface, 'eth1')
+  assert.equal(config.latencyArtifactRoot, '/tmp/latency-test')
+  assert.equal(config.latencyPublicBaseUrl, 'http://192.168.1.101:8081')
+  assert.equal(config.latencyCaptureDurationS, 12)
+  assert.equal(config.latencyCaptureEdgeMarginS, 4)
+  assert.equal(config.latencyMaxUploadBytes, 1048576)
 })
 
 test('parseGatewayConfig ignores removed legacy gateway env and flags', () => {
@@ -141,4 +215,17 @@ test('parseGatewayConfig ignores removed legacy gateway env and flags', () => {
   assert.equal(config.heartbeatHz, 2)
   assert.equal(config.linkTimeoutMs, 2000)
   assert.equal(config.rocketM2Ip, '')
+})
+
+test('field defaults remain field addresses; development networking is CLI-only', () => {
+  const field = { MR2_ROVER_IP: '192.168.1.102', MR2_BASE_ROCKET_IP: '192.168.1.100',
+    MR2_ROVER_ROCKET_IP: '192.168.1.106', MR2_DRONE_ROCKET_IP: '192.168.1.103' }
+  const defaults = parseGatewayConfig([], field)
+  assert.equal(defaults.roverHost, '192.168.1.102')
+  assert.equal(defaults.rocketM2Targets[0].ip, '192.168.1.100')
+  const dev = parseGatewayConfig(['--rover-host', '192.168.0.57', '--base-rocket', '192.168.0.244',
+    '--rover-rocket', '192.168.0.245', '--drone-rocket', ''], field)
+  assert.equal(dev.roverHost, '192.168.0.57')
+  assert.deepEqual(dev.rocketM2Targets.map(t => t.ip), ['192.168.0.244', '', '192.168.0.245'])
+  assert.equal(parseGatewayConfig([], field).roverHost, '192.168.1.102')
 })

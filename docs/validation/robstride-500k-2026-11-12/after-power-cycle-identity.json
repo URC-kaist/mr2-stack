@@ -1,0 +1,16 @@
+{
+  "query": "Type 0 identity, ID 127, host 253",
+  "frames": [
+    {
+      "can_id": "8000FD7F",
+      "dlc": 8,
+      "data": "0000000000000000"
+    },
+    {
+      "can_id": "80007FFE",
+      "dlc": 8,
+      "data": "893e38009023b710"
+    }
+  ],
+  "identified": true
+}

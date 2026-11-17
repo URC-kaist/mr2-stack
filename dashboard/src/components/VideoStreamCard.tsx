@@ -1,60 +1,27 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
 import { getVideoGatewayClient, type VideoStreamInfo } from '../lib/videoGateway'
 import type { VideoChunkMessage, VideoConfigMessage } from '../lib/videoProtocol'
+import { latencyDiagnostics } from '../lib/latencyDiagnostics'
+import { VideoStartupQueue } from '../lib/videoStartupQueue'
+import { createVideoRenderer } from '../lib/videoRenderer'
+import { annexBToAvcc } from '../lib/videoAvcc'
 import './VideoStreamCard.css'
 
 type VideoStreamCardProps = {
   stream: VideoStreamInfo
   videoWidth?: number
   videoHeight?: number
+  onFrameRendered?: (streamId: string) => void
+  onPlaybackStats?: (streamId: string, stats: VideoPlaybackStats) => void
+}
+
+export type VideoPlaybackStats = {
+  width: number | null
+  height: number | null
+  fps: number
 }
 
 type H264PayloadFormat = 'annexb' | 'avcc'
-
-function findStartCodeLength(bytes: Uint8Array, offset: number) {
-  if (offset + 3 > bytes.length) return 0
-  if (bytes[offset] !== 0 || bytes[offset + 1] !== 0) return 0
-  if (bytes[offset + 2] === 1) return 3
-  if (offset + 4 <= bytes.length && bytes[offset + 2] === 0 && bytes[offset + 3] === 1) return 4
-  return 0
-}
-
-function splitAnnexBNalus(bytes: Uint8Array) {
-  const starts: number[] = []
-  for (let index = 0; index < bytes.length - 2; index += 1) {
-    const length = findStartCodeLength(bytes, index)
-    if (length > 0) {
-      starts.push(index)
-      index += length - 1
-    }
-  }
-
-  const nals: Uint8Array[] = []
-  for (let index = 0; index < starts.length; index += 1) {
-    const start = starts[index]
-    const startCodeLength = findStartCodeLength(bytes, start)
-    const nextStart = index + 1 < starts.length ? starts[index + 1] : bytes.length
-    nals.push(bytes.slice(start + startCodeLength, nextStart))
-  }
-  return nals.filter((nal) => nal.length > 0)
-}
-
-function annexBToAvcc(bytes: Uint8Array) {
-  const nals = splitAnnexBNalus(bytes)
-  const totalLength = nals.reduce((sum, nal) => sum + 4 + nal.length, 0)
-  const output = new Uint8Array(totalLength)
-  const view = new DataView(output.buffer)
-  let offset = 0
-
-  for (const nal of nals) {
-    view.setUint32(offset, nal.length, false)
-    offset += 4
-    output.set(nal, offset)
-    offset += nal.length
-  }
-
-  return output
-}
 
 function buildAvcDescription(config: VideoConfigMessage) {
   const sps = config.sps
@@ -98,7 +65,10 @@ function buildDecoderCandidates(message: VideoConfigMessage) {
   const codec = normalizeCodecString(message.codec, message.sps)
   const baseConfig: VideoDecoderConfig = {
     codec,
-    hardwareAcceleration: 'prefer-hardware',
+    // Let the browser fall back to software when hardware H.264 decoding is
+    // unavailable (for example, on a base station without an active GPU).
+    hardwareAcceleration: 'no-preference',
+    optimizeForLatency: true,
   }
   if (message.width > 0) {
     baseConfig.codedWidth = message.width
@@ -139,16 +109,28 @@ async function selectDecoderConfiguration(message: VideoConfigMessage) {
     }
   }
 
+  // Older implementations can reject a latency hint despite supporting H.264.
+  for (const candidate of candidates) {
+    const config = { ...candidate.config, optimizeForLatency: false }
+    try { if ((await VideoDecoder.isConfigSupported(config)).supported) return { ...candidate, config } } catch { /* try next format */ }
+  }
   return null
 }
 
-const VideoStreamCard = ({ stream, videoWidth, videoHeight }: VideoStreamCardProps) => {
+const VideoStreamCard = ({
+  stream,
+  videoWidth,
+  videoHeight,
+  onFrameRendered,
+  onPlaybackStats,
+}: VideoStreamCardProps) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const decoderRef = useRef<VideoDecoder | null>(null)
   const decoderConfigRef = useRef<VideoDecoderConfig | null>(null)
   const payloadFormatRef = useRef<H264PayloadFormat>('avcc')
   const configGenerationRef = useRef(0)
   const waitingForKeyframeRef = useRef(true)
+  const playbackRef = useRef({ frames: 0, width: 0, height: 0 })
   const webCodecsAvailable = typeof VideoDecoder !== 'undefined'
   const [status, setStatus] = useState(() =>
     webCodecsAvailable
@@ -159,6 +141,41 @@ const VideoStreamCard = ({ stream, videoWidth, videoHeight }: VideoStreamCardPro
   )
   const [hasFrame, setHasFrame] = useState(false)
   const [frameSize, setFrameSize] = useState<{ width: number; height: number } | null>(null)
+  const [canvasGeneration, setCanvasGeneration] = useState(0)
+  const [workerDisabled, setWorkerDisabled] = useState(false)
+  const onFrameRef = useRef(onFrameRendered)
+  const lastFrameAt = useRef(0)
+  useEffect(() => { onFrameRef.current = onFrameRendered }, [onFrameRendered])
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      if (lastFrameAt.current && performance.now() - lastFrameAt.current > 1000) {
+        lastFrameAt.current = 0
+        setHasFrame(false)
+        setStatus('Waiting for fresh video...')
+      }
+    }, 250)
+    return () => window.clearInterval(timer)
+  }, [])
+
+  useEffect(() => {
+    if (!onPlaybackStats) return
+    playbackRef.current = { frames: 0, width: 0, height: 0 }
+    let previousFrames = 0
+    let previousTime = performance.now()
+    const timer = window.setInterval(() => {
+      const now = performance.now()
+      const { frames, width, height } = playbackRef.current
+      onPlaybackStats(stream.stream_id, {
+        width: width || null,
+        height: height || null,
+        fps: (frames - previousFrames) * 1000 / Math.max(1, now - previousTime),
+      })
+      previousFrames = frames
+      previousTime = now
+    }, 1000)
+    return () => window.clearInterval(timer)
+  }, [onPlaybackStats, stream.stream_id])
 
   const videoStyle = useMemo(
     () => {
@@ -174,9 +191,41 @@ const VideoStreamCard = ({ stream, videoWidth, videoHeight }: VideoStreamCardPro
   useEffect(() => {
     let active = true
     let decoderGeneration = 0
+    const startup = new VideoStartupQueue()
+    let configuring = false
+    let lastKeyRequest = -Infinity
+    const requestKeyframe = () => {
+      if (performance.now() - lastKeyRequest < 500) return
+      lastKeyRequest = performance.now()
+      getVideoGatewayClient().requestKeyframe(stream.stream_id)
+    }
 
     if (!webCodecsAvailable) {
       return
+    }
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const fallback = () => {
+      if (!active || workerDisabled) return
+      setWorkerDisabled(true)
+      setCanvasGeneration((value) => value + 1)
+    }
+    let renderer: ReturnType<typeof createVideoRenderer>
+    try {
+      renderer = createVideoRenderer(canvas, stream.stream_id, (result) => {
+        if (!active) return
+        lastFrameAt.current = performance.now()
+        playbackRef.current.frames += 1
+        playbackRef.current.width = result.width
+        playbackRef.current.height = result.height
+        setFrameSize((old) => old?.width === result.width && old.height === result.height ? old : { width: result.width, height: result.height })
+        latencyDiagnostics.observeVideoRender(stream.stream_id, result.timestampUs, result.renderEpochUs)
+        setHasFrame(true); setStatus('Live')
+        onFrameRef.current?.(stream.stream_id)
+      }, fallback, !workerDisabled)
+    } catch {
+      fallback()
+      return () => { active = false }
     }
 
     function describeError(error: unknown) {
@@ -202,50 +251,8 @@ const VideoStreamCard = ({ stream, videoWidth, videoHeight }: VideoStreamCardPro
             return
           }
 
-          const canvas = canvasRef.current
-          if (!canvas) {
-            frame.close()
-            return
-          }
-
-          const width = frame.displayWidth || frame.codedWidth || stream.width || videoWidth || 640
-          const height = frame.displayHeight || frame.codedHeight || stream.height || videoHeight || 360
-          if (canvas.width !== width || canvas.height !== height) {
-            canvas.width = width
-            canvas.height = height
-            setFrameSize({ width, height })
-          }
-
-          const context = canvas.getContext('2d')
-          if (!context) {
-            frame.close()
-            return
-          }
-          context.fillStyle = '#060910'
-          context.fillRect(0, 0, canvas.width, canvas.height)
-          const sourceWidth = frame.codedWidth || frame.displayWidth || width
-          const sourceHeight = frame.codedHeight || frame.displayHeight || height
-          const frameRatio = sourceWidth / sourceHeight
-          const canvasRatio = canvas.width / canvas.height
-          const drawWidth = frameRatio > canvasRatio ? canvas.width : canvas.height * frameRatio
-          const drawHeight = frameRatio > canvasRatio ? canvas.width / frameRatio : canvas.height
-          const offsetX = (canvas.width - drawWidth) * 0.5
-          const offsetY = (canvas.height - drawHeight) * 0.5
-          context.drawImage(
-            frame,
-            0,
-            0,
-            sourceWidth,
-            sourceHeight,
-            offsetX,
-            offsetY,
-            drawWidth,
-            drawHeight
-          )
-          frame.close()
           waitingForKeyframeRef.current = false
-          setHasFrame(true)
-          setStatus('Live')
+          renderer.draw(frame)
         },
         error: (error) => {
           if (!active || generation !== decoderGeneration) return
@@ -258,6 +265,7 @@ const VideoStreamCard = ({ stream, videoWidth, videoHeight }: VideoStreamCardPro
 
     function recoverDecoder(reason: string) {
       waitingForKeyframeRef.current = true
+      requestKeyframe()
       const decoderConfig = decoderConfigRef.current
       const payloadFormat = payloadFormatRef.current
       closeDecoder(decoderRef.current)
@@ -285,6 +293,8 @@ const VideoStreamCard = ({ stream, videoWidth, videoHeight }: VideoStreamCardPro
       if (message.kind === 'config') {
         const generation = configGenerationRef.current + 1
         configGenerationRef.current = generation
+        configuring = true
+        startup.clear()
         decoderConfigRef.current = null
         waitingForKeyframeRef.current = true
         setStatus('Configuring decoder...')
@@ -293,24 +303,31 @@ const VideoStreamCard = ({ stream, videoWidth, videoHeight }: VideoStreamCardPro
           const supported = await selectDecoderConfiguration(message)
           if (!active || generation !== configGenerationRef.current) return
           if (!supported) {
+            configuring = false
+            startup.clear()
             decoderConfigRef.current = null
             setStatus('WebCodecs does not support this H.264 stream')
             return
           }
 
           try {
-            const decoder =
-              decoderRef.current && decoderRef.current.state !== 'closed'
-                ? decoderRef.current
-                : createDecoder()
-            decoder.reset()
+            // Encoder restarts may reuse SPS/PPS identifiers at a new size.
+            // A new decoder also fences off output from the previous config.
+            closeDecoder(decoderRef.current)
+            const decoder = createDecoder()
             decoder.configure(supported.config)
             decoderConfigRef.current = supported.config
             payloadFormatRef.current = supported.payloadFormat
             waitingForKeyframeRef.current = true
             setStatus('Waiting for keyframe...')
+            configuring = false
+            const pending = startup.take()
+            for (const chunk of pending) decodeChunk(chunk)
+            if (pending.length === 0) requestKeyframe()
           } catch (error) {
             decoderConfigRef.current = null
+            configuring = false
+            startup.clear()
             setStatus(`Decoder error: ${describeError(error)}`)
           }
         })()
@@ -318,15 +335,25 @@ const VideoStreamCard = ({ stream, videoWidth, videoHeight }: VideoStreamCardPro
       }
 
       const chunk = message as VideoChunkMessage
+      if (configuring) {
+        if (!startup.push(chunk)) requestKeyframe()
+        return
+      }
+      decodeChunk(chunk)
+    })
+
+    function decodeChunk(chunk: VideoChunkMessage) {
       const decoderConfig = decoderConfigRef.current
       const decoder = decoderRef.current
       if (!decoderConfig || !decoder) {
         return
       }
       if (waitingForKeyframeRef.current && !chunk.key) {
+        requestKeyframe()
         return
       }
       if (decoder.decodeQueueSize > 3 && !chunk.key) {
+        recoverDecoder('Decoder queue exceeded latency limit')
         return
       }
       if (decoder.decodeQueueSize > 5 && chunk.key) {
@@ -339,8 +366,7 @@ const VideoStreamCard = ({ stream, videoWidth, videoHeight }: VideoStreamCardPro
         }
       }
 
-      const payload =
-        payloadFormatRef.current === 'annexb' ? chunk.payload : annexBToAvcc(chunk.payload)
+      const payload = payloadFormatRef.current === 'annexb' ? chunk.payload : annexBToAvcc(chunk.payload)
       if (chunk.key) {
         waitingForKeyframeRef.current = false
       }
@@ -355,22 +381,30 @@ const VideoStreamCard = ({ stream, videoWidth, videoHeight }: VideoStreamCardPro
       } catch (error) {
         recoverDecoder(`Decoder error: ${describeError(error)}`)
       }
-    })
+    }
 
     return () => {
       active = false
+      lastFrameAt.current = 0
       unsubscribe()
+      renderer.close()
+      startup.clear()
       closeDecoder(decoderRef.current)
       decoderRef.current = null
       decoderConfigRef.current = null
       payloadFormatRef.current = 'avcc'
       waitingForKeyframeRef.current = true
     }
-  }, [stream.height, stream.stream_id, stream.width, videoHeight, videoWidth, webCodecsAvailable])
+  }, [
+    stream.stream_id,
+    webCodecsAvailable,
+    canvasGeneration,
+    workerDisabled,
+  ])
 
   return (
     <div className="video-stream-card" style={videoStyle}>
-      <canvas ref={canvasRef} className="video-stream-canvas" />
+      <canvas key={canvasGeneration} ref={canvasRef} className="video-stream-canvas" style={{ visibility: hasFrame ? 'visible' : 'hidden' }} />
       <div className={`video-stream-overlay ${hasFrame ? 'video-stream-overlay--live' : ''}`}>
         {status}
       </div>

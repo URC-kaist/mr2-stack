@@ -1,0 +1,27 @@
+Oct 29 20:33:52 base kernel: usb usb1: SerialNumber: 0000:00:0d.0
+Oct 29 20:33:52 base kernel: usb usb2: SerialNumber: 0000:00:0d.0
+Oct 29 20:33:52 base kernel: usb usb3: SerialNumber: 0000:00:14.0
+Oct 29 20:33:52 base kernel: usb usb4: SerialNumber: 0000:00:14.0
+Oct 29 20:33:52 base kernel: usb 3-1: new full-speed USB device number 2 using xhci_hcd
+Oct 29 20:33:52 base kernel: usb 3-1: New USB device found, idVendor=0403, idProduct=6001, bcdDevice= 6.00
+Oct 29 20:33:52 base kernel: usb 3-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Oct 29 20:33:52 base kernel: usb 3-1: Product: USB Serial Converter
+Oct 29 20:33:52 base kernel: usb 3-1: Manufacturer: FTDI
+Oct 29 20:33:52 base kernel: usb 3-1: SerialNumber: FTB6SPL3
+Oct 29 20:33:52 base kernel: usb 3-4: SerialNumber: 00e04c000001
+Oct 29 20:33:52 base kernel: usb 3-3.4: new full-speed USB device number 5 using xhci_hcd
+Oct 29 20:33:52 base kernel: usb 3-3.4: New USB device found, idVendor=0403, idProduct=6015, bcdDevice=10.00
+Oct 29 20:33:52 base kernel: usb 3-3.4: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Oct 29 20:33:52 base kernel: usb 3-3.4: Product: FT231X USB UART
+Oct 29 20:33:52 base kernel: usb 3-3.4: Manufacturer: FTDI
+Oct 29 20:33:52 base kernel: usb 3-3.4: SerialNumber: D30JZD5Z
+Oct 29 20:33:52 base kernel: usb 3-6: SerialNumber: A34004801402
+Oct 29 20:33:53 base kernel: usbcore: registered new interface driver ftdi_sio
+Oct 29 20:33:53 base kernel: usbserial: USB Serial support registered for FTDI USB Serial Device
+Oct 29 20:33:53 base kernel: ftdi_sio 3-1:1.0: FTDI USB Serial Device converter detected
+Oct 29 20:33:53 base kernel: usb 3-1: Detected FT232R
+Oct 29 20:33:53 base kernel: ftdi_sio ttyUSB0: Unable to read latency timer: -32
+Oct 29 20:33:53 base kernel: usb 3-1: FTDI USB Serial Device converter now attached to ttyUSB0
+Oct 29 20:33:53 base kernel: ftdi_sio 3-3.4:1.0: FTDI USB Serial Device converter detected
+Oct 29 20:33:53 base kernel: usb 3-3.4: Detected FT-X
+Oct 29 20:33:53 base kernel: usb 3-3.4: FTDI USB Serial Device converter now attached to ttyUSB1

@@ -1,0 +1,443 @@
+[
+  {
+    "observed_at": 1793281911473,
+    "offset_ms": 0.001555,
+    "bound_ms": 1.0879315,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281913472,
+    "offset_ms": 0.008624000000000001,
+    "bound_ms": 1.1150675,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281915473,
+    "offset_ms": 0.018369,
+    "bound_ms": 1.1413754999999999,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281917474,
+    "offset_ms": 0.051517,
+    "bound_ms": 1.2985060000000002,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281919476,
+    "offset_ms": 0.056672,
+    "bound_ms": 1.349886,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281921481,
+    "offset_ms": 0.0653,
+    "bound_ms": 1.2089359999999998,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281923474,
+    "offset_ms": 0.000919,
+    "bound_ms": 1.2317159999999998,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281925475,
+    "offset_ms": 0.026761999999999998,
+    "bound_ms": 1.264049,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281927475,
+    "offset_ms": 0.051972000000000004,
+    "bound_ms": 1.2968419999999998,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281929482,
+    "offset_ms": 0.017017,
+    "bound_ms": 1.095431,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281931481,
+    "offset_ms": 0.000516,
+    "bound_ms": 1.121012,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281933494,
+    "offset_ms": 0.0025450000000000004,
+    "bound_ms": 1.1393090000000001,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281935496,
+    "offset_ms": 0.032924,
+    "bound_ms": 1.165555,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281937488,
+    "offset_ms": 0.024846,
+    "bound_ms": 1.1823839999999999,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281939492,
+    "offset_ms": 0.01492,
+    "bound_ms": 1.2042249999999999,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281941514,
+    "offset_ms": 0.01295,
+    "bound_ms": 1.228477,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281943477,
+    "offset_ms": 0.058511,
+    "bound_ms": 1.262181,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281945492,
+    "offset_ms": 0.045153,
+    "bound_ms": 1.287524,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281947483,
+    "offset_ms": 0.031801,
+    "bound_ms": 1.3128549999999999,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281949496,
+    "offset_ms": 0.036860000000000004,
+    "bound_ms": 1.3004769999999999,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281951485,
+    "offset_ms": 0.032389,
+    "bound_ms": 1.323075,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281953492,
+    "offset_ms": 0.001299,
+    "bound_ms": 1.306382,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281955480,
+    "offset_ms": 0.0012950000000000001,
+    "bound_ms": 1.326598,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281957501,
+    "offset_ms": 0.00129,
+    "bound_ms": 1.3467829999999998,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281959489,
+    "offset_ms": 0.008919999999999999,
+    "bound_ms": 1.332725,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281961483,
+    "offset_ms": 0.008673,
+    "bound_ms": 1.3505719999999999,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281963493,
+    "offset_ms": 0.008425,
+    "bound_ms": 1.3685059999999998,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281965503,
+    "offset_ms": 0.008177,
+    "bound_ms": 1.3864319999999999,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281967495,
+    "offset_ms": 0.00793,
+    "bound_ms": 1.404288,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281969472,
+    "offset_ms": 0.007683000000000001,
+    "bound_ms": 1.4221709999999999,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281971500,
+    "offset_ms": 0.0074340000000000005,
+    "bound_ms": 1.440177,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281973487,
+    "offset_ms": 0.007188,
+    "bound_ms": 1.4579739999999999,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281975488,
+    "offset_ms": 0.00694,
+    "bound_ms": 1.47587,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281977485,
+    "offset_ms": 0.006691,
+    "bound_ms": 1.493866,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281979511,
+    "offset_ms": 0.006445,
+    "bound_ms": 1.511663,
+    "relative_ready": "False",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281981470,
+    "offset_ms": 0.006195999999999999,
+    "bound_ms": 1.529642,
+    "relative_ready": "False",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281983473,
+    "offset_ms": 0.0059499999999999996,
+    "bound_ms": 1.5474579999999998,
+    "relative_ready": "False",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281985477,
+    "offset_ms": 0.005702,
+    "bound_ms": 1.56537,
+    "relative_ready": "False",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281987476,
+    "offset_ms": 0.005455000000000001,
+    "bound_ms": 1.5832769999999998,
+    "relative_ready": "False",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281989499,
+    "offset_ms": 0.005207000000000001,
+    "bound_ms": 1.601168,
+    "relative_ready": "False",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281991497,
+    "offset_ms": 0.00496,
+    "bound_ms": 1.619047,
+    "relative_ready": "False",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281993508,
+    "offset_ms": 0.004711,
+    "bound_ms": 1.637047,
+    "relative_ready": "False",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281995500,
+    "offset_ms": 0.004464999999999999,
+    "bound_ms": 1.6548589999999999,
+    "relative_ready": "False",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281997497,
+    "offset_ms": 0.004216999999999999,
+    "bound_ms": 1.672767,
+    "relative_ready": "False",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793281999474,
+    "offset_ms": 0.0039689999999999994,
+    "bound_ms": 1.690665,
+    "relative_ready": "False",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793282001492,
+    "offset_ms": 0.121898,
+    "bound_ms": 1.598632,
+    "relative_ready": "False",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793282003496,
+    "offset_ms": 0.162376,
+    "bound_ms": 1.505424,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793282005482,
+    "offset_ms": 8.000000000000001e-06,
+    "bound_ms": 1.5193839999999998,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793282007475,
+    "offset_ms": 0.051887,
+    "bound_ms": 1.3134805,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793282009501,
+    "offset_ms": 0.048531,
+    "bound_ms": 1.3086054999999999,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793282011483,
+    "offset_ms": 0.036347000000000004,
+    "bound_ms": 1.3186084999999999,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793282013497,
+    "offset_ms": 0.022223,
+    "bound_ms": 1.3217225000000001,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793282015476,
+    "offset_ms": 0.047056,
+    "bound_ms": 1.3171484999999998,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793282017496,
+    "offset_ms": 3e-06,
+    "bound_ms": 1.3264355,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793282019463,
+    "offset_ms": 3e-06,
+    "bound_ms": 1.3357385000000002,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793282021478,
+    "offset_ms": 3e-06,
+    "bound_ms": 1.3450434999999998,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793282023485,
+    "offset_ms": 3e-06,
+    "bound_ms": 1.3543405,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793282025466,
+    "offset_ms": 3e-06,
+    "bound_ms": 1.3636495,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793282027498,
+    "offset_ms": 3e-06,
+    "bound_ms": 1.3729515,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793282029476,
+    "offset_ms": 3e-06,
+    "bound_ms": 1.3822215,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793282031473,
+    "offset_ms": 0.025106999999999997,
+    "bound_ms": 1.2790110000000001,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793282033475,
+    "offset_ms": 0.04474,
+    "bound_ms": 1.281858,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  },
+  {
+    "observed_at": 1793282035475,
+    "offset_ms": 0.013415,
+    "bound_ms": 1.289896,
+    "relative_ready": "True",
+    "peer_sample_age_s": null
+  }
+]

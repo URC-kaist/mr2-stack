@@ -1,0 +1,6 @@
+<library path="robstride_device">
+  <class name="mr2_devices_robstride/RobstrideDevice"
+         type="mr2_devices_robstride::RobstrideDevice" base_class_type="CanDevice">
+    <description>RS-06 private CAN protocol, velocity commands in output-shaft rad/s.</description>
+  </class>
+</library>

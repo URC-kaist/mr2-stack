@@ -38,6 +38,17 @@ npm run dev
 The Vite dev server binds to `0.0.0.0`. In this repo it is configured to allow
 access from `mr2-ubuntu` as well as the default local hostnames.
 
+For the Jetson-hosted manual interface:
+
+```bash
+VITE_OPERATING_PROFILE=rover-direct npm run dev
+```
+
+This profile exposes Status, Live Feed, and Arm tabs, keeps the persistent
+drive/steering panel, and omits GPS/map, autonomy/science, Rocket M2, and base
+antenna UI. Leave endpoint variables blank when nginx serves the dashboard and
+proxies all services on the same Jetson.
+
 ## Local Setup
 
 For a simple same-host setup:
@@ -75,6 +86,7 @@ template includes every environment variable currently read by the dashboard.
 
 | Variable | Purpose | Default if unset |
 | --- | --- | --- |
+| `VITE_OPERATING_PROFILE` | UI feature set (`base` or `rover-direct`) | `base` |
 | `VITE_ROSBRIDGE_URL` | Full rosbridge WebSocket URL | `ws(s)://<current-host>/rosbridge-ws` |
 | `VITE_XBEE_WS_URL` | Full base gateway WebSocket URL | `ws(s)://<current-host>/xbee-ws` |
 | `VITE_VIDEO_WS_URL` | Full video WebSocket URL | `ws(s)://<current-host>/video-ws` |
@@ -147,6 +159,50 @@ It owns:
 - stream discovery via `/video/streams`
 - per-stream subscriptions over `/video-ws`
 - browser-side H.264 chunk delivery to the WebCodecs renderer
+
+### Latency diagnostics
+
+The persistent control sidebar contains a `Latency diagnostics` panel. The
+downlink command path and the complete Uplink RTP-to-render path are automated.
+
+- an automated command path through gateway T1 and rover T3/T4;
+- an automated RTP marker-to-browser-render report for the complete Uplink path;
+- aggregate and per-stream latency distributions and packet-loss context.
+
+Before a field run:
+
+1. install the base-local chrony configuration from
+   `scripts/latency/chrony/README.md` on both hosts;
+2. launch the rover with `enable_latency_diagnostics:=true`;
+3. wait for `Ready for synchronized measurement`, or press `Check chrony sync`
+   to refresh immediately;
+4. press `Measure downlink latency`, leave the controller neutral until the
+   panel says `Send one command`, and make one deliberate input;
+5. read the browser-to-gateway, gateway-to-rover, rover receive-to-publish, and
+   total rows after the ending clock check completes;
+6. select the Uplink feed count and press `Measure uplink latency`; capture
+   begins after every selected feed renders in the panel;
+7. read aggregate and per-stream Rocket M2, base-to-browser, decode/render,
+   and total distributions together with frame count and packet loss;
+8. export command and chrony observations as JSON Lines after the desired
+   repetitions.
+
+The chrony button does not start services or step clocks. While the panel is
+mounted, it polls base `/latency/clock-status` every two seconds and combines it
+with rover `/system_status/clock`; the button triggers an immediate refresh.
+Readiness requires both samples to be no older than five seconds, synchronized
+base and rover clocks, an absolute rover residual no greater than 2 ms, and a
+chrony root error bound no greater than 2 ms. A downlink trial also samples the
+browser/base offset before and after the command and rejects drift over 2 ms.
+
+The automated report displays same-frame segment latency and Rocket-link loss.
+It is calculated from existing RTP identifiers;
+the video payload and wire protocol are unchanged. No wheel-motion or visual
+motion detector is used.
+
+Only the selected stream contributes live browser samples. These samples are
+bounded to 600 frames and UI updates are batched. The command event log remains
+bounded to 20,000 records.
 
 ## Current Refactor Status
 

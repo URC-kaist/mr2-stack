@@ -1,8 +1,9 @@
 import type { ReactNode } from 'react'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { FiRefreshCw } from 'react-icons/fi'
-import VideoStreamCard from './VideoStreamCard'
-import { useRosBridge } from '../hooks/useRosBridge'
+import VideoStreamCard, { type VideoPlaybackStats } from './VideoStreamCard'
+import VideoLinkCard from './VideoLinkCard'
+import { useXbeeGateway } from '../hooks/useXbeeGateway'
 import { useVideoStreams } from '../hooks/useVideoStreams'
 import { getVideoGatewayClient, type VideoStreamInfo } from '../lib/videoGateway'
 
@@ -12,15 +13,7 @@ type ConfiguredVideoGridProps = {
   large?: boolean
   showReconnect?: boolean
   showStreamControls?: boolean
-}
-
-type SetBoolRequest = {
-  data: boolean
-}
-
-type SetBoolResponse = {
-  success: boolean
-  message?: string
+  showLinkStatus?: boolean
 }
 
 const ConfiguredVideoGrid = ({
@@ -29,12 +22,17 @@ const ConfiguredVideoGrid = ({
   large = false,
   showReconnect = false,
   showStreamControls = false,
+  showLinkStatus = false,
 }: ConfiguredVideoGridProps) => {
-  const { ros, connected: rosConnected } = useRosBridge()
+  const { gateway, connected } = useXbeeGateway()
   const { streams, loading, error, refresh } = useVideoStreams(panel)
-  const [enabledOverrides, setEnabledOverrides] = useState<Record<string, boolean>>({})
   const [pendingStreams, setPendingStreams] = useState<Set<string>>(() => new Set())
   const [toggleError, setToggleError] = useState<string | null>(null)
+  const [playbackStats, setPlaybackStats] = useState<Record<string, VideoPlaybackStats>>({})
+
+  const handlePlaybackStats = useCallback((streamId: string, stats: VideoPlaybackStats) => {
+    setPlaybackStats((current) => ({ ...current, [streamId]: stats }))
+  }, [])
 
   const handleReconnect = () => {
     getVideoGatewayClient().reconnect()
@@ -53,40 +51,31 @@ const ConfiguredVideoGrid = ({
     })
   }, [])
 
-  const handleToggleStream = useCallback(
-    async (streamId: string) => {
-      const currentlyEnabled = enabledOverrides[streamId] ?? true
-      const nextEnabled = !currentlyEnabled
-      setStreamPending(streamId, true)
-      setToggleError(null)
+  useEffect(() => gateway.onVideoCommandResult((result) => {
+    setStreamPending(result.stream_id, false)
+    if (!result.success) setToggleError(result.message)
+    refresh()
+  }), [gateway, refresh, setStreamPending])
 
-      try {
-        const response = await ros.callService<SetBoolRequest, SetBoolResponse>(
-          `/video_streaming/streams/${streamId}/set_enabled`,
-          'std_srvs/srv/SetBool',
-          { data: nextEnabled }
-        )
-        if (!response.success) {
-          throw new Error(response.message || 'Stream toggle failed')
-        }
-        setEnabledOverrides((current) => ({
-          ...current,
-          [streamId]: nextEnabled,
-        }))
-        getVideoGatewayClient().reconnect()
-        refresh()
-      } catch (err) {
-        setToggleError(err instanceof Error ? err.message : 'Stream toggle failed')
-      } finally {
-        setStreamPending(streamId, false)
-      }
-    },
-    [enabledOverrides, refresh, ros, setStreamPending]
-  )
+  useEffect(() => gateway.onConnectionStatus((isConnected) => {
+    if (!isConnected) setPendingStreams(new Set())
+  }), [gateway])
+
+  const setStream = (stream: VideoStreamInfo, enabled: boolean, priority: 'high' | 'low') => {
+    setToggleError(null)
+    if (!gateway.sendVideoSet(stream.stream_id, enabled, priority)) {
+      setToggleError('Control connection unavailable')
+      return
+    }
+    setStreamPending(stream.stream_id, true)
+  }
 
   const renderStream = (stream: VideoStreamInfo) => {
-    const isEnabled = enabledOverrides[stream.stream_id] !== false
+    const isEnabled = stream.enabled ?? stream.state === 'ON'
     const pending = pendingStreams.has(stream.stream_id)
+    const playback = playbackStats[stream.stream_id]
+    const hasVideo = playback?.width && playback.height && playback.fps > 0 &&
+      stream.state !== 'OFF' && stream.state !== 'NO DEVICE'
 
     return (
       <div className="video-feed-item" key={stream.stream_id}>
@@ -95,20 +84,38 @@ const ConfiguredVideoGrid = ({
             {stream.display.label || stream.stream_id}
           </span>
           {showStreamControls && (
-            <button
-              className="video-feed-stream-toggle"
-              type="button"
-              disabled={!rosConnected || pending}
-              onClick={() => void handleToggleStream(stream.stream_id)}
-            >
-              {isEnabled ? 'Disable' : 'Enable'}
-            </button>
+            <>
+              <span
+                className="video-feed-quality"
+                title="Displayed resolution and measured playback FPS (last second)"
+              >
+                {hasVideo ? `${playback.width}×${playback.height} · ${playback.fps.toFixed(1)} FPS` : '— · 0 FPS'}
+              </span>
+              <select
+                aria-label={`${stream.display.label || stream.stream_id} priority`}
+                value={stream.priority || 'low'}
+                disabled={!connected || pending || stream.state == null}
+                onChange={(event) => setStream(stream, isEnabled, event.target.value as 'high' | 'low')}
+              >
+                <option value="high">High</option>
+                <option value="low">Low</option>
+              </select>
+              <button
+                className="video-feed-stream-toggle"
+                type="button"
+                disabled={!connected || pending || stream.state == null}
+                onClick={() => setStream(stream, !isEnabled, stream.priority || 'low')}
+              >
+                {pending ? 'Applying…' : isEnabled ? 'Disable' : 'Enable'}
+              </button>
+            </>
           )}
         </div>
         <VideoStreamCard
           stream={stream}
           videoWidth={stream.width ?? 320}
           videoHeight={stream.height ?? 180}
+          onPlaybackStats={showStreamControls ? handlePlaybackStats : undefined}
         />
       </div>
     )
@@ -128,9 +135,7 @@ const ConfiguredVideoGrid = ({
     )
   } else {
     content = (
-      <div className="video-feed-grid">
-        {streams.map(renderStream)}
-      </div>
+      <>{streams.map(renderStream)}</>
     )
   }
 
@@ -154,7 +159,12 @@ const ConfiguredVideoGrid = ({
       {showStreamControls && toggleError && (
         <div className="video-feed-toggle-error">{toggleError}</div>
       )}
-      {content}
+      {showLinkStatus || (!loading && !error && streams.length > 0) ? (
+        <div className="video-feed-grid">
+          {showLinkStatus && <VideoLinkCard />}
+          {content}
+        </div>
+      ) : content}
     </article>
   )
 }

@@ -1,0 +1,52 @@
+Oct 29 20:43:00 rover kernel: usb 1-2.4.2: USB disconnect, device number 9
+Oct 29 20:43:00 rover kernel: usb 1-2.4.2: new high-speed USB device number 12 using tegra-xusb
+Oct 29 20:43:05 rover kernel: usb 1-2.4.2: USB disconnect, device number 12
+Oct 29 20:43:05 rover kernel: usb 1-2.4.2: new high-speed USB device number 13 using tegra-xusb
+Oct 29 20:43:09 rover kernel: usb 1-2.4.2: USB disconnect, device number 13
+Oct 29 20:43:10 rover kernel: usb 1-2.4.2: new high-speed USB device number 14 using tegra-xusb
+Oct 29 20:43:23 rover kernel: usb 1-2.4.2: USB disconnect, device number 14
+Oct 29 20:43:23 rover kernel: usb 1-2.4.2: new high-speed USB device number 15 using tegra-xusb
+Oct 29 20:43:26 rover kernel: usb 1-2.4.2: USB disconnect, device number 15
+Oct 29 20:43:26 rover kernel: usb 1-2.4.2: new high-speed USB device number 16 using tegra-xusb
+Oct 29 20:43:59 rover kernel: usb 1-2.4.2: USB disconnect, device number 16
+Oct 29 20:44:00 rover kernel: usb 1-2.4.2: new high-speed USB device number 17 using tegra-xusb
+Oct 29 20:44:01 rover kernel: usb 1-2.4.2: USB disconnect, device number 17
+Oct 29 20:44:02 rover kernel: usb 1-2.4.2: new high-speed USB device number 18 using tegra-xusb
+Oct 29 20:44:03 rover kernel: usb 1-2.4.2: USB disconnect, device number 18
+Oct 29 20:44:03 rover kernel: usb 1-2.4.2: new high-speed USB device number 19 using tegra-xusb
+Oct 29 20:44:04 rover kernel: usb 1-2.4.2: USB disconnect, device number 19
+Oct 29 20:44:56 rover kernel: ftdi_sio ttyUSB0: usb_serial_generic_read_bulk_callback - urb stopped: -32
+Oct 29 20:45:02 rover kernel: usb 1-2: USB disconnect, device number 2
+Oct 29 20:45:02 rover kernel: usb 1-2.1: USB disconnect, device number 4
+Oct 29 20:45:02 rover kernel: ftdi_sio ttyUSB0: error from flowcontrol urb
+Oct 29 20:45:02 rover kernel: ftdi_sio ttyUSB0: FTDI USB Serial Device converter now disconnected from ttyUSB0
+Oct 29 20:45:02 rover kernel: ftdi_sio 1-2.1:1.0: device disconnected
+Oct 29 20:45:02 rover kernel: usb 1-2.2: USB disconnect, device number 5
+Oct 29 20:45:02 rover kernel: usb 1-2.2.4: USB disconnect, device number 7
+Oct 29 20:45:02 rover kernel: usb 1-2.4: USB disconnect, device number 6
+Oct 29 20:45:02 rover kernel: usb 1-2.4.1: USB disconnect, device number 8
+Oct 29 20:45:02 rover kernel: usb 1-2.4.3: USB disconnect, device number 10
+Oct 29 20:45:02 rover kernel: usb 1-2.4.4: USB disconnect, device number 11
+Oct 29 20:45:03 rover kernel: usb 1-2: new high-speed USB device number 24 using tegra-xusb
+Oct 29 20:45:03 rover kernel: usb 1-2.1: new full-speed USB device number 25 using tegra-xusb
+Oct 29 20:45:04 rover kernel: ftdi_sio 1-2.1:1.0: FTDI USB Serial Device converter detected
+Oct 29 20:45:04 rover kernel: usb 1-2.1: FTDI USB Serial Device converter now attached to ttyUSB1
+Oct 29 20:45:04 rover kernel: usb 1-2.2: new high-speed USB device number 26 using tegra-xusb
+Oct 29 20:45:04 rover kernel: usb 1-2.4: new high-speed USB device number 27 using tegra-xusb
+Oct 29 20:45:04 rover kernel: usb 1-2.2.4: new high-speed USB device number 28 using tegra-xusb
+Oct 29 20:45:04 rover kernel: usb 1-2.4.1: new high-speed USB device number 29 using tegra-xusb
+Oct 29 20:45:05 rover kernel: usb 1-2.4.2: new high-speed USB device number 31 using tegra-xusb
+Oct 29 20:45:06 rover kernel: usb 1-2.4.3: new high-speed USB device number 32 using tegra-xusb
+Oct 29 20:45:06 rover kernel: usb 1-2.4.4: new high-speed USB device number 33 using tegra-xusb
+Oct 29 20:45:07 rover kernel: usb 1-2.4.2: USB disconnect, device number 31
+Oct 29 20:45:08 rover kernel: usb 1-2.4.2: new high-speed USB device number 34 using tegra-xusb
+Oct 29 20:45:09 rover kernel: usb 1-2.4.2: USB disconnect, device number 34
+Oct 29 20:45:09 rover kernel: usb 1-2.4.2: new high-speed USB device number 39 using tegra-xusb
+Oct 29 20:45:10 rover kernel: usb 1-2.4.2: new high-speed USB device number 40 using tegra-xusb
+Oct 29 20:45:13 rover kernel: usb 1-2.4.2: USB disconnect, device number 40
+Oct 29 20:45:14 rover kernel: usb 1-2.4.2: new high-speed USB device number 41 using tegra-xusb
+Oct 29 20:45:15 rover kernel: usb 1-2.4.2: new high-speed USB device number 42 using tegra-xusb
+Oct 29 20:45:16 rover kernel: usb 1-2.4.2: USB disconnect, device number 42
+Oct 29 20:45:17 rover kernel: usb 1-2.4.2: new high-speed USB device number 43 using tegra-xusb
+Oct 29 20:45:18 rover kernel: usb 1-2.4.2: USB disconnect, device number 43
+Oct 29 20:45:18 rover kernel: usb 1-2.4.2: new high-speed USB device number 44 using tegra-xusb

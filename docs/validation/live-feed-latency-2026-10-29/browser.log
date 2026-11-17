@@ -1,0 +1,1 @@
+{"passed":true,"layoutCases":8,"states":["ready","clock-unready","clock-recovered","idle","traffic-resumed","telemetry-stale"]}

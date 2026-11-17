@@ -2,6 +2,7 @@
 
 const test = require('node:test')
 const assert = require('node:assert/strict')
+const { Readable } = require('node:stream')
 
 const {
   handleRocketM2Status,
@@ -22,6 +23,25 @@ function createResponseRecorder() {
     },
   }
 }
+
+test('uplink deployment status is read-only and includes clock and live streams', async () => {
+  const handler = createGatewayHttpHandler({
+    uplinkTrialManager: {
+      diagnosticsStatus: () => ({ schema_version: 1, configured: true }),
+      createTrial: () => { throw new Error('status must not create a trial') },
+    },
+    getChronyStatus: async () => ({ synchronized: true }),
+    getVideoStreams: () => [{ stream_id: 'flat_cam_1', available: true }],
+  })
+  const res = createResponseRecorder()
+  await handler({ method: 'GET', url: '/latency/uplink/status' }, res)
+  assert.equal(res.statusCode, 200)
+  assert.equal(res.headers['Cache-Control'], 'no-store')
+  const body = JSON.parse(res.body)
+  assert.equal(body.configured, true)
+  assert.equal(body.clock.synchronized, true)
+  assert.equal(body.video_streams[0].stream_id, 'flat_cam_1')
+})
 
 test('handleRocketM2Status reports disabled gateway state', () => {
   const res = createResponseRecorder()
@@ -122,4 +142,70 @@ test('createGatewayHttpHandler serves video stream metadata', () => {
       },
     ],
   })
+})
+
+test('createGatewayHttpHandler serves latency clock samples without caching', () => {
+  const handler = createGatewayHttpHandler()
+  const res = createResponseRecorder()
+
+  handler(
+    {
+      method: 'GET',
+      url: '/latency/time',
+    },
+    res
+  )
+
+  const body = JSON.parse(res.body)
+  assert.equal(res.statusCode, 200)
+  assert.equal(res.headers['Cache-Control'], 'no-store')
+  assert.equal(Number.isInteger(body.server_receive_epoch_us), true)
+  assert.equal(Number.isInteger(body.server_send_epoch_us), true)
+  assert.equal(body.server_send_epoch_us >= body.server_receive_epoch_us, true)
+})
+
+test('createGatewayHttpHandler serves read-only chrony status without caching', async () => {
+  const handler = createGatewayHttpHandler({
+    getChronyStatus: async () => ({
+      schema_version: 1,
+      role: 'base',
+      available: true,
+      synchronized: true,
+      reference_id: '7F7F0101',
+    }),
+  })
+  const res = createResponseRecorder()
+
+  await handler({ method: 'GET', url: '/latency/clock-status' }, res)
+
+  assert.equal(res.statusCode, 200)
+  assert.equal(res.headers['Cache-Control'], 'no-store')
+  assert.equal(JSON.parse(res.body).reference_id, '7F7F0101')
+})
+
+test('createGatewayHttpHandler routes automated uplink trial creation', async () => {
+  let received = null
+  const handler = createGatewayHttpHandler({
+    uplinkTrialManager: {
+      createTrial(body) {
+        received = body
+        return { schema_version: 1, trial_id: 'trial-1', phase: 'created' }
+      },
+    },
+  })
+  const request = Readable.from([
+    Buffer.from(
+      JSON.stringify({ feed_count: 2, stream_ids: ['front', 'rear'], duration_s: 15 })
+    ),
+  ])
+  request.method = 'POST'
+  request.url = '/latency/uplink/trials'
+  request.headers = { 'content-type': 'application/json' }
+  const res = createResponseRecorder()
+
+  await handler(request, res)
+
+  assert.equal(res.statusCode, 201)
+  assert.deepEqual(received.stream_ids, ['front', 'rear'])
+  assert.equal(JSON.parse(res.body).trial_id, 'trial-1')
 })

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="11" failures="0" disabled="0" errors="0" time="0.759" timestamp="2026-11-12T23:23:49" name="AllTests">
+  <testsuite name="Drivers" tests="11" failures="0" disabled="0" errors="0" time="0.759" timestamp="2026-11-12T23:23:49">
+    <testcase name="AkBytesHoldTimeoutRecoveryAndInvalidFrame" status="run" result="completed" time="0.511" timestamp="2026-11-12T23:23:49" classname="mr2_control.Drivers" />
+    <testcase name="OutputBytesInactiveInvalidAndShutdown" status="run" result="completed" time="0" timestamp="2026-11-12T23:23:49" classname="mr2_control.Drivers" />
+    <testcase name="ActivationFeedbackWaitAndOptionalAbsence" status="run" result="completed" time="0.081" timestamp="2026-11-12T23:23:49" classname="mr2_control.Drivers" />
+    <testcase name="ConcurrentFeedbackCopyProcessAndLifecycleReaders" status="run" result="completed" time="0.061" timestamp="2026-11-12T23:23:49" classname="mr2_control.Drivers" />
+    <testcase name="AkObservedStartupJumpsNeverEscapeOrTransmit" status="run" result="completed" time="0" timestamp="2026-11-12T23:23:49" classname="mr2_control.Drivers" />
+    <testcase name="AkFivePacketsRequiredAndControlReadsDoNotCount" status="run" result="completed" time="0" timestamp="2026-11-12T23:23:49" classname="mr2_control.Drivers" />
+    <testcase name="AkStartupToleranceUsesWholeWindowAndErrorResetsIt" status="run" result="completed" time="0" timestamp="2026-11-12T23:23:49" classname="mr2_control.Drivers" />
+    <testcase name="AkStartupGapRestartsWaitAndWindow" status="run" result="completed" time="0" timestamp="2026-11-12T23:23:49" classname="mr2_control.Drivers" />
+    <testcase name="AkStartupWarningOncePerSecondPerMotorUntilReady" status="run" result="completed" time="0" timestamp="2026-11-12T23:23:49" classname="mr2_control.Drivers" />
+    <testcase name="AkStartupConfigurationIsValidatedAndApplied" status="run" result="completed" time="0" timestamp="2026-11-12T23:23:49" classname="mr2_control.Drivers" />
+    <testcase name="CancelActivationWhenRosContextStops" status="run" result="completed" time="0.105" timestamp="2026-11-12T23:23:49" classname="mr2_control.Drivers" />
+  </testsuite>
+</testsuites>

@@ -1,0 +1,119 @@
+[
+  {
+    "name": "8000-32-8000-loss-0",
+    "admitted_packets": 18600,
+    "admitted_max_age_ms": 410.0217028085608,
+    "received_max_age_ms": 29860.683962891577,
+    "final_budget_kbps": 8619.67538460524,
+    "first_fresh_in_weak_phase_s": 0,
+    "first_fresh_after_recovery_s": 1.652
+  },
+  {
+    "name": "8000-32-8000-loss-0.02",
+    "admitted_packets": 17686,
+    "admitted_max_age_ms": 411.33076360984705,
+    "received_max_age_ms": 29898.94676177972,
+    "final_budget_kbps": 8101.471641327464,
+    "first_fresh_in_weak_phase_s": 0,
+    "first_fresh_after_recovery_s": 1.652
+  },
+  {
+    "name": "8000-32-8000-loss-0.05",
+    "admitted_packets": 15132,
+    "admitted_max_age_ms": 411.4809517720714,
+    "received_max_age_ms": 29860.01416034205,
+    "final_budget_kbps": 7732.706582204331,
+    "first_fresh_in_weak_phase_s": 0,
+    "first_fresh_after_recovery_s": 1.652
+  },
+  {
+    "name": "8000-100-8000-loss-0",
+    "admitted_packets": 21308,
+    "admitted_max_age_ms": 423.2492669473868,
+    "received_max_age_ms": 26961.4151324064,
+    "final_budget_kbps": 8428.301571494894,
+    "first_fresh_in_weak_phase_s": 0,
+    "first_fresh_after_recovery_s": 0.12
+  },
+  {
+    "name": "8000-100-8000-loss-0.02",
+    "admitted_packets": 20040,
+    "admitted_max_age_ms": 420.9071600541938,
+    "received_max_age_ms": 29639.66800398333,
+    "final_budget_kbps": 7313.474788319697,
+    "first_fresh_in_weak_phase_s": 0,
+    "first_fresh_after_recovery_s": 0.252
+  },
+  {
+    "name": "8000-100-8000-loss-0.05",
+    "admitted_packets": 12653,
+    "admitted_max_age_ms": 422.04302246915177,
+    "received_max_age_ms": 26771.908850824228,
+    "final_budget_kbps": 7087.499329546381,
+    "first_fresh_in_weak_phase_s": 0,
+    "first_fresh_after_recovery_s": 0.12
+  },
+  {
+    "name": "8000-300-8000-loss-0",
+    "admitted_packets": 18276,
+    "admitted_max_age_ms": 449.2188239058014,
+    "received_max_age_ms": 8701.4151324064,
+    "final_budget_kbps": 8248.186913572239,
+    "first_fresh_in_weak_phase_s": 0,
+    "first_fresh_after_recovery_s": 0.014
+  },
+  {
+    "name": "8000-300-8000-loss-0.02",
+    "admitted_packets": 18036,
+    "admitted_max_age_ms": 454.7820416877512,
+    "received_max_age_ms": 11178.528518328443,
+    "final_budget_kbps": 8144.35141401516,
+    "first_fresh_in_weak_phase_s": 0,
+    "first_fresh_after_recovery_s": 0.014
+  },
+  {
+    "name": "8000-300-8000-loss-0.05",
+    "admitted_packets": 10001,
+    "admitted_max_age_ms": 421.6163763469085,
+    "received_max_age_ms": 8639.908850824228,
+    "final_budget_kbps": 2084.068031411651,
+    "first_fresh_in_weak_phase_s": 0,
+    "first_fresh_after_recovery_s": 0
+  },
+  {
+    "name": "cold-32",
+    "admitted_packets": 132,
+    "admitted_max_age_ms": 390.87338659586385,
+    "received_max_age_ms": 390.87338659586385,
+    "final_budget_kbps": 32,
+    "first_fresh_in_weak_phase_s": 0.222,
+    "first_fresh_after_recovery_s": null
+  },
+  {
+    "name": "cold-100",
+    "admitted_packets": 287,
+    "admitted_max_age_ms": 198.6242928178981,
+    "received_max_age_ms": 198.6242928178981,
+    "final_budget_kbps": 76.89964244011632,
+    "first_fresh_in_weak_phase_s": 0.004,
+    "first_fresh_after_recovery_s": null
+  },
+  {
+    "name": "cold-1000",
+    "admitted_packets": 3212,
+    "admitted_max_age_ms": 59.348310539731756,
+    "received_max_age_ms": 59.348310539731756,
+    "final_budget_kbps": 825.8064516129032,
+    "first_fresh_in_weak_phase_s": 0.008,
+    "first_fresh_after_recovery_s": null
+  },
+  {
+    "name": "control-old-playback",
+    "admitted_packets": 6907,
+    "admitted_max_age_ms": 14756,
+    "received_max_age_ms": 14756,
+    "final_budget_kbps": 81.44067796610169,
+    "first_fresh_in_weak_phase_s": null,
+    "first_fresh_after_recovery_s": null
+  }
+]

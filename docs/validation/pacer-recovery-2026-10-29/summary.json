@@ -1,0 +1,45 @@
+{
+  "fix": {
+    "geometry": "Removed ROS-only geometry ceiling and impossible rate-based unlock",
+    "pacing": "common CAPS FPS-aware frame windows: delta 1.2 periods, IDR 2 periods; 150 ms minimum, 300 ms hard maximum; assigned packet pacing bitrate unchanged",
+    "source_fps": 6,
+    "camera_config_changed": false,
+    "field_ips_changed": false
+  },
+  "verification": {
+    "unit_tests": 2,
+    "real_encoder_decode": {
+      "source_fps": 6,
+      "source_frames": 72,
+      "decoded_frames": 66,
+      "width": 640,
+      "height": 480,
+      "wire_budget_kbps": 1800,
+      "encoder_target_kbps": 1530,
+      "sender_exit": 0,
+      "elapsed_s": 13.047282350999922
+    },
+    "budget_profile_recovery": true,
+    "real_browser": true,
+    "real_browser_rgbd_fps": 4.498200719712115,
+    "native_x264_jetson": "passed"
+  },
+  "running_processes": {
+    "launch": 29121,
+    "camera": 29211,
+    "yolo": 29392,
+    "old_video": 29438,
+    "new_video": 43029
+  },
+  "deployment": {
+    "video_node_only_restarted": true,
+    "prior_enable_priority_preserved": true,
+    "replacement_follows_original_launch_lifetime": true,
+    "next_normal_launch_uses_workspace_build": true
+  },
+  "limits": [
+    "Browser playback FPS remains below the unchanged 6 FPS camera cap; no 30 FPS camera/autonomy change.",
+    "150/200/300 ms are sender frame admission windows, not an end-to-end latency guarantee.",
+    "Left alias V4L2 initialization errors predate this fix and were not modified."
+  ]
+}

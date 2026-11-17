@@ -1,0 +1,21 @@
+{
+  "rover_policy": {
+    "locked": false,
+    "base_locked": false,
+    "local_sessions": 0,
+    "remote_sessions": 0,
+    "error": null
+  },
+  "rover_tcp_9090": "State Recv-Q Send-Q Local Address:Port Peer Address:PortProcess\n",
+  "rover_test_processes": "",
+  "base": {
+    "policy": {
+      "locked": false,
+      "local_sessions": 0,
+      "remote_sessions": 0,
+      "error": null
+    },
+    "ports": "State Recv-Q Send-Q Local Address:Port Peer Address:PortProcess\n",
+    "processes": ""
+  }
+}

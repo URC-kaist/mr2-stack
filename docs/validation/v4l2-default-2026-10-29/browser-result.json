@@ -1,0 +1,79 @@
+{
+  "elapsed_s": 10.005,
+  "rendered": {
+    "Front Right": {
+      "count": 201,
+      "sizes": [
+        "480x270"
+      ]
+    },
+    "Front Left": {
+      "count": 105,
+      "sizes": [
+        "480x270"
+      ]
+    },
+    "RGB-D Cam": {
+      "count": 299,
+      "sizes": [
+        "480x360"
+      ]
+    }
+  },
+  "headers": [
+    {
+      "label": "RGB-D Cam",
+      "quality": "480×360 · 30.0 FPS"
+    },
+    {
+      "label": "Top Cam",
+      "quality": "— · 0 FPS"
+    },
+    {
+      "label": "Front Left",
+      "quality": "480×270 · 26.0 FPS"
+    },
+    {
+      "label": "Front Right",
+      "quality": "480×270 · 14.0 FPS"
+    },
+    {
+      "label": "Left",
+      "quality": "— · 0 FPS"
+    },
+    {
+      "label": "Right",
+      "quality": "— · 0 FPS"
+    },
+    {
+      "label": "Arm",
+      "quality": "— · 0 FPS"
+    },
+    {
+      "label": "Gripper",
+      "quality": "— · 0 FPS"
+    },
+    {
+      "label": "Science Left",
+      "quality": "— · 0 FPS"
+    },
+    {
+      "label": "Left Beaker",
+      "quality": "— · 0 FPS"
+    },
+    {
+      "label": "Microscope",
+      "quality": "— · 0 FPS"
+    },
+    {
+      "label": "Science Right",
+      "quality": "— · 0 FPS"
+    },
+    {
+      "label": "Right Beaker",
+      "quality": "— · 0 FPS"
+    }
+  ],
+  "rgbd_fps": 29.885057471264364,
+  "passed": true
+}

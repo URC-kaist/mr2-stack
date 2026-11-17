@@ -1,0 +1,32 @@
+{"at_s": 0.8, "base_locked": false, "base_source": "121.134.215.104", "rover_locked": false, "peer": null, "measurement_ready": false, "offset_ms": -0.0, "error_bound_ms": 1500.0}
+{"at_s": 6.6, "base_locked": true, "base_source": "127.127.1.1", "rover_locked": true, "peer": "192.168.0.55", "measurement_ready": false, "offset_ms": 2.637282, "error_bound_ms": 4.0403744999999995}
+{"at_s": 12.4, "base_locked": true, "base_source": "127.127.1.1", "rover_locked": true, "peer": "192.168.0.55", "measurement_ready": false, "offset_ms": 2.079348, "error_bound_ms": 1.536202}
+{"at_s": 18.2, "base_locked": true, "base_source": "127.127.1.1", "rover_locked": true, "peer": "192.168.0.55", "measurement_ready": false, "offset_ms": 1.3236890000000001, "error_bound_ms": 2.51062}
+{"at_s": 24.0, "base_locked": true, "base_source": "127.127.1.1", "rover_locked": true, "peer": "192.168.0.55", "measurement_ready": false, "offset_ms": 1.096725, "error_bound_ms": 3.7194059999999998}
+{"at_s": 29.8, "base_locked": true, "base_source": "127.127.1.1", "rover_locked": true, "peer": "192.168.0.55", "measurement_ready": false, "offset_ms": 0.670589, "error_bound_ms": 2.5188225}
+{"at_s": 35.6, "base_locked": true, "base_source": "127.127.1.1", "rover_locked": true, "peer": "192.168.0.55", "measurement_ready": false, "offset_ms": -0.09907, "error_bound_ms": 2.7365395}
+{"at_s": 41.4, "base_locked": true, "base_source": "127.127.1.1", "rover_locked": true, "peer": "192.168.0.55", "measurement_ready": true, "offset_ms": -0.309464, "error_bound_ms": 1.5168445}
+{"at_s": 47.2, "base_locked": true, "base_source": "127.127.1.1", "rover_locked": true, "peer": "192.168.0.55", "measurement_ready": false, "offset_ms": -0.202131, "error_bound_ms": 2.0040645}
+{"at_s": 53.0, "base_locked": true, "base_source": "127.127.1.1", "rover_locked": true, "peer": "192.168.0.55", "measurement_ready": true, "offset_ms": 0.216417, "error_bound_ms": 1.2684395000000002}
+{"at_s": 58.8, "base_locked": true, "base_source": "127.127.1.1", "rover_locked": true, "peer": "192.168.0.55", "measurement_ready": false, "offset_ms": 0.102575, "error_bound_ms": 1.5767634999999998}
+{"at_s": 64.5, "base_locked": true, "base_source": "127.127.1.1", "rover_locked": true, "peer": "192.168.0.55", "measurement_ready": true, "offset_ms": -0.028428, "error_bound_ms": 1.7605674999999998}
+{"at_s": 70.3, "base_locked": true, "base_source": "127.127.1.1", "rover_locked": true, "peer": "192.168.0.55", "measurement_ready": true, "offset_ms": 0.072371, "error_bound_ms": 1.3913254999999998}
+{"at_s": 76.1, "base_locked": true, "base_source": "127.127.1.1", "rover_locked": true, "peer": "192.168.0.55", "measurement_ready": false, "offset_ms": 0.066772, "error_bound_ms": 1.5719265}
+{"at_s": 81.9, "base_locked": true, "base_source": "127.127.1.1", "rover_locked": true, "peer": "192.168.0.55", "measurement_ready": false, "offset_ms": 0.008878, "error_bound_ms": 1.7684705}
+{"at_s": 87.7, "base_locked": true, "base_source": "127.127.1.1", "rover_locked": true, "peer": "192.168.0.55", "measurement_ready": false, "offset_ms": 0.008785, "error_bound_ms": 1.9672865000000002}
+{"at_s": 93.6, "base_locked": true, "base_source": "127.127.1.1", "rover_locked": true, "peer": "192.168.0.55", "measurement_ready": false, "offset_ms": -0.096203, "error_bound_ms": 2.1874385}
+{"at_s": 99.4, "base_locked": true, "base_source": "127.127.1.1", "rover_locked": true, "peer": "192.168.0.55", "measurement_ready": true, "offset_ms": 0.043034, "error_bound_ms": 1.602019}
+{"at_s": 105.2, "base_locked": true, "base_source": "127.127.1.1", "rover_locked": true, "peer": "192.168.0.55", "measurement_ready": true, "offset_ms": 0.040645999999999995, "error_bound_ms": 1.755833}
+{"at_s": 111.0, "base_locked": true, "base_source": "127.127.1.1", "rover_locked": true, "peer": "192.168.0.55", "measurement_ready": false, "offset_ms": 0.07323700000000001, "error_bound_ms": 1.89364}
+{"at_s": 116.8, "base_locked": true, "base_source": "127.127.1.1", "rover_locked": true, "peer": "192.168.0.55", "measurement_ready": false, "offset_ms": 0.065589, "error_bound_ms": 2.0346640000000003}
+{"at_s": 122.6, "base_locked": true, "base_source": "127.127.1.1", "rover_locked": true, "peer": "192.168.0.55", "measurement_ready": false, "offset_ms": -0.067011, "error_bound_ms": 2.177718}
+{"at_s": 128.4, "base_locked": true, "base_source": "127.127.1.1", "rover_locked": true, "peer": "192.168.0.55", "measurement_ready": false, "offset_ms": -0.064686, "error_bound_ms": 2.3145040000000003}
+{"at_s": 134.2, "base_locked": true, "base_source": "127.127.1.1", "rover_locked": true, "peer": "192.168.0.55", "measurement_ready": false, "offset_ms": -0.062360000000000006, "error_bound_ms": 2.4513629999999997}
+{"at_s": 140.0, "base_locked": true, "base_source": "127.127.1.1", "rover_locked": true, "peer": "192.168.0.55", "measurement_ready": true, "offset_ms": 0.017408, "error_bound_ms": 1.7163755}
+{"at_s": 145.8, "base_locked": true, "base_source": "127.127.1.1", "rover_locked": true, "peer": "192.168.0.55", "measurement_ready": true, "offset_ms": 0.017229, "error_bound_ms": 1.8212195}
+{"at_s": 151.7, "base_locked": true, "base_source": "127.127.1.1", "rover_locked": true, "peer": "192.168.0.55", "measurement_ready": true, "offset_ms": 0.017048999999999998, "error_bound_ms": 1.9269195}
+{"at_s": 157.5, "base_locked": true, "base_source": "127.127.1.1", "rover_locked": true, "peer": "192.168.0.55", "measurement_ready": false, "offset_ms": 0.154977, "error_bound_ms": 2.0460265}
+Traceback (most recent call last):
+  File "/tmp/mr2-offline-audit/clock_audit.py", line 56, in <module>
+    assert ready_since and time.monotonic()-ready_since>=40, 'Relative clock did not remain measurement-ready'
+AssertionError: Relative clock did not remain measurement-ready

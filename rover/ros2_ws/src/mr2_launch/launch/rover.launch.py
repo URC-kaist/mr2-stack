@@ -1,11 +1,12 @@
+from mr2_launch.clock_guard import video_base_host_default
 from launch import LaunchDescription
 from launch.actions import (
-    DeclareLaunchArgument,
     IncludeLaunchDescription,
+    OpaqueFunction,
     TimerAction,
 )
 from launch.conditions import IfCondition, UnlessCondition
-from launch.launch_description_sources import AnyLaunchDescriptionSource, PythonLaunchDescriptionSource
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import (
     EnvironmentVariable,
     LaunchConfiguration,
@@ -16,10 +17,35 @@ from launch_ros.actions import Node, SetParameter
 from launch_ros.parameter_descriptions import ParameterValue
 from launch_ros.substitutions import FindPackageShare
 from mr2_launch.env import load_mr2_env
+from mr2_launch.profile import profile_arguments
+from mr2_launch.clock_guard import acquire_if_real
+from mr2_launch.gnss import gnss_actions
+from mr2_launch.flat_motor import flat_motor_actions
+
+
+def _validate_control_backend(context):
+    if (LaunchConfiguration("control_backend").perform(context) == "mr2_control"
+            and LaunchConfiguration("mode").perform(context) != "real"):
+        raise RuntimeError("mr2_control currently supports real mode only; use its mock.launch.py for hardware-free validation")
+    return []
 
 
 def generate_launch_description():
-    load_mr2_env(required=["MR2_BASE_IP"])
+    DeclareLaunchArgument = profile_arguments("rover")
+    load_mr2_env()
+
+    enable_rover_hardware_arg = DeclareLaunchArgument(
+        "enable_rover_hardware", default_value="true",
+        description="Start the original rover model, drive/arm controllers and battery CAN monitors",
+    )
+    enable_xbee_bridge_arg = DeclareLaunchArgument(
+        "enable_xbee_bridge", default_value="true",
+        description="Start the real-mode command bridge (physical XBee or direct-mode PTY)",
+    )
+    smooth_drive_commands_arg = DeclareLaunchArgument(
+        "smooth_drive_commands", default_value="true",
+        description="Apply command-bridge drive slew limiting (flat motor handles its own limits)",
+    )
 
     # ─── Arguments ───────────────────────────────────────────────────────────────
     default_rviz = PathJoinSubstitution([
@@ -49,15 +75,30 @@ def generate_launch_description():
         default_value="false",
         description="Run without GUI components",
     )
+    actuator_arg = DeclareLaunchArgument(
+        "actuator", default_value="custom", choices=["custom", "rs"],
+        description="Drive wheel motors: custom firmware or RobStride RS-06",
+    )
+
     can_iface_arg = DeclareLaunchArgument(
         "can_iface",
         default_value="can0",
         description="CAN interface used by the AK servo hardware",
     )
+    control_backend_arg = DeclareLaunchArgument(
+        "control_backend", default_value="ros2_control",
+        choices=["ros2_control", "mr2_control"],
+        description="Real actuator runtime (simulation uses ros2_control)",
+    )
     controller_config_arg = DeclareLaunchArgument(
         "controller_config",
         default_value=PathJoinSubstitution(
-            [FindPackageShare("mr2_rover_description"), "config", "controllers", "rover_controllers.yaml"]
+            [
+                FindPackageShare("mr2_rover_description"),
+                "config",
+                "controllers",
+                "rover_controllers.yaml",
+            ]
         ),
         description="Controller manager YAML shared by sim and hardware",
     )
@@ -83,7 +124,9 @@ def generate_launch_description():
     )
     enable_autonomous_module_arg = DeclareLaunchArgument(
         "enable_autonomous_module",
-        default_value="true",
+        default_value=PythonExpression([
+            "'true' if '", LaunchConfiguration("mode"), "' == 'sim' else 'false'",
+        ]),
         description="Enable autonomous camera module (front_camera)",
     )
     enable_science_module_arg = DeclareLaunchArgument(
@@ -95,6 +138,19 @@ def generate_launch_description():
         "enable_autonomous_module_sim",
         default_value="true",
         description="Enable autonomous camera module (front_camera) in simulation",
+    )
+    enable_localization_arg = DeclareLaunchArgument(
+        "enable_localization",
+        default_value=LaunchConfiguration("enable_autonomous_module"),
+        description="Start the delayed robot_localization stack",
+    )
+    start_manipulator_controllers_active_arg = DeclareLaunchArgument(
+        "start_manipulator_controllers_active",
+        default_value="false",
+        description=(
+            "Start real manipulator and gripper controllers active instead of "
+            "configured/inactive"
+        ),
     )
     xbee_sim_device_arg = DeclareLaunchArgument(
         "xbee_sim_device",
@@ -111,15 +167,37 @@ def generate_launch_description():
         default_value="/dev/ttyXBEE",
         description="Serial device for the real XBEE bridge",
     )
+    enable_latency_diagnostics_arg = DeclareLaunchArgument(
+        "enable_latency_diagnostics",
+        default_value="false",
+        description="Publish experimental command and motion latency traces",
+    )
+    latency_capture_interface_arg = DeclareLaunchArgument(
+        "latency_capture_interface",
+        default_value=EnvironmentVariable(
+            "MR2_ROVER_ROCKET_INTERFACE", default_value=""
+        ),
+        description="Rover network interface facing the Rocket M2 link",
+    )
+    latency_artifact_directory_arg = DeclareLaunchArgument(
+        "latency_artifact_directory",
+        default_value=EnvironmentVariable(
+            "MR2_LATENCY_ARTIFACT_DIR", default_value="/tmp/mr2-latency-rover"
+        ),
+        description="Rover directory for temporary latency capture artifacts",
+    )
     enable_aruco_arg = DeclareLaunchArgument(
         "enable_aruco",
-        default_value="true",
+        default_value=LaunchConfiguration("enable_autonomous_module"),
         description="Start ArUco tracker node",
     )
     aruco_cam_topic_arg = DeclareLaunchArgument(
         "aruco_cam_topic",
         default_value="/front_camera/image_raw",
-        description="Base image topic for aruco_opencv (must have matching /camera_info; default is Gazebo RGBD camera)",
+        description=(
+            "Base image topic for aruco_opencv (must have matching /camera_info; "
+            "default is Gazebo RGBD camera)"
+        ),
     )
     enable_video_streaming_arg = DeclareLaunchArgument(
         "enable_video_streaming",
@@ -128,7 +206,7 @@ def generate_launch_description():
     )
     video_base_host_arg = DeclareLaunchArgument(
         "video_base_host",
-        default_value=EnvironmentVariable("MR2_BASE_IP"),
+        default_value=video_base_host_default(),
         description="Base-station host/IP for rover RTP/UDP video streams",
     )
     video_config_arg = DeclareLaunchArgument(
@@ -146,7 +224,10 @@ def generate_launch_description():
     yolo_device_arg = DeclareLaunchArgument(
         "yolo_device",
         default_value="",
-        description="Ultralytics device for YOLO inference (e.g., cuda:0 or cpu; empty lets Ultralytics choose)",
+        description=(
+            "Ultralytics device for YOLO inference (e.g., cuda:0 or cpu; empty "
+            "lets Ultralytics choose)"
+        ),
     )
     yolo_publish_annotated_arg = DeclareLaunchArgument(
         "yolo_publish_annotated",
@@ -156,15 +237,15 @@ def generate_launch_description():
     yolo_annotated_fps_arg = DeclareLaunchArgument(
         "yolo_annotated_fps",
         default_value="0.0",
-        description="Maximum annotated YOLO debug image publish rate in Hz; 0 publishes every frame",
+        description=(
+            "Maximum annotated YOLO debug image publish rate in Hz; 0 publishes "
+            "every frame"
+        ),
     )
 
     # ─── Nodes / Includes ────────────────────────────────────────────────────────
     sim_condition = IfCondition(
         PythonExpression(["'", LaunchConfiguration("mode"), "' == 'sim'"])
-    )
-    real_condition = IfCondition(
-        PythonExpression(["'", LaunchConfiguration("mode"), "' == 'real'"])
     )
     enable_manipulator_module = LaunchConfiguration("enable_manipulator_module")
     xbee_sim_condition = sim_condition
@@ -177,6 +258,25 @@ def generate_launch_description():
         executable="system_status",
         name="system_status",
         output="screen",
+    )
+
+    latency_uplink_agent = Node(
+        package="mr2_latency_diagnostics",
+        executable="uplink_agent",
+        name="latency_uplink_agent",
+        output="screen",
+        parameters=[
+            {
+                "capture_interface": LaunchConfiguration(
+                    "latency_capture_interface"
+                ),
+                "video_config_path": LaunchConfiguration("video_config"),
+                "artifact_directory": LaunchConfiguration(
+                    "latency_artifact_directory"
+                ),
+            }
+        ],
+        condition=IfCondition(LaunchConfiguration("enable_latency_diagnostics")),
     )
 
     xbee_sim_launch = IncludeLaunchDescription(
@@ -217,43 +317,36 @@ def generate_launch_description():
         ),
         launch_arguments={
             "can_iface": LaunchConfiguration("can_iface"),
+            "actuator": LaunchConfiguration("actuator"),
             "controller_config": LaunchConfiguration("controller_config"),
+            "control_backend": LaunchConfiguration("control_backend"),
             "controller_spawn_delay": LaunchConfiguration("controller_spawn_delay"),
             "use_sim_time": LaunchConfiguration("use_sim_time"),
             "use_mock_servos": LaunchConfiguration("use_mock_servos"),
             "enable_manipulator_module": enable_manipulator_module,
             "enable_autonomous_module": LaunchConfiguration("enable_autonomous_module"),
+            "start_manipulator_controllers_active": LaunchConfiguration(
+                "start_manipulator_controllers_active"
+            ),
         }.items(),
-        condition=real_condition,
+        condition=IfCondition(PythonExpression([
+            "'", LaunchConfiguration("mode"), "' == 'real' and '",
+            LaunchConfiguration("enable_rover_hardware"), "' == 'true'",
+        ])),
     )
-    disabled_video_stream_ids = PythonExpression(
-        [
-            "','.join(filter(None, ["
-            "'rgbd_camera' if (('",
-            LaunchConfiguration("mode"),
-            "' == 'real' and '",
-            LaunchConfiguration("enable_autonomous_module"),
-            "' == 'true') or ('",
-            LaunchConfiguration("mode"),
-            "' == 'sim' and '",
-            LaunchConfiguration("enable_autonomous_module_sim"),
-            "' == 'true')) else '', "
-            "'arm_cam,gripper_cam' if (('",
-            LaunchConfiguration("mode"),
-            "' == 'real' and '",
-            LaunchConfiguration("enable_manipulator_module"),
-            "' != 'true') or ('",
-            LaunchConfiguration("mode"),
-            "' == 'sim' and '",
-            LaunchConfiguration("enable_manipulator_module_sim"),
-            "' != 'true')) else '', "
-            "'left_cam,right_cam' if ('",
-            LaunchConfiguration("mode"),
-            "' == 'real' and '",
-            LaunchConfiguration("enable_science_module"),
-            "' == 'true') else '']))",
-        ]
-    )
+    disabled_video_stream_ids = PythonExpression([
+        "','.join(filter(None, ["
+        "'rgbd_camera' if (('", LaunchConfiguration("mode"), "' == 'real' and '",
+        LaunchConfiguration("enable_autonomous_module"), "' == 'true') or ('",
+        LaunchConfiguration("mode"), "' == 'sim' and '",
+        LaunchConfiguration("enable_autonomous_module_sim"), "' == 'true')) else '', "
+        "'arm_cam,gripper_cam' if (('", LaunchConfiguration("mode"), "' == 'real' and '",
+        LaunchConfiguration("enable_manipulator_module"), "' != 'true') or ('",
+        LaunchConfiguration("mode"), "' == 'sim' and '",
+        LaunchConfiguration("enable_manipulator_module_sim"), "' != 'true')) else '', "
+        "'left_cam,right_cam' if ('", LaunchConfiguration("mode"), "' == 'real' and '",
+        LaunchConfiguration("enable_science_module"), "' == 'true') else '']))",
+    ])
     video_streaming_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             PathJoinSubstitution(
@@ -273,6 +366,7 @@ def generate_launch_description():
     )
     localization_launch = TimerAction(
         period=localization_delay,
+        condition=IfCondition(LaunchConfiguration("enable_localization")),
         actions=[
             IncludeLaunchDescription(
                 PythonLaunchDescriptionSource(
@@ -375,10 +469,15 @@ def generate_launch_description():
             {"device": LaunchConfiguration("xbee_device")},
             {"heartbeat_timeout_ms": 500},
             {"cmd_vel_topic": "/base/cmd_vel"},
+            {"smooth_drive_commands": ParameterValue(LaunchConfiguration("smooth_drive_commands"), value_type=bool)},
             {"smooth_arm_joint_commands": True},
             {"arm_joint_accel_limit_rad_s2": 3.0},
+            {"latency_diagnostics_enabled": LaunchConfiguration("enable_latency_diagnostics")},
         ],
-        condition=real_condition,
+        condition=IfCondition(PythonExpression([
+            "'", LaunchConfiguration("mode"), "' == 'real' and '",
+            LaunchConfiguration("enable_xbee_bridge"), "' == 'true'",
+        ])),
     )
     xbee_bridge_sim = Node(
         package="mr2_xbee_bridge",
@@ -392,6 +491,7 @@ def generate_launch_description():
             {"cmd_vel_topic": "/base/cmd_vel"},
             {"smooth_arm_joint_commands": True},
             {"arm_joint_accel_limit_rad_s2": 3.0},
+            {"latency_diagnostics_enabled": LaunchConfiguration("enable_latency_diagnostics")},
         ],
         condition=xbee_sim_condition,
     )
@@ -411,11 +511,18 @@ def generate_launch_description():
 
     # ─── LaunchDescription ───────────────────────────────────────────────────────
     return LaunchDescription([
+        enable_rover_hardware_arg,
+        enable_xbee_bridge_arg,
+        smooth_drive_commands_arg,
         rviz_arg,
         mode_arg,
+        OpaqueFunction(function=acquire_if_real),
         use_sim_time_arg,
         headless_arg,
         can_iface_arg,
+        actuator_arg,
+        control_backend_arg,
+        OpaqueFunction(function=_validate_control_backend),
         controller_config_arg,
         controller_spawn_delay_arg,
         use_mock_servos_arg,
@@ -424,9 +531,14 @@ def generate_launch_description():
         enable_autonomous_module_arg,
         enable_science_module_arg,
         enable_autonomous_module_sim_arg,
+        enable_localization_arg,
+        start_manipulator_controllers_active_arg,
         xbee_sim_device_arg,
         xbee_sim_peer_arg,
         xbee_device_arg,
+        enable_latency_diagnostics_arg,
+        latency_capture_interface_arg,
+        latency_artifact_directory_arg,
         enable_aruco_arg,
         aruco_cam_topic_arg,
         enable_video_streaming_arg,
@@ -437,10 +549,13 @@ def generate_launch_description():
         yolo_publish_annotated_arg,
         yolo_annotated_fps_arg,
         use_sim_time_param,
+        *gnss_actions(DeclareLaunchArgument),
+        *flat_motor_actions(DeclareLaunchArgument),
         rover_launch,
         rover_real_launch,
         localization_launch,
         system_status,
+        latency_uplink_agent,
         aruco_tracker,
         yolo_detector,
         servo_launch,

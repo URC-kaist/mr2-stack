@@ -1,0 +1,31 @@
+{
+  "phases": [
+    "startup_device_absent_survives",
+    "invalid_tty_survives",
+    "first_heartbeat_and_class_ack",
+    "reconnect_1_heartbeat_and_class_ack",
+    "reconnect_2_heartbeat_and_class_ack",
+    "reconnect_3_heartbeat_and_class_ack",
+    "reconnect_4_heartbeat_and_class_ack",
+    "reconnect_5_heartbeat_and_class_ack",
+    "reconnect_6_heartbeat_and_class_ack"
+  ],
+  "reconnect_seconds": [
+    1.4802868659999149,
+    1.3573420389998319,
+    1.3674037949999729,
+    1.3687424120003016,
+    0.38621727500003544,
+    0.34975918400004957
+  ],
+  "requests_received": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "passed": true
+}

@@ -1,0 +1,5 @@
+<library path="mock_can_device">
+  <class name="mr2_flat_bench/MockCanDevice" type="mr2_flat_bench::MockCanDevice" base_class_type="CanDevice">
+    <description>Bench-only ideal position/velocity actuator. No CAN socket or traffic.</description>
+  </class>
+</library>

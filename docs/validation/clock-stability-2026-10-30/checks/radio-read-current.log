@@ -1,0 +1,22 @@
+Radio 192.168.1.100
+ 
+sh: hostname: not found
+ac:8b:a9:c1:77:e7
+XW.v6.2.0
+ath0      get_wmm:1  
+qdisc pfifo_fast 0: dev eth0 root refcnt 2 bands 3 priomap  1 2 2 2 1 2 0 0 1 1 1 1 1 1 1 1
+qdisc pfifo_fast 0: dev eth1 root refcnt 2 bands 3 priomap  1 2 2 2 1 2 0 0 1 1 1 1 1 1 1 1
+qdisc mq 0: dev wifi0 root 
+
+
+Radio 192.168.1.106
+ 
+sh: hostname: not found
+ac:8b:a9:c1:78:18
+XW.v6.2.0
+ath0      get_wmm:1  
+qdisc pfifo_fast 0: dev eth0 root refcnt 2 bands 3 priomap  1 2 2 2 1 2 0 0 1 1 1 1 1 1 1 1
+qdisc pfifo_fast 0: dev eth1 root refcnt 2 bands 3 priomap  1 2 2 2 1 2 0 0 1 1 1 1 1 1 1 1
+qdisc mq 0: dev wifi0 root 
+
+

@@ -1,0 +1,8 @@
+Internal ctest changing into directory: /home/mr2/mr2-stack/rover/ros2_ws/build/mr2_video_streaming
+Test project /home/mr2/mr2-stack/rover/ros2_ws/build/mr2_video_streaming
+    Start 1: video_control
+1/1 Test #1: video_control ....................   Passed    0.04 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.04 sec

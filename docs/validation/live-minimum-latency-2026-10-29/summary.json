@@ -1,0 +1,61 @@
+{
+  "duration_s": 120.687485742,
+  "window_started_at": "2026-10-29T13:51:55.869Z",
+  "window_ended_at": "2026-10-29T13:53:56.558Z",
+  "valid_ui_samples": 96,
+  "clock_sync_ui_samples": 24,
+  "frames": {
+    "RGB-D Cam": 3441,
+    "Front Right": 3625,
+    "Front Left": 3625,
+    "Left": 3425,
+    "Right": 3348
+  },
+  "tab_minimum": {
+    "before_ms": 0.3,
+    "after": "0.3 ms"
+  },
+  "layout": [
+    {
+      "width": 1100,
+      "visible": true,
+      "contained": true,
+      "overflow": 0
+    },
+    {
+      "width": 1440,
+      "visible": true,
+      "contained": true,
+      "overflow": 0
+    }
+  ],
+  "errors": [],
+  "ranges_ms": {
+    "p50": {
+      "min": 2.5,
+      "median_of_second_values": 7.25,
+      "max": 14.1
+    },
+    "p95": {
+      "min": 8.7,
+      "median_of_second_values": 24.3,
+      "max": 72.2
+    },
+    "minimum": {
+      "min": 0.3,
+      "median_of_second_values": 0.3,
+      "max": 0.7
+    },
+    "extra_queue": {
+      "min": 0.9,
+      "median_of_second_values": 6.1,
+      "max": 13.0
+    }
+  },
+  "last_values": [
+    "6.5 ms",
+    "22.9 ms",
+    "0.3 ms",
+    "5.2 ms"
+  ]
+}

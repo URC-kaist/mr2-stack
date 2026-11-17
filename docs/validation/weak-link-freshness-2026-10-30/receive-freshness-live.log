@@ -1,0 +1,2 @@
+{"guarded": false, "decoded_frames": 39, "old_packets_observed": 179, "first_output_s": 1.3486093399988022, "last_output_s": 3.1433187539987557}
+{"guarded": true, "decoded_frames": 20, "old_packets_observed": 179, "first_output_s": 1.5439122809984838, "last_output_s": 2.481554754998797}

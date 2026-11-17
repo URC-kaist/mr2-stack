@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="2" failures="0" disabled="0" errors="0" time="1.638" timestamp="2026-11-12T23:23:50" name="AllTests">
+  <testsuite name="LegacyDrive" tests="1" failures="0" disabled="0" errors="0" time="1.561" timestamp="2026-11-12T23:23:50">
+    <testcase name="RepresentativeCommandsMatchActualController" status="run" result="completed" time="1.561" timestamp="2026-11-12T23:23:50" classname="mr2_control.LegacyDrive" />
+  </testsuite>
+  <testsuite name="LegacyFeedback" tests="1" failures="0" disabled="0" errors="0" time="0.077" timestamp="2026-11-12T23:23:52">
+    <testcase name="BroadcasterMissingFieldsAndFrameContract" status="run" result="completed" time="0.077" timestamp="2026-11-12T23:23:52" classname="mr2_control.LegacyFeedback" />
+  </testsuite>
+</testsuites>

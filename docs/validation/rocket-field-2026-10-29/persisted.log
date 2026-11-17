@@ -1,0 +1,14 @@
+[
+  {
+    "ip": "192.168.0.244",
+    "target": "base",
+    "exit_code": 0,
+    "output": " \r\nFound Backup1 on[1] ...\r\nFound  Active on[2] ...\r\nStoring Active[1] ... [%0  ]\b\b\b\b\b\b[%100]\r\nActive->Backup[2] ... [%0  ]\b\b\b\b\b\b[%100]\r\ndhcpc.1.fallback=192.168.1.100\r\nnetconf.3.alias.1.status=enabled\r\nnetconf.3.alias.1.ip=192.168.1.100\r\nnetconf.3.alias.1.netmask=255.255.255.0\r\nnetconf.3.alias.1.comment=MR2-field-management\r\nPersistent flash readback verified; no reboot or network restart\r\n"
+  },
+  {
+    "ip": "192.168.0.245",
+    "target": "rover",
+    "exit_code": 0,
+    "output": " \r\nFound Backup1 on[1] ...\r\nFound  Active on[2] ...\r\nStoring Active[1] ... [%0  ]\b\b\b\b\b\b[%100]\r\nActive->Backup[2] ... [%0  ]\b\b\b\b\b\b[%100]\r\ndhcpc.1.fallback=192.168.1.106\r\nnetconf.3.alias.1.status=enabled\r\nnetconf.3.alias.1.ip=192.168.1.106\r\nnetconf.3.alias.1.netmask=255.255.255.0\r\nnetconf.3.alias.1.comment=MR2-field-management\r\nPersistent flash readback verified; no reboot or network restart\r\n"
+  }
+]

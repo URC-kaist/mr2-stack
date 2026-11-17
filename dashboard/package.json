@@ -3,11 +3,16 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "packageManager": "npm@11.12.1",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "test:latency": "esbuild test/run.ts --bundle --platform=node --format=cjs --define:import.meta.env='{}' --outfile=/tmp/mr2-latency-dashboard-test.cjs && node /tmp/mr2-latency-dashboard-test.cjs",
     "preview": "vite preview",
     "typecheck": "tsc -p tsconfig.app.json",
     "check": "npm run typecheck && npm run lint && npm run build"

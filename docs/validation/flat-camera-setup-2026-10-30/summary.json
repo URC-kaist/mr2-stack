@@ -1,0 +1,54 @@
+{
+  "passed": true,
+  "observation_s": 100,
+  "connected_streams": [
+    "flat_cam_1",
+    "flat_cam_3",
+    "flat_cam_4"
+  ],
+  "render_fps_final_20s": {
+    "flat_cam_1": 30.05150400565187,
+    "flat_cam_3": 30.05150400565187,
+    "flat_cam_4": 30.05150400565187
+  },
+  "last_sample": {
+    "at_s": 99.001443042,
+    "frames": {
+      "flat_cam_1": 2379,
+      "flat_cam_3": 2314,
+      "flat_cam_4": 2400
+    },
+    "feeds": [
+      {
+        "label": "USB 2.3.1",
+        "quality": "640\u00d7360 \u00b7 30.0 FPS",
+        "status": "Live"
+      },
+      {
+        "label": "USB 2.2.2",
+        "quality": "\u2014 \u00b7 0 FPS",
+        "status": "Waiting for video ingest..."
+      },
+      {
+        "label": "USB 2.4.1",
+        "quality": "640\u00d7360 \u00b7 30.0 FPS",
+        "status": "Live"
+      },
+      {
+        "label": "USB 2.4.2",
+        "quality": "640\u00d7360 \u00b7 30.0 FPS",
+        "status": "Live"
+      }
+    ],
+    "delays": [
+      "2.3 ms",
+      "8.4 ms",
+      "0.2 ms",
+      "1.5 ms"
+    ]
+  },
+  "startup_transient": "During initial bitrate/profile discovery, flat_cam_1 briefly reported a decoder keyframe error and recovered automatically; all three feeds were Live by the 40 s sample.",
+  "processes_stopped": true,
+  "can_interface": "DOWN, never initialized",
+  "defaults": "Flat camera-only; motor/GNSS disabled; field address defaults unchanged"
+}

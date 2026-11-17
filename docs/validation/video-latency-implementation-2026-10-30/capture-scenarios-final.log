@@ -1,0 +1,12 @@
+{"wire_kbps": 600, "width": 320, "height": 180, "fps": 30, "received_frames": 76, "final_rtp_intervals": [3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000]}
+{"wire_kbps": 1800, "width": 640, "height": 360, "fps": 30, "received_frames": 83, "final_rtp_intervals": [3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000]}
+{"wire_kbps": 300, "width": 320, "height": 180, "fps": 15, "received_frames": 44, "final_rtp_intervals": [6000, 6000, 6000, 6000, 6000, 6000, 6000, 6000]}
+{"wire_kbps": 100, "width": 160, "height": 90, "fps": 5, "received_frames": 13, "final_rtp_intervals": [18000, 18000, 18000, 18000, 18000, 18000, 18000, 18000]}
+{"wire_kbps": 32, "width": 80, "height": 44, "fps": 3, "received_frames": 9, "final_rtp_intervals": [30000, 30000, 30000, 30000, 30000, 30000, 30000, 30000]}
+{"wire_kbps": 1800, "width": 640, "height": 360, "fps": 30, "received_frames": 83, "final_rtp_intervals": [3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000]}
+split_test: encoder profile 320x180 30 FPS, 600 kbps (reconfigured in 52 ms)
+split_test: encoder profile 640x360 30 FPS, 1800 kbps (reconfigured in 14 ms)
+split_test: encoder profile 320x180 15 FPS, 300 kbps (reconfigured in 15 ms)
+split_test: encoder profile 160x90 5 FPS, 100 kbps (reconfigured in 14 ms)
+split_test: encoder profile 80x44 3 FPS, 32 kbps (reconfigured in 17 ms)
+split_test: encoder profile 640x360 30 FPS, 1800 kbps (reconfigured in 7 ms)

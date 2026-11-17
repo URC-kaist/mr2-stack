@@ -1,0 +1,48 @@
+[
+  {
+    "ip": "192.168.1.100",
+    "ports": {
+      "22": "TimeoutError",
+      "80": "TimeoutError",
+      "443": "TimeoutError"
+    },
+    "route": "192.168.1.100 dev enp2s0 src 192.168.1.101 uid 1000 \n    cache"
+  },
+  {
+    "ip": "192.168.1.106",
+    "ports": {
+      "22": "TimeoutError",
+      "80": "TimeoutError",
+      "443": "TimeoutError"
+    },
+    "route": "192.168.1.106 dev enp2s0 src 192.168.1.101 uid 1000 \n    cache"
+  },
+  {
+    "ip": "192.168.1.103",
+    "ports": {
+      "22": "TimeoutError",
+      "80": "TimeoutError",
+      "443": "TimeoutError"
+    },
+    "route": "192.168.1.103 dev enp2s0 src 192.168.1.101 uid 1000 \n    cache"
+  },
+  {
+    "ip": "192.168.0.244",
+    "ports": {
+      "22": "open",
+      "80": "open",
+      "443": "open"
+    },
+    "route": "192.168.0.244 dev enp2s0 src 192.168.0.55 uid 1000 \n    cache"
+  },
+  {
+    "ip": "192.168.0.245",
+    "ports": {
+      "22": "open",
+      "80": "open",
+      "443": "open"
+    },
+    "route": "192.168.0.245 dev enp2s0 src 192.168.0.55 uid 1000 \n    cache"
+  }
+]
+{"profile":"base","targets":[{"target":"base","label":"Base","ip":"192.168.1.100"},{"target":"drone","label":"Drone","ip":"192.168.1.103"},{"target":"rover","label":"Rover","ip":"192.168.1.106"}],"pollMs":5000,"timeoutMs":4000,"credentialConfigured":true,"mavproxyEnable":true}

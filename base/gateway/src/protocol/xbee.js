@@ -1,6 +1,9 @@
 'use strict'
 
 const MsgId = {
+  VIDEO_SET: 0x40,
+  VIDEO_FEEDBACK: 0x41,
+  VIDEO_STATE: 0x42,
   CMD_DRIVE: 0x01,
   CMD_ARM_TWIST: 0x02,
   HEARTBEAT: 0x03,

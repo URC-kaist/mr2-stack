@@ -6,14 +6,25 @@ base_gateway/.env.local
 
 /.env
 /.env.local
+/.mr2-rover-profile
+/.mr2-rover-profile.*
 /.vscode
 base/gateway/node_modules
 
 tmp/
 base/gateway/.env.local
 base/gateway/*.tlog*
+*.pcap
+*.pcapng
+__pycache__/
+*.py[cod]
 scripts/dashboard_err.log
 
 scripts/nginx/mr2-dashboard.conf
 /.DS_Store
 /slides/.DS_Store
+
+# Workspace build outputs and local experiment captures
+/install/
+/log/
+__pycache__/

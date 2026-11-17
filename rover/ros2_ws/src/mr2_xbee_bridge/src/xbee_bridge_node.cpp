@@ -2,11 +2,13 @@
 #include <array>
 #include <atomic>
 #include <chrono>
+#include <cerrno>
 #include <cmath>
 #include <cstring>
 #include <functional>
 #include <limits>
 #include <mutex>
+#include <sstream>
 #include <stdexcept>
 #include <string>
 #include <thread>
@@ -14,7 +16,7 @@
 #include <vector>
 
 #include <fcntl.h>
-#include <sys/select.h>
+#include <poll.h>
 #include <termios.h>
 #include <unistd.h>
 
@@ -26,10 +28,12 @@
 #include "mr2_action_interface/msg/mission_control.hpp"
 #include "mr2_battery_monitor/msg/pack_telemetry.hpp"
 #include "mr2_xbee_bridge/packets.hpp"
+#include "std_msgs/msg/u_int8_multi_array.hpp"
 #include "rclcpp/qos.hpp"
 #include "rclcpp/rclcpp.hpp"
 #include "sensor_msgs/msg/nav_sat_fix.hpp"
 #include "std_msgs/msg/float64_multi_array.hpp"
+#include "std_msgs/msg/string.hpp"
 #include "ublox_ubx_msgs/msg/ubx_nav_svin.hpp"
 #include "rtcm_msgs/msg/message.hpp"
 
@@ -112,6 +116,10 @@ class XbeeBridgeNode : public rclcpp::Node {
             "base_svin_topic", "/base/ubx_nav_svin")),
         base_rtcm_topic_(declare_parameter<std::string>(
             "base_rtcm_topic", "/base/rtcm")),
+        latency_diagnostics_enabled_(
+            declare_parameter<bool>("latency_diagnostics_enabled", false)),
+        latency_trace_topic_(declare_parameter<std::string>(
+            "latency_trace_topic", "/latency/trace")),
         log_frames_(declare_parameter<bool>("log_frames", false)) {
     cmd_vel_pub_ = create_publisher<geometry_msgs::msg::Twist>(cmd_vel_topic_, 10);
     mission_control_pub_ =
@@ -129,6 +137,10 @@ class XbeeBridgeNode : public rclcpp::Node {
         base_svin_topic_, rclcpp::QoS(rclcpp::KeepLast(1)).reliable().transient_local());
     base_rtcm_pub_ = create_publisher<rtcm_msgs::msg::Message>(
         base_rtcm_topic_, rclcpp::QoS(rclcpp::KeepLast(10)).reliable());
+    if (latency_diagnostics_enabled_) {
+      latency_trace_pub_ =
+          create_publisher<std_msgs::msg::String>(latency_trace_topic_, 20);
+    }
 
     battery_sub_1_ = create_subscription<mr2_battery_monitor::msg::PackTelemetry>(
         battery_1_topic_, rclcpp::SensorDataQoS(),
@@ -149,10 +161,12 @@ class XbeeBridgeNode : public rclcpp::Node {
     odom_sub_ = create_subscription<nav_msgs::msg::Odometry>(
         odom_topic_, rclcpp::SensorDataQoS(),
         [this](const nav_msgs::msg::Odometry::SharedPtr msg) { odom_cb_(msg); });
-
-    open_serial_();
-    start_reader_();
-
+    video_control_pub_ = create_publisher<std_msgs::msg::UInt8MultiArray>("/video/control", 10);
+    video_state_sub_ = create_subscription<std_msgs::msg::UInt8MultiArray>(
+      "/video/state", 20, [this](std_msgs::msg::UInt8MultiArray::ConstSharedPtr msg) {
+        auto frame = mr2_xbee_bridge::encode_video_packet(next_seq_(), msg->data);
+        if (!frame.empty()) write_frame_(frame);
+      });
     const auto zero_period =
         std::chrono::duration<double>(1.0 / std::max(1.0, zero_publish_rate_hz_));
     zero_timer_ = create_wall_timer(
@@ -178,6 +192,7 @@ class XbeeBridgeNode : public rclcpp::Node {
     last_heartbeat_ = now();
     last_battery_tx_[0] = now() - rclcpp::Duration::from_seconds(10.0);
     last_battery_tx_[1] = now() - rclcpp::Duration::from_seconds(10.0);
+    start_reader_();
   }
 
   ~XbeeBridgeNode() override {
@@ -185,6 +200,9 @@ class XbeeBridgeNode : public rclcpp::Node {
     if (reader_thread_.joinable()) {
       reader_thread_.join();
     }
+    std::lock_guard<std::mutex> lock(write_mutex_);
+    if (fd_ >= 0) ::close(fd_);
+    fd_ = -1;
   }
 
  private:
@@ -204,21 +222,27 @@ class XbeeBridgeNode : public rclcpp::Node {
     cancel_timer(heartbeat_tx_timer_);
     cancel_timer(nav_tx_timer_);
 
-    {
-      std::lock_guard<std::mutex> lock(write_mutex_);
-      fd_ = -1;
-    }
   }
 
-  void open_serial_() {
-    fd_ = ::open(device_.c_str(), O_RDWR | O_NOCTTY | O_NONBLOCK);
-    if (fd_ < 0) {
-      throw std::runtime_error("Failed to open serial device " + device_);
+  bool open_serial_() {
+    const int candidate = ::open(device_.c_str(), O_RDWR | O_NOCTTY | O_NONBLOCK | O_CLOEXEC);
+    if (candidate < 0) {
+      RCLCPP_WARN_THROTTLE(get_logger(), *get_clock(), 5000,
+        "XBee serial unavailable %s: %s; retrying", device_.c_str(), std::strerror(errno));
+      return false;
     }
 
+    const auto configuration_failed = [&]() {
+      const int reason = errno;
+      ::close(candidate);
+      RCLCPP_WARN_THROTTLE(get_logger(), *get_clock(), 5000,
+        "XBee serial configuration failed %s: %s; retrying",
+        device_.c_str(), std::strerror(reason));
+      return false;
+    };
     termios tio{};
-    if (tcgetattr(fd_, &tio) != 0) {
-      throw std::runtime_error("Failed to get serial attributes");
+    if (tcgetattr(candidate, &tio) != 0) {
+      return configuration_failed();
     }
 
     cfmakeraw(&tio);
@@ -227,11 +251,29 @@ class XbeeBridgeNode : public rclcpp::Node {
     tio.c_cflag &= ~CRTSCTS;
 
     if (cfsetispeed(&tio, B115200) != 0 || cfsetospeed(&tio, B115200) != 0) {
-      throw std::runtime_error("Failed to set serial baud rate");
+      return configuration_failed();
     }
 
-    if (tcsetattr(fd_, TCSANOW, &tio) != 0) {
-      throw std::runtime_error("Failed to apply serial attributes");
+    if (tcsetattr(candidate, TCSANOW, &tio) != 0) {
+      return configuration_failed();
+    }
+    // A newly opened UART may contain input from before this connection.
+    // Fresh commands can be retried after heartbeat resumes; old ones must go.
+    if (tcflush(candidate, TCIOFLUSH) != 0) return configuration_failed();
+    // Only the reader replaces/closes descriptors. Writers merely mark a
+    // failure, so a poll/read cannot race with a reused descriptor number.
+    std::lock_guard<std::mutex> lock(write_mutex_);
+    if (shutting_down_.load()) { ::close(candidate); return false; }
+    fd_ = candidate;
+    serial_failed_.store(false);
+    RCLCPP_INFO(get_logger(), "XBee serial connected %s @ 115200", device_.c_str());
+    return true;
+  }
+
+  void mark_serial_failed_(const char * reason) {
+    if (!serial_failed_.exchange(true)) {
+      RCLCPP_WARN(get_logger(), "XBee serial disconnected %s: %s; reconnecting",
+        device_.c_str(), reason);
     }
   }
 
@@ -242,6 +284,7 @@ class XbeeBridgeNode : public rclcpp::Node {
   void read_loop_() {
     std::vector<uint8_t> buffer;
     buffer.reserve(512);
+    auto next_reconnect = std::chrono::steady_clock::now();
 
     while (rclcpp::ok() && !shutting_down_.load()) {
       int local_fd = -1;
@@ -249,25 +292,39 @@ class XbeeBridgeNode : public rclcpp::Node {
         std::lock_guard<std::mutex> lock(write_mutex_);
         local_fd = fd_;
       }
-      if (local_fd < 0) {
-        return;
-      }
-
-      fd_set readfds;
-      FD_ZERO(&readfds);
-      FD_SET(local_fd, &readfds);
-      timeval timeout{};
-      timeout.tv_sec = 0;
-      timeout.tv_usec = 100000;
-
-      const int ready = select(local_fd + 1, &readfds, nullptr, nullptr, &timeout);
-      if (ready <= 0) {
+      if (local_fd < 0 || serial_failed_.load()) {
+        {
+          std::lock_guard<std::mutex> lock(write_mutex_);
+          if (fd_ >= 0) ::close(fd_);
+          fd_ = -1;
+        }
+        // Never join a partial frame from the old device to new input, or
+        // replay queued commands after reconnect. Keep the heartbeat watchdog.
+        buffer.clear();
+        if (std::chrono::steady_clock::now() < next_reconnect) {
+          std::this_thread::sleep_for(std::chrono::milliseconds(50));
+          continue;
+        }
+        next_reconnect = std::chrono::steady_clock::now() + std::chrono::seconds(1);
+        if (!open_serial_()) continue;
         continue;
       }
+
+      pollfd descriptor{local_fd, POLLIN, 0};
+      const int ready = ::poll(&descriptor, 1, 100);
+      if (ready < 0 && errno != EINTR) mark_serial_failed_(std::strerror(errno));
+      if (ready <= 0) continue;
+      if (descriptor.revents & (POLLHUP | POLLERR | POLLNVAL)) {
+        mark_serial_failed_("serial hangup/error");
+        continue;
+      }
+      if (!(descriptor.revents & POLLIN)) continue;
 
       uint8_t temp[256];
       const ssize_t count = ::read(local_fd, temp, sizeof(temp));
       if (count <= 0) {
+        if (count == 0 || (errno != EAGAIN && errno != EWOULDBLOCK && errno != EINTR))
+          mark_serial_failed_(count == 0 ? "serial EOF" : std::strerror(errno));
         continue;
       }
 
@@ -324,10 +381,25 @@ class XbeeBridgeNode : public rclcpp::Node {
 
   void handle_frame_(const Frame &frame) {
     switch (frame.header.msg_id) {
+      case mr2_xbee_bridge::MsgId::kVideoSet:
+      case mr2_xbee_bridge::MsgId::kVideoKeyframe:
+      case mr2_xbee_bridge::MsgId::kVideoFeedback: {
+        const auto id = frame.header.msg_id;
+        if ((id == mr2_xbee_bridge::MsgId::kVideoKeyframe && frame.payload.size() != 10) ||
+            (id == mr2_xbee_bridge::MsgId::kVideoSet && frame.payload.size() != 12) ||
+            (id == mr2_xbee_bridge::MsgId::kVideoFeedback && frame.payload.size() != 22 &&
+             frame.payload.size() != 30)) break;
+        std_msgs::msg::UInt8MultiArray msg;
+        msg.data.push_back(uint8_t(id));
+        msg.data.insert(msg.data.end(), frame.payload.begin(), frame.payload.end());
+        video_control_pub_->publish(msg);
+        break;
+      }
       case mr2_xbee_bridge::MsgId::kCmdDrive: {
         auto cmd = mr2_xbee_bridge::decode_cmd_drive(frame);
         if (cmd) {
-          handle_cmd_drive_(*cmd);
+          const int64_t rover_rx_epoch_us = system_epoch_us_();
+          handle_cmd_drive_(*cmd, frame.header.seq, rover_rx_epoch_us);
         }
         break;
       }
@@ -429,7 +501,9 @@ class XbeeBridgeNode : public rclcpp::Node {
     }
   }
 
-  void handle_cmd_drive_(const CmdDrive &cmd) {
+  void handle_cmd_drive_(const CmdDrive &cmd, uint8_t frame_seq,
+                         int64_t rover_rx_epoch_us,
+                         bool record_latency = true) {
     std::lock_guard<std::mutex> lock(command_smoothing_mutex_);
     const auto now_time = now();
     std::array<double, 3> target{
@@ -454,6 +528,11 @@ class XbeeBridgeNode : public rclcpp::Node {
     msg.linear.y = output[1];
     msg.angular.z = output[2];
     cmd_vel_pub_->publish(msg);
+    const int64_t cmd_publish_epoch_us = system_epoch_us_();
+    if (record_latency) {
+      publish_command_latency_trace_(cmd, frame_seq, rover_rx_epoch_us,
+                                     cmd_publish_epoch_us, output);
+    }
     if (log_frames_) {
       RCLCPP_INFO_THROTTLE(get_logger(), *get_clock(), 1000,
                            "CMD_DRIVE target=(%.3f, %.3f, %.3f) out=(%.3f, %.3f, %.3f)",
@@ -461,6 +540,38 @@ class XbeeBridgeNode : public rclcpp::Node {
                            cmd.angular_z_rad_s, output[0], output[1],
                            output[2]);
     }
+  }
+
+  static int64_t system_epoch_us_() {
+    return std::chrono::duration_cast<std::chrono::microseconds>(
+               std::chrono::system_clock::now().time_since_epoch())
+        .count();
+  }
+
+  void publish_command_latency_trace_(
+      const CmdDrive &cmd, uint8_t frame_seq, int64_t rover_rx_epoch_us,
+      int64_t cmd_publish_epoch_us, const std::array<double, 3> &output) {
+    if (!latency_diagnostics_enabled_ || !latency_trace_pub_) {
+      return;
+    }
+    const auto finite_or_zero = [](double value) {
+      return std::isfinite(value) ? value : 0.0;
+    };
+    std::ostringstream json;
+    json << "{\"schema_version\":1,\"event\":\"command\","
+         << "\"xbee_seq\":" << static_cast<unsigned int>(frame_seq) << ','
+         << "\"wire_timestamp_ms\":" << cmd.timestamp_ms << ','
+         << "\"rover_rx_epoch_us\":" << rover_rx_epoch_us << ','
+         << "\"cmd_publish_epoch_us\":" << cmd_publish_epoch_us << ','
+         << "\"target\":{\"x\":" << finite_or_zero(cmd.linear_x_m_s)
+         << ",\"y\":" << finite_or_zero(cmd.linear_y_m_s)
+         << ",\"yaw\":" << finite_or_zero(cmd.angular_z_rad_s) << "},"
+         << "\"output\":{\"x\":" << finite_or_zero(output[0])
+         << ",\"y\":" << finite_or_zero(output[1])
+         << ",\"yaw\":" << finite_or_zero(output[2]) << "}}";
+    std_msgs::msg::String trace;
+    trace.data = json.str();
+    latency_trace_pub_->publish(trace);
   }
 
   void handle_cmd_arm_(const CmdArmTwist &cmd) {
@@ -662,7 +773,7 @@ class XbeeBridgeNode : public rclcpp::Node {
     }
 
     CmdDrive zero_drive;
-    handle_cmd_drive_(zero_drive);
+    handle_cmd_drive_(zero_drive, 0, 0, false);
 
     CmdArmTwist zero_arm;
     handle_cmd_arm_(zero_arm);
@@ -813,7 +924,7 @@ class XbeeBridgeNode : public rclcpp::Node {
 
   void write_frame_(const std::vector<uint8_t> &frame) {
     std::lock_guard<std::mutex> lock(write_mutex_);
-    if (fd_ < 0 || shutting_down_.load()) {
+    if (fd_ < 0 || serial_failed_.load() || shutting_down_.load()) {
       return;
     }
     ssize_t total = 0;
@@ -821,6 +932,9 @@ class XbeeBridgeNode : public rclcpp::Node {
       const ssize_t written =
           ::write(fd_, frame.data() + total, frame.size() - total);
       if (written <= 0) {
+        if (written < 0 && errno == EINTR) continue;
+        if (written == 0 || (errno != EAGAIN && errno != EWOULDBLOCK))
+          mark_serial_failed_(written == 0 ? "serial write EOF" : std::strerror(errno));
         break;
       }
       total += written;
@@ -828,10 +942,11 @@ class XbeeBridgeNode : public rclcpp::Node {
   }
 
   uint8_t next_seq_() {
-    const uint8_t seq = seq_;
-    seq_ = static_cast<uint8_t>(seq_ + 1);
-    return seq;
+    return seq_.fetch_add(1);
   }
+
+  rclcpp::Publisher<std_msgs::msg::UInt8MultiArray>::SharedPtr video_control_pub_;
+  rclcpp::Subscription<std_msgs::msg::UInt8MultiArray>::SharedPtr video_state_sub_;
 
   // Parameters
   std::string device_;
@@ -866,6 +981,8 @@ class XbeeBridgeNode : public rclcpp::Node {
   std::string battery_2_topic_;
   std::string base_svin_topic_;
   std::string base_rtcm_topic_;
+  bool latency_diagnostics_enabled_;
+  std::string latency_trace_topic_;
   bool log_frames_;
 
   // ROS interfaces
@@ -878,6 +995,7 @@ class XbeeBridgeNode : public rclcpp::Node {
   rclcpp::Publisher<geometry_msgs::msg::Vector3>::SharedPtr camera_turret_cmd_pub_;
   rclcpp::Publisher<ublox_ubx_msgs::msg::UBXNavSvin>::SharedPtr base_svin_pub_;
   rclcpp::Publisher<rtcm_msgs::msg::Message>::SharedPtr base_rtcm_pub_;
+  rclcpp::Publisher<std_msgs::msg::String>::SharedPtr latency_trace_pub_;
   rclcpp::Subscription<mr2_battery_monitor::msg::PackTelemetry>::SharedPtr
       battery_sub_1_;
   rclcpp::Subscription<mr2_battery_monitor::msg::PackTelemetry>::SharedPtr
@@ -890,10 +1008,11 @@ class XbeeBridgeNode : public rclcpp::Node {
 
   // Serial
   int fd_{-1};
+  std::atomic<bool> serial_failed_{false};
   std::thread reader_thread_;
   std::mutex write_mutex_;
   std::atomic<bool> shutting_down_{false};
-  uint8_t seq_{0};
+  std::atomic<uint8_t> seq_{0};
 
   // State
   rclcpp::Time last_heartbeat_{};

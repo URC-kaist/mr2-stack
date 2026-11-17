@@ -1,0 +1,2093 @@
+{
+  "python_version": "3.10.12 (main, Mar  3 2026, 11:56:32) [GCC 11.4.0]",
+  "python_executable": "/usr/bin/python3",
+  "distributions": [
+    {
+      "name": "mr2-launch",
+      "version": "0.0.0",
+      "location": "/home/mr2/mr2-stack/rover/ros2_ws/build/mr2_launch"
+    },
+    {
+      "name": "mr2-rover-auto",
+      "version": "0.0.0",
+      "location": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_rover_auto/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "ublox-ubx-msgs",
+      "version": "0.7.4",
+      "location": "/home/mr2/mr2-stack/rover/ros2_ws/install/ublox_ubx_msgs/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "ublox-ubx-interfaces",
+      "version": "0.7.4",
+      "location": "/home/mr2/mr2-stack/rover/ros2_ws/install/ublox_ubx_interfaces/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "rtcm-msgs",
+      "version": "1.1.6",
+      "location": "/home/mr2/mr2-stack/rover/ros2_ws/install/rtcm_msgs/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "mr2-yolo-perception",
+      "version": "0.0.0",
+      "location": "/home/mr2/mr2-stack/rover/ros2_ws/build/mr2_yolo_perception"
+    },
+    {
+      "name": "mr2-latency-diagnostics",
+      "version": "0.1.0",
+      "location": "/home/mr2/mr2-stack/rover/ros2_ws/build/mr2_latency_diagnostics"
+    },
+    {
+      "name": "mr2-system-status",
+      "version": "0.0.1",
+      "location": "/home/mr2/mr2-stack/rover/ros2_ws/build/mr2_system_status"
+    },
+    {
+      "name": "mr2-spectrophotometer",
+      "version": "0.1.0",
+      "location": "/home/mr2/mr2-stack/rover/ros2_ws/build/mr2_spectrophotometer"
+    },
+    {
+      "name": "mr2-spectrophotometer-msgs",
+      "version": "0.1.0",
+      "location": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_spectrophotometer_msgs/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "mr2-science-module",
+      "version": "0.1.0",
+      "location": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_science_module/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "mr2-rover-description",
+      "version": "0.0.0",
+      "location": "/home/mr2/mr2-stack/rover/ros2_ws/build/mr2_rover_description"
+    },
+    {
+      "name": "mr2-led",
+      "version": "0.1.0",
+      "location": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_led/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "mr2-latency-msgs",
+      "version": "0.1.0",
+      "location": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_latency_msgs/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "mr2-flat-motor",
+      "version": "0.1.0",
+      "location": "/home/mr2/mr2-stack/rover/ros2_ws/build/mr2_flat_motor"
+    },
+    {
+      "name": "mr2-devices-output-actuator",
+      "version": "0.0.0",
+      "location": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_devices_output_actuator/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "mr2-battery-monitor",
+      "version": "0.1.0",
+      "location": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_battery_monitor/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "mr2-action-interface",
+      "version": "0.0.0",
+      "location": "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_action_interface/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "realsense2-camera-msgs",
+      "version": "4.57.7",
+      "location": "/home/mr2/ros2_ws/install/realsense2_camera_msgs/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "launch-xml",
+      "version": "1.0.14",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "examples-rclpy-minimal-action-server",
+      "version": "0.15.5",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "ros2plugin",
+      "version": "5.1.3",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "ament-pep257",
+      "version": "0.12.15",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "sensor-msgs-py",
+      "version": "4.9.1",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "ament-lint-cmake",
+      "version": "0.12.15",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "domain-coordinator",
+      "version": "0.10.0",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "examples-rclpy-minimal-service",
+      "version": "0.15.5",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "rqt-publisher",
+      "version": "1.5.0",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "launch-yaml",
+      "version": "1.0.14",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "rpyutils",
+      "version": "0.2.2",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "osrf-pycommon",
+      "version": "2.1.6",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "launch-testing",
+      "version": "1.0.14",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "topic-monitor",
+      "version": "0.20.9",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "launch-param-builder",
+      "version": "0.1.1",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "ros2topic",
+      "version": "0.18.18",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "action-tutorials-py",
+      "version": "0.20.9",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "ament-xmllint",
+      "version": "0.12.15",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "ament-cppcheck",
+      "version": "0.12.15",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "launch-pytest",
+      "version": "1.0.14",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "ros2controlcli",
+      "version": "2.53.1",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "launch-ros",
+      "version": "0.19.13",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "examples-rclpy-minimal-client",
+      "version": "0.15.5",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "ament-cpplint",
+      "version": "0.12.15",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "rqt-bag",
+      "version": "1.1.6",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "launch",
+      "version": "1.0.14",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "rqt-srv",
+      "version": "1.0.3",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "rqt-service-caller",
+      "version": "1.0.5",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "moveit-configs-utils",
+      "version": "2.5.9",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "examples-rclpy-minimal-subscriber",
+      "version": "0.15.5",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "ros2launch",
+      "version": "0.19.13",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "rosidl-cli",
+      "version": "3.1.8",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "ament-copyright",
+      "version": "0.12.15",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "ros2pkg",
+      "version": "0.18.18",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "ros2service",
+      "version": "0.18.18",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "rqt-plot",
+      "version": "1.1.5",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "ros2cli",
+      "version": "0.18.18",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "teleop-twist-keyboard",
+      "version": "2.4.1",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "rqt-shell",
+      "version": "1.0.2",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "rqt-action",
+      "version": "2.0.1",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "ros2action",
+      "version": "0.18.18",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "ros2multicast",
+      "version": "0.18.18",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "ros2lifecycle",
+      "version": "0.18.18",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "tf2-ros-py",
+      "version": "0.25.20",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "rqt-topic",
+      "version": "1.5.1",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "ament-index-python",
+      "version": "1.4.1",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "rqt-reconfigure",
+      "version": "1.1.4",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "ros2component",
+      "version": "0.18.18",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "ament-lint",
+      "version": "0.12.15",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "rqt-gui-py",
+      "version": "1.1.9",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "ament-uncrustify",
+      "version": "0.12.15",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "ament-flake8",
+      "version": "0.12.15",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "quality-of-service-demo-py",
+      "version": "0.20.9",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "rqt-msg",
+      "version": "1.2.0",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "demo-nodes-py",
+      "version": "0.20.9",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "rqt-gui",
+      "version": "1.1.9",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "rosidl-runtime-py",
+      "version": "0.9.3",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "rqt-graph",
+      "version": "1.3.2",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "ros2doctor",
+      "version": "0.18.18",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "tf2-tools",
+      "version": "0.25.20",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "ros2bag",
+      "version": "0.15.16",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "ros2param",
+      "version": "0.18.18",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "nav2-simple-commander",
+      "version": "1.0.0",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "rqt-console",
+      "version": "2.0.3",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "ros2node",
+      "version": "0.18.18",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "rqt-bag-plugins",
+      "version": "1.1.6",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "ros2run",
+      "version": "0.18.18",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "examples-rclpy-executors",
+      "version": "0.15.5",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "ros2interface",
+      "version": "0.18.18",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "urdfdom-py",
+      "version": "1.2.1",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "examples-rclpy-minimal-action-client",
+      "version": "0.15.5",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "examples-rclpy-minimal-publisher",
+      "version": "0.15.5",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "generate-parameter-library-py",
+      "version": "0.7.1",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "launch-testing-ros",
+      "version": "0.19.13",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "sros2",
+      "version": "0.10.9",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "rqt-py-console",
+      "version": "1.0.2",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "ament-package",
+      "version": "0.14.2",
+      "location": "/opt/ros/humble/lib/python3.10/site-packages"
+    },
+    {
+      "name": "map-msgs",
+      "version": "2.1.0",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "topic-tools-interfaces",
+      "version": "1.1.1",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "rosidl-typesupport-cpp",
+      "version": "2.0.2",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "aruco-opencv-msgs",
+      "version": "2.4.1",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "grid-map-msgs",
+      "version": "2.0.1",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "rosbag2-py",
+      "version": "0.15.16",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "example-interfaces",
+      "version": "0.9.3",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "robot-localization",
+      "version": "3.5.4",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "sensor-msgs",
+      "version": "4.9.1",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "xacro",
+      "version": "2.1.1",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "rqt-py-common",
+      "version": "1.1.9",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "bond",
+      "version": "4.1.4",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "qt-gui",
+      "version": "2.2.4",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "rosapi-msgs",
+      "version": "2.0.5",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "composition-interfaces",
+      "version": "1.2.2",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "tf2-kdl",
+      "version": "0.25.20",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "controller-manager",
+      "version": "2.53.1",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "rosidl-typesupport-introspection-c",
+      "version": "3.1.8",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "geometry-msgs",
+      "version": "4.9.1",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "statistics-msgs",
+      "version": "1.2.2",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "rosidl-typesupport-fastrtps-c",
+      "version": "2.2.4",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "rmw-dds-common",
+      "version": "1.6.0",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "rosidl-typesupport-c",
+      "version": "2.0.2",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "unique-identifier-msgs",
+      "version": "2.2.1",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "ackermann-msgs",
+      "version": "2.0.2",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "rosidl-typesupport-fastrtps-cpp",
+      "version": "2.2.4",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "std-srvs",
+      "version": "4.9.1",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "rosidl-adapter",
+      "version": "3.1.8",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "nav2-common",
+      "version": "1.1.20",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "control-msgs",
+      "version": "4.8.0",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "tf2-sensor-msgs",
+      "version": "0.25.20",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "shape-msgs",
+      "version": "4.9.1",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "angles",
+      "version": "1.15.0",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "rosidl-typesupport-introspection-cpp",
+      "version": "3.1.8",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "rcutils",
+      "version": "5.1.8",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "tf2-msgs",
+      "version": "0.25.20",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "srdfdom",
+      "version": "2.0.7",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "python-qt-binding",
+      "version": "1.1.3",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "pcl-msgs",
+      "version": "1.0.0",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "std-msgs",
+      "version": "4.9.1",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "visualization-msgs",
+      "version": "4.9.1",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "rosidl-cmake",
+      "version": "3.1.8",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "stereo-msgs",
+      "version": "4.9.1",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "tf2-geometry-msgs",
+      "version": "0.25.20",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "rcl-interfaces",
+      "version": "1.2.2",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "rosbridge-server",
+      "version": "2.0.5",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "rosgraph-msgs",
+      "version": "1.2.2",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "rosidl-parser",
+      "version": "3.1.8",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "object-recognition-msgs",
+      "version": "2.0.0",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "nav2-msgs",
+      "version": "1.1.20",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "image-geometry",
+      "version": "3.2.1",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "qt-dotgraph",
+      "version": "2.2.4",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "nav-msgs",
+      "version": "4.9.1",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "ament-cmake-test",
+      "version": "1.3.14",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "moveit-msgs",
+      "version": "2.2.1",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "action-tutorials-interfaces",
+      "version": "0.20.9",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "rclpy",
+      "version": "3.3.21",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "topic-tools",
+      "version": "1.1.1",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "lifecycle-msgs",
+      "version": "1.2.2",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "smclib",
+      "version": "4.1.4",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "tf2-py",
+      "version": "0.25.20",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "nav-2d-msgs",
+      "version": "1.1.20",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "diagnostic-msgs",
+      "version": "4.9.1",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "rosidl-generator-c",
+      "version": "3.1.8",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "controller-manager-msgs",
+      "version": "2.53.1",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "laser-geometry",
+      "version": "2.4.1",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "logging-demo",
+      "version": "0.20.9",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "diagnostic-updater",
+      "version": "4.0.6",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "rosidl-generator-rs",
+      "version": "0.4.11",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "rosapi",
+      "version": "2.0.5",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "qt-gui-cpp",
+      "version": "2.2.4",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "octomap-msgs",
+      "version": "2.0.1",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "qt-gui-py-common",
+      "version": "2.2.4",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "interactive-markers",
+      "version": "2.3.2",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "rosbridge-msgs",
+      "version": "2.0.5",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "builtin-interfaces",
+      "version": "1.2.2",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "action-msgs",
+      "version": "1.2.2",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "rosidl-generator-cpp",
+      "version": "3.1.8",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "geographic-msgs",
+      "version": "1.0.6",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "actionlib-msgs",
+      "version": "4.9.1",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "turtlesim",
+      "version": "1.4.3",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "message-filters",
+      "version": "4.3.15",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "dwb-msgs",
+      "version": "1.1.20",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "slam-toolbox",
+      "version": "2.6.10",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "rosbag2-interfaces",
+      "version": "0.15.16",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "pendulum-msgs",
+      "version": "0.20.9",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "resource-retriever",
+      "version": "3.1.3",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "cv-bridge",
+      "version": "3.2.1",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "rosidl-generator-py",
+      "version": "0.14.6",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "trajectory-msgs",
+      "version": "4.9.1",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "rosbridge-library",
+      "version": "2.0.5",
+      "location": "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    },
+    {
+      "name": "torch",
+      "version": "2.8.0",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "ultralytics-thop",
+      "version": "2.0.19",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "cuda-pathfinder",
+      "version": "1.5.4",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "nvidia-curand",
+      "version": "10.4.0.35",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "pip",
+      "version": "26.1",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "mpmath",
+      "version": "1.3.0",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "nvidia-nvtx",
+      "version": "13.0.85",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "polars",
+      "version": "1.40.1",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "nvidia-nvshmem-cu13",
+      "version": "3.4.5",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "nvidia-nvjitlink",
+      "version": "13.0.88",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "nvidia-cufft",
+      "version": "12.0.0.61",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "fsspec",
+      "version": "2026.4.0",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "nvidia-cudnn-cu13",
+      "version": "9.19.0.56",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "Jinja2",
+      "version": "3.1.6",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "nvidia-cuda-cupti",
+      "version": "13.0.85",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "nvidia-cuda-runtime",
+      "version": "13.0.96",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "filelock",
+      "version": "3.29.0",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "numpy",
+      "version": "1.26.4",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "polars-runtime-32",
+      "version": "1.40.1",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "triton",
+      "version": "3.6.0",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "nvidia-cusolver",
+      "version": "12.0.4.66",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "nvidia-nccl-cu13",
+      "version": "2.28.9",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "sympy",
+      "version": "1.14.0",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "nvidia-cufile",
+      "version": "1.15.1.6",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.15.0",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "cuda-bindings",
+      "version": "13.2.0",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "networkx",
+      "version": "3.4.2",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "nvidia-cusparselt-cu13",
+      "version": "0.8.0",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "nvidia-cuda-nvrtc",
+      "version": "13.0.88",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "opencv-python",
+      "version": "4.13.0.92",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "cuda-toolkit",
+      "version": "13.0.2",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "pillow",
+      "version": "12.2.0",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "MarkupSafe",
+      "version": "3.0.3",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "ultralytics",
+      "version": "8.4.46",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "torchvision",
+      "version": "0.23.0",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "nvidia-cublas",
+      "version": "13.1.0.3",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "nvidia-cusparse",
+      "version": "12.6.3.3",
+      "location": "/home/mr2/.local/lib/python3.10/site-packages"
+    },
+    {
+      "name": "cov-core",
+      "version": "1.15.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "urllib3",
+      "version": "1.26.5",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "breezy",
+      "version": "3.2.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "scipy",
+      "version": "1.8.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "MarkupSafe",
+      "version": "2.0.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "pydot",
+      "version": "1.4.2",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "vcstool",
+      "version": "0.3.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "PyOpenGL",
+      "version": "3.1.5",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "pyxdg",
+      "version": "0.27",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "Brlapi",
+      "version": "0.8.3",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "defer",
+      "version": "1.0.6",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "protobuf",
+      "version": "3.12.4",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "colcon-recursive-crawl",
+      "version": "0.2.3",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "cpuset",
+      "version": "1.6",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "colcon-ros",
+      "version": "0.5.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "python-apt",
+      "version": "2.4.0+ubuntu4.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "xkit",
+      "version": "0.0.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "colcon-common-extensions",
+      "version": "0.3.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "mccabe",
+      "version": "0.6.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "attrs",
+      "version": "21.2.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "zipp",
+      "version": "1.0.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "PyQt5",
+      "version": "5.15.6",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "pip",
+      "version": "22.0.2",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "ufoLib2",
+      "version": "0.13.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "colcon-bash",
+      "version": "0.5.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "colcon-argcomplete",
+      "version": "0.3.3",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "cryptography",
+      "version": "3.4.8",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "PyNaCl",
+      "version": "1.5.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "psutil",
+      "version": "5.9.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "PyJWT",
+      "version": "2.3.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "colcon-cmake",
+      "version": "0.2.29",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "toml",
+      "version": "0.10.2",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "colcon-library-path",
+      "version": "0.2.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "pluggy",
+      "version": "0.13.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "distro-info",
+      "version": "1.1+ubuntu0.2",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "importlib-metadata",
+      "version": "4.6.4",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "lazr.uri",
+      "version": "1.0.6",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "mpmath",
+      "version": "0.0.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "colcon-zsh",
+      "version": "0.5.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "Jetson.GPIO",
+      "version": "2.1.9",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "Brotli",
+      "version": "1.0.9",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "wheel",
+      "version": "0.37.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "colcon-core",
+      "version": "0.20.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "click",
+      "version": "8.0.3",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "bcrypt",
+      "version": "3.2.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "colcon-mixin",
+      "version": "0.2.3",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "colcon-pkg-config",
+      "version": "0.1.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "netifaces",
+      "version": "0.11.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "pyflakes",
+      "version": "2.4.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "rosdistro",
+      "version": "1.0.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "ply",
+      "version": "3.11",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "xdg",
+      "version": "5",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "apturl",
+      "version": "0.5.2",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "cbor2",
+      "version": "5.4.2",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "Jinja2",
+      "version": "3.0.3",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "fastbencode",
+      "version": "0.0.5",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "Mako",
+      "version": "1.1.3",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "dulwich",
+      "version": "0.20.31",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "systemd-python",
+      "version": "234",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "appdirs",
+      "version": "1.4.4",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "sympy",
+      "version": "1.9",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "urwid",
+      "version": "2.1.2",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "snowballstemmer",
+      "version": "2.2.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "py",
+      "version": "1.10.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "keyring",
+      "version": "23.5.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "rosdistro-modules",
+      "version": "1.0.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "PyQt5-sip",
+      "version": "12.9.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "colcon-package-selection",
+      "version": "0.2.10",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "pikepdf",
+      "version": "5.0.1+dfsg",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "catkin-pkg-modules",
+      "version": "1.1.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "lark",
+      "version": "1.1.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "catkin-pkg",
+      "version": "1.1.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "colcon-override-check",
+      "version": "0.0.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "pytz",
+      "version": "2022.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "ubuntu-drivers-common",
+      "version": "0.0.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "flake8",
+      "version": "4.0.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "numpy",
+      "version": "1.21.5",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "python-debian",
+      "version": "0.1.43+ubuntu1.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "colcon-cd",
+      "version": "0.2.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "colcon-python-setup-py",
+      "version": "0.2.9",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "pycups",
+      "version": "2.0.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "argcomplete",
+      "version": "1.8.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "docutils",
+      "version": "0.17.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "wadllib",
+      "version": "1.3.6",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "PyGithub",
+      "version": "1.55",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "pyRFC3339",
+      "version": "1.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "distlib",
+      "version": "0.3.4",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "six",
+      "version": "1.16.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "bloom",
+      "version": "0.14.2",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "pythran",
+      "version": "0.10.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "lockfile",
+      "version": "0.12.2",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "matplotlib",
+      "version": "3.5.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "onboard",
+      "version": "1.4.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "duplicity",
+      "version": "0.8.21",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "beniget",
+      "version": "0.4.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "blinker",
+      "version": "1.4",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "fonttools",
+      "version": "4.29.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "tqdm",
+      "version": "4.57.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "pycodestyle",
+      "version": "2.8.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "colcon-defaults",
+      "version": "0.2.9",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "colcon-devtools",
+      "version": "0.3.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "pytest",
+      "version": "6.2.5",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "ubuntu-pro-client",
+      "version": "8001",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "requests",
+      "version": "2.25.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "packaging",
+      "version": "21.3",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "monotonic",
+      "version": "1.6",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "jeepney",
+      "version": "0.7.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "mpi4py",
+      "version": "3.1.3",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "Babel",
+      "version": "2.8.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "language-selector",
+      "version": "0.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "lxml",
+      "version": "4.8.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "macaroonbakery",
+      "version": "1.3.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "pytest-cov",
+      "version": "3.0.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "empy",
+      "version": "3.3.4",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "ujson",
+      "version": "5.1.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "paramiko",
+      "version": "2.9.3",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "httplib2",
+      "version": "0.20.2",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "dbus-python",
+      "version": "1.2.18",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "colcon-test-result",
+      "version": "0.3.8",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "pandas",
+      "version": "1.3.5",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "iniconfig",
+      "version": "1.1.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "nose2",
+      "version": "0.9.2",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "idna",
+      "version": "3.3",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "gpg",
+      "version": "1.16.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "PyGObject",
+      "version": "3.42.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "rosdep",
+      "version": "0.26.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "colorama",
+      "version": "0.4.4",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "notify2",
+      "version": "0.3",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "gast",
+      "version": "0.5.2",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "colcon-package-information",
+      "version": "0.4.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "fasteners",
+      "version": "0.14.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "lazr.restfulclient",
+      "version": "0.14.4",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "future",
+      "version": "0.18.2",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "pymacaroons",
+      "version": "0.13.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "distro",
+      "version": "1.7.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "pyparsing",
+      "version": "2.4.7",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "PyYAML",
+      "version": "5.4.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "colcon-installed-package-information",
+      "version": "0.2.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "more-itertools",
+      "version": "8.10.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "typeguard",
+      "version": "2.2.2",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "requests-toolbelt",
+      "version": "0.9.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "roman",
+      "version": "3.3",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "fs",
+      "version": "2.4.12",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "cycler",
+      "version": "0.11.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "kiwisolver",
+      "version": "1.3.2",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "img2pdf",
+      "version": "0.4.2",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "colcon-parallel-executor",
+      "version": "0.3.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "mercurial",
+      "version": "6.1.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "python-dateutil",
+      "version": "2.8.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "pygraphviz",
+      "version": "1.7",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "pexpect",
+      "version": "4.8.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "unicodedata2",
+      "version": "14.0.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "olefile",
+      "version": "0.46",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "rospkg-modules",
+      "version": "1.6.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "SecretStorage",
+      "version": "3.3.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "python-dbusmock",
+      "version": "0.27.5",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "coverage",
+      "version": "6.2",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "louis",
+      "version": "3.20.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "colcon-notification",
+      "version": "0.3.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "tornado",
+      "version": "6.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "chardet",
+      "version": "4.0.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "Pygments",
+      "version": "2.11.2",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "rosdep-modules",
+      "version": "0.26.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "fastimport",
+      "version": "0.9.14",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "ptyprocess",
+      "version": "0.7.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "wrapt",
+      "version": "1.13.3",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "Deprecated",
+      "version": "1.2.13",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "colcon-output",
+      "version": "0.2.14",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "vcstools",
+      "version": "0.1.42",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "lz4",
+      "version": "3.1.3+dfsg",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "certifi",
+      "version": "2020.6.20",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "Pillow",
+      "version": "9.0.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "python-gitlab",
+      "version": "2.10.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "setuptools",
+      "version": "59.6.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "launchpadlib",
+      "version": "1.10.16",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "configobj",
+      "version": "5.0.6",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "patiencediff",
+      "version": "0.2.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "pycairo",
+      "version": "1.20.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "oauthlib",
+      "version": "3.2.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "colcon-powershell",
+      "version": "0.5.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "cupshelpers",
+      "version": "1.0",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "decorator",
+      "version": "4.4.2",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "pydocstyle",
+      "version": "6.1.1",
+      "location": "/usr/lib/python3/dist-packages"
+    },
+    {
+      "name": "colcon-metadata",
+      "version": "0.2.5",
+      "location": "/usr/lib/python3/dist-packages"
+    }
+  ],
+  "modules": {
+    "numpy": {
+      "origin": "/home/mr2/.local/lib/python3.10/site-packages/numpy/__init__.py"
+    },
+    "cv2": {
+      "origin": "/home/mr2/.local/lib/python3.10/site-packages/cv2/__init__.py"
+    },
+    "psutil": {
+      "origin": "/usr/lib/python3/dist-packages/psutil/__init__.py"
+    },
+    "yaml": {
+      "origin": "/usr/lib/python3/dist-packages/yaml/__init__.py"
+    },
+    "ultralytics": {
+      "origin": "/home/mr2/.local/lib/python3.10/site-packages/ultralytics/__init__.py"
+    },
+    "torch": {
+      "origin": "/home/mr2/.local/lib/python3.10/site-packages/torch/__init__.py"
+    },
+    "torchvision": {
+      "origin": "/home/mr2/.local/lib/python3.10/site-packages/torchvision/__init__.py"
+    },
+    "tensorrt": {
+      "origin": null
+    },
+    "pyrealsense2": {
+      "origin": null
+    },
+    "serial": {
+      "origin": null
+    },
+    "pymavlink": {
+      "origin": null
+    },
+    "MAVProxy": {
+      "origin": null
+    },
+    "pytest": {
+      "origin": "/usr/lib/python3/dist-packages/pytest/__init__.py"
+    },
+    "gi": {
+      "origin": "/usr/lib/python3/dist-packages/gi/__init__.py"
+    },
+    "setuptools": {
+      "origin": "/usr/lib/python3/dist-packages/setuptools/__init__.py"
+    }
+  }
+}

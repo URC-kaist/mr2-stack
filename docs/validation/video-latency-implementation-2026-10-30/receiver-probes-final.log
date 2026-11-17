@@ -1,0 +1,2 @@
+{"passed": true, "fps": 1, "native_metadata": false, "frames": [{"at_s": 0.04502903300090111, "bytes": 3039}, {"at_s": 1.0442146170007618, "bytes": 2324}, {"at_s": 2.0442100020009093, "bytes": 2326}]}
+{"passed": true, "fps": 1, "native_metadata": true, "frames": [{"at_s": 0.08920127499914088, "bytes": 3039}, {"at_s": 1.04933144899951, "bytes": 2324}, {"at_s": 2.0489588950003963, "bytes": 2326}]}

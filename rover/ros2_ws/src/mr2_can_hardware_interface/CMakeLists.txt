@@ -38,4 +38,11 @@ install(
 install(FILES plugin.xml
   DESTINATION share/${PROJECT_NAME})
 
+if(BUILD_TESTING)
+  find_package(ament_cmake_gtest REQUIRED)
+  ament_add_gtest(test_activation test/test_activation.cpp)
+  ament_target_dependencies(test_activation mr2_can_bus_core hardware_interface
+    pluginlib rclcpp transmission_interface)
+endif()
+
 ament_package()

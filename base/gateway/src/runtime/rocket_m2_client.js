@@ -31,10 +31,11 @@ class RocketM2Client {
   getState() {
     const configured =
       this.config.rocketM2Ip && this.config.rocketM2User && this.config.rocketM2Pass
+    const autoEnable = this.config.rocketM2AutoEnable !== false
     return {
       target: this.target,
       label: this.label,
-      enabled: Boolean(this.config.rocketM2Enable || configured),
+      enabled: Boolean(this.config.rocketM2Enable || (autoEnable && configured)),
       configured: Boolean(configured),
       status: this.status,
     }
@@ -66,7 +67,7 @@ class RocketM2Client {
 
     this.poll()
     this.pollTimer = setInterval(() => this.poll(), Math.max(pollMs, 500))
-    this.log(`Rocket M2 ${this.label} polling every ${Math.max(pollMs, 500)} ms`)
+    this.log(`Rocket M2 ${this.label} polling ${this.config.rocketM2Ip} every ${Math.max(pollMs, 500)} ms`)
   }
 
   stop() {
@@ -130,7 +131,7 @@ class RocketM2Client {
         }
       )
       if (error && error !== this.lastError) {
-        this.log(`Rocket M2 ${this.label} poll failed: ${error}`)
+        this.log(`Rocket M2 ${this.label} poll failed (${this.config.rocketM2Ip}): ${error}`)
         this.lastError = error
       }
     } finally {
@@ -155,6 +156,14 @@ class RocketM2Client {
       uri: '/index.cgi',
     }).toString()
 
+    // Bootstrap the cookie, then let --data select POST. Explicit -X POST
+    // incorrectly survives airOS's redirect to index.cgi and loses the session.
+    await this.runCurl([
+      '-k', '--ciphers', 'DEFAULT:@SECLEVEL=0', '-sS', '-L',
+      '-c', this.cookiePath, '-b', this.cookiePath,
+      `https://${this.config.rocketM2Ip}/login.cgi`, '-o', '/dev/null',
+    ], this.config.rocketM2TimeoutMs)
+
     await this.runCurl(
       [
         '-k',
@@ -166,8 +175,6 @@ class RocketM2Client {
         this.cookiePath,
         '-b',
         this.cookiePath,
-        '-X',
-        'POST',
         `https://${this.config.rocketM2Ip}/login.cgi`,
         '-H',
         'Content-Type: application/x-www-form-urlencoded',

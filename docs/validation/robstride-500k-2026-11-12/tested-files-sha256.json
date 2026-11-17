@@ -1,0 +1,6 @@
+{
+  "src/mr2_devices_robstride/src/robstride_device.cpp": "8dd74e7d157447527027ef9ce3ecdc2a5f3012d1b807b7ec80dfaa2ac1b43a1a",
+  "src/mr2_devices_robstride/src/robstride_smoke_test.cpp": "50e7c1cb3a17c74a9b3ab8102c925b2c377460144d3b1d2016f1190753258c4f",
+  "install/mr2_devices_robstride/lib/librobstride_device.so": "57b7027331d8bea9f07e22bb6da7579eadae6c2a16ba961d5ef7ada900ea09f8",
+  "install/mr2_devices_robstride/lib/mr2_devices_robstride/robstride_smoke_test": "364ad468879236332a36797b654349b731ed9c9c043c93ea62ce460f41b9e87c"
+}

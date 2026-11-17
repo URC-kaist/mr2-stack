@@ -1,0 +1,3 @@
+    'actuator':
+        Drive wheel motors: custom firmware or RobStride RS-06. Valid choices are: ['custom', 'rs']
+        (default: 'custom')

@@ -1,0 +1,94 @@
+[
+  {
+    "configured_latency_ms": 40,
+    "matched_markers": 96,
+    "steady_n": 86,
+    "jitter_residence_ms": {
+      "n": 86,
+      "p50": 0.070946,
+      "p95": 0.118402,
+      "max": 0.175396
+    },
+    "sender_pay_to_post_jitter_ms": {
+      "n": 86,
+      "p50": 0.975157,
+      "p95": 1.371197,
+      "max": 1.543008
+    },
+    "sender_pay_to_access_unit_ms": {
+      "n": 56,
+      "p50": 1.050838,
+      "p95": 1.625442,
+      "max": 1.92964
+    }
+  },
+  {
+    "configured_latency_ms": 20,
+    "matched_markers": 96,
+    "steady_n": 86,
+    "jitter_residence_ms": {
+      "n": 86,
+      "p50": 0.06541,
+      "p95": 0.176995,
+      "max": 0.327047
+    },
+    "sender_pay_to_post_jitter_ms": {
+      "n": 86,
+      "p50": 1.001205,
+      "p95": 1.434878,
+      "max": 1.763941
+    },
+    "sender_pay_to_access_unit_ms": {
+      "n": 56,
+      "p50": 1.206809,
+      "p95": 1.740388,
+      "max": 2.273104
+    }
+  },
+  {
+    "configured_latency_ms": 10,
+    "matched_markers": 96,
+    "steady_n": 86,
+    "jitter_residence_ms": {
+      "n": 86,
+      "p50": 0.064257,
+      "p95": 0.09053,
+      "max": 0.10813
+    },
+    "sender_pay_to_post_jitter_ms": {
+      "n": 86,
+      "p50": 0.949204,
+      "p95": 1.40387,
+      "max": 1.652419
+    },
+    "sender_pay_to_access_unit_ms": {
+      "n": 86,
+      "p50": 1.092311,
+      "p95": 1.565569,
+      "max": 1.932169
+    }
+  },
+  {
+    "configured_latency_ms": 40,
+    "matched_markers": 96,
+    "steady_n": 86,
+    "jitter_residence_ms": {
+      "n": 86,
+      "p50": 0.064193,
+      "p95": 0.080865,
+      "max": 0.10685
+    },
+    "sender_pay_to_post_jitter_ms": {
+      "n": 86,
+      "p50": 0.933492,
+      "p95": 1.457503,
+      "max": 1.606594
+    },
+    "sender_pay_to_access_unit_ms": {
+      "n": 86,
+      "p50": 1.103767,
+      "p95": 1.627298,
+      "max": 1.940425
+    }
+  }
+]

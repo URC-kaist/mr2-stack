@@ -1,0 +1,61 @@
+{
+  "functional_tests": 102,
+  "failures": 0,
+  "errors": 0,
+  "suites": [
+    {
+      "result_file": "actuator-launch.xml",
+      "tests": 61,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "result_file": "test_drivers.gtest.xml",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "result_file": "test_launch.xunit.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "result_file": "test_legacy_drive.gtest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "result_file": "test_processors.gtest.xml",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "result_file": "test_converter.gtest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "result_file": "test_robstride.gtest.xml",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "result_file": "test_plugin_loading.gtest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "result_file": "test_activation.gtest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>mr2_control</name><version>0.1.0</version>
+  <description>Explicit MR2 control runtime with existing CAN drivers and transmissions.</description>
+  <maintainer email="maintainers@kaist.ac.kr">MR2 maintainers</maintainer>
+  <license>MIT</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>rclcpp</depend><depend>hardware_interface</depend>
+  <depend>transmission_interface</depend><depend>pluginlib</depend>
+  <depend>mr2_can_bus_core</depend><depend>mr2_action_interface</depend>
+  <depend>geometry_msgs</depend><depend>nav_msgs</depend><depend>sensor_msgs</depend>
+  <depend>std_msgs</depend><depend>std_srvs</depend><depend>diagnostic_msgs</depend>
+  <depend>yaml-cpp</depend>
+  <exec_depend>mr2_devices_ak_servo</exec_depend>
+  <exec_depend>mr2_devices_output_actuator</exec_depend>
+  <test_depend>ament_cmake_gtest</test_depend>
+  <test_depend>ament_cmake_pytest</test_depend>
+  <test_depend>controller_interface</test_depend>
+  <test_depend>joint_state_broadcaster</test_depend>
+  <test_depend>rclpy</test_depend>
+  <test_depend>xacro</test_depend>
+  <test_depend>python3-yaml</test_depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

@@ -37,33 +37,35 @@ browser; no physical gamepad or motor response was tested.
 
 ## Accepted live results
 
-Each initial uplink trial requested a five-second capture. These short runs
+Each accepted uplink trial requested a five-second capture. These short runs
 validate the workflow, not sustained throughput or a load-scaling benchmark.
 Values below are milliseconds; report JSON distributions use microseconds.
 
 | Feeds | Matched rendered frames | RTP rover→base p50 | RTP rover→render p50 | RTP rover→render p95 | Warnings |
 | --- | ---: | ---: | ---: | ---: | --- |
-| 1 | 122 | 0.112 | 103.948 | 104.959 | none |
-| 2 | 244 | 0.113 | 74.305 | 104.816 | none |
-| 4 | 488 (122 each) | 0.098 | 58.427 | 104.822 | none |
+| 1 | 122 | 0.099 | 71.915 | 74.046 | none |
+| 2 | 244 | 0.098 | 71.488 | 73.499 | none |
+| 4 | 485 (121/121/122/121) | 0.101 | 71.920 | 75.466 | none |
 
 All selected streams reported 0% matched-window packet loss, both tcpdump
 processes exited successfully with zero kernel drops, and rover metadata reported
 `stream_lease_acquired: true`. Unselected cameras therefore stopped transmitting
 during the selected-load measurements. The four-feed per-camera total p50s were
-103.184, 36.190, 71.564, and 35.950 ms: the aggregate is a mixture of camera
-pipelines and should not be interpreted as more feeds making a camera faster.
+72.226, 71.762, 71.984, and 71.357 ms. These distributions measure the same
+rendered frames in each segment, verified against their actual VCL contents.
 
 Trial IDs and artifact subdirectories:
 
-- 1: `87af5f37-ed54-465d-ae45-192217488d12`, `uplink-AwqCmR`
-- 2: `90fb13a8-0b52-46b2-83b4-1e68e584737c`, `uplink-7s9vpG`
-- 4: `2a73b918-c5f8-4779-841e-6c654b7e59a4`, `uplink-iNIMtR`
+- 1: `100dc208-5893-4f5c-821d-13370566d3b6`, `uplink-g9Xkze`
+- 2: `f3a01ab7-d908-4bbf-ad19-325e7b9efc3e`, `uplink-i5nv3l`
+- 4: `fcb3fc5f-36e8-4ca6-913b-8a9d875c1f70`, `uplink-p0M1Ix`
 
 Cancel during capture restored all four feeds; another one-feed trial completed
-with 73 matched frames. Earlier browser-warmup and capture-file failures also
-returned the camera streams to their previous selection. No deliberate
-long-duration timeout or reboot acceptance test was performed.
+with matched rendered frames (see `cancel-results.json`). Earlier browser-warmup and capture-file failures also
+returned the camera streams to their previous selection. During extended testing one camera process remained alive but stopped sending
+UDP; restarting the camera launch restored it. This was not an automatic
+stalled-camera recovery test. No deliberate long-duration timeout or reboot
+acceptance test was performed.
 
 Downlink final accepted trials:
 
@@ -99,7 +101,18 @@ These are individual input trials, not latency percentiles.
    empty hostname (`7F7F0101 ()`). It now accepts the same format as the gateway's
    parser; a regression test covers local references with and without parentheses.
 
-Gateway unit tests: 73 passed. Dashboard latency tests, TypeScript, lint, and
+6. A late-join regression proved that FIFO pairing of the tee's two outputs
+   could assign an earlier RTP frame to a later rendered access unit. Timing now
+   requires matching SHA-256 fingerprints of the unchanged H.264 VCL bytes,
+   reconstructed from single NAL/STAP-A/FU-A packets. Packet loss, unsupported
+   packetization, and incomplete fragments receive no correlation. Unmatched
+   frames do not block later verified frames, and stopping a receiver cancels
+   pending correlation work. The packet reconstruction follows
+   [RFC 6184 sections 5.6–5.8](https://www.rfc-editor.org/rfc/rfc6184.html).
+   Initial FIFO-based uplink measurements are **superseded**, including the first
+   488-frame result. The accepted table uses the repeated content-matched trials.
+
+Gateway unit tests: 81 passed. Dashboard latency tests, TypeScript, lint, and
 production build passed on the x86 base. Rover's six changed ROS packages built
 successfully. Synthetic normal and late-join video checks passed. Final
 point-in-time deployment agreement is checked separately with `preflight.py`

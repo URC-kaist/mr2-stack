@@ -25,6 +25,7 @@ test('parseRtpPacket reads marker key through CSRC and extension headers', () =>
     sequence: 65535,
     rtp_timestamp: 123456,
     ssrc: 0x10203040,
+    payload: Buffer.alloc(0),
   })
 })
 
@@ -36,4 +37,18 @@ test('RtpStreamParser accepts split RFC4571 packets', () => {
   const parser = new RtpStreamParser()
   assert.deepEqual(parser.push(framed.subarray(0, 7)), [])
   assert.equal(parser.push(framed.subarray(7))[0].sequence, 65535)
+})
+
+
+test('parseRtpPacket strips valid RTP padding and rejects invalid padding', () => {
+  const packet = Buffer.alloc(16)
+  packet[0] = 0xa0
+  packet[12] = 0x65
+  packet[13] = 0xe0
+  packet[15] = 2
+  assert.deepEqual(parseRtpPacket(packet).payload, Buffer.from([0x65, 0xe0]))
+  packet[15] = 0
+  assert.equal(parseRtpPacket(packet), null)
+  packet[15] = 5
+  assert.equal(parseRtpPacket(packet), null)
 })

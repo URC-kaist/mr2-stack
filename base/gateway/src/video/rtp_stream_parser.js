@@ -16,12 +16,15 @@ function parseRtpPacket(packet) {
     headerLength += 4 + extensionWords * 4
     if (packet.length < headerLength) return null
   }
+  const padding = (first & 0x20) !== 0 ? packet[packet.length - 1] : 0
+  if ((first & 0x20) !== 0 && (!padding || padding > packet.length - headerLength)) return null
   return {
     marker: (second & 0x80) !== 0,
     payload_type: second & 0x7f,
     sequence: packet.readUInt16BE(2),
     rtp_timestamp: packet.readUInt32BE(4),
     ssrc: packet.readUInt32BE(8),
+    payload: packet.subarray(headerLength, packet.length - padding),
   }
 }
 

@@ -4,6 +4,7 @@ const { spawn } = require('child_process')
 
 const { AnnexBAccessUnitParser } = require('./h264')
 const { RtpStreamParser } = require('./rtp_stream_parser')
+const { accessUnitFingerprint, RtpFrameFingerprint } = require('./rtp_frame_fingerprint')
 
 function buildGstReceiveArgs(stream, options = {}) {
   const latencyMs = Math.max(0, Math.floor(options.jitterLatencyMs || 0))
@@ -70,6 +71,7 @@ function createVideoStreamReceiver(options = {}) {
   let availabilityTimer = null
   let parser = new AnnexBAccessUnitParser()
   let rtpParser = new RtpStreamParser()
+  const fingerprint = new RtpFrameFingerprint()
   let pendingAccessUnits = []
   let pendingMarkers = []
   let pairingTimer = null
@@ -85,6 +87,7 @@ function createVideoStreamReceiver(options = {}) {
     }
     parser = new AnnexBAccessUnitParser()
     rtpParser = new RtpStreamParser()
+    fingerprint.reset()
     pendingAccessUnits = []
     pendingMarkers = []
   }
@@ -118,8 +121,21 @@ function createVideoStreamReceiver(options = {}) {
 
   function pairFrames() {
     while (pendingAccessUnits.length > 0 && pendingMarkers.length > 0) {
+      // Pipe delivery order is independent, and depayloading can discard frames
+      // before the first keyframe or after packet loss. FIFO pairing silently
+      // assigns another frame's RTP timestamp; require identical VCL content.
+      const unitIndex = pendingAccessUnits.findIndex((unit) =>
+        pendingMarkers.some((item) => item.fingerprint === unit.fingerprint))
+      if (unitIndex < 0) break
+      // A lost/corrupt frame must not block subsequent verified matches until
+      // their metadata expires. Preserve decoding order, without timing it.
+      for (let index = 0; index < unitIndex; index += 1) {
+        emitAccessUnit(pendingAccessUnits.shift().value)
+      }
+      const index = pendingMarkers.findIndex((item) =>
+        item.fingerprint === pendingAccessUnits[0].fingerprint)
       const accessUnit = pendingAccessUnits.shift().value
-      const marker = pendingMarkers.shift().value
+      const marker = pendingMarkers.splice(index, 1)[0].value
       emitAccessUnit(accessUnit, marker)
     }
     if (pendingAccessUnits.length > maximumPairingQueue) {
@@ -165,7 +181,10 @@ function createVideoStreamReceiver(options = {}) {
   function handleStdout(chunk) {
     for (const accessUnit of parser.push(chunk)) {
       if (!accessUnit.payload || accessUnit.payload.length === 0) continue
-      pendingAccessUnits.push({ queuedAt: Date.now(), value: accessUnit })
+      pendingAccessUnits.push({
+        queuedAt: Date.now(), value: accessUnit,
+        fingerprint: accessUnitFingerprint(accessUnit.payload),
+      })
     }
     pairFrames()
   }
@@ -173,9 +192,11 @@ function createVideoStreamReceiver(options = {}) {
   function handleRtpStream(chunk) {
     try {
       for (const packet of rtpParser.push(chunk)) {
-        if (!packet.marker) continue
+        const frameFingerprint = fingerprint.push(packet)
+        if (!packet.marker || !frameFingerprint) continue
         pendingMarkers.push({
           queuedAt: Date.now(),
+          fingerprint: frameFingerprint,
           value: {
             marker_sequence: packet.sequence,
             rtp_timestamp: packet.rtp_timestamp,
@@ -187,6 +208,7 @@ function createVideoStreamReceiver(options = {}) {
     } catch (error) {
       log(`[video:${stream.stream_id}] RTP metadata parse error: ${error.message || error}`)
       rtpParser.reset()
+      fingerprint.reset()
       pendingMarkers = []
     }
   }
@@ -249,6 +271,7 @@ function createVideoStreamReceiver(options = {}) {
   function stop() {
     stopping = true
     clearAvailabilityTimer()
+    resetCorrelation()
     if (restartTimer) {
       clearTimeout(restartTimer)
       restartTimer = null

@@ -6,13 +6,14 @@ const { EventEmitter } = require('events')
 
 const { buildGstReceiveArgs, createVideoStreamReceiver } = require('../src/video/receiver')
 
-function rtpStreamPacket(sequence = 1, timestamp = 90000, ssrc = 0x10203040) {
-  const rtp = Buffer.alloc(12)
+function rtpStreamPacket(sequence = 1, timestamp = 90000, ssrc = 0x10203040, payload = Buffer.from([0x65, 0xe0])) {
+  const rtp = Buffer.alloc(12 + payload.length)
   rtp.writeUInt8(0x80, 0)
   rtp.writeUInt8(0x80 | 96, 1)
   rtp.writeUInt16BE(sequence, 2)
   rtp.writeUInt32BE(timestamp, 4)
   rtp.writeUInt32BE(ssrc, 8)
+  payload.copy(rtp, 12)
   const framed = Buffer.alloc(rtp.length + 2)
   framed.writeUInt16BE(rtp.length, 0)
   rtp.copy(framed, 2)
@@ -144,4 +145,73 @@ test('createVideoStreamReceiver pairs marker metadata regardless of fd event ord
     ssrc: 42,
   })
   receiver.stop()
+})
+
+
+test('late join does not assign an earlier discarded delta marker to an IDR', () => {
+  const child = createFakeChild()
+  const frames = []
+  const receiver = createVideoStreamReceiver({
+    stream: { stream_id: 'flat_cam_1', udp_port: 5010 },
+    spawnImpl: () => child,
+    onAccessUnit: (_id, frame) => frames.push(frame),
+  })
+  try {
+    receiver.start()
+    child.stdio[3].emit('data', Buffer.concat([
+      rtpStreamPacket(70, 90000, 42, Buffer.from([0x41, 0xe1])),
+      rtpStreamPacket(71, 93000, 42, Buffer.from([0x41, 0xe2])),
+      rtpStreamPacket(72, 96000, 42, Buffer.from([0x65, 0xe0])),
+    ]))
+    child.stdout.emit('data', Buffer.from([
+      0, 0, 0, 1, 0x65, 0xe0,
+      0, 0, 0, 1, 0x41, 0xe0,
+      0, 0, 0, 1, 0x41, 0xe0,
+    ]))
+    assert.equal(frames.length, 1)
+    assert.equal(frames[0].correlation.marker_sequence, 72)
+    assert.equal(frames[0].correlation.rtp_timestamp, 96000)
+  } finally { receiver.stop() }
+})
+
+test('stop cancels pending uncorrelated frame output', async () => {
+  const child = createFakeChild()
+  const frames = []
+  const receiver = createVideoStreamReceiver({
+    stream: { stream_id: 'flat_cam_1', udp_port: 5010 },
+    spawnImpl: () => child,
+    onAccessUnit: (_id, frame) => frames.push(frame),
+  })
+  receiver.start()
+  child.stdout.emit('data', Buffer.from([
+    0, 0, 0, 1, 0x65, 0xe0,
+    0, 0, 0, 1, 0x41, 0xe0,
+    0, 0, 0, 1, 0x41, 0xe0,
+  ]))
+  receiver.stop()
+  await new Promise(resolve => setTimeout(resolve, 150))
+  assert.equal(frames.length, 0)
+})
+
+test('an unmatched access unit does not starve later verified frames', () => {
+  const child = createFakeChild()
+  const frames = []
+  const receiver = createVideoStreamReceiver({
+    stream: { stream_id: 'flat_cam_1', udp_port: 5010 },
+    spawnImpl: () => child,
+    onAccessUnit: (_id, frame) => frames.push(frame),
+  })
+  try {
+    receiver.start()
+    child.stdio[3].emit('data', rtpStreamPacket(72, 96000, 42, Buffer.from([0x41, 0xe2])))
+    child.stdout.emit('data', Buffer.from([
+      0, 0, 0, 1, 0x65, 0xe1,
+      0, 0, 0, 1, 0x41, 0xe2,
+      0, 0, 0, 1, 0x41, 0xe3,
+      0, 0, 0, 1, 0x41, 0xe4,
+    ]))
+    assert.equal(frames.length, 2)
+    assert.equal(frames[0].correlation, undefined)
+    assert.equal(frames[1].correlation.marker_sequence, 72)
+  } finally { receiver.stop() }
 })

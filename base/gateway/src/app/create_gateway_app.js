@@ -19,6 +19,7 @@ const {
   encodeMissionControl,
 } = require('../protocol/xbee')
 const { createGatewayHttpHandler } = require('../runtime/http_handlers')
+const { createChronyStatusProvider } = require('../runtime/chrony_status')
 const { startMavproxy } = require('../runtime/mavproxy')
 const { RocketM2Client } = require('../runtime/rocket_m2_client')
 const { startRosTopicRelay } = require('../runtime/ros_topic_relay')
@@ -36,6 +37,7 @@ function createGatewayApp(options = {}) {
   const config = options.config
   const env = options.env || process.env
   const execFileAsync = options.execFileAsync || promisify(execFile)
+  const getChronyStatus = createChronyStatusProvider({ execFileAsync })
   const videoConfig = loadVideoConfig(config.videoConfigPath)
 
   const nextSeq = createSequencer()
@@ -63,6 +65,7 @@ function createGatewayApp(options = {}) {
       log,
       getRocketM2State: () => getRocketM2FleetState(),
       getVideoStreams: () => (videoGateway ? videoGateway.getBrowserStreams() : []),
+      getChronyStatus,
     })
   )
   const routeRegistry = createWsRouteRegistry({ server })

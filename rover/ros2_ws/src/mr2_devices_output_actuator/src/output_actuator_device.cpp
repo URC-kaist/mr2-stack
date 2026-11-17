@@ -1,5 +1,5 @@
-#include "hardware_interface/types/hardware_interface_type_values.hpp"
 #include "builtin_interfaces/msg/time.hpp"
+#include "hardware_interface/types/hardware_interface_type_values.hpp"
 #include "mr2_can_bus_core/can_bus_registry.hpp"
 #include "mr2_can_bus_core/can_device.hpp"
 #include "mr2_devices_output_actuator/msg/actuator_config_status.hpp"
@@ -19,6 +19,7 @@
 #include <cstdint>
 #include <functional>
 #include <limits>
+#include <mutex>
 #include <optional>
 #include <stdexcept>
 #include <string>
@@ -153,6 +154,8 @@ bool profile_requires_selection(Profile profile) {
 } // namespace
 
 class OutputActuatorDevice : public CanDevice {
+  friend struct DeviceTestPeer;
+
 public:
   void configure(const hardware_interface::ComponentInfo &info,
                  rclcpp::Node *node) override {
@@ -202,14 +205,15 @@ public:
     const auto required_at_activation_it =
         info.parameters.find("required_at_activation");
     if (required_at_activation_it != info.parameters.end()) {
-      required_at_activation_ =
-          parse_bool(required_at_activation_it->second);
+      required_at_activation_ = parse_bool(required_at_activation_it->second);
     }
-    const auto require_limits_it = info.parameters.find("require_limits_status");
+    const auto require_limits_it =
+        info.parameters.find("require_limits_status");
     if (require_limits_it != info.parameters.end()) {
       require_limits_status_ = parse_bool(require_limits_it->second);
     }
-    const auto require_config_it = info.parameters.find("require_config_status");
+    const auto require_config_it =
+        info.parameters.find("require_config_status");
     if (require_config_it != info.parameters.end()) {
       require_config_status_ = parse_bool(require_config_it->second);
     }
@@ -217,18 +221,19 @@ public:
     if (timeout_it != info.parameters.end()) {
       activation_timeout_ms_ = std::max(1, std::stoi(timeout_it->second));
     }
-    const auto arm_attempts_it = info.parameters.find("activation_arm_attempts");
+    const auto arm_attempts_it =
+        info.parameters.find("activation_arm_attempts");
     if (arm_attempts_it != info.parameters.end()) {
-      activation_arm_attempts_ = std::max(1, std::stoi(arm_attempts_it->second));
+      activation_arm_attempts_ =
+          std::max(1, std::stoi(arm_attempts_it->second));
     }
 
     const auto actuator_it = info.parameters.find("actuator");
     const std::string default_status_topic_base =
-        "output_actuator/" +
-        (actuator_it != info.parameters.end() ? actuator_it->second
-                                              : info.name);
-    const auto status_topic_base_it =
-        info.parameters.find("status_topic_base");
+        "output_actuator/" + (actuator_it != info.parameters.end()
+                                  ? actuator_it->second
+                                  : info.name);
+    const auto status_topic_base_it = info.parameters.find("status_topic_base");
     status_topic_base_ = status_topic_base_it != info.parameters.end()
                              ? status_topic_base_it->second
                              : default_status_topic_base;
@@ -236,20 +241,37 @@ public:
     const auto expected_min_it =
         info.parameters.find("expected_output_min_deg");
     if (expected_min_it != info.parameters.end()) {
-      expected_output_min_rad_ =
-          std::stod(expected_min_it->second) * kDegToRad;
+      expected_output_min_rad_ = std::stod(expected_min_it->second) * kDegToRad;
     }
     const auto expected_max_it =
         info.parameters.find("expected_output_max_deg");
     if (expected_max_it != info.parameters.end()) {
-      expected_output_max_rad_ =
-          std::stod(expected_max_it->second) * kDegToRad;
+      expected_output_max_rad_ = std::stod(expected_max_it->second) * kDegToRad;
     }
 
     bus_ = CanBusRegistry::get(iface_);
     if (!bus_) {
       throw std::runtime_error("Cannot open CAN bus");
     }
+
+    if (node_) {
+      const auto qos = rclcpp::QoS(rclcpp::KeepLast(10));
+      angle_status_pub_ = node_->create_publisher<OutputAngleStatusMsg>(
+          status_topic_base_ + "/angle_status", qos);
+      velocity_status_pub_ = node_->create_publisher<OutputVelocityStatusMsg>(
+          status_topic_base_ + "/velocity_status", qos);
+      travel_limits_status_pub_ =
+          node_->create_publisher<TravelLimitsStatusMsg>(
+              status_topic_base_ + "/travel_limits_status", qos);
+      config_status_pub_ = node_->create_publisher<ActuatorConfigStatusMsg>(
+          status_topic_base_ + "/config_status", qos);
+      runtime_diagnostic_pub_ = node_->create_publisher<RuntimeDiagnosticMsg>(
+          status_topic_base_ + "/runtime_diagnostic", qos);
+    }
+
+    if (node_)
+      telemetry_timer_ = node_->create_wall_timer(
+          std::chrono::milliseconds(10), [this] { publish_telemetry(); });
 
     add_filter(bus_, kAngleStatusBase + node_id_, kStandardIdMask,
                [this](const can_frame &f) { on_angle_status(f); });
@@ -262,75 +284,83 @@ public:
     add_filter(bus_, kRuntimeDiagBase + node_id_, kStandardIdMask,
                [this](const can_frame &f) { on_runtime_diag(f); });
 
-    if (node_) {
-      const auto qos = rclcpp::QoS(rclcpp::KeepLast(10));
-      angle_status_pub_ =
-          node_->create_publisher<OutputAngleStatusMsg>(
-              status_topic_base_ + "/angle_status", qos);
-      velocity_status_pub_ =
-          node_->create_publisher<OutputVelocityStatusMsg>(
-              status_topic_base_ + "/velocity_status", qos);
-      travel_limits_status_pub_ =
-          node_->create_publisher<TravelLimitsStatusMsg>(
-              status_topic_base_ + "/travel_limits_status", qos);
-      config_status_pub_ =
-          node_->create_publisher<ActuatorConfigStatusMsg>(
-              status_topic_base_ + "/config_status", qos);
-      runtime_diagnostic_pub_ =
-          node_->create_publisher<RuntimeDiagnosticMsg>(
-              status_topic_base_ + "/runtime_diagnostic", qos);
-    }
-
     last_integrate_time_ns_ = clock_.now().nanoseconds();
   }
 
   bool on_activate() override {
     active_ = false;
+    if (activation_cancelled())
+      return false;
 
     if (!auto_arm_) {
       active_ = true;
       return true;
     }
 
-    if (!wait_for([this] { return diag_seen_.load(); }, "runtime diagnostic")) {
+    if (!wait_for(
+            [this] {
+              const auto feedback_ = feedback_snapshot();
+              return feedback_.diag_seen_;
+            },
+            "runtime diagnostic")) {
       return handle_activation_failure("runtime diagnostic");
     }
 
-    if (armed_) {
+    if (feedback_snapshot().armed_) {
       send_power_command(false);
-      if (!wait_for([this] { return diag_seen_.load() && !armed_.load(); },
-                    "disarmed diagnostic")) {
+      if (!wait_for(
+              [this] {
+                const auto feedback_ = feedback_snapshot();
+                return feedback_.diag_seen_ && !feedback_.armed_;
+              },
+              "disarmed diagnostic")) {
         return handle_activation_failure("disarmed diagnostic");
       }
     }
 
+    const auto profile_feedback = feedback_snapshot();
     if (profile_requires_selection(desired_profile_) &&
-        (stored_profile_.load() != static_cast<uint8_t>(desired_profile_) ||
-         active_profile_.load() != static_cast<uint8_t>(desired_profile_))) {
-      config_status_seen_ = false;
+        (profile_feedback.stored_profile_ !=
+             static_cast<uint8_t>(desired_profile_) ||
+         profile_feedback.active_profile_ !=
+             static_cast<uint8_t>(desired_profile_))) {
+      {
+        std::lock_guard<std::mutex> lock(feedback_mutex_);
+        feedback_.config_status_seen_ = false;
+      }
       send_profile_command(desired_profile_);
-      if (!wait_for([this] {
-            return diag_seen_.load() &&
-                   stored_profile_.load() ==
-                       static_cast<uint8_t>(desired_profile_) &&
-                   active_profile_.load() ==
-                       static_cast<uint8_t>(desired_profile_);
-          },
-                    "desired profile diagnostic")) {
+      if (!wait_for(
+              [this] {
+                const auto feedback_ = feedback_snapshot();
+                return feedback_.diag_seen_ &&
+                       feedback_.stored_profile_ ==
+                           static_cast<uint8_t>(desired_profile_) &&
+                       feedback_.active_profile_ ==
+                           static_cast<uint8_t>(desired_profile_);
+              },
+              "desired profile diagnostic")) {
         RCLCPP_ERROR(logger_, "Actuator %u profile select result: %u", node_id_,
-                     profile_select_result_.load());
+                     feedback_snapshot().profile_select_result_);
         return handle_activation_failure("profile selection");
       }
     }
 
-    if (require_limits_status_ &&
-        !wait_for([this] { return limits_status_seen_.load(); },
-                  "limits status")) {
+    if (require_limits_status_ && !wait_for(
+                                      [this] {
+                                        const auto feedback_ =
+                                            feedback_snapshot();
+                                        return feedback_.limits_status_seen_;
+                                      },
+                                      "limits status")) {
       return handle_activation_failure("limits status");
     }
-    if (require_config_status_ &&
-        !wait_for([this] { return config_status_seen_.load(); },
-                  "config status")) {
+    if (require_config_status_ && !wait_for(
+                                      [this] {
+                                        const auto feedback_ =
+                                            feedback_snapshot();
+                                        return feedback_.config_status_seen_;
+                                      },
+                                      "config status")) {
       return handle_activation_failure("config status");
     }
     if (!validate_config_status()) {
@@ -341,11 +371,15 @@ public:
     }
 
     if (channel_ == CommandChannel::Angle) {
-      if (!wait_for([this] { return angle_status_seen_.load(); },
-                    "angle status before arm")) {
+      if (!wait_for(
+              [this] {
+                const auto feedback_ = feedback_snapshot();
+                return feedback_.angle_status_seen_;
+              },
+              "angle status before arm")) {
         return handle_activation_failure("angle status before arm");
       }
-      hold_position_rad_ = position_rad_;
+      hold_position_rad_ = feedback_snapshot().position_rad_;
       transmit_angle(hold_position_rad_);
     } else {
       transmit_velocity(0.0);
@@ -374,11 +408,15 @@ public:
 
   void process(const rclcpp::Time &) override {
     integrate_position(clock_.now().nanoseconds());
+    const auto feedback_ = feedback_snapshot();
+    if (!std::isfinite(hold_position_rad_) &&
+        std::isfinite(feedback_.first_angle))
+      hold_position_rad_ = feedback_.first_angle;
 
     if (!active_.load()) {
       return;
     }
-    if (auto_arm_ && !armed_.load()) {
+    if (auto_arm_ && !feedback_.armed_) {
       return;
     }
 
@@ -386,7 +424,7 @@ public:
       double desired = desired_command_;
       if (!std::isfinite(desired)) {
         desired = std::isfinite(hold_position_rad_) ? hold_position_rad_
-                                                    : position_rad_;
+                                                    : feedback_.position_rad_;
       } else {
         hold_position_rad_ = desired;
       }
@@ -394,35 +432,76 @@ public:
         transmit_angle(desired);
       }
     } else {
-      const double desired = std::isfinite(desired_command_) ? desired_command_
-                                                             : 0.0;
+      const double desired =
+          std::isfinite(desired_command_) ? desired_command_ : 0.0;
       transmit_velocity(desired);
     }
   }
 
-  void export_state(double *&position, double *&velocity,
-                    double *&effort) override {
-    if (!std::isfinite(position_rad_)) {
-      position_rad_ = 0.0;
-    }
-    if (!std::isfinite(velocity_rad_s_)) {
-      velocity_rad_s_ = 0.0;
-    }
-    position = &position_rad_;
-    velocity = &velocity_rad_s_;
-    effort_dummy_ = 0.0;
-    effort = &effort_dummy_;
+  bool copy_feedback(CanFeedback &out) override {
+    const auto f = feedback_snapshot();
+    out = {f.position_rad_, f.velocity_rad_s_, 0.0, f.angle_received_ns,
+           f.velocity_received_ns};
+    return true;
   }
 
-  void export_command(double *&command) override { command = &desired_command_; }
+  void export_state(double *&position, double *&velocity,
+                    double *&effort) override {
+    copy_feedback(exported_);
+    position = &exported_.position;
+    velocity = &exported_.velocity;
+    effort = &exported_.effort;
+  }
+
+  void export_command(double *&command) override {
+    command = &desired_command_;
+  }
 
 private:
+  struct Feedback {
+    uint8_t stored_profile_{static_cast<uint8_t>(Profile::VelocityOnly)};
+    uint8_t active_profile_{static_cast<uint8_t>(Profile::VelocityOnly)};
+    bool diag_seen_{false};
+    bool limits_status_seen_{false};
+    bool config_status_seen_{false};
+    bool angle_status_seen_{false};
+    bool velocity_status_seen_{false};
+    bool need_calibration_{true};
+    bool armed_{false};
+    bool config_velocity_mode_enabled_{false};
+    bool config_angle_mode_enabled_{false};
+    bool diag_velocity_mode_enabled_{false};
+    bool diag_angle_mode_enabled_{false};
+    bool trusted_foc_calibration_valid_{false};
+    bool trusted_output_calibration_valid_{false};
+    bool output_feedback_required_{false};
+    uint8_t profile_select_result_{0};
+    uint8_t stored_output_encoder_type_{0};
+    uint8_t config_default_control_mode_{0};
+    uint8_t diag_default_control_mode_{0};
+    uint8_t runtime_diag_magic_{0};
+    uint8_t runtime_fault_{0};
+    double position_rad_{0.0};
+    double velocity_rad_s_{0.0};
+    double output_min_rad_{std::numeric_limits<double>::quiet_NaN()};
+    double output_max_rad_{std::numeric_limits<double>::quiet_NaN()};
+    double gear_ratio_{std::numeric_limits<double>::quiet_NaN()};
+    int64_t angle_received_ns{0}, velocity_received_ns{0};
+    double first_angle{std::numeric_limits<double>::quiet_NaN()};
+  };
+  Feedback feedback_;
+  mutable std::mutex feedback_mutex_;
+  CanFeedback exported_;
+  Feedback feedback_snapshot() const {
+    std::lock_guard<std::mutex> lock(feedback_mutex_);
+    return feedback_;
+  }
   bool handle_activation_failure(const char *phase) {
     active_ = false;
     if (required_at_activation_) {
       return false;
     }
-    if (auto_arm_ && diag_seen_.load()) {
+    if (auto_arm_ && feedback_snapshot().diag_seen_) {
       send_power_command(false);
     }
     RCLCPP_WARN(
@@ -433,13 +512,60 @@ private:
     return true;
   }
 
+  template <class Message>
+  void
+  safe_publish(const typename rclcpp::Publisher<Message>::SharedPtr &publisher,
+               const Message &message) {
+    if (!node_ || !rclcpp::ok(node_->get_node_base_interface()->get_context()))
+      return;
+    try {
+      publisher->publish(message);
+    } catch (const rclcpp::exceptions::RCLError &) {
+      // Shutdown can invalidate the context between the check and publish.
+    }
+  }
+
+  struct PreparedTelemetry {
+    OutputAngleStatusMsg angle;
+    OutputVelocityStatusMsg velocity;
+    TravelLimitsStatusMsg limits;
+    ActuatorConfigStatusMsg config;
+    RuntimeDiagnosticMsg diagnostic;
+    bool angle_dirty{}, velocity_dirty{}, limits_dirty{}, config_dirty{},
+        diagnostic_dirty{};
+  };
+  PreparedTelemetry telemetry_;
+  std::mutex telemetry_mutex_;
+  rclcpp::TimerBase::SharedPtr telemetry_timer_;
+  void publish_telemetry() {
+    PreparedTelemetry copy;
+    {
+      std::lock_guard<std::mutex> lock(telemetry_mutex_);
+      copy = telemetry_;
+      telemetry_.angle_dirty = telemetry_.velocity_dirty =
+          telemetry_.limits_dirty = telemetry_.config_dirty =
+              telemetry_.diagnostic_dirty = false;
+    }
+    if (copy.angle_dirty)
+      safe_publish(angle_status_pub_, copy.angle);
+    if (copy.velocity_dirty)
+      safe_publish(velocity_status_pub_, copy.velocity);
+    if (copy.limits_dirty)
+      safe_publish(travel_limits_status_pub_, copy.limits);
+    if (copy.config_dirty)
+      safe_publish(config_status_pub_, copy.config);
+    if (copy.diagnostic_dirty)
+      safe_publish(runtime_diagnostic_pub_, copy.diagnostic);
+  }
+
   bool valid_frame(const can_frame &frame, uint8_t expected_dlc) const {
     return (frame.can_id & CAN_EFF_FLAG) == 0 &&
            (frame.can_id & CAN_RTR_FLAG) == 0 && frame.can_dlc == expected_dlc;
   }
 
   builtin_interfaces::msg::Time stamp_now() const {
-    const auto now = node_ ? node_->now() : rclcpp::Clock(RCL_SYSTEM_TIME).now();
+    const auto now =
+        node_ ? node_->now() : rclcpp::Clock(RCL_SYSTEM_TIME).now();
     const int64_t ns = now.nanoseconds();
     builtin_interfaces::msg::Time stamp;
     stamp.sec = static_cast<int32_t>(ns / 1000000000LL);
@@ -454,66 +580,73 @@ private:
   }
 
   bool validate_config_status() const {
-    if (!config_status_seen_.load()) {
+    const auto feedback_ = feedback_snapshot();
+    if (!feedback_.config_status_seen_) {
       return true;
     }
 
     if (profile_requires_selection(desired_profile_) &&
-        stored_output_encoder_type_.load() !=
-        static_cast<uint8_t>(desired_profile_)) {
+        feedback_.stored_output_encoder_type_ !=
+            static_cast<uint8_t>(desired_profile_)) {
       RCLCPP_ERROR(logger_,
                    "Actuator %u config profile mismatch: stored=%u expected=%u",
-                   node_id_, stored_output_encoder_type_.load(),
+                   node_id_, feedback_.stored_output_encoder_type_,
                    static_cast<uint8_t>(desired_profile_));
       return false;
     }
-    if (config_default_control_mode_.load() != expected_control_mode()) {
-      RCLCPP_ERROR(logger_,
-                   "Actuator %u config default mode mismatch: got=%u expected=%u",
-                   node_id_, config_default_control_mode_.load(),
-                   expected_control_mode());
+    if (feedback_.config_default_control_mode_ != expected_control_mode()) {
+      RCLCPP_ERROR(
+          logger_,
+          "Actuator %u config default mode mismatch: got=%u expected=%u",
+          node_id_, feedback_.config_default_control_mode_,
+          expected_control_mode());
       return false;
     }
-    if (channel_ == CommandChannel::Angle && !config_angle_mode_enabled_.load()) {
+    if (channel_ == CommandChannel::Angle &&
+        !feedback_.config_angle_mode_enabled_) {
       RCLCPP_ERROR(logger_, "Actuator %u config reports angle mode disabled",
                    node_id_);
       return false;
     }
     if (channel_ == CommandChannel::Velocity &&
-        !config_velocity_mode_enabled_.load()) {
+        !feedback_.config_velocity_mode_enabled_) {
       RCLCPP_ERROR(logger_, "Actuator %u config reports velocity mode disabled",
                    node_id_);
       return false;
     }
     if (expected_output_min_rad_.has_value()) {
-      if (!limits_status_seen_.load()) {
-        RCLCPP_ERROR(logger_,
-                     "Actuator %u missing travel limits status for expected min",
-                     node_id_);
+      if (!feedback_.limits_status_seen_) {
+        RCLCPP_ERROR(
+            logger_,
+            "Actuator %u missing travel limits status for expected min",
+            node_id_);
         return false;
       }
-      if (std::abs(output_min_rad_ - *expected_output_min_rad_) >
+      if (std::abs(feedback_.output_min_rad_ - *expected_output_min_rad_) >
           kAngleToleranceRad) {
-        RCLCPP_ERROR(logger_,
-                     "Actuator %u min travel mismatch: got=%.3f deg expected=%.3f deg",
-                     node_id_, output_min_rad_ * kRadToDeg,
-                     *expected_output_min_rad_ * kRadToDeg);
+        RCLCPP_ERROR(
+            logger_,
+            "Actuator %u min travel mismatch: got=%.3f deg expected=%.3f deg",
+            node_id_, feedback_.output_min_rad_ * kRadToDeg,
+            *expected_output_min_rad_ * kRadToDeg);
         return false;
       }
     }
     if (expected_output_max_rad_.has_value()) {
-      if (!limits_status_seen_.load()) {
-        RCLCPP_ERROR(logger_,
-                     "Actuator %u missing travel limits status for expected max",
-                     node_id_);
+      if (!feedback_.limits_status_seen_) {
+        RCLCPP_ERROR(
+            logger_,
+            "Actuator %u missing travel limits status for expected max",
+            node_id_);
         return false;
       }
-      if (std::abs(output_max_rad_ - *expected_output_max_rad_) >
+      if (std::abs(feedback_.output_max_rad_ - *expected_output_max_rad_) >
           kAngleToleranceRad) {
-        RCLCPP_ERROR(logger_,
-                     "Actuator %u max travel mismatch: got=%.3f deg expected=%.3f deg",
-                     node_id_, output_max_rad_ * kRadToDeg,
-                     *expected_output_max_rad_ * kRadToDeg);
+        RCLCPP_ERROR(
+            logger_,
+            "Actuator %u max travel mismatch: got=%.3f deg expected=%.3f deg",
+            node_id_, feedback_.output_max_rad_ * kRadToDeg,
+            *expected_output_max_rad_ * kRadToDeg);
         return false;
       }
     }
@@ -521,84 +654,94 @@ private:
   }
 
   bool validate_runtime_diag_ready(const char *phase) const {
-    if (!diag_seen_.load()) {
+    const auto feedback_ = feedback_snapshot();
+    if (!feedback_.diag_seen_) {
       RCLCPP_ERROR(logger_, "Actuator %u has no runtime diagnostic", node_id_);
       return false;
     }
-    if (runtime_diag_magic_.load() != kRuntimeDiagMagic) {
-      RCLCPP_ERROR(logger_,
-                   "Actuator %u invalid runtime diagnostic magic during %s: 0x%02X",
-                   node_id_, phase, runtime_diag_magic_.load());
+    if (feedback_.runtime_diag_magic_ != kRuntimeDiagMagic) {
+      RCLCPP_ERROR(
+          logger_,
+          "Actuator %u invalid runtime diagnostic magic during %s: 0x%02X",
+          node_id_, phase, feedback_.runtime_diag_magic_);
       return false;
     }
     if (profile_requires_selection(desired_profile_) &&
-        (stored_profile_.load() != static_cast<uint8_t>(desired_profile_) ||
-         active_profile_.load() != static_cast<uint8_t>(desired_profile_))) {
-      RCLCPP_ERROR(
-          logger_,
-          "Actuator %u profile mismatch during %s: stored=%u active=%u expected=%u",
-          node_id_, phase, stored_profile_.load(), active_profile_.load(),
-          static_cast<uint8_t>(desired_profile_));
-      return false;
-    }
-    if (diag_default_control_mode_.load() != expected_control_mode()) {
-      RCLCPP_ERROR(
-          logger_,
-          "Actuator %u diagnostic default mode mismatch during %s: got=%u expected=%u",
-          node_id_, phase, diag_default_control_mode_.load(),
-          expected_control_mode());
-      return false;
-    }
-    if (channel_ == CommandChannel::Angle && !diag_angle_mode_enabled_.load()) {
+        (feedback_.stored_profile_ != static_cast<uint8_t>(desired_profile_) ||
+         feedback_.active_profile_ != static_cast<uint8_t>(desired_profile_))) {
       RCLCPP_ERROR(logger_,
-                   "Actuator %u diagnostic reports angle mode disabled during %s",
-                   node_id_, phase);
+                   "Actuator %u profile mismatch during %s: stored=%u "
+                   "active=%u expected=%u",
+                   node_id_, phase, feedback_.stored_profile_,
+                   feedback_.active_profile_,
+                   static_cast<uint8_t>(desired_profile_));
+      return false;
+    }
+    if (feedback_.diag_default_control_mode_ != expected_control_mode()) {
+      RCLCPP_ERROR(logger_,
+                   "Actuator %u diagnostic default mode mismatch during %s: "
+                   "got=%u expected=%u",
+                   node_id_, phase, feedback_.diag_default_control_mode_,
+                   expected_control_mode());
+      return false;
+    }
+    if (channel_ == CommandChannel::Angle &&
+        !feedback_.diag_angle_mode_enabled_) {
+      RCLCPP_ERROR(
+          logger_,
+          "Actuator %u diagnostic reports angle mode disabled during %s",
+          node_id_, phase);
       return false;
     }
     if (channel_ == CommandChannel::Velocity &&
-        !diag_velocity_mode_enabled_.load()) {
+        !feedback_.diag_velocity_mode_enabled_) {
       RCLCPP_ERROR(
           logger_,
           "Actuator %u diagnostic reports velocity mode disabled during %s",
           node_id_, phase);
       return false;
     }
-    if (!trusted_foc_calibration_valid_.load()) {
+    if (!feedback_.trusted_foc_calibration_valid_) {
       RCLCPP_ERROR(logger_,
                    "Actuator %u trusted FOC calibration is invalid during %s",
                    node_id_, phase);
       return false;
     }
     if (profile_requires_output_feedback(desired_profile_) &&
-        !trusted_output_calibration_valid_.load()) {
+        !feedback_.trusted_output_calibration_valid_) {
       RCLCPP_ERROR(
           logger_,
           "Actuator %u trusted output calibration is invalid during %s",
           node_id_, phase);
       return false;
     }
-    if (runtime_fault_.load() != 0) {
-      RCLCPP_ERROR(logger_,
-                   "Actuator %u reports runtime fault %u during %s", node_id_,
-                   runtime_fault_.load(), phase);
+    if (feedback_.runtime_fault_ != 0) {
+      RCLCPP_ERROR(logger_, "Actuator %u reports runtime fault %u during %s",
+                   node_id_, feedback_.runtime_fault_, phase);
       return false;
     }
-    if (need_calibration_.load()) {
-      RCLCPP_ERROR(logger_, "Actuator %u reports calibration required during %s",
+    if (feedback_.need_calibration_) {
+      RCLCPP_ERROR(logger_,
+                   "Actuator %u reports calibration required during %s",
                    node_id_, phase);
       return false;
     }
     const bool expected_feedback_required =
         profile_requires_output_feedback(desired_profile_);
-    if (output_feedback_required_.load() != expected_feedback_required) {
-      RCLCPP_ERROR(
-          logger_,
-          "Actuator %u output feedback requirement mismatch during %s: got=%u expected=%u",
-          node_id_, phase, output_feedback_required_.load() ? 1 : 0,
-          expected_feedback_required ? 1 : 0);
+    if (feedback_.output_feedback_required_ != expected_feedback_required) {
+      RCLCPP_ERROR(logger_,
+                   "Actuator %u output feedback requirement mismatch during "
+                   "%s: got=%u expected=%u",
+                   node_id_, phase, feedback_.output_feedback_required_ ? 1 : 0,
+                   expected_feedback_required ? 1 : 0);
       return false;
     }
     return true;
+  }
+
+  bool activation_cancelled() const {
+    return node_ &&
+           !rclcpp::ok(node_->get_node_base_interface()->get_context());
   }
 
   bool wait_for(const std::function<bool()> &predicate,
@@ -606,11 +749,15 @@ private:
     const auto start = std::chrono::steady_clock::now();
     const auto timeout = std::chrono::milliseconds(activation_timeout_ms_);
     while (std::chrono::steady_clock::now() - start < timeout) {
+      if (activation_cancelled())
+        return false;
       if (predicate()) {
         return true;
       }
       std::this_thread::sleep_for(std::chrono::milliseconds(20));
     }
+    if (activation_cancelled())
+      return false;
     if (predicate()) {
       return true;
     }
@@ -627,8 +774,12 @@ private:
   bool arm_with_confirmation() {
     for (int attempt = 1; attempt <= activation_arm_attempts_; ++attempt) {
       send_power_command(true);
-      if (wait_for([this] { return diag_seen_.load() && armed_.load(); },
-                   "armed diagnostic")) {
+      if (wait_for(
+              [this] {
+                const auto f = feedback_snapshot();
+                return f.diag_seen_ && f.armed_;
+              },
+              "armed diagnostic")) {
         if (attempt > 1) {
           RCLCPP_INFO(logger_, "Actuator %u armed after %d attempts", node_id_,
                       attempt);
@@ -636,9 +787,8 @@ private:
         return true;
       }
       if (attempt < activation_arm_attempts_) {
-        RCLCPP_WARN(logger_,
-                    "Actuator %u arm attempt %d/%d failed; retrying", node_id_,
-                    attempt, activation_arm_attempts_);
+        RCLCPP_WARN(logger_, "Actuator %u arm attempt %d/%d failed; retrying",
+                    node_id_, attempt, activation_arm_attempts_);
       }
     }
 
@@ -680,14 +830,16 @@ private:
   }
 
   void integrate_position(int64_t now_ns) {
+    std::lock_guard<std::mutex> lock(feedback_mutex_);
     if (channel_ != CommandChannel::Velocity) {
       last_integrate_time_ns_ = now_ns;
       return;
     }
-    if (last_integrate_time_ns_ > 0 && std::isfinite(velocity_rad_s_)) {
+    if (last_integrate_time_ns_ > 0 &&
+        std::isfinite(feedback_.velocity_rad_s_)) {
       const double dt = (now_ns - last_integrate_time_ns_) * 1e-9;
       if (dt > 0.0 && dt < 1.0) {
-        position_rad_ += velocity_rad_s_ * dt;
+        feedback_.position_rad_ += feedback_.velocity_rad_s_ * dt;
       }
     }
     last_integrate_time_ns_ = now_ns;
@@ -698,19 +850,29 @@ private:
       return;
     }
     const int32_t mdeg = decode_i32_le(frame, 0);
-    position_rad_ = mdeg_to_rad(mdeg);
-    angle_status_seen_ = true;
-    if (!std::isfinite(hold_position_rad_)) {
-      hold_position_rad_ = position_rad_;
+    Feedback received;
+    {
+      std::lock_guard<std::mutex> lock(feedback_mutex_);
+      feedback_.position_rad_ = mdeg_to_rad(mdeg);
+      feedback_.angle_status_seen_ = true;
+      if (!std::isfinite(feedback_.first_angle))
+        feedback_.first_angle = feedback_.position_rad_;
+      feedback_.angle_received_ns = clock_.now().nanoseconds();
+      received = feedback_;
     }
+    const auto &feedback_ = received;
     if (angle_status_pub_) {
       OutputAngleStatusMsg msg;
       msg.stamp = stamp_now();
       msg.node_id = node_id_;
       msg.angle_mdeg = mdeg;
-      msg.angle_rad = position_rad_;
+      msg.angle_rad = feedback_.position_rad_;
       std::copy(frame.data, frame.data + 4, msg.raw_data.begin());
-      angle_status_pub_->publish(msg);
+      {
+        std::lock_guard<std::mutex> lock(telemetry_mutex_);
+        telemetry_.angle = msg;
+        telemetry_.angle_dirty = true;
+      }
     }
   }
 
@@ -719,16 +881,27 @@ private:
       return;
     }
     const int32_t mdeg_s = decode_i32_le(frame, 0);
-    velocity_rad_s_ = mdeg_s_to_rad_s(mdeg_s);
-    velocity_status_seen_ = true;
+    Feedback received;
+    {
+      std::lock_guard<std::mutex> lock(feedback_mutex_);
+      feedback_.velocity_rad_s_ = mdeg_s_to_rad_s(mdeg_s);
+      feedback_.velocity_status_seen_ = true;
+      feedback_.velocity_received_ns = clock_.now().nanoseconds();
+      received = feedback_;
+    }
+    const auto &feedback_ = received;
     if (velocity_status_pub_) {
       OutputVelocityStatusMsg msg;
       msg.stamp = stamp_now();
       msg.node_id = node_id_;
       msg.velocity_mdeg_s = mdeg_s;
-      msg.velocity_rad_s = velocity_rad_s_;
+      msg.velocity_rad_s = feedback_.velocity_rad_s_;
       std::copy(frame.data, frame.data + 4, msg.raw_data.begin());
-      velocity_status_pub_->publish(msg);
+      {
+        std::lock_guard<std::mutex> lock(telemetry_mutex_);
+        telemetry_.velocity = msg;
+        telemetry_.velocity_dirty = true;
+      }
     }
   }
 
@@ -738,19 +911,29 @@ private:
     }
     const int32_t output_min_mdeg = decode_i32_le(frame, 0);
     const int32_t output_max_mdeg = decode_i32_le(frame, 4);
-    output_min_rad_ = mdeg_to_rad(output_min_mdeg);
-    output_max_rad_ = mdeg_to_rad(output_max_mdeg);
-    limits_status_seen_ = true;
+    Feedback received;
+    {
+      std::lock_guard<std::mutex> lock(feedback_mutex_);
+      feedback_.output_min_rad_ = mdeg_to_rad(output_min_mdeg);
+      feedback_.output_max_rad_ = mdeg_to_rad(output_max_mdeg);
+      feedback_.limits_status_seen_ = true;
+      received = feedback_;
+    }
+    const auto &feedback_ = received;
     if (travel_limits_status_pub_) {
       TravelLimitsStatusMsg msg;
       msg.stamp = stamp_now();
       msg.node_id = node_id_;
       msg.output_min_mdeg = output_min_mdeg;
       msg.output_max_mdeg = output_max_mdeg;
-      msg.output_min_rad = output_min_rad_;
-      msg.output_max_rad = output_max_rad_;
+      msg.output_min_rad = feedback_.output_min_rad_;
+      msg.output_max_rad = feedback_.output_max_rad_;
       std::copy(frame.data, frame.data + 8, msg.raw_data.begin());
-      travel_limits_status_pub_->publish(msg);
+      {
+        std::lock_guard<std::mutex> lock(telemetry_mutex_);
+        telemetry_.limits = msg;
+        telemetry_.limits_dirty = true;
+      }
     }
   }
 
@@ -759,25 +942,35 @@ private:
       return;
     }
     const int32_t gear_ratio_milli = decode_i32_le(frame, 0);
-    gear_ratio_ = static_cast<double>(gear_ratio_milli) / 1000.0;
-    stored_output_encoder_type_ = frame.data[4];
-    config_default_control_mode_ = frame.data[5];
-    config_velocity_mode_enabled_ = (frame.data[6] & 0x01) != 0;
-    config_angle_mode_enabled_ = (frame.data[6] & 0x02) != 0;
-    config_status_seen_ = true;
+    Feedback received;
+    {
+      std::lock_guard<std::mutex> lock(feedback_mutex_);
+      feedback_.gear_ratio_ = static_cast<double>(gear_ratio_milli) / 1000.0;
+      feedback_.stored_output_encoder_type_ = frame.data[4];
+      feedback_.config_default_control_mode_ = frame.data[5];
+      feedback_.config_velocity_mode_enabled_ = (frame.data[6] & 0x01) != 0;
+      feedback_.config_angle_mode_enabled_ = (frame.data[6] & 0x02) != 0;
+      feedback_.config_status_seen_ = true;
+      received = feedback_;
+    }
+    const auto &feedback_ = received;
     if (config_status_pub_) {
       ActuatorConfigStatusMsg msg;
       msg.stamp = stamp_now();
       msg.node_id = node_id_;
       msg.gear_ratio_milli = gear_ratio_milli;
-      msg.gear_ratio = gear_ratio_;
-      msg.stored_output_encoder_type = stored_output_encoder_type_.load();
-      msg.default_control_mode = config_default_control_mode_.load();
-      msg.velocity_mode_enabled = config_velocity_mode_enabled_.load();
-      msg.output_angle_mode_enabled = config_angle_mode_enabled_.load();
+      msg.gear_ratio = feedback_.gear_ratio_;
+      msg.stored_output_encoder_type = feedback_.stored_output_encoder_type_;
+      msg.default_control_mode = feedback_.config_default_control_mode_;
+      msg.velocity_mode_enabled = feedback_.config_velocity_mode_enabled_;
+      msg.output_angle_mode_enabled = feedback_.config_angle_mode_enabled_;
       msg.reserved = frame.data[7];
       std::copy(frame.data, frame.data + 8, msg.raw_data.begin());
-      config_status_pub_->publish(msg);
+      {
+        std::lock_guard<std::mutex> lock(telemetry_mutex_);
+        telemetry_.config = msg;
+        telemetry_.config_dirty = true;
+      }
     }
   }
 
@@ -785,42 +978,52 @@ private:
     if (!valid_frame(frame, 8)) {
       return;
     }
-    runtime_diag_magic_ = frame.data[0];
-    stored_profile_ = frame.data[1];
-    active_profile_ = frame.data[2];
-    diag_default_control_mode_ = frame.data[3];
-    diag_velocity_mode_enabled_ = (frame.data[4] & 0x01) != 0;
-    diag_angle_mode_enabled_ = (frame.data[4] & 0x02) != 0;
-    trusted_foc_calibration_valid_ = (frame.data[4] & 0x04) != 0;
-    trusted_output_calibration_valid_ = (frame.data[4] & 0x08) != 0;
-    runtime_fault_ = frame.data[5];
-    need_calibration_ = (frame.data[6] & 0x01) != 0;
-    profile_select_result_ = (frame.data[6] >> 4) & 0x0F;
-    output_feedback_required_ = (frame.data[7] & 0x01) != 0;
-    armed_ = (frame.data[7] & 0x02) != 0;
-    diag_seen_ = true;
+    Feedback received;
+    {
+      std::lock_guard<std::mutex> lock(feedback_mutex_);
+      feedback_.runtime_diag_magic_ = frame.data[0];
+      feedback_.stored_profile_ = frame.data[1];
+      feedback_.active_profile_ = frame.data[2];
+      feedback_.diag_default_control_mode_ = frame.data[3];
+      feedback_.diag_velocity_mode_enabled_ = (frame.data[4] & 0x01) != 0;
+      feedback_.diag_angle_mode_enabled_ = (frame.data[4] & 0x02) != 0;
+      feedback_.trusted_foc_calibration_valid_ = (frame.data[4] & 0x04) != 0;
+      feedback_.trusted_output_calibration_valid_ = (frame.data[4] & 0x08) != 0;
+      feedback_.runtime_fault_ = frame.data[5];
+      feedback_.need_calibration_ = (frame.data[6] & 0x01) != 0;
+      feedback_.profile_select_result_ = (frame.data[6] >> 4) & 0x0F;
+      feedback_.output_feedback_required_ = (frame.data[7] & 0x01) != 0;
+      feedback_.armed_ = (frame.data[7] & 0x02) != 0;
+      feedback_.diag_seen_ = true;
+      received = feedback_;
+    }
+    const auto &feedback_ = received;
     if (runtime_diagnostic_pub_) {
       RuntimeDiagnosticMsg msg;
       msg.stamp = stamp_now();
       msg.node_id = node_id_;
-      msg.magic = runtime_diag_magic_.load();
-      msg.stored_output_encoder_type = stored_profile_.load();
-      msg.active_output_encoder_type = active_profile_.load();
-      msg.default_control_mode = diag_default_control_mode_.load();
-      msg.velocity_mode_enabled = diag_velocity_mode_enabled_.load();
-      msg.output_angle_mode_enabled = diag_angle_mode_enabled_.load();
+      msg.magic = feedback_.runtime_diag_magic_;
+      msg.stored_output_encoder_type = feedback_.stored_profile_;
+      msg.active_output_encoder_type = feedback_.active_profile_;
+      msg.default_control_mode = feedback_.diag_default_control_mode_;
+      msg.velocity_mode_enabled = feedback_.diag_velocity_mode_enabled_;
+      msg.output_angle_mode_enabled = feedback_.diag_angle_mode_enabled_;
       msg.trusted_foc_calibration_valid =
-          trusted_foc_calibration_valid_.load();
+          feedback_.trusted_foc_calibration_valid_;
       msg.trusted_output_calibration_valid =
-          trusted_output_calibration_valid_.load();
+          feedback_.trusted_output_calibration_valid_;
       msg.calibration_load_status = (frame.data[4] >> 4) & 0x03;
-      msg.runtime_fault = runtime_fault_.load();
-      msg.need_calibration = need_calibration_.load();
-      msg.profile_select_result = profile_select_result_.load();
-      msg.output_feedback_required = output_feedback_required_.load();
-      msg.power_stage_armed = armed_.load();
+      msg.runtime_fault = feedback_.runtime_fault_;
+      msg.need_calibration = feedback_.need_calibration_;
+      msg.profile_select_result = feedback_.profile_select_result_;
+      msg.output_feedback_required = feedback_.output_feedback_required_;
+      msg.power_stage_armed = feedback_.armed_;
       std::copy(frame.data, frame.data + 8, msg.raw_data.begin());
-      runtime_diagnostic_pub_->publish(msg);
+      {
+        std::lock_guard<std::mutex> lock(telemetry_mutex_);
+        telemetry_.diagnostic = msg;
+        telemetry_.diagnostic_dirty = true;
+      }
     }
   }
 
@@ -834,10 +1037,7 @@ private:
 
   CommandChannel channel_{CommandChannel::Angle};
   Profile desired_profile_{Profile::As5600};
-  std::atomic<uint8_t> stored_profile_{
-      static_cast<uint8_t>(Profile::VelocityOnly)};
-  std::atomic<uint8_t> active_profile_{
-      static_cast<uint8_t>(Profile::VelocityOnly)};
+
   bool auto_arm_{true};
   bool required_at_activation_{true};
   bool require_limits_status_{true};
@@ -846,43 +1046,19 @@ private:
   int activation_arm_attempts_{3};
 
   std::atomic_bool active_{false};
-  std::atomic_bool diag_seen_{false};
-  std::atomic_bool limits_status_seen_{false};
-  std::atomic_bool config_status_seen_{false};
-  std::atomic_bool angle_status_seen_{false};
-  std::atomic_bool velocity_status_seen_{false};
-  std::atomic_bool need_calibration_{true};
-  std::atomic_bool armed_{false};
-  std::atomic_bool config_velocity_mode_enabled_{false};
-  std::atomic_bool config_angle_mode_enabled_{false};
-  std::atomic_bool diag_velocity_mode_enabled_{false};
-  std::atomic_bool diag_angle_mode_enabled_{false};
-  std::atomic_bool trusted_foc_calibration_valid_{false};
-  std::atomic_bool trusted_output_calibration_valid_{false};
-  std::atomic_bool output_feedback_required_{false};
-  std::atomic<uint8_t> profile_select_result_{0};
-  std::atomic<uint8_t> stored_output_encoder_type_{0};
-  std::atomic<uint8_t> config_default_control_mode_{0};
-  std::atomic<uint8_t> diag_default_control_mode_{0};
-  std::atomic<uint8_t> runtime_diag_magic_{0};
-  std::atomic<uint8_t> runtime_fault_{0};
 
   int64_t last_integrate_time_ns_{0};
-  double position_rad_{0.0};
-  double velocity_rad_s_{0.0};
+
   double desired_command_{std::numeric_limits<double>::quiet_NaN()};
   double hold_position_rad_{std::numeric_limits<double>::quiet_NaN()};
   double effort_dummy_{0.0};
-  double output_min_rad_{std::numeric_limits<double>::quiet_NaN()};
-  double output_max_rad_{std::numeric_limits<double>::quiet_NaN()};
-  double gear_ratio_{std::numeric_limits<double>::quiet_NaN()};
+
   std::optional<double> expected_output_min_rad_;
   std::optional<double> expected_output_max_rad_;
 
   rclcpp::Publisher<OutputAngleStatusMsg>::SharedPtr angle_status_pub_;
   rclcpp::Publisher<OutputVelocityStatusMsg>::SharedPtr velocity_status_pub_;
-  rclcpp::Publisher<TravelLimitsStatusMsg>::SharedPtr
-      travel_limits_status_pub_;
+  rclcpp::Publisher<TravelLimitsStatusMsg>::SharedPtr travel_limits_status_pub_;
   rclcpp::Publisher<ActuatorConfigStatusMsg>::SharedPtr config_status_pub_;
   rclcpp::Publisher<RuntimeDiagnosticMsg>::SharedPtr runtime_diagnostic_pub_;
 };

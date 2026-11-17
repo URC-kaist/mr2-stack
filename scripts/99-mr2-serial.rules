@@ -8,6 +8,15 @@
 # SUBSYSTEM=="tty", KERNEL=="ttyACM*", ATTRS{idVendor}=="1546", ATTRS{idProduct}=="01a9", MODE:="0666", GROUP:="plugdev"
 #######################################################################
 SUBSYSTEM=="tty", KERNEL=="ttyUSB*", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6015", ATTRS{serial}=="D30JZD4O", MODE:="0666", GROUP:="dialout", SYMLINK+="ttyXBEE"
+
+# The directional cameras share a Genesys Logic USB 2 hub.  Runtime suspend on
+# either the hub or a Suyin UVC child can make the device disappear mid-stream
+# (uvcvideo reports a failed URB with -ENODEV and the host then resets it).
+# Keep this route powered; GStreamer still closes the camera normally when a
+# stream is disabled.
+ACTION=="add|change", SUBSYSTEM=="usb", ATTR{idVendor}=="05e3", ATTR{idProduct}=="0610", TEST=="power/control", ATTR{power/control}:="on"
+ACTION=="add|change", SUBSYSTEM=="usb", ATTR{idVendor}=="1e45", ATTR{idProduct}=="8022", TEST=="power/control", ATTR{power/control}:="on"
+
 # RealSense D435i RGB stream — map only the RGB capture node (interface 03, index 0).
 SUBSYSTEM=="video4linux", KERNEL=="video*", ATTRS{idVendor}=="8086", ATTRS{idProduct}=="0b3a", ENV{ID_USB_INTERFACE_NUM}=="03", ATTR{index}=="0", MODE:="0666", GROUP:="video", SYMLINK+="videoRGBD"
 # Front camera (Suyin rev 0x5805, USB path 2.3) — map only the capture node (index 0)

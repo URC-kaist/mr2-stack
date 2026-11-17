@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>mr2_flat_motor</name>
+  <version>0.1.0</version>
+  <description>Single AK motor control, independent of original rover controllers.</description>
+  <maintainer email="gmmyung@kaist.ac.kr">mr2</maintainer>
+  <license>MIT</license>
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>mr2_action_interface</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <test_depend>python3-pytest</test_depend>
+  <export><build_type>ament_python</build_type></export>
+</package>

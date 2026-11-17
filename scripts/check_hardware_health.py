@@ -46,6 +46,8 @@ XBEE_PRODUCT = "6015"
 XBEE_SERIAL = "D30JZD4O"
 REALSENSE_VENDOR = "8086"
 REALSENSE_PRODUCT = "0b3a"
+SUYIN_CAMERA_VENDOR = "1e45"
+SUYIN_CAMERA_PRODUCT = "8022"
 
 
 @dataclass
@@ -188,6 +190,12 @@ def usb_attrs_for_video(dev_path: Path) -> dict[str, str]:
                 value = read_text(parent / key)
                 if value:
                     attrs[key] = value
+            devpath = read_text(parent / "devpath")
+            if devpath:
+                attrs["devpath"] = devpath
+            power_control = read_text(parent / "power" / "control")
+            if power_control:
+                attrs["power_control"] = power_control
             break
     return attrs
 
@@ -225,8 +233,19 @@ def check_video_device(label: str, device: Path) -> CheckResult:
     parts = [f"{device}->{real}", f"name={name}" if name else ""]
     if attrs:
         parts.append(f"usb={attrs.get('idVendor')}:{attrs.get('idProduct')}")
+        if attrs.get("devpath"):
+            parts.append(f"path={attrs['devpath']}")
         if attrs.get("serial"):
             parts.append(f"serial={attrs['serial']}")
+        if attrs.get("power_control"):
+            parts.append(f"power={attrs['power_control']}")
+        if (
+            attrs.get("idVendor") == SUYIN_CAMERA_VENDOR
+            and attrs.get("idProduct") == SUYIN_CAMERA_PRODUCT
+            and attrs.get("power_control") != "on"
+        ):
+            status = "WARN"
+            parts.append("USB autosuspend is not disabled; reinstall MR2 udev rules")
     if ok is False:
         status = "FAIL"
         parts.append(f"v4l2 query failed: {query_detail}")

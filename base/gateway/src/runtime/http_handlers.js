@@ -159,6 +159,19 @@ function createGatewayHttpHandler(options = {}) {
     const requestEpochUs = Date.now() * 1000
     const parsedUrl = new URL(req.url || '/', 'http://gateway.local')
 
+    if (req.method === 'GET' && parsedUrl.pathname === '/latency/uplink/status') {
+      if (!uplinkTrialManager) {
+        sendJson(res, 503, { error: 'uplink diagnostics are unavailable' })
+        return
+      }
+      sendJson(res, 200, {
+        ...uplinkTrialManager.diagnosticsStatus(),
+        clock: await getChronyStatus(),
+        video_streams: getVideoStreams(),
+      })
+      return
+    }
+
     if (parsedUrl.pathname.startsWith('/latency/uplink/trials')) {
       if (!uplinkTrialManager) {
         sendJson(res, 503, { error: 'uplink diagnostics are unavailable' })

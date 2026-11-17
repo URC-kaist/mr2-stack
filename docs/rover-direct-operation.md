@@ -10,7 +10,7 @@ all run natively on the Jetson over SSH.
 ```text
 Laptop browser
   |
-  | HTTPS / WSS over the Jetson AP (192.168.2.102)
+  | HTTPS / WSS over the Jetson AP (10.42.0.1)
   v
 Jetson nginx :443
   |-- /xbee-ws -----------------> gateway 127.0.0.1:8081
@@ -75,20 +75,21 @@ the repository root when needed:
 
 ## Configure the Jetson AP
 
-The default AP address is `192.168.2.102/24`, chosen to avoid the existing
-`192.168.1.0/24` network. Select the actual Jetson Wi-Fi interface and provide
-the WPA2 password outside the repository:
+This deployment uses `10.42.0.1/24`. The script still defaults to
+`192.168.2.102/24`, so set the address explicitly to match the dashboard
+installation below. Select the actual Jetson Wi-Fi interface (`wlP1p1s0` on
+this rover) and enter the WPA2 password at the hidden prompt:
 
 ```bash
-sudo --preserve-env=MR2_AP_PASSWORD \
-  MR2_AP_PASSWORD='replace-with-a-private-password' \
-  MR2_AP_INTERFACE=wlan0 \
+sudo MR2_AP_INTERFACE=wlP1p1s0 \
+  MR2_DIRECT_AP_CIDR=10.42.0.1/24 \
   ./scripts/configure_rover_ap.bash
 ```
 
-If `MR2_AP_PASSWORD` is omitted in an interactive terminal, the script prompts
-without echoing it. NetworkManager stores the resulting connection as
-`MR2-Rover-AP` and brings it up with IPv4 shared mode.
+For noninteractive use, supply `MR2_AP_PASSWORD` through the environment and
+preserve it through sudo. NetworkManager stores the resulting connection as
+`MR2-Rover-AP` and brings it up with IPv4 shared mode. Configure the AP once,
+or when changing its settings; doing so can disconnect SSH over that Wi-Fi link.
 
 ## Install the native dashboard for manual launch
 
@@ -99,7 +100,10 @@ MR2_DIRECT_AP_IP=10.42.0.1 \
   ./scripts/install_rover_direct.bash --manual
 ```
 
-This installs the direct dashboard build and nginx configuration/certificate.
+This builds and deploys the direct dashboard, installs the nginx
+configuration/certificate, and starts/enables and reloads nginx. Run it during
+initial setup or to deploy a dashboard update; reload the browser afterward.
+It requires an already built ROS workspace and does not rebuild ROS packages.
 Manual mode also stops and disables `mr2-rover-direct.service`, preventing it
 from racing a directly executed `rover_direct.launch.py`. Review CAN and camera
 readiness before launching.
@@ -113,13 +117,15 @@ Systemd-managed operation remains available as an alternative. Enable at boot
 without starting now:
 
 ```bash
-./scripts/install_rover_direct.bash --skip-build --enable
+MR2_DIRECT_AP_IP=10.42.0.1 \
+  ./scripts/install_rover_direct.bash --skip-build --enable
 ```
 
 Enable and start:
 
 ```bash
-./scripts/install_rover_direct.bash --skip-build --start
+MR2_DIRECT_AP_IP=10.42.0.1 \
+  ./scripts/install_rover_direct.bash --skip-build --start
 ```
 
 The unit is `mr2-rover-direct.service`. Its launch owns the PTY pair, gateway,
@@ -143,12 +149,35 @@ browser warnings are unacceptable.
 
 ## Direct native start (primary mode)
 
-Start nginx, confirm the systemd rover service is not running, then source the
-built workspace and run the unified launch with the desired arguments:
+Routine startup uses the installed dashboard and AP configuration. nginx
+does not need restarting when already active. With any existing terminal
+rover launch stopped, prepare the hardware from the repository root:
 
 ```bash
+cd /home/mr2/mr2-stack
 sudo systemctl start nginx
 sudo systemctl stop mr2-rover-direct
+
+# Install once, and again when the rules change.
+./scripts/install_udev_serial_rules.bash
+
+# Configure CAN when down or unconfigured. This resets the CAN interface.
+ip -details link show can0
+./scripts/can0.bash
+
+# Start the complete direct stack; keep this terminal open.
+./scripts/run_rover_direct.bash
+```
+
+For drive-only operation with an absent or unpowered arm, replace the last
+command with `MR2_ENABLE_MANIPULATOR_MODULE=false ./scripts/run_rover_direct.bash`.
+Do not run CAN setup while the rover stack is operating. The wrapper sources
+ROS and selects the pinned Node runtime automatically.
+
+Alternatively, after the same hardware preparation, source the built
+workspace and launch with explicit ROS arguments:
+
+```bash
 cd /home/mr2/mr2-stack/rover/ros2_ws
 source /opt/ros/humble/setup.bash
 source install/setup.bash
@@ -224,9 +253,11 @@ Run the following for every available argument and its description:
 ros2 launch mr2_launch rover_direct.launch.py --show-args
 ```
 
-The systemd wrapper accepts matching `.env` settings such as
+The systemd service reads matching settings from the repository-root `.env`, such as
 `MR2_ENABLE_MANIPULATOR_MODULE=false`, `MR2_ENABLE_VIDEO_STREAMING=false`,
 `MR2_ENABLE_LED=true`, and `MR2_ENABLE_CAMERA_TURRET=true`.
+When running `run_rover_direct.bash` directly, export or prefix these variables
+in the shell; the script does not load `.env` itself.
 
 nginx configuration is installed and reloaded by `install_rover_direct.bash`;
 it does not need to be regenerated for each launch. The unified
@@ -238,14 +269,15 @@ dashboard is intentionally unused.
 
 ## Scope and hardware validation
 
-This mode intentionally leaves the existing XBEE protocol, drive command
-behavior, arm Servo command path, software E-stop UI, and command deadman
-semantics unchanged. Additional safety interlocks and multi-browser command
-arbitration are separate work.
+This mode uses the existing XBEE protocol, ROS drive controller, arm Servo
+command path, software E-stop UI, and command deadman handling. On
+`2026-nepo-demo`, the dashboard also provides
+[Orbit controls](./nepo-demo-operation.md#circular-driving). Additional safety
+interlocks and multi-browser command arbitration are separate work.
 
 Before field operation, validate on the actual Jetson and rover:
 
-- AP association and the fixed `192.168.2.102` address
+- AP association and the configured `10.42.0.1` address
 - browser connections through all four nginx paths
 - every configured camera stream and browser H.264 decode
 - controller states with `ros2 control list_controllers`

@@ -136,6 +136,24 @@ async function runLatencyDiagnosticsTest() {
       },
     ])
 
+    // Both manual translation and orbit-generated combined commands are traced.
+    // A mode change/disconnect cancels even a trace awaiting its next 50 ms send.
+    for (const vector of [{ x: 0, y: 0.4, yaw: 0 }, { x: -0.2, y: -0.1, yaw: 0.3 }]) {
+      assert.equal(diagnostics.startDownlinkPreflight(), true)
+      assert.equal(await diagnostics.synchronizeGatewayClock(2), true)
+      assert.equal(diagnostics.armDownlinkTrial(), true)
+      diagnostics.observeControlInput(vector)
+      assert.equal(diagnostics.getSnapshot().downlink.phase, 'waiting_for_neutral')
+      diagnostics.observeControlInput({ x: 0, y: 0, yaw: 0 })
+      diagnostics.observeControlInput(vector)
+      assert.equal(diagnostics.getSnapshot().pendingCommandTrace, true)
+      diagnostics.cancelDownlinkTrial()
+      assert.equal(diagnostics.claimPendingCommandTrace(), undefined)
+      diagnostics.observeControlInput({ x: 0, y: 0, yaw: 0 })
+      diagnostics.observeControlInput(vector)
+      assert.equal(diagnostics.getSnapshot().downlink.phase, 'cancelled')
+    }
+
     console.log('latency diagnostics state-machine test passed')
   } finally {
     globalThis.fetch = originalFetch

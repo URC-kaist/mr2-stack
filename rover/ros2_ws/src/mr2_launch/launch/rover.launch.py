@@ -1,7 +1,7 @@
 from launch import LaunchDescription
 from launch.actions import (
-    DeclareLaunchArgument,
     IncludeLaunchDescription,
+    OpaqueFunction,
     TimerAction,
 )
 from launch.conditions import IfCondition, UnlessCondition
@@ -13,12 +13,37 @@ from launch.substitutions import (
     PythonExpression,
 )
 from launch_ros.actions import Node, SetParameter
+from launch_ros.parameter_descriptions import ParameterValue
 from launch_ros.substitutions import FindPackageShare
 from mr2_launch.env import load_mr2_env
+from mr2_launch.profile import profile_arguments
+from mr2_launch.gnss import gnss_actions
+from mr2_launch.flat_motor import flat_motor_actions
+
+
+def _validate_control_backend(context):
+    if (LaunchConfiguration("control_backend").perform(context) == "mr2_control"
+            and LaunchConfiguration("mode").perform(context) != "real"):
+        raise RuntimeError("mr2_control currently supports real mode only; use its mock.launch.py for hardware-free validation")
+    return []
 
 
 def generate_launch_description():
+    DeclareLaunchArgument = profile_arguments("rover")
     load_mr2_env()
+
+    enable_rover_hardware_arg = DeclareLaunchArgument(
+        "enable_rover_hardware", default_value="true",
+        description="Start the original rover model, drive/arm controllers and battery CAN monitors",
+    )
+    enable_xbee_bridge_arg = DeclareLaunchArgument(
+        "enable_xbee_bridge", default_value="true",
+        description="Start the real-mode command bridge (physical XBee or direct-mode PTY)",
+    )
+    smooth_drive_commands_arg = DeclareLaunchArgument(
+        "smooth_drive_commands", default_value="true",
+        description="Apply command-bridge drive slew limiting (flat motor handles its own limits)",
+    )
 
     # ─── Arguments ───────────────────────────────────────────────────────────────
     default_rviz = PathJoinSubstitution([
@@ -52,6 +77,11 @@ def generate_launch_description():
         "can_iface",
         default_value="can0",
         description="CAN interface used by the AK servo hardware",
+    )
+    control_backend_arg = DeclareLaunchArgument(
+        "control_backend", default_value="ros2_control",
+        choices=["ros2_control", "mr2_control"],
+        description="Real actuator runtime (simulation uses ros2_control)",
     )
     controller_config_arg = DeclareLaunchArgument(
         "controller_config",
@@ -208,9 +238,6 @@ def generate_launch_description():
     sim_condition = IfCondition(
         PythonExpression(["'", LaunchConfiguration("mode"), "' == 'sim'"])
     )
-    real_condition = IfCondition(
-        PythonExpression(["'", LaunchConfiguration("mode"), "' == 'real'"])
-    )
     enable_manipulator_module = LaunchConfiguration("enable_manipulator_module")
     xbee_sim_condition = sim_condition
     use_sim_time_param = SetParameter(
@@ -282,6 +309,7 @@ def generate_launch_description():
         launch_arguments={
             "can_iface": LaunchConfiguration("can_iface"),
             "controller_config": LaunchConfiguration("controller_config"),
+            "control_backend": LaunchConfiguration("control_backend"),
             "controller_spawn_delay": LaunchConfiguration("controller_spawn_delay"),
             "use_sim_time": LaunchConfiguration("use_sim_time"),
             "use_mock_servos": LaunchConfiguration("use_mock_servos"),
@@ -291,7 +319,10 @@ def generate_launch_description():
                 "start_manipulator_controllers_active"
             ),
         }.items(),
-        condition=real_condition,
+        condition=IfCondition(PythonExpression([
+            "'", LaunchConfiguration("mode"), "' == 'real' and '",
+            LaunchConfiguration("enable_rover_hardware"), "' == 'true'",
+        ])),
     )
     disabled_video_stream_ids = PythonExpression(
         [
@@ -443,11 +474,15 @@ def generate_launch_description():
             {"device": LaunchConfiguration("xbee_device")},
             {"heartbeat_timeout_ms": 500},
             {"cmd_vel_topic": "/base/cmd_vel"},
+            {"smooth_drive_commands": ParameterValue(LaunchConfiguration("smooth_drive_commands"), value_type=bool)},
             {"smooth_arm_joint_commands": True},
             {"arm_joint_accel_limit_rad_s2": 3.0},
             {"latency_diagnostics_enabled": LaunchConfiguration("enable_latency_diagnostics")},
         ],
-        condition=real_condition,
+        condition=IfCondition(PythonExpression([
+            "'", LaunchConfiguration("mode"), "' == 'real' and '",
+            LaunchConfiguration("enable_xbee_bridge"), "' == 'true'",
+        ])),
     )
     xbee_bridge_sim = Node(
         package="mr2_xbee_bridge",
@@ -481,11 +516,16 @@ def generate_launch_description():
 
     # ─── LaunchDescription ───────────────────────────────────────────────────────
     return LaunchDescription([
+        enable_rover_hardware_arg,
+        enable_xbee_bridge_arg,
+        smooth_drive_commands_arg,
         rviz_arg,
         mode_arg,
         use_sim_time_arg,
         headless_arg,
         can_iface_arg,
+        control_backend_arg,
+        OpaqueFunction(function=_validate_control_backend),
         controller_config_arg,
         controller_spawn_delay_arg,
         use_mock_servos_arg,
@@ -512,6 +552,8 @@ def generate_launch_description():
         yolo_publish_annotated_arg,
         yolo_annotated_fps_arg,
         use_sim_time_param,
+        *gnss_actions(DeclareLaunchArgument),
+        *flat_motor_actions(DeclareLaunchArgument),
         rover_launch,
         rover_real_launch,
         localization_launch,

@@ -9,7 +9,13 @@ the rover XBEE bridge, rosbridge, and video streaming to `127.0.0.1`. The
 manipulator and its active controllers are enabled by default.
 
 It bypasses the GNSS/NTRIP/autonomy/science composition in
-`rover_real.launch.py`. Direct `ros2 launch` is the primary operating mode:
+`rover_real.launch.py`. Direct `ros2 launch` is the primary operating mode.
+
+The commands below assume you are in the `rover/` directory and have already
+installed the direct dashboard/nginx, configured the AP, and brought up CAN.
+See the [root README startup instructions](../README.md#rover-direct-operation-no-base-station-computer)
+for those steps. From the repository root, `./scripts/run_rover_direct.bash`
+also launches this stack and sources ROS automatically.
 
 ```bash
 cd ros2_ws
@@ -82,6 +88,15 @@ Verify the required elements:
 gst-inspect-1.0 h264parse
 gst-inspect-1.0 nvv4l2h264enc
 gst-inspect-1.0 nvvidconv
+```
+
+Install the MR2 udev rules before launching the camera streams. In addition to
+creating the stable `/dev/video*` aliases, these rules keep the shared
+directional-camera USB hub and Suyin UVC cameras out of runtime suspend:
+
+```bash
+cd ~/mr2-stack
+./scripts/install_udev_serial_rules.bash
 ```
 
 The central stream mapping lives at

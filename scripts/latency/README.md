@@ -1,5 +1,10 @@
 # RTP link latency experiment
 
+For the integrated flat rover/base deployment, use
+[the handoff guide](../../docs/flat-latency-handoff.md). It includes supported
+configuration, read-only `preflight.py`, four-feed `smoke_video.cjs`, and the
+two-host acceptance/rollback procedure.
+
 These tools measure the rover-to-base Rocket M2 path by matching the same RTP
 packets in two classic pcap files. They do not modify RTP, H.264, UDP, or the
 browser video protocol, and they do not use visual motion detection.

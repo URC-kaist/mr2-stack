@@ -6,7 +6,9 @@
 - [docs/video-pipeline.md](docs/video-pipeline.md): rover-to-base-to-browser
   video transport, framing, and bootstrap behavior
 - [docs/rover-direct-operation.md](docs/rover-direct-operation.md): native
-  Jetson direct-control deployment at `192.168.2.102`
+  Jetson direct-control deployment at `10.42.0.1`
+- [docs/nepo-demo-operation.md](docs/nepo-demo-operation.md): gamepad Orbit
+  controls and startup on `2026-nepo-demo`
 
 ```bash
 ros2 run tf2_tools view_frames
@@ -20,7 +22,8 @@ ros2 pkg create --build-type ament_cmake <package_name>
 ```
 
 
-Launch ros2_ws (please change sim to real for rover.):
+Simulation and full rover/autonomy launch (for manual rover-direct operation,
+use the section below):
 
 ```bash
 # under rover/ros2_ws/
@@ -48,25 +51,71 @@ nginx, and Wi-Fi AP natively. The direct mode keeps drive/steering, arm control,
 video, batteries, and system status, while omitting GPS, autonomy, science,
 Rocket M2, MAVProxy, and base antenna services.
 
+Run the following from the repository root. First install the
+[Jetson prerequisites](docs/rover-direct-operation.md#jetson-prerequisites),
+including Node.js 24, nginx, and a built `rover/ros2_ws/install/setup.bash`.
+The dashboard installer requires that ROS workspace to exist.
+
+**Initial installation, or updating the dashboard after changing branches:**
+
 ```bash
-# Build/install native files and keep systemd rover startup disabled.
+# Build/deploy the direct dashboard and install service/nginx files.
 MR2_DIRECT_AP_IP=10.42.0.1 \
   ./scripts/install_rover_direct.bash --manual
 
-# Configure the Jetson AP separately (password is never checked in).
-sudo --preserve-env=MR2_AP_PASSWORD ./scripts/configure_rover_ap.bash
-
-# After checking CAN and camera readiness, start directly with launch arguments.
-sudo systemctl start nginx
-cd rover/ros2_ws
-source /opt/ros/humble/setup.bash
-source install/setup.bash
-ros2 launch mr2_launch rover_direct.launch.py
+# Install camera aliases and USB power rules after setup or rule changes.
+./scripts/install_udev_serial_rules.bash
 ```
+
+The installer starts/enables and reloads nginx. `--manual` also stops and
+disables the rover systemd service, so run it while the rover is stopped.
+It does not configure the AP or CAN. A ROS source change also requires
+rebuilding the workspace; a dashboard-only change does not.
+
+**Configure the AP once, or when its settings change:**
+
+```bash
+# This Jetson uses wlP1p1s0; replace it with your Wi-Fi interface if different.
+# The script prompts for the Wi-Fi password without echoing it.
+sudo MR2_AP_INTERFACE=wlP1p1s0 MR2_DIRECT_AP_CIDR=10.42.0.1/24 \
+  ./scripts/configure_rover_ap.bash
+```
+
+Reconfiguring the AP can disconnect an SSH session using that Wi-Fi link.
+The explicit address matters: the script's default is `192.168.2.102/24`.
+
+**Routine startup on an installed Jetson:**
+
+```bash
+# Start nginx if needed; this is harmless if it is already active.
+sudo systemctl start nginx
+
+# With the rover stack stopped, configure CAN if it is down or unconfigured.
+ip -details link show can0
+./scripts/can0.bash
+
+# Start the gateway, video streaming, and rover controllers in this terminal.
+./scripts/run_rover_direct.bash
+```
+
+`can0.bash` resets CAN and configures it at 500 kbit/s; do not run it while
+the rover stack is operating. Keep the launch terminal open. The wrapper
+selects the pinned Node runtime and sources ROS automatically. For an absent
+or unpowered arm, replace the last command with:
+
+```bash
+MR2_ENABLE_MANIPULATOR_MODULE=false ./scripts/run_rover_direct.bash
+```
+
+Routine startup does not require reinstalling the dashboard, reconfiguring
+the AP, or restarting nginx when it is already active. Do not run the terminal
+launch alongside `mr2-rover-direct.service`.
 
 Join the `MR2-Rover` AP and browse to `https://10.42.0.1`. See the
 [rover-direct runbook](docs/rover-direct-operation.md) for prerequisites,
-service inspection, manual startup, and hardware validation.
+service inspection, manual startup with launch arguments, and hardware
+validation. Reload the browser after deploying dashboard updates; see the
+[NEPO demo guide](docs/nepo-demo-operation.md#circular-driving) for Orbit controls.
 
 ### Jetson native development
 
@@ -85,8 +134,10 @@ colcon build --symlink-install
 Run the native rover-direct gateway, dashboard, ROS build, and package tests
 from the repository root with `./scripts/check_rover_direct.bash`.
 
-Scripts to host and receive web:
-Please install Node.js and npm!
+Separate base-station dashboard deployment (requires Node.js and npm):
+
+These commands configure the base-station network profile. Use
+`install_rover_direct.bash` above for the Jetson-hosted direct profile.
 
 ``` bash
 # Building dashboard:

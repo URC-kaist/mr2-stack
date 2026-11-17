@@ -6,6 +6,7 @@ const { promisify } = require('util')
 
 const { AntennaTracker } = require('../antenna/tracker')
 const { UplinkTrialManager } = require('../latency/uplink_trial_manager')
+const { readSourceRevision } = require('../runtime/source_revision')
 const {
   MsgId,
   createSequencer,
@@ -74,6 +75,7 @@ function createGatewayApp(options = {}) {
   const getChronyStatus = createChronyStatusProvider({ execFileAsync })
   const videoConfig = loadVideoConfig(config.videoConfigPath)
   const uplinkTrialManager = options.uplinkTrialManager || new UplinkTrialManager({
+    sourceRevision: readSourceRevision(),
     enabled: config.latencyDiagnosticsEnable,
     interfaceName: config.latencyBaseInterface,
     artifactRoot: config.latencyArtifactRoot,

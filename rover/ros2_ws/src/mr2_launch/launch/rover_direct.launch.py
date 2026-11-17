@@ -14,7 +14,6 @@ import subprocess
 
 from launch import LaunchDescription
 from launch.actions import (
-    DeclareLaunchArgument,
     ExecuteProcess,
     GroupAction,
     IncludeLaunchDescription,
@@ -32,6 +31,7 @@ from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
 from mr2_launch.env import load_mr2_env
+from mr2_launch.profile import profile_arguments
 
 
 def _gateway_entrypoint():
@@ -120,6 +120,7 @@ def _ensure_nginx(context):
 
 
 def generate_launch_description():
+    DeclareLaunchArgument = profile_arguments("direct")
     load_mr2_env()
 
     can_iface_arg = DeclareLaunchArgument(
@@ -131,6 +132,11 @@ def generate_launch_description():
         "controller_spawn_delay",
         default_value="10.0",
         description="Delay before spawning ros2_control controllers",
+    )
+    control_backend_arg = DeclareLaunchArgument(
+        "control_backend", default_value="ros2_control",
+        choices=["ros2_control", "mr2_control"],
+        description="Real actuator runtime (simulation uses ros2_control)",
     )
     controller_config_arg = DeclareLaunchArgument(
         "controller_config",
@@ -367,12 +373,14 @@ def generate_launch_description():
             )
         ),
         launch_arguments={
+            "enable_xbee_bridge": "true",
             "mode": "real",
             "use_sim_time": "false",
             "headless": LaunchConfiguration("headless"),
             "rviz_config": LaunchConfiguration("rviz_config"),
             "can_iface": LaunchConfiguration("can_iface"),
             "controller_config": LaunchConfiguration("controller_config"),
+            "control_backend": LaunchConfiguration("control_backend"),
             "controller_spawn_delay": LaunchConfiguration("controller_spawn_delay"),
             "use_mock_servos": LaunchConfiguration("use_mock_servos"),
             "enable_manipulator_module": LaunchConfiguration(
@@ -485,6 +493,7 @@ def generate_launch_description():
         [
             can_iface_arg,
             controller_spawn_delay_arg,
+            control_backend_arg,
             controller_config_arg,
             headless_arg,
             rviz_config_arg,

@@ -12,10 +12,15 @@
   width: 20%;
   max-width: 100vw;
   height: 100vh;
+  height: 100dvh;
   overflow-x: hidden;
   overflow-y: auto;
   scrollbar-gutter: stable;
   z-index: 2;
+}
+
+.control-panel > * {
+  flex-shrink: 0;
 }
 
 .control-panel::-webkit-scrollbar {

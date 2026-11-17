@@ -53,6 +53,28 @@ async function upload(manager, trialId, token, kind, body, contentType) {
   })
 }
 
+test('deployment status exposes stream mapping and missing configuration without capturing', (t) => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'mr2-uplink-status-'))
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }))
+  const events = []
+  const manager = createManager(root, events)
+  manager.sourceRevision = 'test-revision'
+  assert.deepEqual(manager.diagnosticsStatus(), {
+    schema_version: 1,
+    source_revision: 'test-revision',
+    configured: true,
+    missing: [],
+    capture_interface: 'eth0',
+    public_base_url: 'http://192.168.1.101:8081',
+    streams: [{ stream_id: 'front', udp_port: 5000 }, { stream_id: 'rear', udp_port: 5002 }],
+  })
+  manager.enabled = false
+  assert.equal(manager.diagnosticsStatus().configured, false)
+  assert.ok(manager.diagnosticsStatus().missing.includes('MR2_LATENCY_DIAGNOSTICS_ENABLE'))
+  assert.deepEqual(events, [])
+  assert.equal(manager.trials.size, 0)
+})
+
 test('uplink trial starts base capture before accepting rover artifacts and analyzes both', async (t) => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'mr2-uplink-manager-'))
   t.after(() => fs.rmSync(root, { recursive: true, force: true }))

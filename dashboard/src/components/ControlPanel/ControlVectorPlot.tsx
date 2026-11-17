@@ -220,14 +220,7 @@ const OrbitControlView = ({
             />
           )}
 
-          <g className="rover-symbol" aria-hidden="true">
-            <path d="M 120 90 L 136 103 L 136 146 L 104 146 L 104 103 Z" />
-            <line x1="120" y1="96" x2="120" y2="139" />
-            <rect x="98" y="103" width="6" height="15" rx="2" />
-            <rect x="136" y="103" width="6" height="15" rx="2" />
-            <rect x="98" y="132" width="6" height="15" rx="2" />
-            <rect x="136" y="132" width="6" height="15" rx="2" />
-          </g>
+          <circle className="rover-symbol" cx="120" cy="120" r="18" aria-hidden="true" />
 
           <g className="orbit-center-marker" transform={`translate(${iccX} ${iccY})`}>
             <circle className="orbit-center-halo" r="9" />
@@ -424,7 +417,7 @@ const ControlVectorPlot = ({
 
   return (
     <section className="panel-section control-command-panel">
-      <div className="control-visual">
+      <div className={`control-visual ${controlMode === 'orbit' ? 'control-visual-orbit' : ''}`}>
         <div
           className="control-mode-switch"
           role="group"
@@ -452,7 +445,7 @@ const ControlVectorPlot = ({
 
         {modeSwitchProgress > 0 && modeSwitchProgress < 1 && (
           <div className="mode-switch-hint">
-            Hold L1 + R1 · {Math.ceil((1 - modeSwitchProgress) * 2)} s
+            Hold L1 + R1 · {Math.ceil(1 - modeSwitchProgress)} s
           </div>
         )}
 

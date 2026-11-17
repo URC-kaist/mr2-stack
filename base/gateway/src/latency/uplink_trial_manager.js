@@ -42,6 +42,7 @@ function runCommand(binary, args, spawnProcess = spawn, onChild = null) {
 
 class UplinkTrialManager {
   constructor(options) {
+    this.sourceRevision = options.sourceRevision || null
     this.enabled = options.enabled === true
     this.interfaceName = options.interfaceName || ''
     this.publicBaseUrl = String(options.publicBaseUrl || '').replace(/\/$/, '')
@@ -69,6 +70,20 @@ class UplinkTrialManager {
     if (!this.interfaceName) missing.push('MR2_BASE_ROCKET_INTERFACE')
     if (!this.publicBaseUrl) missing.push('MR2_LATENCY_PUBLIC_BASE_URL')
     return { configured: missing.length === 0, missing }
+  }
+
+  diagnosticsStatus() {
+    return {
+      schema_version: 1,
+      source_revision: this.sourceRevision,
+      ...this.configurationStatus(),
+      capture_interface: this.interfaceName,
+      public_base_url: this.publicBaseUrl,
+      streams: this.streams.map((stream) => ({
+        stream_id: stream.stream_id,
+        udp_port: stream.udp_port,
+      })),
+    }
   }
 
   createTrial(body) {

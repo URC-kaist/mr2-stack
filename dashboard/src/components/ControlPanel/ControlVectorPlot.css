@@ -12,6 +12,10 @@
   width: 100%;
 }
 
+.control-visual-orbit {
+  gap: 8px;
+}
+
 .control-command-panel {
   overflow: hidden;
 }
@@ -305,6 +309,8 @@
 .orbit-plot {
   position: relative;
   width: 100%;
+  max-width: 200px;
+  justify-self: center;
   aspect-ratio: 1 / 1;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -353,24 +359,11 @@
   stroke-dasharray: 4 4;
 }
 
-.rover-symbol path {
+.rover-symbol {
   fill: rgba(23, 35, 53, 0.94);
   stroke: var(--accent);
   stroke-width: 1.6;
-  stroke-linejoin: round;
   filter: drop-shadow(0 0 7px rgba(53, 211, 195, 0.22));
-}
-
-.rover-symbol line {
-  stroke: rgba(53, 211, 195, 0.45);
-  stroke-width: 1;
-  stroke-dasharray: 2 3;
-}
-
-.rover-symbol rect {
-  fill: #0b111a;
-  stroke: rgba(232, 238, 245, 0.55);
-  stroke-width: 1;
 }
 
 .orbit-center-halo {

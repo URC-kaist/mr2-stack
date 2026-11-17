@@ -1,6 +1,5 @@
 from launch import LaunchDescription
 from launch.actions import (
-    DeclareLaunchArgument,
     ExecuteProcess,
     IncludeLaunchDescription,
     TimerAction,
@@ -16,10 +15,17 @@ from launch.substitutions import (
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 from mr2_launch.env import load_mr2_env
+from mr2_launch.profile import profile_arguments
 
 
 def generate_launch_description():
+    DeclareLaunchArgument = profile_arguments("real")
     load_mr2_env(required=["MR2_BASE_IP"])
+
+    enable_realsense_arg = DeclareLaunchArgument(
+        "enable_realsense", default_value="true",
+        description="Start RealSense RGB-D/IMU hardware",
+    )
 
     # Optional manual datum setter for navsat_transform if base survey-in message
     # is not available on the rover network. Disabled by default.
@@ -55,6 +61,11 @@ def generate_launch_description():
         "headless",
         default_value="true",
         description="Run without GUI components (disables RViz)",
+    )
+    control_backend_arg = DeclareLaunchArgument(
+        "control_backend", default_value="ros2_control",
+        choices=["ros2_control", "mr2_control"],
+        description="Real actuator runtime (simulation uses ros2_control)",
     )
     controller_config_arg = DeclareLaunchArgument(
         "controller_config",
@@ -306,6 +317,7 @@ def generate_launch_description():
                 [FindPackageShare("mr2_launch"), "launch", "realsense_rgbd.launch.py"]
             )
         ),
+        condition=IfCondition(LaunchConfiguration("enable_realsense")),
         launch_arguments={
             "camera_name": "rgbd_camera",
             "camera_namespace": "",
@@ -402,10 +414,13 @@ def generate_launch_description():
             )
         ),
         launch_arguments={
+            # This wrapper already owns both GNSS receivers and relays.
+            "enable_gnss": "false",
             "mode": "real",
             "rviz_config": LaunchConfiguration("rviz_config"),
             "headless": LaunchConfiguration("headless"),
             "controller_config": LaunchConfiguration("controller_config"),
+            "control_backend": LaunchConfiguration("control_backend"),
             "controller_spawn_delay": LaunchConfiguration("controller_spawn_delay"),
             "can_iface": LaunchConfiguration("can_iface"),
             "use_mock_servos": LaunchConfiguration("use_mock_servos"),
@@ -530,6 +545,7 @@ def generate_launch_description():
         executable="static_joint_state_publisher",
         name="passive_rocker_joint_state",
         output="screen",
+        condition=IfCondition(LaunchConfiguration("enable_manipulator_module")),
         parameters=[
             {"joint_names": ["left_rocker_joint"]},
             {"positions": [0.0]},
@@ -568,12 +584,14 @@ def generate_launch_description():
 
     return LaunchDescription(
         [
+            enable_realsense_arg,
             set_manual_datum_arg,
             datum_lat_arg,
             datum_lon_arg,
             datum_alt_arg,
             rviz_arg,
             headless_arg,
+            control_backend_arg,
             controller_config_arg,
             controller_spawn_delay_arg,
             can_iface_arg,

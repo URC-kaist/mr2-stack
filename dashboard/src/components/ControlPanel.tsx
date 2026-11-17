@@ -22,7 +22,7 @@ const RADIUS = 0.57725 // meters
 const WHEEL_BASE = 0.95386 // meters
 const TRACK_WIDTH = 0.6504 // meters
 const MAX_WHEEL_LINEAR_SPEED = 0.8 // meters per second
-const MODE_HOLD_MS = 2000
+const MODE_HOLD_MS = 1000
 const GAMEPAD_DEADZONE = 0.08
 
 const centerSensitivityScale = {
@@ -278,7 +278,7 @@ const ControlPanel = () => {
             setOrbitYaw(0)
             setRequestedOrbitYaw(0)
           } else {
-            const requestedYaw = -leftX * orbitYawScale
+            const requestedYaw = leftX * orbitYawScale
             const yawLimit = getSafeOrbitYawRate(orbitCenterRef.current)
             const yaw = Math.max(-yawLimit, Math.min(yawLimit, requestedYaw))
             const activeCenter = orbitCenterRef.current

@@ -7,6 +7,7 @@ from launch_ros.substitutions import FindPackageShare
 
 from mr2_rover_description.launch_common import (
     controller_spawners,
+    control_backend_actions,
     declare_can_iface,
     declare_controller_config,
     declare_use_mock_servos,
@@ -203,10 +204,12 @@ def generate_launch_description():
             rsp,
             passive_rocker_joint_state,
             *mock_servos,
-            ros2_control,
-            *spawners,
-            manipulator_active_spawner,
-            manipulator_inactive_spawner,
+            *control_backend_actions(
+                [ros2_control, *spawners, manipulator_active_spawner, manipulator_inactive_spawner],
+                controller_config, robot_description, use_sim_time,
+                enable_manipulator=enable_manipulator_module,
+                start_manipulator_active=start_manipulator_controllers_active,
+            ),
             battery_monitor,
             battery_monitor_secondary,
         ]

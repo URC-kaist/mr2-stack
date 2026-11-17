@@ -24,6 +24,25 @@ function createResponseRecorder() {
   }
 }
 
+test('uplink deployment status is read-only and includes clock and live streams', async () => {
+  const handler = createGatewayHttpHandler({
+    uplinkTrialManager: {
+      diagnosticsStatus: () => ({ schema_version: 1, configured: true }),
+      createTrial: () => { throw new Error('status must not create a trial') },
+    },
+    getChronyStatus: async () => ({ synchronized: true }),
+    getVideoStreams: () => [{ stream_id: 'flat_cam_1', available: true }],
+  })
+  const res = createResponseRecorder()
+  await handler({ method: 'GET', url: '/latency/uplink/status' }, res)
+  assert.equal(res.statusCode, 200)
+  assert.equal(res.headers['Cache-Control'], 'no-store')
+  const body = JSON.parse(res.body)
+  assert.equal(body.configured, true)
+  assert.equal(body.clock.synchronized, true)
+  assert.equal(body.video_streams[0].stream_id, 'flat_cam_1')
+})
+
 test('handleRocketM2Status reports disabled gateway state', () => {
   const res = createResponseRecorder()
 

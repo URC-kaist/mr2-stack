@@ -137,13 +137,24 @@ def run_capture(
     duration_s: float,
     cancel_event: threading.Event,
     popen=subprocess.Popen,
+    check_clock=None,
 ) -> tuple[int, str, int, int]:
+    if check_clock:
+        check_clock()
     started_epoch_us = time.time_ns() // 1000
     process = popen(command, stderr=subprocess.PIPE)
     deadline = time.monotonic() + duration_s
-    while process.poll() is None and time.monotonic() < deadline and not cancel_event.is_set():
-        cancel_event.wait(0.1)
-    exit_code = stop_process(process)
+    next_check = time.monotonic() + 1
+    try:
+        while process.poll() is None and time.monotonic() < deadline and not cancel_event.is_set():
+            if check_clock and time.monotonic() >= next_check:
+                check_clock()
+                next_check = time.monotonic() + 1
+            cancel_event.wait(0.1)
+        if check_clock and not cancel_event.is_set():
+            check_clock()
+    finally:
+        exit_code = stop_process(process)
     stderr = ""
     if process.stderr is not None:
         stderr = process.stderr.read().decode("utf-8", errors="replace").strip()

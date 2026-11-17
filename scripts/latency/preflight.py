@@ -48,12 +48,20 @@ def stream_map(streams):
 def clock_ready(status, role):
     if status.get('available') is not True or status.get('synchronized') is not True:
         raise ValueError('chrony is unavailable or unsynchronized')
+    if not status.get('policy_available') or not status.get('policy_locked'):
+        raise ValueError('Clock policy must be fresh and locked for the ROS launch')
     age = abs(time.time() * 1000 - status['sampled_at_epoch_ms'])
     if not math.isfinite(age) or age > 5000:
         raise ValueError('Clock status is stale or host clocks differ by more than 5 s')
     if role == 'rover':
+        if not status.get('relative_ready') or not status.get('base_locked') or not status.get('base_peer') or status.get('selected_source') != status['base_peer']:
+            raise ValueError('Rover is not synchronized to the locked base')
         offset = status['system_time_offset_s']
-        bound = status['root_dispersion_s'] + abs(status['root_delay_s']) / 2
+        bound = abs(offset) + status['root_dispersion_s'] + abs(status['root_delay_s']) / 2
+        if status.get('clock_error_bound_s') is not None:
+            if not math.isfinite(status['clock_error_bound_s']) or status['clock_error_bound_s'] < 0:
+                raise ValueError('Clock uncertainty is unavailable')
+            bound = max(bound, status['clock_error_bound_s'])
         if not math.isfinite(offset) or not math.isfinite(bound) or abs(offset) > .002 or bound > .002:
             raise ValueError('Rover offset or chrony error bound exceeds 2 ms')
     return status

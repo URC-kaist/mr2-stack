@@ -32,6 +32,7 @@ from launch_ros.substitutions import FindPackageShare
 
 from mr2_launch.env import load_mr2_env
 from mr2_launch.profile import profile_arguments
+from mr2_launch.clock_guard import acquire_clock
 
 
 def _gateway_entrypoint():
@@ -491,6 +492,7 @@ def generate_launch_description():
 
     return LaunchDescription(
         [
+            OpaqueFunction(function=acquire_clock),
             can_iface_arg,
             controller_spawn_delay_arg,
             control_backend_arg,

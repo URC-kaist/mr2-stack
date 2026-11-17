@@ -1,3 +1,4 @@
+from mr2_launch.clock_guard import video_base_host_default
 from launch import LaunchDescription
 from launch.actions import (
     IncludeLaunchDescription,
@@ -17,6 +18,7 @@ from launch_ros.parameter_descriptions import ParameterValue
 from launch_ros.substitutions import FindPackageShare
 from mr2_launch.env import load_mr2_env
 from mr2_launch.profile import profile_arguments
+from mr2_launch.clock_guard import acquire_if_real
 from mr2_launch.gnss import gnss_actions
 from mr2_launch.flat_motor import flat_motor_actions
 
@@ -197,7 +199,7 @@ def generate_launch_description():
     )
     video_base_host_arg = DeclareLaunchArgument(
         "video_base_host",
-        default_value=EnvironmentVariable("MR2_BASE_IP", default_value="127.0.0.1"),
+        default_value=video_base_host_default(),
         description="Base-station host/IP for rover RTP/UDP video streams",
     )
     video_config_arg = DeclareLaunchArgument(
@@ -521,6 +523,7 @@ def generate_launch_description():
         smooth_drive_commands_arg,
         rviz_arg,
         mode_arg,
+        OpaqueFunction(function=acquire_if_real),
         use_sim_time_arg,
         headless_arg,
         can_iface_arg,

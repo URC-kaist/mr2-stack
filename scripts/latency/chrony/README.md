@@ -1,145 +1,62 @@
-# MR2 base-local chrony setup
+# MR2 offline clock policy
 
-This setup makes the base system clock the experiment's local reference. It
-does not require Internet time, GNSS, PTP, or changes to nginx. The rover is the
-only NTP client allowed by the generated base configuration, and the base is
-the rover's only configured time source.
+The supported configuration is described in
+[offline-clock-policy.md](../../../docs/offline-clock-policy.md).
 
-This provides relative base/rover synchronization. The displayed UTC date may
-be wrong after the base loses RTC power, but matched RTP one-way latency remains
-valid when both hosts are locked to the same base clock.
+The base field address is `192.168.1.101`; rover is `192.168.1.102`.
+Internet access is optional. Before/after a real rover ROS launch both hosts
+may synchronize to public NTP. For the entire ROS launch lifetime Internet
+corrections are locked out; rover slews only to a base with an acknowledged
+clock lock. Simulation does not acquire this lock.
 
-## Safety and behavior
+## Installation
 
-- The generator prints a candidate by default and does not mutate the host.
-- `--output` refuses to overwrite unless `--force` is supplied.
-- `--install` must be run as root, validates with `chronyd -p`, backs up the
-  current complete `/etc/chrony/chrony.conf`, replaces it atomically, and
-  restarts only `chrony.service`.
-- A failed restart automatically restores the previous configuration and
-  attempts to restart the service again.
-- It does not install packages, change firewall rules, change nginx, or run
-  `chronyc makestep` from the dashboard.
-- The rover configuration permits stepping offsets over 100 ms only during the
-  first ten clock updates after chronyd starts. Normal operation uses slewing.
+Install chrony on each host and back up any existing custom settings. With real
+ROS launches stopped, run `sudo python3 scripts/clock_policy/install.py --role
+base` on base, then `--role rover` on rover. Installer flags `--dev-base-ip` and
+`--dev-subnet` add development-network addresses/access without changing routes
+or interface addresses. The installer backs up overwritten host configuration.
 
-## Prerequisites
+On rover, pass `--known-hosts-file` with the verified base SSH host key using
+alias `mr2-clock-base`. Add rover's `/etc/mr2-clock/base_key.pub` to base user's
+`~/.ssh/authorized_keys` with exactly this restriction before the public key:
 
-Install chrony on both computers using the operating-system package manager.
-For Ubuntu:
-
-```bash
-sudo apt-get update
-sudo apt-get install chrony
+```
+restrict,command="/usr/local/bin/mr2-clock-client remote"
 ```
 
-Confirm `MR2_BASE_IP` and `MR2_ROVER_IP` are the addresses routed through the
-Rocket M2 link. UDP port 123 from rover to base must be allowed by host
-firewalls. No remote chronyc command port needs to be exposed.
+This key accepts clock lease requests only. No account password is stored.
+Keep unrelated authorized keys. Service code is installed root-owned under
+`/usr/local/lib/mr2-clock`; configuration is `/etc/mr2-clock/config.json`.
 
-## Preview and validate
+The old `configure_chrony.py` remains an idle-profile preview utility. It refuses
+to overwrite a clock-manager installation; do not deploy a static idle profile
+for operation that requires launch locks.
 
-From the repository root on the base:
+## Use and verify
 
-```bash
-python3 scripts/latency/chrony/configure_chrony.py \
-  --role base \
-  --base-ip "$MR2_BASE_IP" \
-  --rover-ip "$MR2_ROVER_IP" \
-  --output /tmp/mr2-base-chrony.conf
+Real `rover_real`, `rover_direct`, and real-mode `rover` launches acquire their
+clock lock before starting nodes. No extra clock launch flag is needed. A
+missing local manager blocks the launch with a clear error; a missing base
+allows standalone operation with time held and measurements disabled.
 
-chronyd -p -f /tmp/mr2-base-chrony.conf >/dev/null
-```
-
-On the rover:
-
-```bash
-python3 scripts/latency/chrony/configure_chrony.py \
-  --role rover \
-  --base-ip "$MR2_BASE_IP" \
-  --output /tmp/mr2-rover-chrony.conf
-
-chronyd -p -f /tmp/mr2-rover-chrony.conf >/dev/null
-```
-
-Review both complete files. They intentionally contain no distribution pool or
-Internet server directives.
-
-## Install
-
-Install the base first:
-
-```bash
-sudo python3 scripts/latency/chrony/configure_chrony.py \
-  --role base \
-  --base-ip "$MR2_BASE_IP" \
-  --rover-ip "$MR2_ROVER_IP" \
-  --install
-```
-
-Then install the rover configuration on the rover:
-
-```bash
-sudo python3 scripts/latency/chrony/configure_chrony.py \
-  --role rover \
-  --base-ip "$MR2_BASE_IP" \
-  --install
-```
-
-Each command prints the timestamped backup path when it replaces an existing
-configuration.
-
-## Verify before capture
-
-On the base, `chronyc tracking` should report the local reference, stratum 8,
-and a normal leap status:
-
-```bash
-chronyc -n tracking
-```
-
-On the rover, the base should become the selected source (`^*`) and tracking
-should normally report stratum 9:
-
-```bash
+```sh
+systemctl status mr2-clock.service chrony.service --no-pager
+mr2-clock-client status
 chronyc -n sources -v
-chronyc -n tracking
-chronyc waitsync 30 0.002 0 1
-```
-
-The final command waits up to about 30 seconds for synchronization and a
-remaining correction below 2 ms. The dashboard `Check chrony sync` button is
-read-only and checks the same runtime state. It marks the experiment ready only
-when both status samples are fresh and the rover offset/error bound are within
-2 ms.
-
-When ready, analyze synchronized captures with:
-
-```text
---clock-offset-us 0
-```
-
-## Rollback
-
-If a previous configuration was backed up, restore the exact path printed by
-the installer:
-
-```bash
-sudo cp /etc/chrony/chrony.conf.mr2-backup-<timestamp> /etc/chrony/chrony.conf
-sudo systemctl restart chrony.service
 chronyc tracking
 ```
 
-## Accuracy boundary
+The manager tracks launch PID/start time and marked ROS children. The last
+process exit releases the local lock; remote leases expire if disconnected.
+Base's lock is renewed every ten seconds and expires after sixty seconds.
+Rover removes a base source on renewal failure, before its lease expires.
 
-chrony filters measurements continuously and tracks oscillator frequency, but
-it cannot completely remove persistent forward/reverse delay asymmetry in the
-Rocket M2 path. The dashboard error bound is:
+Measurement readiness requires policy freshness, both clock locks, the actual
+selected base source, and offset/error bounds <= 2 ms. A base local reference
+supports relative synchronization and does not establish UTC accuracy.
+Internet correction is allowed again only when no real launch remains.
 
-```text
-root_dispersion + 0.5 * abs(root_delay)
-```
-
-Capture this status in the exported latency JSONL. For experiments requiring an
-error substantially below the displayed bound, use an independent PPS/PTP
-reference at both hosts.
+RTC/disk recovery still provides boot-time approximate dates. Neither a saved
+file nor offline synchronization can infer elapsed powered-off time. Verify RTC
+backup power if correct offline UTC is required.

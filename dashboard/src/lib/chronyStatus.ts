@@ -20,6 +20,18 @@ export type ChronyStatus = {
   sampledAtEpochMs: number
   receivedAtEpochMs: number
   error: string | null
+  policyAvailable: boolean
+  policyLocked: boolean
+  baseLocked: boolean
+  relativeReady: boolean
+  basePeer: string | null
+  selectedSource: string | null
+  utcState: string
+  clockState?: string
+  clockErrorBoundS?: number | null
+  clockEpoch?: string | null
+  baseClockEpoch?: string | null
+  clockDriftBoundPpm?: number | null
 }
 
 export type ChronyReadiness = {
@@ -79,6 +91,18 @@ function parseObject(
     sampledAtEpochMs,
     receivedAtEpochMs,
     error: stringOrNull(value.error),
+    policyAvailable: booleanValue(value.policy_available ?? false, 'policy_available'),
+    policyLocked: booleanValue(value.policy_locked ?? false, 'policy_locked'),
+    baseLocked: booleanValue(value.base_locked ?? false, 'base_locked'),
+    relativeReady: booleanValue(value.relative_ready ?? false, 'relative_ready'),
+    basePeer: stringOrNull(value.base_peer),
+    selectedSource: stringOrNull(value.selected_source),
+    utcState: stringOrNull(value.utc_state) ?? 'unverified',
+    clockState: stringOrNull(value.clock_state) ?? 'invalid',
+    clockErrorBoundS: finiteOrNull(value.clock_error_bound_s),
+    clockEpoch: stringOrNull(value.clock_epoch),
+    baseClockEpoch: stringOrNull(value.base_clock_epoch),
+    clockDriftBoundPpm: finiteOrNull(value.clock_drift_bound_ppm),
   }
 }
 
@@ -131,19 +155,26 @@ export function evaluateChronyReadiness(
       reasons.push(`${label} chrony status is missing`)
       return
     }
-    const sampleAgeMs = nowEpochMs - status.sampledAtEpochMs
     const receiveAgeMs = nowEpochMs - status.receivedAtEpochMs
-    if (
-      Math.abs(sampleAgeMs) > CHRONY_MAX_AGE_MS ||
-      Math.abs(receiveAgeMs) > CHRONY_MAX_AGE_MS
-    ) {
+    // Offline base UTC may differ from the browser's wall clock. Policy age is
+    // checked on each host's monotonic clock; use receipt age in this clock domain.
+    if (Math.abs(receiveAgeMs) > CHRONY_MAX_AGE_MS) {
       reasons.push(`${label} chrony status is stale`)
     }
     if (!status.available) reasons.push(`${label} chronyc is unavailable`)
     if (!status.synchronized) reasons.push(`${label} clock is not synchronized`)
+    if (!status.policyAvailable) reasons.push(`${label} clock policy is unavailable or stale`)
+    if (!status.policyLocked) reasons.push(`${label} clock is not locked for this launch`)
   }
   checkHost('Base', base)
   checkHost('Rover', rover)
+  if (rover && (!rover.baseLocked || !rover.basePeer || rover.selectedSource !== rover.basePeer)) {
+    reasons.push('Rover is not synchronized to the locked base')
+  }
+  if (rover && !rover.relativeReady) reasons.push('Latest base time sample is stale or exceeds 2 ms')
+  if (base?.clockEpoch && rover?.baseClockEpoch !== base.clockEpoch) {
+    reasons.push('Base clock epoch changed')
+  }
 
   const roverOffsetS = rover?.systemTimeOffsetS
   if (rover && roverOffsetS == null) {
@@ -154,15 +185,23 @@ export function evaluateChronyReadiness(
 
   const roverErrorBoundS =
     rover?.rootDispersionS != null && rover.rootDelayS != null
-      ? rover.rootDispersionS + 0.5 * Math.abs(rover.rootDelayS)
+      ? Math.abs(rover.systemTimeOffsetS ?? Infinity) + rover.rootDispersionS + 0.5 * Math.abs(rover.rootDelayS)
       : null
+  const reportedBound = rover?.clockErrorBoundS
+  if (reportedBound != null && (!Number.isFinite(reportedBound) || reportedBound < 0)) {
+    reasons.push('Clock uncertainty is unavailable')
+  }
+  let combinedBound = rover != null && roverErrorBoundS != null && reportedBound != null ?
+    Math.max(roverErrorBoundS, reportedBound + Math.max(0, nowEpochMs - rover.receivedAtEpochMs) *
+      Math.max(10, rover.clockDriftBoundPpm ?? 10) * 1e-9) : roverErrorBoundS
+  if (combinedBound != null) combinedBound += Math.abs(base?.systemTimeOffsetS ?? Infinity)
   if (rover && roverErrorBoundS == null) {
     reasons.push('Rover clock error bound is unavailable')
-  } else if (roverErrorBoundS != null && roverErrorBoundS > CHRONY_MAX_ERROR_BOUND_S) {
+  } else if (combinedBound != null && combinedBound > CHRONY_MAX_ERROR_BOUND_S) {
     reasons.push('Rover clock error bound exceeds 2 ms')
   }
 
-  return { ready: reasons.length === 0, reasons, roverErrorBoundS }
+  return { ready: reasons.length === 0, reasons, roverErrorBoundS: combinedBound }
 }
 
 export function chronyStatusForLog(status: ChronyStatus | null) {
@@ -180,5 +219,12 @@ export function chronyStatusForLog(status: ChronyStatus | null) {
     sampled_at_epoch_ms: status.sampledAtEpochMs,
     received_at_epoch_ms: status.receivedAtEpochMs,
     error: status.error,
+    policy_available: status.policyAvailable,
+    policy_locked: status.policyLocked,
+    base_locked: status.baseLocked,
+    relative_ready: status.relativeReady,
+    base_peer: status.basePeer,
+    selected_source: status.selectedSource,
+    utc_state: status.utcState,
   }
 }

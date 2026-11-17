@@ -23,6 +23,13 @@ const values = {
   leap_status: 'Normal',
   sampled_at_epoch_ms: '1000',
   error: '',
+  policy_available: 'True',
+  policy_locked: 'True',
+  base_locked: 'True',
+  relative_ready: 'True',
+  base_peer: '192.168.1.10',
+  selected_source: '192.168.1.10',
+  utc_state: 'held',
 }
 
 const rover = parseRoverChronyDiagnostic(
@@ -50,7 +57,7 @@ const base: ChronyStatus = {
 }
 let readiness = evaluateChronyReadiness(base, rover, 2_100)
 assert.equal(readiness.ready, true)
-assert.ok(Math.abs((readiness.roverErrorBoundS ?? 0) - 0.00055) < 1e-12)
+assert.ok(Math.abs((readiness.roverErrorBoundS ?? 0) - 0.00105) < 1e-12)
 
 readiness = evaluateChronyReadiness(
   base,
@@ -65,4 +72,26 @@ readiness = evaluateChronyReadiness(base, rover, 8_000)
 assert.equal(readiness.ready, false)
 assert.ok(readiness.reasons.some((reason) => reason.includes('stale')))
 
+for (const change of [
+  { policyAvailable: false }, { policyLocked: false },
+  { baseLocked: false }, { selectedSource: '1.2.3.4' }, { relativeReady: false },
+]) {
+  assert.equal(evaluateChronyReadiness(base, { ...rover, ...change }, 2100).ready, false)
+}
+assert.equal(evaluateChronyReadiness({ ...base, policyLocked: false }, rover, 2100).ready, false)
+assert.equal(evaluateChronyReadiness(
+  { ...base, sampledAtEpochMs: 0 }, { ...rover, sampledAtEpochMs: 0 }, 2100
+).ready, true, 'offline host UTC need not match browser UTC for relative synchronization')
+
 console.log('chrony status parser/readiness test passed')
+
+const versionedBase = { ...base, clockEpoch: 'base-one', systemTimeOffsetS: 0 }
+const holdover = { ...rover, baseClockEpoch: 'base-one', clockState: 'holdover',
+  clockErrorBoundS: .001, clockDriftBoundPpm: 20 }
+assert.equal(evaluateChronyReadiness(versionedBase, holdover, 2100).ready, true)
+assert.equal(evaluateChronyReadiness({ ...versionedBase, clockEpoch: 'base-two' }, holdover, 2100).ready, false)
+for (const clockErrorBoundS of [.0021, NaN, -1]) {
+  assert.equal(evaluateChronyReadiness(versionedBase, { ...holdover, clockErrorBoundS }, 2100).ready, false)
+}
+assert.equal(evaluateChronyReadiness(versionedBase, { ...holdover, clockErrorBoundS: .00198 }, 4000).ready, false,
+  'uncertainty must age while a diagnostic snapshot waits in the browser')

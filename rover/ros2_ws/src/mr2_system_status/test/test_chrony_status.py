@@ -1,9 +1,11 @@
 import subprocess
 import unittest
+from unittest.mock import patch
 
 from mr2_system_status.chrony_status import (
     parse_chronyc_tracking,
     read_chrony_status,
+    require_measurement_clock,
 )
 
 
@@ -20,6 +22,27 @@ Leap status     : Normal
 
 
 class ChronyStatusTest(unittest.TestCase):
+    def test_measurement_rejects_external_source_unlocked_or_large_error(self):
+        good = dict(available=True, synchronized=True, policy_available=True,
+                    policy_locked=True, base_locked=True, relative_ready=True, base_peer='192.168.1.101',
+                    selected_source='192.168.1.101', system_time_offset_s=.0001,
+                    root_delay_s=.0002, root_dispersion_s=.0001)
+        with patch('mr2_system_status.chrony_status.read_chrony_status', return_value=good):
+            require_measurement_clock()
+        for change in ({'policy_locked': False}, {'base_locked': False},
+                       {'selected_source': '1.2.3.4'}, {'system_time_offset_s': .01},
+                       {'root_dispersion_s': float('nan')}, {'relative_ready': False}):
+            with patch('mr2_system_status.chrony_status.read_chrony_status', return_value={**good, **change}):
+                with self.assertRaises(RuntimeError):
+                    require_measurement_clock()
+
+        for change in ({'clock_error_bound_s': .003},
+                       {'clock_error_bound_s': float('nan')}, {'clock_error_bound_s': -1},
+                       {'system_time_offset_s': .001, 'root_dispersion_s': .001}):
+            with patch('mr2_system_status.chrony_status.read_chrony_status', return_value={**good, **change}):
+                with self.assertRaises(RuntimeError):
+                    require_measurement_clock()
+
     def test_parse_chronyc_tracking(self) -> None:
         status = parse_chronyc_tracking(TRACKING, 1234)
         self.assertIs(status["available"], True)

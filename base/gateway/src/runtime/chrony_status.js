@@ -2,9 +2,30 @@
 
 const { execFile } = require('child_process')
 const { promisify } = require('util')
+const { readFile } = require('fs/promises')
 
 const DEFAULT_TIMEOUT_MS = 1500
 const MAX_OUTPUT_BYTES = 16 * 1024
+
+async function readClockPolicy() {
+  try {
+    const value = JSON.parse(await readFile('/run/mr2-clock/status.json', 'utf8'))
+    const age = Number(process.hrtime.bigint()) / 1e9 - value.updated_monotonic
+    return {
+      policy_available: Number.isFinite(age) && age >= 0 && age < 20 && !value.error,
+      policy_locked: value.locked === true,
+      base_locked: value.base_locked === true,
+      base_peer: value.base_peer,
+      selected_source: value.selected_source,
+      utc_state: value.utc_state,
+      policy_error: value.error,
+      clock_epoch: value.clock_epoch,
+      internet_offset_s: value.internet_probe?.offset_s ?? null,
+    }
+  } catch {
+    return { policy_available: false, policy_locked: false, utc_state: 'unverified' }
+  }
+}
 
 function parseNumberField(fields, name) {
   const raw = fields.get(name)
@@ -91,7 +112,7 @@ function createChronyStatusProvider(options = {}) {
         maxBuffer: MAX_OUTPUT_BYTES,
         windowsHide: true,
       })
-      return parseChronycTracking(stdout, sampledAtEpochMs)
+      return { ...parseChronycTracking(stdout, sampledAtEpochMs), ...await readClockPolicy() }
     } catch (error) {
       const code = error && typeof error === 'object' ? error.code : null
       const message = code === 'ENOENT' ? 'chronyc is not installed' : 'chronyc tracking failed'

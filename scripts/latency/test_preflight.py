@@ -9,6 +9,8 @@ class PreflightTest(unittest.TestCase):
     def setUp(self):
         self.streams = {f'flat_cam_{i}': 5008 + 2 * i for i in range(1, 5)}
         self.clock = dict(available=True, synchronized=True,
+                          policy_available=True, policy_locked=True, base_locked=True, relative_ready=True,
+                          base_peer='192.168.1.101', selected_source='192.168.1.101',
                           sampled_at_epoch_ms=time.time() * 1000,
                           system_time_offset_s=.0001, root_delay_s=.0002,
                           root_dispersion_s=.0001)

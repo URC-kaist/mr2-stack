@@ -21,14 +21,14 @@ class ConfigureChronyTest(unittest.TestCase):
         self.assertIn("allow 192.168.1.20/32", config)
         directives = [line for line in config.splitlines() if not line.startswith("#")]
         self.assertFalse(any(line.startswith("server ") for line in directives))
-        self.assertFalse(any(line.startswith("pool ") for line in directives))
+        self.assertTrue(any(line.startswith("pool ") for line in directives))
 
-    def test_rover_uses_only_base(self) -> None:
+    def test_rover_prefers_base_with_internet_fallback(self) -> None:
         config = render_rover_config("192.168.1.10")
         self.assertIn(
-            "server 192.168.1.10 iburst prefer trust minpoll 2 maxpoll 4", config
+            "server 192.168.1.10 iburst prefer minpoll 2 maxpoll 4", config
         )
-        self.assertIn("makestep 0.1 10", config)
+        self.assertIn("makestep 0.1 -1", config)
         self.assertNotIn("local stratum", config)
         self.assertEqual(config.count("server "), 1)
 

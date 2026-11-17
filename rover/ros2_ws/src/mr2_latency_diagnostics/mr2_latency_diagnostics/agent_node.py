@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from mr2_system_status.chrony_status import require_measurement_clock
 import os
 import tempfile
 import threading
@@ -288,7 +289,7 @@ class UplinkAgent(Node):
                 ports,
             )
             exit_code, stderr, started_us, finished_us = run_capture(
-                command, duration_s, self._cancel_event
+                command, duration_s, self._cancel_event, check_clock=require_measurement_clock
             )
             metadata = {
                 "schema_version": 1,
@@ -305,7 +306,7 @@ class UplinkAgent(Node):
                 "tcpdump_stderr": stderr,
             }
             metadata_path.write_text(
-                json.dumps(metadata, indent=2) + "\n", encoding="utf-8"
+                json.dumps(metadata, separators=(",", ":")) + "\n", encoding="utf-8"
             )
             if self._cancel_event.is_set():
                 return

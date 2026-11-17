@@ -1,5 +1,6 @@
 import json
 import tempfile
+import threading
 import unittest
 from pathlib import Path
 from unittest.mock import Mock
@@ -10,6 +11,7 @@ from mr2_latency_diagnostics.capture import (
     load_stream_ports,
     probe_upload_target,
     resolve_capture_interface,
+    run_capture,
 )
 from mr2_latency_diagnostics.trial_state import (
     UplinkTrial,
@@ -19,6 +21,16 @@ from mr2_latency_diagnostics.trial_state import (
 
 
 class UplinkTrialStateTest(unittest.TestCase):
+    def test_clock_failure_stops_capture_and_rejects_result(self):
+        process = Mock()
+        process.poll.return_value = None
+        check = Mock(side_effect=[None, RuntimeError('clock lease lost')])
+        with patch('mr2_latency_diagnostics.capture.stop_process', return_value=0) as stop:
+            with self.assertRaisesRegex(RuntimeError, 'clock lease lost'):
+                run_capture(['fake-tcpdump'], 0, threading.Event(),
+                            popen=Mock(return_value=process), check_clock=check)
+        stop.assert_called_once_with(process)
+
     def test_trial_records_stream_lease_state(self) -> None:
         no_lease = UplinkTrial("trial-no-lease", ["front"])
         self.assertFalse(no_lease.lease_acquired)

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>mr2_flat_bench</name>
+  <version>0.1.0</version>
+  <description>Separate flat bench fixture for the unchanged MR2 ros2_control and CanHW stack.</description>
+  <maintainer email="gmmyung@kaist.ac.kr">mr2</maintainer>
+  <license>MIT</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>ament_cmake_python</buildtool_depend>
+  <depend>mr2_can_bus_core</depend>
+  <depend>hardware_interface</depend>
+  <depend>pluginlib</depend>
+  <depend>rclcpp</depend>
+  <exec_depend>ament_index_python</exec_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>xacro</exec_depend>
+  <exec_depend>controller_manager</exec_depend>
+  <exec_depend>joint_state_broadcaster</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>mr2_launch</exec_depend>
+  <exec_depend>mr2_rover_description</exec_depend>
+  <exec_depend>mr2_rover_control</exec_depend>
+  <exec_depend>mr2_can_hardware_interface</exec_depend>
+  <exec_depend>mr2_devices_robstride</exec_depend>
+  <test_depend>ament_cmake_gtest</test_depend>
+  <test_depend>ament_cmake_pytest</test_depend>
+  <test_depend>rclpy</test_depend>
+  <test_depend>controller_manager_msgs</test_depend>
+  <test_depend>mr2_action_interface</test_depend>
+  <test_depend>geometry_msgs</test_depend>
+  <test_depend>sensor_msgs</test_depend>
+  <test_depend>nav_msgs</test_depend>
+  <export>
+    <build_type>ament_cmake</build_type>
+    <pluginlib plugin_manifest="plugin.xml"/>
+  </export>
+</package>

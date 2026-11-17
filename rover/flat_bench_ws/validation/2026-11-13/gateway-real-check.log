@@ -1,0 +1,15 @@
+initial_zero -0.009002822919050857
+forward 0.10757610437170939
+release_triggers -0.005594974695455335
+reverse -0.12520875189678074
+final_zero -0.01080847384349326
+{
+  "result": "PASS",
+  "real_wheel": "fl",
+  "public_websocket": "wss://10.42.0.1/xbee-ws",
+  "forward_joint_velocity": 0.10757610437170939,
+  "reverse_joint_velocity": -0.12520875189678074,
+  "twist_messages": 129,
+  "joint_messages": 644,
+  "existing_stack_abort_behavior": null
+}

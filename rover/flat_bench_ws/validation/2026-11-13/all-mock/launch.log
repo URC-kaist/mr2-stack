@@ -1,0 +1,67 @@
+[INFO] [launch]: All log files can be found below /home/mr2/.ros/log/2026-11-13-00-19-56-941092-rover-50931
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [launch.user]: Flat bench: production controller YAML=/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_rover_description/share/mr2_rover_description/config/controllers/rover_controllers.yaml; CanHW; real=none, id=127; remaining devices are mocks
+[INFO] [robot_state_publisher-1]: process started with pid [50936]
+[INFO] [ros2_control_node-2]: process started with pid [50938]
+[robot_state_publisher-1] [INFO] [1794496797.286966014] [robot_state_publisher]: got segment base_chassis
+[robot_state_publisher-1] [INFO] [1794496797.287219110] [robot_state_publisher]: got segment base_link
+[robot_state_publisher-1] [INFO] [1794496797.287248807] [robot_state_publisher]: got segment dummy_link
+[robot_state_publisher-1] [INFO] [1794496797.287261767] [robot_state_publisher]: got segment fl_mount
+[robot_state_publisher-1] [INFO] [1794496797.287271752] [robot_state_publisher]: got segment fl_wheel
+[robot_state_publisher-1] [INFO] [1794496797.287281032] [robot_state_publisher]: got segment fr_mount
+[robot_state_publisher-1] [INFO] [1794496797.287290536] [robot_state_publisher]: got segment fr_wheel
+[robot_state_publisher-1] [INFO] [1794496797.287299273] [robot_state_publisher]: got segment imu_link
+[robot_state_publisher-1] [INFO] [1794496797.287308169] [robot_state_publisher]: got segment left_gnss
+[robot_state_publisher-1] [INFO] [1794496797.287316937] [robot_state_publisher]: got segment left_rocker
+[robot_state_publisher-1] [INFO] [1794496797.287326025] [robot_state_publisher]: got segment rgbd_camera
+[robot_state_publisher-1] [INFO] [1794496797.287334634] [robot_state_publisher]: got segment right_gnss
+[robot_state_publisher-1] [INFO] [1794496797.287343850] [robot_state_publisher]: got segment right_rocker
+[robot_state_publisher-1] [INFO] [1794496797.287353098] [robot_state_publisher]: got segment rl_mount
+[robot_state_publisher-1] [INFO] [1794496797.287362539] [robot_state_publisher]: got segment rl_wheel
+[robot_state_publisher-1] [INFO] [1794496797.287371019] [robot_state_publisher]: got segment rr_mount
+[robot_state_publisher-1] [INFO] [1794496797.287380075] [robot_state_publisher]: got segment rr_wheel
+[ros2_control_node-2] [WARN] [1794496797.311965658] [controller_manager]: [Deprecated] Passing the robot description parameter directly to the control_manager node is deprecated. Use '~/robot_description' topic from 'robot_state_publisher' instead.
+[ros2_control_node-2] [INFO] [1794496797.312775539] [resource_manager]: Loading hardware 'RoverCanSystem' 
+[ros2_control_node-2] [INFO] [1794496797.315593193] [resource_manager]: Initialize hardware 'RoverCanSystem' 
+[ros2_control_node-2] [INFO] [1794496797.327793662] [can_hw]: CanHW initialised: 8 joints, 8 actuators, 8 transmissions
+[ros2_control_node-2] [INFO] [1794496797.327914945] [resource_manager]: Successful initialization of hardware 'RoverCanSystem'
+[ros2_control_node-2] [INFO] [1794496797.328201098] [resource_manager]: 'configure' hardware 'RoverCanSystem' 
+[ros2_control_node-2] [INFO] [1794496797.328224779] [resource_manager]: Successful 'configure' of hardware 'RoverCanSystem'
+[ros2_control_node-2] [INFO] [1794496797.328238923] [resource_manager]: 'activate' hardware 'RoverCanSystem' 
+[ros2_control_node-2] [INFO] [1794496797.328276076] [resource_manager]: Successful 'activate' of hardware 'RoverCanSystem'
+[ros2_control_node-2] [INFO] [1794496797.333815670] [controller_manager]: update rate is 100 Hz
+[ros2_control_node-2] [INFO] [1794496797.333885240] [controller_manager]: Spawning controller_manager RT thread with scheduler priority: 50
+[ros2_control_node-2] [WARN] [1794496797.334097374] [controller_manager]: Could not enable FIFO RT scheduling policy: with error number <1>(Operation not permitted). See [https://control.ros.org/master/doc/ros2_control/controller_manager/doc/userdoc.html] for details on how to enable realtime scheduling.
+[INFO] [spawner-3]: process started with pid [50979]
+[ros2_control_node-2] [INFO] [1794496798.885533731] [controller_manager]: Loading controller 'joint_state_broadcaster'
+[spawner-3] [INFO] [1794496798.935222289] [spawner_joint_state_broadcaster]: [94mLoaded [1mjoint_state_broadcaster[0m
+[ros2_control_node-2] [INFO] [1794496798.937284688] [controller_manager]: Configuring controller 'joint_state_broadcaster'
+[ros2_control_node-2] [INFO] [1794496798.937541912] [joint_state_broadcaster]: 'joints' or 'interfaces' parameter is empty. All available state interfaces will be published
+[spawner-3] [INFO] [1794496798.976442717] [spawner_joint_state_broadcaster]: [92mConfigured and activated [1mjoint_state_broadcaster[0m
+[INFO] [spawner-3]: process has finished cleanly [pid 50979]
+[INFO] [spawner-4]: process started with pid [51008]
+[ros2_control_node-2] [INFO] [1794496799.884335765] [controller_manager]: Loading controller 'rover_controller'
+[spawner-4] [INFO] [1794496799.935560754] [spawner_rover_controller]: [94mLoaded [1mrover_controller[0m
+[ros2_control_node-2] [INFO] [1794496799.937821175] [controller_manager]: Configuring controller 'rover_controller'
+[spawner-4] [INFO] [1794496799.986030968] [spawner_rover_controller]: [92mConfigured and activated [1mrover_controller[0m
+[INFO] [spawner-4]: process has finished cleanly [pid 51008]
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[INFO] [ros2_control_node-2]: sending signal 'SIGINT' to process[ros2_control_node-2]
+[INFO] [robot_state_publisher-1]: sending signal 'SIGINT' to process[robot_state_publisher-1]
+[ros2_control_node-2] [INFO] [1794496807.666646447] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[ros2_control_node-2] [INFO] [1794496807.666867478] [controller_manager]: Shutdown request received....
+[ros2_control_node-2] [INFO] [1794496807.666976377] [controller_manager]: Shutting down all controllers in the controller manager.
+[ros2_control_node-2] [INFO] [1794496807.667036123] [controller_manager]: Deactivating controller 'joint_state_broadcaster'
+[ros2_control_node-2] [INFO] [1794496807.667120605] [controller_manager]: Shutting down controller 'joint_state_broadcaster'
+[ros2_control_node-2] [INFO] [1794496807.667186175] [controller_manager]: Deactivating controller 'rover_controller'
+[ros2_control_node-2] [INFO] [1794496807.667239617] [controller_manager]: Shutting down controller 'rover_controller'
+[ros2_control_node-2] [INFO] [1794496807.667302435] [resource_manager]: 'deactivate' hardware 'RoverCanSystem' 
+[ros2_control_node-2] [INFO] [1794496807.667344292] [resource_manager]: Successful 'deactivate' of hardware 'RoverCanSystem'
+[ros2_control_node-2] [INFO] [1794496807.667361509] [resource_manager]: 'shutdown' hardware 'RoverCanSystem' 
+[ros2_control_node-2] [INFO] [1794496807.667375333] [resource_manager]: Successful 'shutdown' of hardware 'RoverCanSystem'
+[ros2_control_node-2] [INFO] [1794496807.667386213] [controller_manager]: Shutting down the controller manager.
+[robot_state_publisher-1] [INFO] [1794496807.666728241] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[ros2_control_node-2] [INFO] [1794496807.672291515] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[robot_state_publisher-1] [INFO] [1794496807.674103027] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [robot_state_publisher-1]: process has finished cleanly [pid 50936]
+[INFO] [ros2_control_node-2]: process has finished cleanly [pid 50938]

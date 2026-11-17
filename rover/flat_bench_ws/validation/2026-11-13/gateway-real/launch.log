@@ -1,0 +1,280 @@
+[INFO] [launch]: All log files can be found below /home/mr2/.ros/log/2026-11-13-00-23-26-325029-rover-53263
+[INFO] [launch]: Default logging verbosity is set to INFO
+[mr2_launch] rover profile: flat (direct)
+[mr2_launch] rover profile: flat (rover)
+[mr2_launch] rover profile: flat (video)
+[mr2_launch] rover profile: flat (real)
+[mr2_launch] rover profile: flat (rover)
+[mr2_launch] rover profile: flat (video)
+[mr2_launch] rover profile: flat (direct)
+[mr2_launch] rover profile: flat (rover)
+[mr2_launch] rover profile: flat (video)
+[INFO] [launch.user]: Clock locked for ROS launch; base=unavailable
+[INFO] [launch.user]: nginx.service is active
+[INFO] [launch.user]: Flat bench: production controller YAML=/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_rover_description/share/mr2_rover_description/config/controllers/rover_controllers.yaml; CanHW; real=fl, id=127; remaining devices are mocks
+[INFO] [socat-1]: process started with pid [53313]
+[INFO] [node-2]: process started with pid [53315]
+[INFO] [robot_state_publisher-3]: process started with pid [53317]
+[INFO] [ros2_control_node-4]: process started with pid [53319]
+[socat-1] 2026/11/13 00:23:27 socat[53313] N PTY is /dev/pts/2
+[socat-1] 2026/11/13 00:23:27 socat[53313] N PTY is /dev/pts/3
+[socat-1] 2026/11/13 00:23:27 socat[53313] N starting data transfer loop with FDs [5,5] and [7,7]
+[robot_state_publisher-3] [INFO] [1794497007.995937108] [robot_state_publisher]: got segment base_chassis
+[robot_state_publisher-3] [INFO] [1794497007.996202236] [robot_state_publisher]: got segment base_link
+[robot_state_publisher-3] [INFO] [1794497007.996233629] [robot_state_publisher]: got segment dummy_link
+[robot_state_publisher-3] [INFO] [1794497007.996246078] [robot_state_publisher]: got segment fl_mount
+[robot_state_publisher-3] [INFO] [1794497007.996255710] [robot_state_publisher]: got segment fl_wheel
+[robot_state_publisher-3] [INFO] [1794497007.996264446] [robot_state_publisher]: got segment fr_mount
+[robot_state_publisher-3] [INFO] [1794497007.996272926] [robot_state_publisher]: got segment fr_wheel
+[robot_state_publisher-3] [INFO] [1794497007.996281183] [robot_state_publisher]: got segment imu_link
+[robot_state_publisher-3] [INFO] [1794497007.996289279] [robot_state_publisher]: got segment left_gnss
+[robot_state_publisher-3] [INFO] [1794497007.996297727] [robot_state_publisher]: got segment left_rocker
+[robot_state_publisher-3] [INFO] [1794497007.996306175] [robot_state_publisher]: got segment rgbd_camera
+[robot_state_publisher-3] [INFO] [1794497007.996314592] [robot_state_publisher]: got segment right_gnss
+[robot_state_publisher-3] [INFO] [1794497007.996323040] [robot_state_publisher]: got segment right_rocker
+[robot_state_publisher-3] [INFO] [1794497007.996331712] [robot_state_publisher]: got segment rl_mount
+[robot_state_publisher-3] [INFO] [1794497007.996340128] [robot_state_publisher]: got segment rl_wheel
+[robot_state_publisher-3] [INFO] [1794497007.996348321] [robot_state_publisher]: got segment rr_mount
+[robot_state_publisher-3] [INFO] [1794497007.996356417] [robot_state_publisher]: got segment rr_wheel
+[ros2_control_node-4] [WARN] [1794497008.018098715] [controller_manager]: [Deprecated] Passing the robot description parameter directly to the control_manager node is deprecated. Use '~/robot_description' topic from 'robot_state_publisher' instead.
+[ros2_control_node-4] [INFO] [1794497008.018946133] [resource_manager]: Loading hardware 'RoverCanSystem' 
+[ros2_control_node-4] [INFO] [1794497008.021705321] [resource_manager]: Initialize hardware 'RoverCanSystem' 
+[ros2_control_node-4] [INFO] [1794497008.036460333] [can_hw]: CanHW initialised: 8 joints, 8 actuators, 8 transmissions
+[ros2_control_node-4] [INFO] [1794497008.036618578] [resource_manager]: Successful initialization of hardware 'RoverCanSystem'
+[ros2_control_node-4] [INFO] [1794497008.036936379] [resource_manager]: 'configure' hardware 'RoverCanSystem' 
+[ros2_control_node-4] [INFO] [1794497008.036962140] [resource_manager]: Successful 'configure' of hardware 'RoverCanSystem'
+[ros2_control_node-4] [INFO] [1794497008.036976989] [resource_manager]: 'activate' hardware 'RoverCanSystem' 
+[ros2_control_node-4] [INFO] [1794497008.042660683] [resource_manager]: Successful 'activate' of hardware 'RoverCanSystem'
+[ros2_control_node-4] [INFO] [1794497008.048571071] [controller_manager]: update rate is 100 Hz
+[ros2_control_node-4] [INFO] [1794497008.048643586] [controller_manager]: Spawning controller_manager RT thread with scheduler priority: 50
+[ros2_control_node-4] [WARN] [1794497008.048863656] [controller_manager]: Could not enable FIFO RT scheduling policy: with error number <1>(Operation not permitted). See [https://control.ros.org/master/doc/ros2_control/controller_manager/doc/userdoc.html] for details on how to enable realtime scheduling.
+[node-2] [gateway] HTTP/WebSocket listening on 127.0.0.1:8081
+[node-2] [gateway] Base ROS GNSS/RTCM topic relay disabled
+[node-2] [gateway] [video:flat_cam_1] spawning /home/mr2/mr2-stack/rover/ros2_ws/install/mr2_video_streaming/lib/mr2_video_streaming/video_receiver udpsrc name=video_source port=5010 caps=application/x-rtp,media=video,encoding-name=H264,payload=96,clock-rate=90000 ! rtpjitterbuffer name=video_jitter latency=40 drop-on-latency=true ! rtph264depay wait-for-keyframe=true request-keyframe=true ! h264parse disable-passthrough=true ! video/x-h264,stream-format=byte-stream,alignment=au ! appsink name=video_output sync=false async=false
+[node-2] [gateway] [video:flat_cam_2] spawning /home/mr2/mr2-stack/rover/ros2_ws/install/mr2_video_streaming/lib/mr2_video_streaming/video_receiver udpsrc name=video_source port=5012 caps=application/x-rtp,media=video,encoding-name=H264,payload=96,clock-rate=90000 ! rtpjitterbuffer name=video_jitter latency=40 drop-on-latency=true ! rtph264depay wait-for-keyframe=true request-keyframe=true ! h264parse disable-passthrough=true ! video/x-h264,stream-format=byte-stream,alignment=au ! appsink name=video_output sync=false async=false
+[node-2] [gateway] [video:flat_cam_3] spawning /home/mr2/mr2-stack/rover/ros2_ws/install/mr2_video_streaming/lib/mr2_video_streaming/video_receiver udpsrc name=video_source port=5014 caps=application/x-rtp,media=video,encoding-name=H264,payload=96,clock-rate=90000 ! rtpjitterbuffer name=video_jitter latency=40 drop-on-latency=true ! rtph264depay wait-for-keyframe=true request-keyframe=true ! h264parse disable-passthrough=true ! video/x-h264,stream-format=byte-stream,alignment=au ! appsink name=video_output sync=false async=false
+[node-2] [gateway] [video:flat_cam_4] spawning /home/mr2/mr2-stack/rover/ros2_ws/install/mr2_video_streaming/lib/mr2_video_streaming/video_receiver udpsrc name=video_source port=5016 caps=application/x-rtp,media=video,encoding-name=H264,payload=96,clock-rate=90000 ! rtpjitterbuffer name=video_jitter latency=40 drop-on-latency=true ! rtph264depay wait-for-keyframe=true request-keyframe=true ! h264parse disable-passthrough=true ! video/x-h264,stream-format=byte-stream,alignment=au ! appsink name=video_output sync=false async=false
+[node-2] [gateway] Serial open /tmp/mr2_xbee_gateway @ 115200
+[mr2_launch] rover profile: flat (rover)
+[mr2_launch] rover profile: flat (video)
+[INFO] [launch.user]: Clock locked for ROS launch; base=unavailable
+[INFO] [system_status-5]: process started with pid [53397]
+[INFO] [xbee_bridge_node-6]: process started with pid [53399]
+[INFO] [rosbridge_websocket-7]: process started with pid [53401]
+[INFO] [spawner-8]: process started with pid [53403]
+[xbee_bridge_node-6] [INFO] [1794497009.490328203] [xbee_bridge]: XBee serial connected /tmp/mr2_xbee_rover @ 115200
+[INFO] [spawner-9]: process started with pid [53437]
+[ros2_control_node-4] [INFO] [1794497010.132378740] [controller_manager]: Loading controller 'joint_state_broadcaster'
+[spawner-8] [INFO] [1794497010.190460102] [spawner_joint_state_broadcaster]: [94mLoaded [1mjoint_state_broadcaster[0m
+[ros2_control_node-4] [INFO] [1794497010.193549732] [controller_manager]: Configuring controller 'joint_state_broadcaster'
+[ros2_control_node-4] [INFO] [1794497010.193813613] [joint_state_broadcaster]: 'joints' or 'interfaces' parameter is empty. All available state interfaces will be published
+[spawner-8] [INFO] [1794497010.231275719] [spawner_joint_state_broadcaster]: [92mConfigured and activated [1mjoint_state_broadcaster[0m
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[rosbridge_websocket-7] [WARN] [1794497010.420481800] [rosbridge_websocket]: The 'default_call_service_timeout' parameter is currently set to 0.0, which means service calls will block indefinitely if no response is received. Please note that in the Jazzy and later releases, the default value for this parameter will be updated to 5.0 seconds.
+[rosbridge_websocket-7] [WARN] [1794497010.421355843] [rosbridge_websocket]: The 'call_services_in_new_thread' parameter is currently set to False, which means service calls will block the main thread. Please note that in the Jazzy and later releases, the default value for this parameter will be updated to True.
+[rosbridge_websocket-7] [WARN] [1794497010.422054168] [rosbridge_websocket]: The 'send_action_goals_in_new_thread' parameter is currently set to False, which means sending action goals will block the main thread. Please note that in the Jazzy and later releases, the default value for this parameter will be updated to True.
+[rosbridge_websocket-7] [INFO] [1794497010.424675624] [rosbridge_websocket]: Rosbridge WebSocket server started on port 9090
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[INFO] [spawner-8]: process has finished cleanly [pid 53403]
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[spawner-9] [INFO] [1794497010.711991461] [spawner_rover_controller]: waiting for service /controller_manager/list_controllers to become available...
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0.02 y=0 yaw=0
+[ros2_control_node-4] [INFO] [1794497011.718749643] [controller_manager]: Loading controller 'rover_controller'
+[node-2] [gateway] cmd_drive rx x=0.02 y=0 yaw=0
+[spawner-9] [INFO] [1794497011.762177436] [spawner_rover_controller]: [94mLoaded [1mrover_controller[0m
+[ros2_control_node-4] [INFO] [1794497011.765703560] [controller_manager]: Configuring controller 'rover_controller'
+[node-2] [gateway] cmd_drive rx x=0.02 y=0 yaw=0
+[spawner-9] [INFO] [1794497011.811826956] [spawner_rover_controller]: [92mConfigured and activated [1mrover_controller[0m
+[node-2] [gateway] cmd_drive rx x=0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0.02 y=0 yaw=0
+[INFO] [spawner-9]: process has finished cleanly [pid 53437]
+[node-2] [gateway] cmd_drive rx x=0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=-0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=-0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=-0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=-0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=-0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=-0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=-0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=-0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=-0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=-0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=-0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=-0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=-0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=-0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=-0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=-0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=-0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=-0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=-0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=-0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=-0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=-0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=-0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=-0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=-0.02 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[node-2] [gateway] cmd_drive rx x=0 y=0 yaw=0
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[INFO] [rosbridge_websocket-7]: sending signal 'SIGINT' to process[rosbridge_websocket-7]
+[ERROR] [socat-1]: process has died [pid 53313, exit code 130, cmd 'socat -d -d pty,raw,echo=0,link=/tmp/mr2_xbee_rover pty,raw,echo=0,link=/tmp/mr2_xbee_gateway'].
+[INFO] [xbee_bridge_node-6]: sending signal 'SIGINT' to process[xbee_bridge_node-6]
+[INFO] [system_status-5]: sending signal 'SIGINT' to process[system_status-5]
+[INFO] [node-2]: process has finished cleanly [pid 53315]
+[INFO] [ros2_control_node-4]: sending signal 'SIGINT' to process[ros2_control_node-4]
+[INFO] [robot_state_publisher-3]: sending signal 'SIGINT' to process[robot_state_publisher-3]
+[ERROR] [rosbridge_websocket-7]: process has died [pid 53401, exit code -2, cmd '/opt/ros/humble/lib/rosbridge_server/rosbridge_websocket --ros-args -r __node:=rosbridge_websocket -p use_sim_time:=False --params-file /tmp/launch_params_2xom8gnd --params-file /tmp/launch_params_w7v_cuvn --params-file /tmp/launch_params_jw7kh0o9 --params-file /tmp/launch_params_334obewa'].
+[robot_state_publisher-3] [INFO] [1794497019.905695168] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[ros2_control_node-4] [INFO] [1794497019.905669375] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[ros2_control_node-4] [INFO] [1794497019.905886662] [controller_manager]: Shutdown request received....
+[ros2_control_node-4] [INFO] [1794497019.906019114] [controller_manager]: Shutting down all controllers in the controller manager.
+[ros2_control_node-4] [INFO] [1794497019.906088492] [controller_manager]: Deactivating controller 'joint_state_broadcaster'
+[ros2_control_node-4] [INFO] [1794497019.906182895] [controller_manager]: Shutting down controller 'joint_state_broadcaster'
+[ros2_control_node-4] [INFO] [1794497019.906256177] [controller_manager]: Deactivating controller 'rover_controller'
+[ros2_control_node-4] [INFO] [1794497019.906323987] [controller_manager]: Shutting down controller 'rover_controller'
+[ros2_control_node-4] [INFO] [1794497019.906393589] [resource_manager]: 'deactivate' hardware 'RoverCanSystem' 
+[ros2_control_node-4] [INFO] [1794497019.906474360] [resource_manager]: Successful 'deactivate' of hardware 'RoverCanSystem'
+[ros2_control_node-4] [INFO] [1794497019.906491672] [resource_manager]: 'shutdown' hardware 'RoverCanSystem' 
+[ros2_control_node-4] [INFO] [1794497019.906506009] [resource_manager]: Successful 'shutdown' of hardware 'RoverCanSystem'
+[ros2_control_node-4] [INFO] [1794497019.906517753] [controller_manager]: Shutting down the controller manager.
+[xbee_bridge_node-6] [INFO] [1794497019.905686240] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[xbee_bridge_node-6] [WARN] [1794497019.906272050] [xbee_bridge]: XBee serial disconnected /tmp/mr2_xbee_rover: serial hangup/error; reconnecting
+[ERROR] [ros2_control_node-4]: process has died [pid 53319, exit code -2, cmd '/opt/ros/humble/lib/controller_manager/ros2_control_node --ros-args --params-file /home/mr2/mr2-stack/rover/ros2_ws/install/mr2_rover_description/share/mr2_rover_description/config/controllers/rover_controllers.yaml --params-file /tmp/launch_params_rm_y96z6 --params-file /tmp/launch_params_vuxv4ght'].
+[socat-1] 2026/11/13 00:23:39 socat[53313] N socat_signal(): handling signal 2
+[socat-1] 2026/11/13 00:23:39 socat[53313] N exiting on signal 2
+[socat-1] 2026/11/13 00:23:39 socat[53313] N socat_signal(): finishing signal 2
+[socat-1] 2026/11/13 00:23:39 socat[53313] N exit(130)
+[node-2] [gateway] SIGINT received, shutting down
+[rosbridge_websocket-7] registered capabilities (classes):
+[rosbridge_websocket-7]  - <class 'rosbridge_library.capabilities.advertise.Advertise'>
+[rosbridge_websocket-7]  - <class 'rosbridge_library.capabilities.publish.Publish'>
+[rosbridge_websocket-7]  - <class 'rosbridge_library.capabilities.subscribe.Subscribe'>
+[rosbridge_websocket-7]  - <class 'rosbridge_library.capabilities.defragmentation.Defragment'>
+[rosbridge_websocket-7]  - <class 'rosbridge_library.capabilities.advertise_service.AdvertiseService'>
+[rosbridge_websocket-7]  - <class 'rosbridge_library.capabilities.call_service.CallService'>
+[rosbridge_websocket-7]  - <class 'rosbridge_library.capabilities.service_response.ServiceResponse'>
+[rosbridge_websocket-7]  - <class 'rosbridge_library.capabilities.unadvertise_service.UnadvertiseService'>
+[rosbridge_websocket-7]  - <class 'rosbridge_library.capabilities.advertise_action.AdvertiseAction'>
+[rosbridge_websocket-7]  - <class 'rosbridge_library.capabilities.action_feedback.ActionFeedback'>
+[rosbridge_websocket-7]  - <class 'rosbridge_library.capabilities.action_result.ActionResult'>
+[rosbridge_websocket-7]  - <class 'rosbridge_library.capabilities.send_action_goal.SendActionGoal'>
+[rosbridge_websocket-7]  - <class 'rosbridge_library.capabilities.unadvertise_action.UnadvertiseAction'>
+[rosbridge_websocket-7] Exiting due to SIGINT
+[xbee_bridge_node-6] [INFO] [1794497019.923061876] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[system_status-5] Traceback (most recent call last):
+[system_status-5]   File "/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_system_status/lib/mr2_system_status/system_status", line 33, in <module>
+[system_status-5]     sys.exit(load_entry_point('mr2-system-status', 'console_scripts', 'system_status')())
+[system_status-5]   File "/home/mr2/mr2-stack/rover/ros2_ws/build/mr2_system_status/mr2_system_status/system_status_node.py", line 162, in main
+[system_status-5]     node.destroy_node()
+[system_status-5]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1685, in destroy_node
+[system_status-5]     self.destroy_publisher(self._publishers[0])
+[system_status-5]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1565, in destroy_publisher
+[system_status-5]     publisher.destroy()
+[system_status-5]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/publisher.py", line 99, in destroy
+[system_status-5]     self.__publisher.destroy_when_not_in_use()
+[system_status-5] KeyboardInterrupt
+[robot_state_publisher-3] [INFO] [1794497019.931890562] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[ERROR] [system_status-5]: process has died [pid 53397, exit code -2, cmd '/home/mr2/mr2-stack/rover/ros2_ws/install/mr2_system_status/lib/mr2_system_status/system_status --ros-args -r __node:=system_status -p use_sim_time:=False'].
+[INFO] [robot_state_publisher-3]: process has finished cleanly [pid 53317]
+[INFO] [xbee_bridge_node-6]: process has finished cleanly [pid 53399]

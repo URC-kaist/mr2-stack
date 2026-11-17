@@ -10,6 +10,10 @@ namespace mr2_xbee_bridge {
 constexpr uint8_t kMagic = 0xA5;
 
 enum class MsgId : uint8_t {
+  kVideoSet = 0x40,
+  kVideoFeedback = 0x41,
+  kVideoState = 0x42,
+  kVideoKeyframe = 0x43,
   kCmdDrive = 0x01,
   kCmdArmTwist = 0x02,
   kHeartbeat = 0x03,
@@ -123,6 +127,8 @@ struct Frame {
   Header header{};
   std::vector<uint8_t> payload;
 };
+
+std::vector<uint8_t> encode_video_packet(uint8_t seq, const std::vector<uint8_t> & packet);
 
 uint16_t crc16_ccitt_false(const uint8_t *data, size_t length);
 

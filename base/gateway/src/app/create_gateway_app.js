@@ -28,6 +28,7 @@ const { startRosTopicRelay } = require('../runtime/ros_topic_relay')
 const { XbeeSerialLink } = require('../runtime/serial_link')
 const { createWsRouteRegistry } = require('../runtime/ws_route_registry')
 const { createWsHub } = require('../runtime/ws_hub')
+const { createVideoControl } = require('../video/control')
 const { createVideoGateway } = require('../video/service')
 const { loadVideoConfig } = require('../video/stream_config')
 
@@ -128,6 +129,8 @@ function createGatewayApp(options = {}) {
     onMessage: handleDashboardMessage,
     getInitialMessages: () => {
       const messages = [getLinkStatus()]
+      const videoMetrics = videoControl.getMetrics()
+      if (videoMetrics) messages.push(videoMetrics)
       for (const rocketM2Client of rocketM2Clients) {
         const rocketM2Status = rocketM2Client.getStatus()
         if (rocketM2Status) {
@@ -137,7 +140,15 @@ function createGatewayApp(options = {}) {
       return messages
     },
   })
+  const freshnessEnabled = false
+  const videoControl = createVideoControl({ initialKbps: config.videoInitialKbps, maxKbps: config.videoMaxKbps, streams: videoConfig.streams, nextSeq, writeFrame,
+    freshness: freshnessEnabled, onReceivePolicy: (policy) => videoGateway?.setReceivePolicy(policy),
+    broadcast: (msg) => wsHub.broadcast(msg) })
   videoGateway = createVideoGateway({
+    freshness: freshnessEnabled,
+    requestKeyframe: (id) => videoControl.requestKeyframe(id),
+    onPacket: (id, p) => videoControl.observe(id, p),
+    getControlState: (id) => videoControl.get(id),
     availabilityStaleMs: config.videoAvailabilityStaleMs,
     clientMaxBufferedBytes: config.videoClientMaxBufferedBytes,
     gstBinary: config.videoGstBinary,
@@ -190,8 +201,8 @@ function createGatewayApp(options = {}) {
     }
   }
 
-  function writeFrame(frame) {
-    serialLink.write(frame)
+  function writeFrame(frame, traffic) {
+    return serialLink.write(frame, traffic)
   }
 
   function getLinkStatus() {
@@ -235,6 +246,8 @@ function createGatewayApp(options = {}) {
     // Older clients sometimes send `event`; current clients send `type`.
     const type = msg.type || msg.event
     if (!type) return
+
+    if (type === 'video_set') { videoControl.command(msg); return }
 
     if (type === 'cmd_drive') {
       const linear = coerceNumber(msg.linear_x_m_s)
@@ -358,6 +371,7 @@ function createGatewayApp(options = {}) {
 
   function handleFrame(msgId, payload) {
     lastRxMs = Date.now()
+    if (msgId === MsgId.VIDEO_STATE) { videoControl.handleState(payload); return }
 
     // Link liveness is defined by heartbeat frames arriving from the rover side.
     if (msgId === MsgId.HEARTBEAT) {
@@ -383,6 +397,18 @@ function createGatewayApp(options = {}) {
   }
 
   async function start() {
+    // Claim the port before touching serial devices or starting child processes.
+    // A duplicate invocation must fail without disrupting the running gateway.
+    await new Promise((resolve, reject) => {
+      server.once('error', reject)
+      server.listen(config.port, config.host, () => {
+        server.removeListener('error', reject)
+        serverListening = true
+        log(`HTTP/WebSocket listening on ${config.host}:${config.port}`)
+        resolve()
+      })
+    })
+
     serialLink.start()
     mavproxy = startMavproxy({
       config,
@@ -417,8 +443,7 @@ function createGatewayApp(options = {}) {
     }
 
     if (config.rosTopicRelayEnable !== false) {
-      // Start the ROS topic relay before opening the server so base-side data
-      // can flow immediately once dashboard clients connect.
+      // Start base-side data producers before video and periodic telemetry.
       rosTopicRelay = await startRosTopicRelay({
         nextSeq,
         writeFrame,
@@ -433,14 +458,7 @@ function createGatewayApp(options = {}) {
       log('Base ROS GNSS/RTCM topic relay disabled')
     }
     videoGateway.start()
-
-    await new Promise((resolve) => {
-      server.listen(config.port, config.host, () => {
-        serverListening = true
-        log(`HTTP/WebSocket listening on ${config.host}:${config.port}`)
-        resolve()
-      })
-    })
+    videoControl.start()
 
     for (const rocketM2Client of rocketM2Clients) {
       rocketM2Client.start()
@@ -494,6 +512,7 @@ function createGatewayApp(options = {}) {
 
     await uplinkTrialManager.stop()
 
+    videoControl.stop()
     serialLink.stop()
     if (videoGateway) {
       videoGateway.stop()

@@ -12,7 +12,9 @@ const DEFAULTS = {
     __dirname,
     '../../../rover/ros2_ws/src/mr2_launch/config/video_streams.json'
   ),
-  videoGstBinary: 'gst-launch-1.0',
+  videoGstBinary: path.resolve(__dirname, '../../../rover/ros2_ws/install/mr2_video_streaming/lib/mr2_video_streaming/video_receiver'),
+  videoInitialKbps: 3000,
+  videoMaxKbps: 0,
   videoJitterLatencyMs: 40,
   videoReceiverRestartMs: 1000,
   videoAvailabilityStaleMs: 1500,
@@ -169,6 +171,8 @@ function parseGatewayConfig(args = process.argv.slice(2), env = process.env) {
       getArg(args, '--video-gst-binary') ||
       env.VIDEO_GST_BINARY ||
       DEFAULTS.videoGstBinary,
+    videoInitialKbps: toInt(getArg(args, '--video-initial-kbps') || env.VIDEO_INITIAL_KBPS || DEFAULTS.videoInitialKbps),
+    videoMaxKbps: toInt(getArg(args, '--video-max-kbps') || env.VIDEO_MAX_KBPS || DEFAULTS.videoMaxKbps),
     videoJitterLatencyMs: toInt(
       getArg(args, '--video-jitter-ms') ||
         env.VIDEO_JITTER_LATENCY_MS ||

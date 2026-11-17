@@ -53,8 +53,9 @@ class XbeeSerialLink extends EventEmitter {
     return this.lastTxMs
   }
 
-  write(frame) {
+  write(frame, traffic) {
     if (!this.serialReady || !this.port) return false
+    if (traffic === 'video' && this.port.writableLength > 128) return false
     this.port.write(frame)
     this.lastTxMs = Date.now()
     return true

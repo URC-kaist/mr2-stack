@@ -142,6 +142,7 @@ function normalizeSource(raw, index) {
 }
 
 function normalizeStream(raw, index) {
+  if (raw?.priority != null && !["high", "low"].includes(raw.priority)) throw new Error("invalid video priority")
   if (typeof raw !== 'object' || raw == null || Array.isArray(raw)) {
     throw new Error(`streams[${index}] must be an object`)
   }
@@ -154,6 +155,7 @@ function normalizeStream(raw, index) {
   }
 
   return {
+    priority: raw.priority === "high" ? "high" : "low",
     stream_id: streamId,
     udp_port: udpPort,
     width: parseOptionalPositiveInt(raw.width, `streams[${index}].width`),
@@ -214,6 +216,7 @@ function loadVideoConfig(configPath) {
 function listBrowserStreams(videoConfig) {
   return videoConfig.streams
     .map((stream) => ({
+      ...(stream.priority ? { priority: stream.priority } : {}),
       stream_id: stream.stream_id,
       source_type: stream.source_type,
       ros_topic: stream.ros_topic,

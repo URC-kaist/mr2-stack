@@ -109,6 +109,30 @@ export type RocketM2Status = {
   error: string | null
 }
 
+export type VideoClassMetrics = {
+  budget_kbps: number | null
+  receive_kbps: number
+  utilization_pct: number | null
+  streams: number
+}
+
+export type VideoLinkMetrics = {
+  type: 'video_link_metrics'
+  updated_at_ms: number
+  budget_kbps: number
+  receive_kbps: number
+  loss_pct: number
+  trend_ms_s: number
+  /** Packet send -> base pre-jitter receive. Display only with verified rover/base clocks. */
+  network_delay_ms?: number | null
+  network_delay_p95_ms?: number | null
+  network_delay_min_ms?: number | null
+  network_delay_samples?: number
+  /** Extra network transit above the observed baseline; independent of clock offset. */
+  queue_delay_ms?: number | null
+  classes: Record<'high' | 'low', VideoClassMetrics>
+}
+
 type MessageHandler<T> = (payload: T) => void
 
 type RawTelemBattery = {
@@ -140,7 +164,11 @@ type RawRocketM2Status = {
   type: 'rocket_m2_status'
 } & RocketM2Status
 
+export type VideoCommandResult = { type: 'video_command_result'; stream_id: string; success: boolean; message: string }
+
 type GatewayMessage =
+  | VideoLinkMetrics
+  | VideoCommandResult
   | RawTelemBattery
   | RawTelemNav
   | RawBaseStatus
@@ -183,6 +211,9 @@ class XbeeGatewayClient {
   private baseStatusListeners = new Set<MessageHandler<BaseStatus>>()
   private rocketM2Listeners = new Set<MessageHandler<RocketM2Status>>()
   private latencyTraceListeners = new Set<MessageHandler<GatewayLatencyTrace>>()
+  private videoResultListeners = new Set<MessageHandler<VideoCommandResult>>()
+  private videoMetricsListeners = new Set<MessageHandler<VideoLinkMetrics>>()
+  private videoMetrics: VideoLinkMetrics | null = null
   private pendingBaseHeading: number | null = null
   private url: string
 
@@ -222,7 +253,12 @@ class XbeeGatewayClient {
       this.lastRxAt = Date.now()
       const message = this.safeParse(event.data)
       if (!message) return
-      if (message.type === 'telem_battery') {
+      if (message.type === 'video_link_metrics') {
+        this.videoMetrics = message
+        for (const listener of this.videoMetricsListeners) listener(message)
+      } else if (message.type === 'video_command_result') {
+        for (const listener of this.videoResultListeners) listener(message)
+      } else if (message.type === 'telem_battery') {
         const batteryId = message.battery_id === 2 ? 2 : 1
         const payload: TelemBattery = {
           battery_id: batteryId,
@@ -321,6 +357,23 @@ class XbeeGatewayClient {
     return () => {
       this.latencyTraceListeners.delete(handler)
     }
+  }
+
+  onVideoCommandResult(handler: MessageHandler<VideoCommandResult>) {
+    this.videoResultListeners.add(handler)
+    return () => { this.videoResultListeners.delete(handler) }
+  }
+
+  onVideoLinkMetrics(handler: MessageHandler<VideoLinkMetrics>) {
+    this.videoMetricsListeners.add(handler)
+    if (this.videoMetrics) handler(this.videoMetrics)
+    return () => { this.videoMetricsListeners.delete(handler) }
+  }
+
+  sendVideoSet(streamId: string, enabled: boolean, priority: 'high' | 'low') {
+    if (!this.ws || this.ws.readyState !== WebSocket.OPEN) return false
+    this.send({ type: 'video_set', stream_id: streamId, enabled, priority })
+    return true
   }
 
   sendCmdDrive(cmd: CmdDrive, trace?: CmdDriveTrace) {

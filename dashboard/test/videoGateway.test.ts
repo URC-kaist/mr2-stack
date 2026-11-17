@@ -135,6 +135,15 @@ try {
 
   unsubscribeUplink()
   assert.equal(socket.sent.length, 1)
+  const delta = encodeKeyChunk('front')
+  new DataView(delta).setUint8(3, 0)
+  socket.message(delta)
+  const lateMessages: string[] = []
+  const unsubscribeLate = client.subscribe('front', (message) => lateMessages.push(message.kind))
+  assert.deepEqual(lateMessages, ['config'], 'an older IDR cannot bootstrap missing dependent frames')
+  socket.message(encodeKeyChunk('front'))
+  assert.deepEqual(lateMessages, ['config', 'chunk'])
+  unsubscribeLate()
   unsubscribeLiveFeed()
   assert.deepEqual(JSON.parse(socket.sent[1]), {
     type: 'unsubscribe',

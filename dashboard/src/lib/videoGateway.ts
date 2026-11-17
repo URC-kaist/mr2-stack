@@ -19,6 +19,11 @@ export type VideoStreamInfo = {
   encoded_width?: number | null
   encoded_height?: number | null
   framerate: number | null
+  state?: 'ON' | 'OFF' | 'NO DEVICE' | null
+  enabled?: boolean
+  priority?: 'high' | 'low'
+  bitrate_kbps?: number
+  fps?: number
   available: boolean
   display: {
     label?: string
@@ -118,6 +123,12 @@ export class VideoGatewayClient {
     }
   }
 
+  requestKeyframe(streamId: string) {
+    if (this.ws?.readyState === WebSocket.OPEN && this.listeners.has(streamId)) {
+      this.ws.send(JSON.stringify({ type: 'request_keyframe', stream_id: streamId }))
+    }
+  }
+
   private connect() {
     if (this.ws) return
     this.clearReconnectTimer()
@@ -158,6 +169,9 @@ export class VideoGatewayClient {
             config: bootstrap?.config ?? null,
             keyChunk: message,
           })
+        } else {
+          const bootstrap = this.streamBootstraps.get(message.streamId)
+          if (bootstrap) bootstrap.keyChunk = null
         }
       }
       const streamListeners = this.listeners.get(message.streamId)

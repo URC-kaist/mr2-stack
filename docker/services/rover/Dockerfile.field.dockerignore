@@ -1,0 +1,18 @@
+# Context = the repo root. Keep rover/ros2_ws/src, including
+# mr2_rover_auto/maps (Nav2 start-up map, cropper raster).
+**/.git
+**/node_modules
+**/__pycache__
+**/.env
+**/.env.*
+!**/.env.example
+dashboard
+base
+docker
+docs
+firmware
+rover/firmware
+rover/ros2_ws/build
+rover/ros2_ws/install
+rover/ros2_ws/log
+**/maps/crops

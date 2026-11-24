@@ -1,0 +1,94 @@
+# DRAFT, NOT RUN ON HARDWARE. MR2 base computer in Docker. See README.md here.
+# On the base computer:  docker compose -f docker/compose/field/compose.base.yaml up -d
+# Host prerequisites: udev rules (scripts/install_udev_base_station_rules.bash),
+# a .env next to this file (copy env.example; holds the Rocket M2 login).
+name: mr2-base
+
+x-build: &build
+  context: ../../..
+  additional_contexts:
+    tooling: ../..
+
+services:
+  # Dashboard + the repo's nginx config on the base's real address (:443).
+  nginx:
+    image: mr2/dashboard:humble
+    build:
+      <<: *build
+      dockerfile: docker/services/dashboard/Dockerfile
+    environment:
+      MR2_GATEWAY_HOST: 127.0.0.1
+      MR2_GATEWAY_PORT: "8081"
+      MR2_ROVER_IP: ${MR2_ROVER_IP:-192.168.1.102}
+      MR2_ROSBRIDGE_PORT: "9090"
+      MR2_BASE_IP: ${MR2_BASE_IP:-192.168.1.101}
+      MR2_BASE_ROCKET_IP: ${MR2_BASE_ROCKET_IP:-192.168.1.100}
+      MR2_DRONE_ROCKET_IP: ${MR2_DRONE_ROCKET_IP:-192.168.1.103}
+      MR2_ROVER_ROCKET_IP: ${MR2_ROVER_ROCKET_IP:-192.168.1.106}
+    network_mode: host
+    volumes:
+      - ${MR2_TILES:-/var/www/mr2-tiles}:/var/www/mr2-tiles:ro
+      - nginx-ssl:/etc/nginx/ssl
+    restart: unless-stopped
+    depends_on: [gateway]
+
+  # Gateway with the real radios: XBee to the rover, SiK to the drone
+  # (MAVProxy), antenna Arduino; ROS relay on for RTK corrections from
+  # base-gnss.
+  gateway:
+    image: mr2/gateway-field:humble
+    build:
+      <<: *build
+      dockerfile: docker/services/gateway/Dockerfile.field
+      args:
+        ROS_DISTRO: humble
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      ROS_DOMAIN_ID: ${BASE_ROS_DOMAIN_ID:-11}
+      MR2_GATEWAY_HOST: 0.0.0.0
+      MR2_GATEWAY_PORT: "8081"
+      BASE_XBEE_DEVICE: /dev/ttyXBEE
+      MAVPROXY_ENABLE: "true"
+      BASE_ANTENNA_ENABLE: ${BASE_ANTENNA_ENABLE:-true}
+      ROCKET_M2_ENABLE: ${ROCKET_M2_ENABLE:-true}
+    network_mode: host
+    volumes:
+      - /dev:/dev
+      - /run/udev:/run/udev:ro
+    device_cgroup_rules:
+      # USB serial (FTDI: XBee, Arduino)
+      - "c 188:* rmw"
+      # CP2102 SiK also enumerates as ttyUSB; CDC-ACM just in case
+      - "c 166:* rmw"
+    restart: unless-stopped
+    init: true
+
+  # Base GNSS receiver: RTK corrections for the rover, sent over the XBee
+  # by the gateway's ROS relay. Same image as the rover, built for this
+  # machine (it needs mr2_launch's dependency closure).
+  base-gnss:
+    image: mr2/rover-field:humble
+    build:
+      <<: *build
+      dockerfile: docker/services/rover/Dockerfile.field
+      args:
+        ROS_DISTRO: humble
+    environment:
+      # Must match the gateway, and differ from the rover's domain, or the
+      # corrections loop back (one message became 15,557 radio frames).
+      ROS_DOMAIN_ID: ${BASE_ROS_DOMAIN_ID:-11}
+    command: ["ros2", "launch", "mr2_launch", "ublox_base_custom.launch.py"]
+    network_mode: host
+    volumes:
+      - /dev:/dev
+      - /run/udev:/run/udev:ro
+    device_cgroup_rules:
+      - "c 166:* rmw"
+      - "c 189:* rmw"
+    restart: unless-stopped
+    init: true
+
+volumes:
+  nginx-ssl: {}

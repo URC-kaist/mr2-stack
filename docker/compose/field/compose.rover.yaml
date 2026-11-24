@@ -1,0 +1,55 @@
+# DRAFT, NOT RUN ON HARDWARE. MR2 rover (Orin) in Docker. See README.md here.
+# On the rover:  docker compose -f docker/compose/field/compose.rover.yaml up -d
+# The rover runs demo_2026 today, not this branch: see README.md.
+# Host prerequisites (not done by Docker): JetPack 6 (L4T r36) + NVIDIA container
+# runtime, udev rules (scripts/install_udev_serial_rules.bash), can0 up
+# (scripts/can0.bash), a .env next to this file (copy env.example).
+name: mr2-rover
+
+services:
+  # Everything rover_real.launch.py starts: drive controller + CAN hardware
+  # plugin, sensor drivers, position filters, XBee bridge, rosbridge :9090,
+  # video sender, autonomy (included by default on real), arm.
+  rover:
+    image: mr2/rover-field:humble
+    build:
+      context: ../../..
+      dockerfile: docker/services/rover/Dockerfile.field
+      additional_contexts:
+        tooling: ../..
+      args:
+        ROS_DISTRO: humble
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      ROS_DOMAIN_ID: ${ROVER_ROS_DOMAIN_ID:-10}
+      MR2_BASE_IP: ${MR2_BASE_IP:-192.168.1.101}
+    command:
+      - ros2
+      - launch
+      - mr2_launch
+      - rover_real.launch.py
+      - enable_video_streaming:=true
+    # Host network: rosbridge and video use the rover's real interfaces
+    # (Rocket M2 link), DDS sees the LAN, and can0 (a host network
+    # interface) is reachable.
+    network_mode: host
+    # Devices: mount /dev so udev names (/dev/ttyXBEE, /dev/video*) survive
+    # replugging, and allow the device classes by major number instead of
+    # listing fixed devices (fixed entries break on re-enumeration).
+    volumes:
+      - /dev:/dev
+      - /run/udev:/run/udev:ro
+    device_cgroup_rules:
+      # USB serial (FTDI XBee: ttyUSB)
+      - "c 188:* rmw"
+      # USB CDC-ACM (u-blox GNSS)
+      - "c 166:* rmw"
+      # V4L2 cameras
+      - "c 81:* rmw"
+      # raw USB (RealSense)
+      - "c 189:* rmw"
+    runtime: nvidia
+    restart: unless-stopped
+    init: true

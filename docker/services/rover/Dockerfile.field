@@ -1,0 +1,53 @@
+# syntax=docker/dockerfile:1.7-labs
+# DRAFT, NOT RUN ON HARDWARE. MR2 rover stack for the real rover (Orin NX,
+# JetPack 6 / L4T r36, Ubuntu 22.04) and the base GNSS container on the
+# base computer. Built by docker/compose/field/compose.{rover,base}.yaml.
+#
+# Open before first use (see docker/compose/field/README.md):
+# - BASE_IMAGE: an NVIDIA JetPack 6 / L4T r36 image with ROS 2 Humble for the
+#   Orin (hardware video encoder, CUDA for YOLO), or ros:humble for the base
+#   computer. Verify the NVIDIA runtime is registered on the exact board.
+# - rosdep still pulls Gazebo through mr2_rover_description; a Gazebo-free
+#   image needs its own dependency list.
+# - YOLO: the 2026 rover used a hand-made Python environment (no pinned
+#   versions in this repo); not installed here.
+# - Code: this repo's 2026 branch lacks the Robstride motor plugin and other
+#   changes that are on the rover (demo_2026). Build from that for the rover.
+ARG ROS_DISTRO=humble
+ARG BASE_IMAGE=ros:${ROS_DISTRO}
+
+FROM ${BASE_IMAGE} AS deps
+ARG ROS_DISTRO
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+ENV DEBIAN_FRONTEND=noninteractive
+RUN printf 'APT::Install-Recommends "false";\nAPT::Install-Suggests "false";\n' \
+      > /etc/apt/apt.conf.d/99mr2-lean
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      python3-colcon-common-extensions python3-rosdep can-utils iproute2 \
+      libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev \
+      gstreamer1.0-tools gstreamer1.0-plugins-base \
+      gstreamer1.0-plugins-good gstreamer1.0-plugins-bad \
+      gstreamer1.0-plugins-ugly gstreamer1.0-libav \
+ && rm -rf /var/lib/apt/lists/*
+COPY --parents rover/ros2_ws/src/**/package.xml /tmp/manifests/
+RUN source /opt/ros/${ROS_DISTRO}/setup.bash \
+ && apt-get update \
+ && rosdep update --rosdistro ${ROS_DISTRO} \
+ && rosdep install --from-paths /tmp/manifests --ignore-src -y \
+      --rosdistro ${ROS_DISTRO} \
+ && rm -rf /var/lib/apt/lists/*
+
+FROM deps AS field
+ARG ROS_DISTRO
+ENV ROS_DISTRO=${ROS_DISTRO} MR2_WS=/home/mr2/mr2-stack/rover/ros2_ws
+# Same path as on the rover today (nav2_params.yaml hard-codes BT paths).
+WORKDIR /home/mr2/mr2-stack/rover/ros2_ws
+COPY rover/ros2_ws/src src
+RUN source /opt/ros/${ROS_DISTRO}/setup.bash \
+ && MAKEFLAGS=-j4 colcon build --executor sequential \
+      --event-handlers console_cohesion+ 2>&1 | tail -n 80 \
+ && test -f install/setup.bash
+COPY --from=tooling --chmod=0755 services/rover/entrypoint.sh \
+     services/rover/with-ros.sh /opt/mr2/
+ENTRYPOINT ["/opt/mr2/entrypoint.sh"]
+CMD ["ros2", "launch", "mr2_launch", "rover_real.launch.py"]

@@ -1,0 +1,48 @@
+# syntax=docker/dockerfile:1.7
+# DRAFT, NOT RUN ON HARDWARE. MR2 gateway for the base computer: real XBee,
+# MAVProxy to the drone over the SiK radio, antenna tracker, and the ROS
+# relay (RTK corrections from base-gnss). Built by compose/field/compose.base.yaml.
+#
+# Differences from the local gateway image:
+# - ROS 2 Humble underneath, so rclnodejs builds and the relay runs.
+# - The two custom message types (ublox_ubx_msgs, rtcm_msgs) are generated
+#   for rclnodejs from their sources in rover/ros2_ws/src.
+# - MAVProxy installed (the gateway starts it by default: /dev/ttySIK ->
+#   udp:192.168.1.108:14550).
+# Node pinned to 24.15.0.
+ARG ROS_DISTRO=humble
+FROM ros:${ROS_DISTRO}
+ARG ROS_DISTRO
+ARG NODE_VERSION=24.15.0
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      curl xz-utils build-essential python3-pip python3-venv \
+      gstreamer1.0-tools gstreamer1.0-plugins-base \
+      gstreamer1.0-plugins-good gstreamer1.0-plugins-bad \
+      gstreamer1.0-libav \
+ && rm -rf /var/lib/apt/lists/*
+RUN arch="$(dpkg --print-architecture | sed 's/amd64/x64/')" \
+ && curl -fsSL "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-${arch}.tar.xz" \
+    | tar -xJ -C /opt \
+ && ln -s "/opt/node-v${NODE_VERSION}-linux-${arch}/bin/"* /usr/local/bin/
+# MAVProxy in its own venv.
+RUN python3 -m venv /opt/mavproxy \
+ && /opt/mavproxy/bin/pip install --no-cache-dir MAVProxy \
+ && ln -s /opt/mavproxy/bin/mavproxy.py /usr/local/bin/mavproxy.py
+WORKDIR /repo/base/gateway
+COPY base/gateway/package.json base/gateway/package-lock.json ./
+RUN source /opt/ros/${ROS_DISTRO}/setup.bash && npm ci --no-audit --no-fund
+COPY rover/ros2_ws/src/ublox_dgnss/ublox_ubx_msgs /repo/msgs/ublox_ubx_msgs
+COPY rover/ros2_ws/src/rtcm_msgs /repo/msgs/rtcm_msgs
+RUN source /opt/ros/${ROS_DISTRO}/setup.bash \
+ && AMENT_PREFIX_PATH=/opt/ros/${ROS_DISTRO} node -e "\
+const g=require('./node_modules/rclnodejs/rosidl_gen');\
+(async()=>{await g.generateAll(true);\
+for(const s of ['/repo/msgs/ublox_ubx_msgs','/repo/msgs/rtcm_msgs'])\
+await g.generateInPath(s);})().catch(e=>{console.error(e);process.exit(1)})"
+COPY base/gateway/ ./
+COPY rover/ros2_ws/src/mr2_launch/config/video_streams.json \
+     /repo/rover/ros2_ws/src/mr2_launch/config/
+ENTRYPOINT ["/bin/bash", "-c", "source /opt/ros/$ROS_DISTRO/setup.bash && exec \"$@\"", "--"]
+CMD ["node", "index.js"]

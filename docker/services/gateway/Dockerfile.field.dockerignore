@@ -1,0 +1,9 @@
+# Context = the repo root. Gateway, its custom ROS messages, video config.
+*
+!base/gateway
+!rover/ros2_ws/src/ublox_dgnss/ublox_ubx_msgs
+!rover/ros2_ws/src/rtcm_msgs
+!rover/ros2_ws/src/mr2_launch/config/video_streams.json
+**/node_modules
+**/.env
+**/.env.*

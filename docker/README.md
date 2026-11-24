@@ -37,11 +37,16 @@ make down                     # stop everything
 | Addresses | `.env` edited by hand | set in the compose file |
 | Checks | by hand | `make test` (readiness, radio, nginx, video, a mission) |
 
-## Setup
+## Two setups
 
-[`compose/local/`](compose/local/README.md) runs the whole system in
-simulation on one computer: architecture, links, ports, workflow and
-troubleshooting are in its README.
+| | [`compose/local/`](compose/local/README.md) | [`compose/field/`](compose/field/README.md) |
+|---|---|---|
+| Where | one computer | rover (Orin, JetPack 6) + base computer |
+| World | Gazebo simulator | real motors (CAN), sensors (USB), radios |
+| Status | **tested**: repeated clean runs, suite + browser checks | **draft**: not run on hardware yet |
+
+Read the README in the folder you need: architecture, links, network,
+devices, settings and troubleshooting are there.
 
 ## What's in this folder
 
@@ -49,18 +54,25 @@ troubleshooting are in its README.
 docker/
 ├── Makefile                  # Commands to build, start, stop and test the stack
 ├── compose/                  # Container setups: services, network, ports, volumes
-│   └── local/                # Whole system in simulation on one computer
-│       ├── compose.local.yaml
+│   ├── local/                # Whole system in simulation on one computer
+│   │   ├── compose.local.yaml
+│   │   ├── env.example
+│   │   └── README.md
+│   └── field/                # Real rover and base computer (draft, untested)
+│       ├── compose.rover.yaml
+│       ├── compose.base.yaml
 │       ├── env.example
 │       └── README.md
 ├── services/                 # Image builds, one folder per image
 │   ├── rover/                # ROS workspace image for the rover and autonomy
 │   │   ├── Dockerfile
+│   │   ├── Dockerfile.field
 │   │   ├── entrypoint.sh
 │   │   ├── with-ros.sh
 │   │   └── radio-bridge.sh
 │   ├── gateway/              # Node gateway for the radio link and video
 │   │   ├── Dockerfile
+│   │   ├── Dockerfile.field
 │   │   └── entrypoint.sh
 │   ├── dashboard/            # Dashboard build served by nginx over HTTPS
 │   │   ├── Dockerfile

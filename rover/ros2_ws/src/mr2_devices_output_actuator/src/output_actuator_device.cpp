@@ -275,7 +275,7 @@ public:
               status_topic_base_ + "/runtime_diagnostic", qos);
     }
 
-    last_integrate_time_ns_ = clock_.now().nanoseconds();
+    last_integrate_time_ns_ = integration_now_ns();
   }
 
   bool on_activate() override {
@@ -367,7 +367,7 @@ public:
   }
 
   void process(const rclcpp::Time &) override {
-    integrate_position(clock_.now().nanoseconds());
+    integrate_position(integration_now_ns());
 
     if (!active_.load()) {
       return;
@@ -411,6 +411,14 @@ public:
   void export_command(double *&command) override { command = &desired_command_; }
 
 private:
+  int64_t integration_now_ns() {
+    // Preserve monotonic hardware timing; simulation must integrate ROS seconds.
+    if (node_ && node_->get_clock()->ros_time_is_active()) {
+      return node_->now().nanoseconds();
+    }
+    return clock_.now().nanoseconds();
+  }
+
   bool valid_frame(const can_frame &frame, uint8_t expected_dlc) const {
     return (frame.can_id & CAN_EFF_FLAG) == 0 &&
            (frame.can_id & CAN_RTR_FLAG) == 0 && frame.can_dlc == expected_dlc;

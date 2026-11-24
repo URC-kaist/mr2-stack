@@ -28,6 +28,7 @@
 #include "mr2_xbee_bridge/packets.hpp"
 #include "rclcpp/qos.hpp"
 #include "rclcpp/rclcpp.hpp"
+#include "rclcpp/create_timer.hpp"
 #include "sensor_msgs/msg/nav_sat_fix.hpp"
 #include "std_msgs/msg/float64_multi_array.hpp"
 #include "ublox_ubx_msgs/msg/ubx_nav_svin.hpp"
@@ -155,14 +156,14 @@ class XbeeBridgeNode : public rclcpp::Node {
 
     const auto zero_period =
         std::chrono::duration<double>(1.0 / std::max(1.0, zero_publish_rate_hz_));
-    zero_timer_ = create_wall_timer(
+    zero_timer_ = create_rate_timer_(
         std::chrono::duration_cast<std::chrono::nanoseconds>(zero_period),
         std::bind(&XbeeBridgeNode::zero_check, this));
 
     if (heartbeat_tx_rate_hz_ > 0.0) {
       const auto heartbeat_period = std::chrono::duration<double>(
           1.0 / std::max(heartbeat_tx_rate_hz_, 0.1));
-      heartbeat_tx_timer_ = create_wall_timer(
+      heartbeat_tx_timer_ = create_rate_timer_(
           std::chrono::duration_cast<std::chrono::nanoseconds>(heartbeat_period),
           std::bind(&XbeeBridgeNode::send_heartbeat_, this));
     }
@@ -170,7 +171,7 @@ class XbeeBridgeNode : public rclcpp::Node {
     if (nav_tx_rate_hz_ > 0.0) {
       const auto nav_period =
           std::chrono::duration<double>(1.0 / std::max(nav_tx_rate_hz_, 0.1));
-      nav_tx_timer_ = create_wall_timer(
+      nav_tx_timer_ = create_rate_timer_(
           std::chrono::duration_cast<std::chrono::nanoseconds>(nav_period),
           std::bind(&XbeeBridgeNode::send_nav_, this));
     }
@@ -782,6 +783,17 @@ class XbeeBridgeNode : public rclcpp::Node {
 
     auto frame = mr2_xbee_bridge::encode_telem_nav(next_seq_(), nav);
     write_frame_(frame);
+  }
+
+  template <typename Duration, typename Callback>
+  rclcpp::TimerBase::SharedPtr create_rate_timer_(Duration period,
+                                                Callback callback) {
+    if (get_clock()->ros_time_is_active()) {
+      return rclcpp::create_timer(get_node_base_interface(),
+                                 get_node_timers_interface(), get_clock(),
+                                 rclcpp::Duration(period), std::move(callback));
+    }
+    return create_wall_timer(period, callback);
   }
 
   double smoothing_dt_(const rclcpp::Time &last_time,

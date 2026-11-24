@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MR2 Teleop</title>
+<!--
+  Local development teleop for the MR2 Docker stack (not part of the dashboard).
+  Sends exactly what the dashboard sends for a gamepad, over the same socket:
+    {"type":"heartbeat"} every 500 ms
+    {"type":"cmd_drive",...} every 50 ms while a key is held, then 10 zeros
+  to /xbee-ws -> gateway -> radio (TCP) -> XBee bridge -> /base/cmd_vel -> controller.
+  Served by the nginx container at https://localhost/dev-teleop.html.
+-->
+<style>
+  :root {
+    --bg: #0f1722; --panel: #172232; --line: #2a3a50; --text: #e6edf5;
+    --muted: #8da0b6; --accent: #2dd4bf; --warn: #f59e0b; --bad: #f87171;
+    --key: #223047; --key-on: #2dd4bf; --key-on-text: #06221e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 15px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+  main { max-width: 760px; margin: 0 auto; padding: 20px 16px 40px; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  .sub { color: var(--muted); margin: 0 0 16px; font-size: 13px; }
+  .status { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+  .pill {
+    display: flex; align-items: center; gap: 8px; padding: 6px 12px;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 999px;
+    font-size: 13px;
+  }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--bad); }
+  .dot.ok { background: var(--accent); } .dot.mid { background: var(--warn); }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+  .card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+    padding: 16px;
+  }
+  .card h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .06em;
+    color: var(--muted); margin: 0 0 12px; font-weight: 600; }
+  .pad { display: grid; grid-template-columns: repeat(3, 64px); gap: 8px;
+    justify-content: center; }
+  .k {
+    height: 64px; border-radius: 10px; border: 1px solid var(--line);
+    background: var(--key); color: var(--text); font-size: 13px; font-weight: 600;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    user-select: none; touch-action: none; cursor: pointer;
+  }
+  .k small { color: var(--muted); font-weight: 500; font-size: 11px; }
+  .k.on { background: var(--key-on); color: var(--key-on-text); }
+  .k.on small { color: var(--key-on-text); }
+  .k.blank { visibility: hidden; }
+  .stop {
+    margin-top: 14px; width: 100%; height: 48px; border: 0; border-radius: 10px;
+    background: var(--bad); color: #2a0b0b; font-weight: 700; font-size: 15px;
+    cursor: pointer;
+  }
+  label { display: block; font-size: 13px; color: var(--muted); margin: 10px 0 4px; }
+  input[type=range] { width: 100%; accent-color: var(--accent); }
+  .val { float: right; color: var(--text); font-variant-numeric: tabular-nums; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  td { padding: 4px 0; border-bottom: 1px solid var(--line); }
+  td:last-child { text-align: right; }
+  .note { color: var(--muted); font-size: 12px; margin-top: 12px; }
+  kbd { background: var(--key); border: 1px solid var(--line); border-radius: 4px;
+    padding: 0 5px; font-size: 12px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>MR2 Teleop</h1>
+  <p class="sub">Keyboard driving for the local Docker sim. Same messages as the dashboard's
+    gamepad, through the real gateway and radio link.</p>
+
+  <div class="status">
+    <span class="pill"><span id="ws-dot" class="dot"></span><span id="ws-text">Gateway: connecting</span></span>
+    <span class="pill"><span id="link-dot" class="dot"></span><span id="link-text">Rover link: unknown</span></span>
+    <span class="pill"><span id="active-dot" class="dot mid"></span><span id="active-text">Idle</span></span>
+  </div>
+
+  <div class="grid">
+    <section class="card">
+      <h2>Drive</h2>
+      <div class="pad">
+        <div class="k" data-key="q">Q<small>turn L</small></div>
+        <div class="k" data-key="w">W<small>forward</small></div>
+        <div class="k" data-key="e">E<small>turn R</small></div>
+        <div class="k" data-key="a">A<small>left</small></div>
+        <div class="k" data-key="s">S<small>back</small></div>
+        <div class="k" data-key="d">D<small>right</small></div>
+      </div>
+      <button class="stop" id="stop">STOP (Space)</button>
+      <p class="note">Hold keys or buttons to move; release to stop. Combine
+        <kbd>W</kbd>+<kbd>Q</kbd> to arc. Manual driving is ignored while a mission is
+        RUNNING (autonomy has control).</p>
+    </section>
+
+    <section class="card">
+      <h2>Speed</h2>
+      <label>Linear speed <span class="val" id="lin-val"></span></label>
+      <input id="lin" type="range" min="0.05" max="0.8" step="0.05" value="0.4">
+      <label>Turn rate <span class="val" id="yaw-val"></span></label>
+      <input id="yaw" type="range" min="0.1" max="1.5" step="0.1" value="0.6">
+
+      <h2 style="margin-top:18px">Sending</h2>
+      <table>
+        <tr><td>linear x (forward)</td><td id="cx">0.00 m/s</td></tr>
+        <tr><td>linear y (left)</td><td id="cy">0.00 m/s</td></tr>
+        <tr><td>angular z (CCW)</td><td id="cz">0.00 rad/s</td></tr>
+        <tr><td>frames sent</td><td id="sent">0</td></tr>
+      </table>
+
+      <h2 style="margin-top:18px">Rover (telemetry)</h2>
+      <table>
+        <tr><td>lat / lon</td><td id="pos">--</td></tr>
+        <tr><td>heading</td><td id="hdg">--</td></tr>
+      </table>
+    </section>
+  </div>
+</main>
+
+<script>
+(() => {
+  const proto = location.protocol === 'https:' ? 'wss:' : 'ws:';
+  const url = `${proto}//${location.host}/xbee-ws`;
+  const held = new Set();
+  const $ = (id) => document.getElementById(id);
+  let ws = null, sent = 0, lastLinkMs = 0;
+
+  const lin = $('lin'), yaw = $('yaw');
+  const showSpeeds = () => {
+    $('lin-val').textContent = `${Number(lin.value).toFixed(2)} m/s`;
+    $('yaw-val').textContent = `${Number(yaw.value).toFixed(1)} rad/s`;
+  };
+  lin.oninput = yaw.oninput = showSpeeds; showSpeeds();
+
+  function setDot(id, cls) { $(id).className = 'dot ' + (cls || ''); }
+
+  function connect() {
+    ws = new WebSocket(url);
+    $('ws-text').textContent = 'Gateway: connecting';
+    setDot('ws-dot', 'mid');
+    ws.onopen = () => { $('ws-text').textContent = 'Gateway: connected'; setDot('ws-dot', 'ok'); };
+    ws.onclose = () => {
+      $('ws-text').textContent = 'Gateway: disconnected (retrying)'; setDot('ws-dot', '');
+      setTimeout(connect, 1000);
+    };
+    ws.onerror = () => ws.close();
+    ws.onmessage = (ev) => {
+      let m; try { m = JSON.parse(ev.data); } catch { return; }
+      if (m.type === 'link_status') {
+        lastLinkMs = Date.now();
+        $('link-text').textContent = 'Rover link: ' + (m.connected ? 'up' : 'down');
+        setDot('link-dot', m.connected ? 'ok' : '');
+      } else if (m.type === 'telem_nav') {
+        $('pos').textContent = `${m.latitude_deg.toFixed(7)}, ${m.longitude_deg.toFixed(7)}`;
+        $('hdg').textContent = `${m.heading_deg.toFixed(1)}°`;
+      }
+    };
+  }
+
+  function send(obj) {
+    if (ws && ws.readyState === WebSocket.OPEN) { ws.send(JSON.stringify(obj)); return true; }
+    return false;
+  }
+
+  function command() {
+    const v = Number(lin.value), w = Number(yaw.value);
+    const x = (held.has('w') ? v : 0) - (held.has('s') ? v : 0);
+    const y = (held.has('a') ? v : 0) - (held.has('d') ? v : 0);
+    const z = (held.has('q') ? w : 0) - (held.has('e') ? w : 0);
+    return { x, y, z };
+  }
+
+  // Same cadence as the dashboard: heartbeat 500 ms, drive 50 ms.
+  // Drive frames only while a key is held, then 10 zero frames (0.5 s) to
+  // stop. An idle page must not stream zeros: the gateway forwards every
+  // client, so idle zeros would fight the dashboard or another driver.
+  let stopFrames = 0;
+  setInterval(() => send({ type: 'heartbeat' }), 500);
+  setInterval(() => {
+    const c = command();
+    const moving = c.x || c.y || c.z;
+    if (moving) stopFrames = 10;
+    if (moving || stopFrames > 0) {
+      if (!moving) stopFrames -= 1;
+      if (send({ type: 'cmd_drive', linear_x_m_s: c.x, linear_y_m_s: c.y, angular_z_rad_s: c.z })) {
+        sent += 1; $('sent').textContent = sent;
+      }
+    }
+    $('cx').textContent = `${c.x.toFixed(2)} m/s`;
+    $('cy').textContent = `${c.y.toFixed(2)} m/s`;
+    $('cz').textContent = `${c.z.toFixed(2)} rad/s`;
+    $('active-text').textContent = moving ? 'Driving' : 'Idle (not sending)';
+    setDot('active-dot', moving ? 'ok' : 'mid');
+    if (Date.now() - lastLinkMs > 3000) { setDot('link-dot', ''); $('link-text').textContent = 'Rover link: no status'; }
+    document.querySelectorAll('.k[data-key]').forEach((el) =>
+      el.classList.toggle('on', held.has(el.dataset.key)));
+  }, 50);
+
+  const KEYS = new Set(['w', 'a', 's', 'd', 'q', 'e']);
+  const stopAll = () => held.clear();
+  window.addEventListener('keydown', (e) => {
+    const k = e.key.toLowerCase();
+    if (KEYS.has(k)) { held.add(k); e.preventDefault(); }
+    else if (k === ' ') { stopAll(); e.preventDefault(); }
+  });
+  window.addEventListener('keyup', (e) => held.delete(e.key.toLowerCase()));
+  window.addEventListener('blur', stopAll);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) stopAll(); });
+
+  document.querySelectorAll('.k[data-key]').forEach((el) => {
+    const k = el.dataset.key;
+    el.addEventListener('pointerdown', (e) => { held.add(k); el.setPointerCapture(e.pointerId); });
+    el.addEventListener('pointerup', () => held.delete(k));
+    el.addEventListener('pointercancel', () => held.delete(k));
+  });
+  $('stop').addEventListener('click', stopAll);
+
+  connect();
+})();
+</script>
+</body>
+</html>

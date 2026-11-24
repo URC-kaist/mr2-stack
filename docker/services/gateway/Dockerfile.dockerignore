@@ -1,0 +1,8 @@
+# Context = the repo root. Only the gateway and the two video configs.
+*
+!base/gateway
+!rover/ros2_ws/src/mr2_launch/config/video_streams.json
+!rover/ros2_ws/src/mr2_launch/config/video_streams.sim.json
+**/node_modules
+**/.env
+**/.env.*

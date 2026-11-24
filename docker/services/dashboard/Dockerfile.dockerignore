@@ -1,0 +1,7 @@
+*
+!dashboard
+!scripts/nginx
+**/node_modules
+**/dist
+**/.env
+**/.env.*

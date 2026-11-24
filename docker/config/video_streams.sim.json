@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "streams": [
+    {
+      "stream_id": "sim_rgbd",
+      "source": {
+        "type": "ros_topic",
+        "ros_topic": "/rgbd_camera/color/image_raw",
+        "ros_encoding": "rgb8"
+      },
+      "udp_port": 5022,
+      "width": 320,
+      "height": 180,
+      "framerate": 15,
+      "encoder": {
+        "type": "x264",
+        "bitrate_kbps": 1200,
+        "keyframe_interval": 15,
+        "speed_preset": "ultrafast",
+        "tune": "zerolatency"
+      },
+      "display": {
+        "label": "Sim RGB-D",
+        "panel": "autonomy",
+        "order": 1
+      }
+    }
+  ]
+}

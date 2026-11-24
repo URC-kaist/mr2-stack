@@ -1,0 +1,185 @@
+# MR2 local stack: the whole system in simulation on one computer.
+# Run from docker/: `make local` (see docker/README.md and README.md here).
+# Paths are relative to this file: repo root = ../../.., docker/ = ../..
+name: mr2-humble
+
+x-build: &build
+  context: ../../..
+  additional_contexts:
+    tooling: ../..
+  args:
+    ROS_DISTRO: humble
+
+x-ros-env: &ros-env
+  ROS_DOMAIN_ID: "42"
+  ROS_LOCALHOST_ONLY: "0"
+  FASTRTPS_DEFAULT_PROFILES_FILE: /opt/mr2/config/fastdds-udp.xml
+  FASTDDS_DEFAULT_PROFILES_FILE: /opt/mr2/config/fastdds-udp.xml
+  IGN_PARTITION: mr2
+  # Video destination; rover.launch.py requires it. An IP, not the name
+  # "gateway": the rover's udpsink resolves its host once, at the first
+  # frame, before the gateway container exists (it waits for the rover).
+  MR2_BASE_IP: 10.242.42.10
+
+x-ws: &ws
+  - ../../../rover/ros2_ws/src:/home/mr2/mr2-stack/rover/ros2_ws/src
+  - ws-build:/home/mr2/mr2-stack/rover/ros2_ws/build
+  - ws-install:/home/mr2/mr2-stack/rover/ros2_ws/install
+  - ws-log:/home/mr2/mr2-stack/rover/ros2_ws/log
+  - ../../tests:/opt/mr2/tests:ro
+
+services:
+  # Gazebo, the rover's ROS stack (controllers, filters, XBee bridge,
+  # rosbridge :9090, video) and the fake radio served on TCP :7777.
+  rover:
+    image: mr2/rover-sim:humble
+    build:
+      <<: *build
+      dockerfile: docker/services/rover/Dockerfile
+      target: sim
+    environment:
+      <<: *ros-env
+      RADIO_BRIDGE: server
+    command:
+      - ros2
+      - launch
+      - mr2_launch
+      - rover_sim.launch.py
+      - headless:=true
+      - enable_manipulator_module:=false
+      - enable_autonomous_module:=false
+      - enable_aruco:=false
+      - enable_video_streaming:=${MR2_VIDEO:-false}
+      - video_config:=/opt/mr2/config/video_streams.sim.json
+    volumes:
+      - ../../../rover/ros2_ws/src:/home/mr2/mr2-stack/rover/ros2_ws/src
+      - ws-build:/home/mr2/mr2-stack/rover/ros2_ws/build
+      - ws-install:/home/mr2/mr2-stack/rover/ros2_ws/install
+      - ws-log:/home/mr2/mr2-stack/rover/ros2_ws/log
+      - ../../tests:/opt/mr2/tests:ro
+      - gz-cache:/root/.ignition
+    # The configuration that kept software-rendered Gazebo stable on a Mac.
+    cpus: 4
+    shm_size: 256m
+    init: true
+    networks: [mr2]
+    healthcheck:
+      test: ["CMD", "/opt/mr2/with-ros.sh", "python3", "/opt/mr2/ready.py",
+             "rover"]
+      interval: 10s
+      timeout: 30s
+      start_period: 40s
+      retries: 30
+
+  # Nav2, mission servers, mission_master, map cropper, terrain pipeline.
+  autonomy:
+    image: mr2/rover-sim:humble
+    environment:
+      <<: *ros-env
+    command:
+      - ros2
+      - launch
+      - mr2_rover_auto
+      - navigation.launch.py
+      - mode:=sim
+    volumes: *ws
+    init: true
+    networks: [mr2]
+    depends_on:
+      rover: { condition: service_healthy }
+    healthcheck:
+      test: ["CMD", "/opt/mr2/with-ros.sh", "python3", "/opt/mr2/ready.py",
+             "autonomy"]
+      interval: 10s
+      timeout: 40s
+      start_period: 40s
+      retries: 30
+
+  # Browser <-> radio bridge and video receiver (Node, no ROS). Its fake
+  # radio is a local PTY joined to the rover's over TCP rover:7777.
+  gateway:
+    image: mr2/gateway:humble
+    build:
+      <<: *build
+      dockerfile: docker/services/gateway/Dockerfile
+    environment:
+      MR2_GATEWAY_HOST: 0.0.0.0
+      MR2_GATEWAY_PORT: "8081"
+      BASE_XBEE_DEVICE: /tmp/xbee_sim1
+      RADIO_PEER: rover:7777
+      MAVPROXY_ENABLE: "false"
+      ROCKET_M2_ENABLE: "false"
+      BASE_ANTENNA_ENABLE: "false"
+      BASE_XBEE_HEARTBEAT_HZ: ${BASE_XBEE_HEARTBEAT_HZ:-2}
+    init: true
+    networks:
+      mr2:
+        ipv4_address: 10.242.42.10
+    depends_on:
+      rover: { condition: service_healthy }
+    healthcheck:
+      test: ["CMD", "node", "-e",
+             "fetch('http://127.0.0.1:8081/video/streams').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 5s
+      timeout: 5s
+      start_period: 10s
+      retries: 30
+
+  # Dashboard + the repo's nginx config, HTTPS on 127.0.0.1:443.
+  nginx:
+    image: mr2/dashboard:humble
+    build:
+      <<: *build
+      dockerfile: docker/services/dashboard/Dockerfile
+    environment:
+      MR2_GATEWAY_HOST: gateway
+      MR2_GATEWAY_PORT: "8081"
+      MR2_ROVER_IP: rover
+      MR2_ROSBRIDGE_PORT: "9090"
+      MR2_BASE_IP: localhost
+    ports: ["127.0.0.1:443:443"]
+    volumes:
+      - ${MR2_TILES:-../../tiles}:/var/www/mr2-tiles:ro
+      - nginx-ssl:/etc/nginx/ssl
+      # Local dev teleop (keyboard driving), served same-origin as the
+      # dashboard so it can use /xbee-ws: https://localhost/dev-teleop.html
+      - ../../tools/teleop.html:/var/www/mr2-dashboard/dev-teleop.html:ro
+    networks: [mr2]
+    depends_on:
+      gateway: { condition: service_healthy }
+      rover: { condition: service_healthy }
+    healthcheck:
+      test: ["CMD", "curl", "-fsk", "https://127.0.0.1/"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  # Optional (profile "viewer"): RViz + Gazebo GUI in the browser,
+  # http://localhost:6080
+  viewer:
+    image: mr2/viewer:humble
+    build:
+      <<: *build
+      dockerfile: docker/services/viewer/Dockerfile
+    environment:
+      <<: *ros-env
+    volumes: *ws
+    ports: ["127.0.0.1:6080:6080"]
+    shm_size: 256m
+    networks: [mr2]
+    profiles: [viewer]
+    depends_on:
+      rover: { condition: service_healthy }
+
+volumes:
+  nginx-ssl: {}
+  ws-build: {}
+  ws-install: {}
+  ws-log: {}
+  gz-cache: {}
+
+networks:
+  mr2:
+    ipam:
+      config:
+        - subnet: 10.242.42.0/24

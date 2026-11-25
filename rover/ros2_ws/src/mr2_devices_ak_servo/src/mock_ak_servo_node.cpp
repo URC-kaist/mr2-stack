@@ -322,7 +322,8 @@ private:
     const int16_t pos_10deg =
         static_cast<int16_t>(std::lround(position * 180.0 / M_PI * 10.0));
     const double rpm = velocity * 30.0 / M_PI;
-    const int16_t vel_10rpm = static_cast<int16_t>(std::lround(rpm * 10.0));
+    // Match the status decoder: one speed count represents 10 RPM.
+    const int16_t vel_10rpm = static_cast<int16_t>(std::lround(rpm / 10.0));
     const int16_t cur_01amp = static_cast<int16_t>(std::lround(effort * 100.0));
 
     status.data[0] = static_cast<uint8_t>((pos_10deg >> 8) & 0xFF);

@@ -70,6 +70,7 @@
 
 #include "mr2_can_bus_core/can_bus_manager.hpp"
 #include "mr2_can_bus_core/can_bus_registry.hpp"
+#include "rclcpp/create_timer.hpp"
 #include "rclcpp/rclcpp.hpp"
 
 namespace {
@@ -215,11 +216,17 @@ private:
 
     // Start the update loop.
     const auto period = std::chrono::duration<double>(1.0 / update_rate_hz_);
-    timer_ = create_wall_timer(
-        std::chrono::duration_cast<std::chrono::nanoseconds>(period),
-        std::bind(&MockAkServoNode::update, this));
-
     last_time_ = std::chrono::steady_clock::now();
+    last_ros_time_ = get_clock()->now();
+    if (get_clock()->ros_time_is_active()) {
+      timer_ = rclcpp::create_timer(
+          get_node_base_interface(), get_node_timers_interface(), get_clock(),
+          rclcpp::Duration(period), std::bind(&MockAkServoNode::update, this));
+    } else {
+      timer_ = create_wall_timer(
+          std::chrono::duration_cast<std::chrono::nanoseconds>(period),
+          std::bind(&MockAkServoNode::update, this));
+    }
     RCLCPP_INFO(get_logger(), "Mock AK servo started on %s (motor_id=%d)",
                 can_iface_.c_str(), servo_id_);
   }
@@ -248,12 +255,29 @@ private:
   }
 
   void update() {
-    const auto now = std::chrono::steady_clock::now();
-    double dt = std::chrono::duration<double>(now - last_time_).count();
-    last_time_ = now;
-    if (dt <= 0.0) {
-      dt = 1.0 / update_rate_hz_;
-    } else if (max_integration_dt_ > 0.0) {
+    double dt;
+    if (get_clock()->ros_time_is_active()) {
+      const auto now = get_clock()->now();
+      const auto previous = last_ros_time_;
+      last_ros_time_ = now;
+      // The first /clock sample establishes the epoch. A paused or rewound
+      // clock must not advance the motor by a nominal timestep.
+      if (previous.nanoseconds() <= 0) {
+        return;
+      }
+      dt = (now - previous).seconds();
+      if (dt <= 0.0) {
+        return;
+      }
+    } else {
+      const auto now = std::chrono::steady_clock::now();
+      dt = std::chrono::duration<double>(now - last_time_).count();
+      last_time_ = now;
+      if (dt <= 0.0) {
+        dt = 1.0 / update_rate_hz_;
+      }
+    }
+    if (max_integration_dt_ > 0.0) {
       dt = std::min(dt, max_integration_dt_);
     }
 
@@ -448,6 +472,7 @@ private:
   double effort_amp_{0.0};
 
   std::chrono::steady_clock::time_point last_time_{};
+  rclcpp::Time last_ros_time_{0, 0, RCL_ROS_TIME};
 };
 
 int main(int argc, char **argv) {
